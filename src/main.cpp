@@ -16,14 +16,16 @@
 #include <QLineEdit>
 #include <QStyleOptionSpinBox>
 #include <QTabWidget>
+#include <QInputDialog>
 int main(int argc,char** argv){
     QApplication app(argc,argv);app.setStyle("Fusion");QCoreApplication::setOrganizationName("N120Emulator");
-    bool uiSmoke=app.arguments().contains("--ui-smoke"),firmwareSmoke=app.arguments().contains("--firmware-smoke");
-    QCoreApplication::setApplicationName(uiSmoke||firmwareSmoke?"N120StudioTests":"N120Emulator");
+    bool usbSmoke=app.arguments().contains("--usb-smoke");
+    bool uiSmoke=app.arguments().contains("--ui-smoke"),firmwareSmoke=app.arguments().contains("--firmware-smoke")||usbSmoke;
+    QCoreApplication::setApplicationName(usbSmoke?"N120StudioUsbTests":uiSmoke||firmwareSmoke?"N120StudioTests":"N120Emulator");
     MainWindow window(uiSmoke||firmwareSmoke);window.show();
     if(uiSmoke)QTimer::singleShot(1000,&app,&QApplication::quit);
     QJsonObject uiResults;
-    if(firmwareSmoke){
+    if(firmwareSmoke&&!usbSmoke){
         const QList<int> smokeKeys={4,4,4,6,2,2,2,3,4,4};for(int i=0;i<smokeKeys.size();++i){int key=smokeKeys[i];QTimer::singleShot(14000+i*400,&app,[&,key]{window.calculator()->physicalKey(key,true);QTimer::singleShot(60,&app,[&,key]{window.calculator()->physicalKey(key,false);});});}
         QTimer::singleShot(22000,&app,[&]{window.findChild<QAction*>("standard")->trigger();window.grab().save(QStringLiteral(N120_SOURCE_DIR)+"/docs/standard-smoke.png");});
         QTimer::singleShot(7000,&app,[&]{window.findChild<QAction*>("standard")->trigger();window.grab().save(QStringLiteral(N120_SOURCE_DIR)+"/docs/standard-smoke.png");});
@@ -33,6 +35,14 @@ int main(int argc,char** argv){
         QTimer::singleShot(12000,&app,[&]{window.findChild<QAction*>("pause")->trigger();});
         QTimer::singleShot(12500,&app,[&]{window.findChild<QAction*>("resume")->trigger();});
     }
-    if(firmwareSmoke){Configuration c;c.renode="F:/Programs/Renode/renode.exe";c.internal="C:/Users/Dotmazy/Desktop/NEW/internal to test.bin";c.external="C:/Users/Dotmazy/Desktop/NEW/external to test.bin";window.startWith(c);QTimer::singleShot(30000,&app,[&]{window.grab().save(QStringLiteral(N120_SOURCE_DIR)+"/docs/gui-smoke.png");auto state=window.lastSnapshot();state.remove("frame");state["uiChecks"]=uiResults;QFile report(QStringLiteral(N120_SOURCE_DIR)+"/docs/gui-smoke-state.json");if(report.open(QIODevice::WriteOnly))report.write(QJsonDocument(state).toJson());bool uiOk=true;for(auto value:uiResults)uiOk=uiOk&&value.toBool();app.exit(window.hasFrame()&&uiOk?0:2);});}
+    if(usbSmoke){
+        for(int i=0;i<3;++i)QTimer::singleShot(7500+i*500,&app,[&]{window.calculator()->physicalKey(4,true);QTimer::singleShot(60,&app,[&]{window.calculator()->physicalKey(4,false);});});
+        QTimer::singleShot(11000,&app,[&]{window.findChild<QAction*>("usb")->trigger();QTimer::singleShot(100,&app,[&]{if(auto dialog=qobject_cast<QInputDialog*>(QApplication::activeModalWidget())){dialog->setIntValue(3240);dialog->accept();}});window.findChild<QPushButton*>("usbIpStart")->click();});
+        QTimer::singleShot(14000,&app,[&]{window.findChild<QPushButton*>("windowsAttach")->click();});
+        QTimer::singleShot(21500,&app,[&]{auto state=window.lastSnapshot();state.remove("frame");state["windowsStatus"]=window.hostUsbStatus();uiResults["windowsImported"]=state["usbImported"].toBool();uiResults["winUsbBound"]=window.hostUsbStatus().contains("WINUSB")&&window.hostUsbStatus().contains("OK");QFile report(QStringLiteral(N120_SOURCE_DIR)+"/docs/usb-gui-state.json");if(report.open(QIODevice::WriteOnly))report.write(QJsonDocument(state).toJson());window.grab().save(QStringLiteral(N120_SOURCE_DIR)+"/docs/usb-gui.png");});
+        QTimer::singleShot(22500,&app,[&]{window.findChild<QComboBox*>("usbCable")->setCurrentIndex(1);});
+        QTimer::singleShot(27000,&app,[&]{auto state=window.lastSnapshot();uiResults["chargerStopsHost"]=state["usbIpPort"].toInt()==0&&!state["usbImported"].toBool();});
+    }
+    if(firmwareSmoke){Configuration c;c.renode="F:/Programs/Renode/renode.exe";c.internal="C:/Users/Dotmazy/Desktop/NEW/internal to test.bin";c.external="C:/Users/Dotmazy/Desktop/NEW/external to test.bin";window.startWith(c);QTimer::singleShot(30000,&app,[&]{window.grab().save(QStringLiteral(N120_SOURCE_DIR)+(usbSmoke?"/docs/usb-gui-final.png":"/docs/gui-smoke.png"));auto state=window.lastSnapshot();state.remove("frame");state["uiChecks"]=uiResults;QFile report(QStringLiteral(N120_SOURCE_DIR)+(usbSmoke?"/docs/usb-gui-final.json":"/docs/gui-smoke-state.json"));if(report.open(QIODevice::WriteOnly))report.write(QJsonDocument(state).toJson());bool uiOk=true;for(auto value:uiResults)uiOk=uiOk&&value.toBool();app.exit(window.hasFrame()&&uiOk?0:2);});}
     return app.exec();
 }

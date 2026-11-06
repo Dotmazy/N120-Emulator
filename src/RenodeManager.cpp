@@ -62,10 +62,18 @@ void RenodeManager::start(const Configuration& c) {
         text.replace("lcd: N120.Lcd @ sysbus 0x60000000\n    board: board",QByteArray("lcd: N120.Lcd @ sysbus 0x60000000\n    board: board\n    id: ")+QByteArray::number(c.lcdId));
         const QString repl=session->filePath("n120.repl");
         QFile out(repl);if(!out.open(QIODevice::WriteOnly)||out.write(text)!=text.size())throw std::runtime_error("Cannot write session platform");out.close();
+        if(c.boot0){
+            QFile rom(c.systemRom);if(!rom.open(QIODevice::ReadOnly))throw std::runtime_error("BOOT0 needs a user-supplied STM32H725 system ROM image");
+            const auto image=rom.readAll();if(image.size()<8||image.size()>0x20000)throw std::runtime_error("System ROM must contain vectors and fit the 128 KiB mapping");
+            const auto romSp=qFromLittleEndian<quint32>(image.constData()),romPc=qFromLittleEndian<quint32>(image.constData()+4);
+            const bool stackMapped=(romSp>0x20000000&&romSp<=0x20020000)||(romSp>0x24000000&&romSp<=0x24050000)||(romSp>0x30000000&&romSp<=0x30008000)||(romSp>0x38000000&&romSp<=0x38004000);
+            if((romSp&7)||!stackMapped||!(romPc&1)||romPc<0x1FF00001||romPc>=0x1FF00000+quint32(image.size()))throw std::runtime_error("Invalid STM32H725 system ROM vectors");
+        }
         QTcpServer allocator;if(!allocator.listen(QHostAddress::LocalHost,0))throw std::runtime_error("Cannot allocate bridge port");port=allocator.serverPort();allocator.close();
         if(!allocator.listen(QHostAddress::LocalHost,0))throw std::runtime_error("Cannot allocate console port");
         monitorPort=allocator.serverPort();allocator.close();
         QString script="include "+pathToken(resources+"/UsbHost.cs")+"\ninclude "+pathToken(resources+"/N120.cs")+"\nmach create \"N120\"\nmachine LoadPlatformDescription "+pathToken(repl)+"\nsysbus LoadBinary "+pathToken(c.internal)+" 0x08000000\n";
+        if(c.boot0)script+="sysbus LoadBinary "+pathToken(c.systemRom)+" 0x1FF00000\nlcd ConfigureBoot true\n";
         if(!c.external.isEmpty())script+="ospi Load "+stringToken(c.external)+" "+QString::number(c.externalOffset)+"\n";
         if(!c.persistent.isEmpty())script+="ospi Load "+stringToken(c.persistent)+"\n";
         script+="lcd ConfigureRevision "+QString::number(revision)+"\nospi ProtectMapping\nlcd StartBridge "+QString::number(port)+"\nstart\n";

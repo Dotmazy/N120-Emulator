@@ -15,6 +15,8 @@ struct Configuration {
     QString persistent;
     quint32 lcdId=0x4E4101;
     quint32 externalOffset=0;
+    bool boot0=false;
+    QString systemRom;
 };
 
 class RenodeManager final : public QObject {

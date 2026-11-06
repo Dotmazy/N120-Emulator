@@ -6,6 +6,7 @@
 #include "RenodeManager.h"
 #include "KeyboardTranslator.h"
 #include "CalculatorWidget.h"
+#include "WindowsUsb.h"
 QIcon studioIcon(const QString&,QColor);
 class QLabel;class QDockWidget;class QTabWidget;class QSlider;class QComboBox;class QToolBar;class LogViewer;
 class MainWindow final:public QMainWindow {
@@ -13,6 +14,7 @@ class MainWindow final:public QMainWindow {
 public:
     explicit MainWindow(bool uiSmoke=false);
     ~MainWindow() override;
+    QString hostUsbStatus() const{return windowsUsbStatus;}
     QJsonObject lastSnapshot() const{return hardware;}
     void startWith(const Configuration&);
     bool hasFrame() const{return firmwarePixels>300000&&externalExecuting;}
@@ -27,6 +29,7 @@ private:
     void saveFlash();void screenshot(bool full);void exportReport();void console();
     void recentFiles();void updateActions();void speedSettings();
     void applyZoom();void updatePowerCard();
+    WindowsUsb windowsUsb;QString windowsUsbStatus="Windows attachment not checked";
     RenodeManager engine;KeyboardTranslator keyboard;Configuration config;
     CalculatorWidget* surface;QDockWidget* sidebar;QTabWidget* tabs;QToolBar* toolbar;
     QLabel *standardInfo,*boardInfo,*overview,*cpuInfo,*displayInfo,*powerInfo,*usbInfo,*flashInfo,*liveStatus;
