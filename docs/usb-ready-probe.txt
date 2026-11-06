@@ -1,9 +1,0 @@
-{'ok': True, 'usbDescriptor': ''}
-{'faulted': False, 'usbIn0': 2147647552, 'usbOut0': 2147647488, 'usbIpPort': 0, 'usbTransfers': 0, 'usbAddress': 0, 'usbDescriptor': '', 'usbPending': False, 'usbError': 'USB request cancelled or EP0 did not arm/complete; IN=80028040 OUT=80028000'}
-regs ['0x4000020', '0x2200000', '0x80028040', '0x80028000']
-{'ok': True, 'usbDescriptor': ''}
-{'faulted': False, 'usbIn0': 32832, 'usbOut0': 2147516416, 'usbIpPort': 0, 'usbTransfers': 0, 'usbAddress': 0, 'usbDescriptor': '', 'usbPending': False, 'usbError': 'USB request cancelled or EP0 did not arm/complete; IN=00008040 OUT=80008000'}
-regs ['0x4000020', '0x2200000', '0x8040', '0x80008000']
-{'ok': True, 'usbDescriptor': ''}
-{'faulted': False, 'usbIn0': 32832, 'usbOut0': 2147516416, 'usbIpPort': 0, 'usbTransfers': 0, 'usbAddress': 0, 'usbDescriptor': '', 'usbPending': False, 'usbError': 'USB request cancelled or EP0 did not arm/complete; IN=00008040 OUT=80008000'}
-regs ['0x4000020', '0x2200000', '0x8040', '0x80008000']
