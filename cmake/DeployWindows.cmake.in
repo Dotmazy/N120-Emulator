@@ -1,0 +1,11 @@
+# Use a checked deployment command; Qt's generated target list can misquote
+# build paths containing spaces/parentheses in some supported Qt versions.
+get_filename_component(stage "${CMAKE_INSTALL_PREFIX}" ABSOLUTE)
+execute_process(
+    COMMAND "@N120_WINDEPLOYQT@" --no-translations --no-opengl-sw
+        --dir "${stage}" "${stage}/n120-studio.exe"
+    RESULT_VARIABLE deployment_result
+)
+if(NOT deployment_result EQUAL 0)
+    message(FATAL_ERROR "Qt deployment failed (${deployment_result}); the stage is incomplete")
+endif()

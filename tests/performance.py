@@ -1,7 +1,8 @@
 import argparse,json,time,pathlib,socket,struct,sys,os
 from integration import Engine,ROOT,free_port
-p=argparse.ArgumentParser();p.add_argument('--label',default='before');p.add_argument('--quick',action='store_true');opt=p.parse_args()
-a=argparse.Namespace(renode='F:/Programs/Renode/renode.exe',internal=pathlib.Path('C:/Users/Dotmazy/Desktop/NEW/internal to test.bin'),external=pathlib.Path('C:/Users/Dotmazy/Desktop/NEW/external to test.bin'))
+p=argparse.ArgumentParser();p.add_argument('--label',default='before');p.add_argument('--quick',action='store_true')
+from integration import arguments
+a=arguments(p);opt=a
 t=time.perf_counter();e=Engine(a);launch=time.perf_counter()-t;results={'launch_s':launch,'diagnostic_unprotected_xip':bool(os.environ.get('N120_PROFILE_NO_XIP_WRITE_WRAPPER'))}
 try:
  t=time.perf_counter();e.machine(0x4E4101);results['machine_load_s']=time.perf_counter()-t;e.run(5)

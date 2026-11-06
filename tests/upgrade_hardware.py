@@ -1,7 +1,8 @@
 import sys,pathlib,socket,json,argparse,base64,time
 sys.path.insert(0,str(pathlib.Path(__file__).resolve().parent))
 from integration import Engine,ROOT,free_port,png
-parser=argparse.ArgumentParser();parser.add_argument('--renode',default='F:/Programs/Renode/renode.exe');parser.add_argument('--internal',type=pathlib.Path,default=pathlib.Path('C:/Users/Dotmazy/Desktop/NEW/internal to test.bin'));parser.add_argument('--external',type=pathlib.Path,default=pathlib.Path('C:/Users/Dotmazy/Desktop/NEW/external to test.bin'));a=parser.parse_args()
+from integration import arguments
+a=arguments()
 e=Engine(a);results=[]
 def check(name,passed,detail=''):
  results.append(dict(name=name,passed=bool(passed),detail=str(detail)));print(('PASS ' if passed else 'FAIL ')+name+' '+str(detail),flush=True)

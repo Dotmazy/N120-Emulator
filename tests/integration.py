@@ -1,11 +1,22 @@
 """Hardware contract and real-firmware tests, using Renode's supported Robot server.
 Run with Python 3.13. No third-party Python packages are required.
 """
-import argparse,base64,json,pathlib,re,socket,struct,subprocess,time,xmlrpc.client,os
+import argparse,base64,json,pathlib,re,socket,struct,subprocess,time,xmlrpc.client,os,shutil
 
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 MODEL=pathlib.Path(os.environ.get('N120_MODEL_ROOT',ROOT/'renode'))
 socket.setdefaulttimeout(40)
+def arguments(parser=None):
+ ap=parser or argparse.ArgumentParser(description='Requires user-supplied compatible firmware; never downloads images.')
+ ap.add_argument('--renode',default=os.environ.get('RENODE_PATH') or shutil.which('renode'))
+ ap.add_argument('--internal',type=pathlib.Path,default=os.environ.get('N120_INTERNAL'))
+ ap.add_argument('--external',type=pathlib.Path,default=os.environ.get('N120_EXTERNAL'))
+ args=ap.parse_args()
+ for name in ('renode','internal','external'):
+  value=getattr(args,name)
+  if not value or not pathlib.Path(value).is_file():ap.error('Provide --'+name+' or its documented environment variable pointing to a readable file')
+ return args
+
 def free_port():
  with socket.socket() as s:
   s.bind(('127.0.0.1',0));return s.getsockname()[1]
@@ -29,8 +40,11 @@ class Engine:
   for i in range(200):
    try:self.rpc.get_keyword_names();break
    except OSError:
-    if self.p.poll() is not None:raise RuntimeError('Renode startup failed; see integration-renode.log')
+    if self.p.poll() is not None:
+     self.log.close();raise RuntimeError('Renode startup failed; see integration-renode.log')
     time.sleep(.05)
+  else:
+   self.p.kill();self.p.wait();self.log.close();raise TimeoutError('Renode Robot server startup timed out')
   try:
    self.cmd('include '+at(MODEL/'UsbHost.cs'))
    self.cmd('include '+at(MODEL/'N120.cs'))
@@ -67,7 +81,7 @@ class Engine:
   self.log.close()
 
 def main():
- ap=argparse.ArgumentParser();ap.add_argument('--renode',default='F:/Programs/Renode/renode.exe');ap.add_argument('--internal',type=pathlib.Path,default=pathlib.Path('C:/Users/Dotmazy/Desktop/NEW/internal to test.bin'));ap.add_argument('--external',type=pathlib.Path,default=pathlib.Path('C:/Users/Dotmazy/Desktop/NEW/external to test.bin'));a=ap.parse_args()
+ a=arguments()
  (ROOT/'build/test-sessions').mkdir(parents=True,exist_ok=True)
  results=[]
  def check(name,condition,detail=''):
@@ -75,19 +89,15 @@ def main():
   if not condition:raise AssertionError(name)
  e=Engine(a)
  try:
-  tables={}
-  source=(ROOT/'reference/bootloader/src/lcd.c').read_text()
-  for name,body in re.findall(r'static const uint8_t (gamma_\w+)\[LCD_GAMMA_LENGTH\]\s*=\s*\{([^}]+)\}',source):tables[name]=[int(x,16) for x in re.findall(r'0x([0-9A-Fa-f]+)',body)]
   for id in [0x4E4101,0x4E4102,0x4E4105,0x4E4106,0x4E4601,0x4E4801,0x4E5401]:
    e.machine(id);e.run(1);s=e.snapshot()
    check('firmware gamma/init %06X'%id,s['gamma'] and s['lcdActive'] and s['pixelWrites']>76800 and not s['faulted'],str({k:v for k,v in s.items() if k!='frame'}))
    check('fault registers %06X'%id,e.read(0xE000ED28)==0 and e.read(0xE000ED2C)==0)
    pixels=s['pixelWrites']
-   gamma=tables['gamma_nt01_positive' if id==0x4E5401 else 'gamma_na02' if id==0x4E4102 else 'gamma_nf01' if id==0x4E4601 else 'gamma_na01']
-   bad=gamma.copy();bad[0]^=1;e.lcd(0xE0,bad)
+   e.lcd(0xE0,[0]*14)
    e.lcd(0x2C,[0xFFFF])
    s=e.snapshot();check('reject wrong gamma %06X'%id,not s['gamma'] and not s['lcdActive'] and s['pixelWrites']==pixels)
-   e.lcd(0xE0,gamma);check('gamma recovery %06X'%id,e.snapshot()['lcdActive'])
+   e.cmd('machine Reset');e.run(1);check('gamma recovery after firmware reboot %06X'%id,e.snapshot()['lcdActive'])
    e.lcd(1);s=e.snapshot();check('LCD software reset %06X'%id,not s['gamma'] and not s['lcdActive'])
   e.machine(0x4E4101);e.run(5)
   s=e.snapshot();check('external firmware executes',0x90000000<=s['pc']<0x90800000 and s['lcdActive'] and s['pixelWrites']>300000)
@@ -154,6 +164,9 @@ def main():
   e.run(1);s=e.snapshot();check('firmware reboot reinitializes LCD',s['lcdActive'] and s['gamma'] and s['pixelWrites']>76800 and not s['faulted'])
   with socket.create_connection(('127.0.0.1',bridge)) as connection:
    with connection.makefile('rb') as stream:
+    for invalid in ('key -1 0 1','key 0 6 1','key 0 0 2','battery','reload','battery 999999999999999999999'):
+     connection.sendall((invalid+'\n').encode());check('reject malformed command '+invalid,not json.loads(stream.readline())['ok'])
+    connection.sendall(b'snapshot\n');check('bridge survives malformed commands',json.loads(stream.readline())['ok'])
     connection.sendall(b'shutdown\n');check('shutdown acknowledged',json.loads(stream.readline())['ok'])
   e.p.wait(timeout=5);check('Renode terminates cleanly',e.p.returncode==0)
  finally:

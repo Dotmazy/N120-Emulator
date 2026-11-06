@@ -1,4 +1,4 @@
-// N120 board peripherals. Reference sources are never compiled into the emulator.
+// N120 board peripherals and register-level extensions for Renode.
 using System;
 using System.IO;
 using System.Linq;
@@ -43,56 +43,74 @@ namespace Antmicro.Renode.Peripherals.N120
         public new void Reset(){base.Reset();processorClock=false;Divider=8;}
     }
     public sealed class Usb : Antmicro.Renode.Peripherals.USB.STM_USB,IDoubleWordPeripheral,IUSBDevice,IPeripheral {
-        public Usb(IMachine machine,Board board,Rcc clock):base(machine){b=board;b.Usb=this;clock.Register(this,"USB1OTGHS");base.IRQ.Connect(new InterruptJoin(this),0);recovery=new LimitTimer(machine.ClockSource,1000,this,"USB reset recovery",limit:10,eventEnabled:true,workMode:WorkMode.OneShot);recovery.LimitReached+=()=>{recoveryReady=true;endpointChanged.Set();};}
-        private readonly Board b;private uint phy;
+        public Usb(IMachine machine,Board board,Rcc clock):base(machine){b=board;b.Usb=this;clock.Register(this,"USB1OTGHS");base.IRQ.Connect(new InterruptJoin(this),0);recovery=new LimitTimer(machine.ClockSource,1000,this,"USB reset recovery",limit:10,eventEnabled:true,workMode:WorkMode.OneShot);recovery.LimitReached+=()=>{recoveryReady=true;SignalEndpointChanged();};}
+        private readonly Board b;private uint phy,in0SizeEncoding,out0SizeEncoding;
         private readonly GPIO combinedIRQ=new GPIO();private bool baseInterrupt;private uint completedOut;
         public new GPIO IRQ {get{return combinedIRQ;}}
         private sealed class InterruptJoin:IGPIOReceiver {private readonly Usb owner;public InterruptJoin(Usb usb){owner=usb;}public void Reset(){owner.baseInterrupt=false;owner.UpdateIRQ();}public void OnGPIO(int number,bool value){owner.baseInterrupt=value;owner.UpdateIRQ();}}
         private bool ExtraOutPending(){return (completedOut&(base.ReadDoubleWord(0x81C)>>16))!=0&&(base.ReadDoubleWord(0x814)&1)!=0;}
         private void UpdateIRQ(){if(combinedIRQ!=null)combinedIRQ.Set(baseInterrupt||(ExtraOutPending()&&(base.ReadDoubleWord(8)&1)!=0&&(base.ReadDoubleWord(0x18)&(1u<<19))!=0));}
         private readonly uint[] endpointEvents=new uint[16];
-        private IUSBConnection host,session;private bool pullupConnected;private readonly object ioSync=new object();
-        private readonly AutoResetEvent endpointChanged=new AutoResetEvent(false);
+        private IUSBConnection host,session;private bool pullupConnected,in0Stall,out0Stall;private readonly object ioSync=new object();
+        private readonly AutoResetEvent endpointChanged=new AutoResetEvent(false),transferChanged=new AutoResetEvent(false);
+        private void SignalEndpointChanged(){endpointChanged.Set();transferChanged.Set();}
         private readonly SemaphoreSlim hostGate=new SemaphoreSlim(1,1);
         private CancellationTokenSource connectionStop=new CancellationTokenSource();
+        private readonly object connectionSync=new object();
         public volatile bool ProbePending;public long ConnectionGeneration;
         private readonly LimitTimer recovery;private bool recoveryReady=true;private uint rxFifoSize,txFifoSize,txFifoConfig;
         // USB 2.0 reset recovery: 10 ms of virtual USB time, independent of CPU clock.
         private void RecoverFromBusReset(){recoveryReady=false;recovery.Enabled=false;recovery.Value=0;recovery.Enabled=true;}
         // EP0 enable bits can survive a host reset. Wait for this reset ISR to
         // finish configuring FIFO banks before delivering the next SETUP packet.
-        private long fifoGeneration,awaitedFifoGeneration;
+        private long fifoGeneration,awaitedFifoGeneration,in0Generation,setupGeneration;
         private uint waitGlobal,waitControl,waitOut,waitInterrupt;
-        private bool EndpointReady(){waitGlobal=base.ReadDoubleWord(0x14);waitControl=base.ReadDoubleWord(0x804);waitInterrupt=base.ReadDoubleWord(0xB08);waitOut=base.ReadDoubleWord(0xB00);return fifoGeneration>=awaitedFifoGeneration&&recoveryReady&&rxFifoSize>=2&&txFifoSize>=2&&(waitGlobal&0x3010)==0&&(waitControl&2)==0&&(waitOut&0x80008000)==0x80008000;}
-        public new IUSBConnection ConnectUSB(){lock(ioSync){Array.Clear(endpointEvents,0,endpointEvents.Length);awaitedFifoGeneration=fifoGeneration+1;var connection=base.ConnectUSB();session=connection;RecoverFromBusReset();return new ReadyConnection(connection,EndpointReady,endpointChanged,ioSync,false);}}
-        public long Transfers;public volatile byte[] Descriptor=new byte[0];public volatile string LastError="";
-        public void DisconnectHost(){connectionStop.Cancel();endpointChanged.Set();hostGate.Wait();try{if(host!=null){host.Dispose();host=null;}connectionStop.Dispose();connectionStop=new CancellationTokenSource();Descriptor=new byte[0];ConnectionGeneration++;}finally{hostGate.Release();}}
+        private bool EndpointReady(){waitGlobal=base.ReadDoubleWord(0x14);waitControl=base.ReadDoubleWord(0x804);waitInterrupt=base.ReadDoubleWord(0xB08);waitOut=base.ReadDoubleWord(0xB00);return fifoGeneration>=awaitedFifoGeneration&&recoveryReady&&rxFifoSize>=2&&txFifoSize>=2&&(base.ReadDoubleWord(0x908)&1)==0&&(waitGlobal&0x3010)==0&&(waitControl&2)==0&&(waitOut&0x80008000)==0x80008000;}
+        public new IUSBConnection ConnectUSB(){lock(ioSync){Array.Clear(endpointEvents,0,endpointEvents.Length);awaitedFifoGeneration=fifoGeneration+1;var connection=base.ConnectUSB();session=connection;RecoverFromBusReset();return new ReadyConnection(connection,EndpointReady,endpointChanged,ioSync,false){ReadReady=()=> (base.ReadDoubleWord(0x908)&1)==0,DataReady=()=> in0Stall||out0Stall||(base.ReadDoubleWord(0xB00)&(1u<<17))==0,Stalled=()=>in0Stall||out0Stall,BeforeSetup=()=>{in0Stall=out0Stall=false;setupGeneration++;SignalEndpointChanged();}};}}
+        public long Transfers;public int Configuration;public volatile byte[] Descriptor=new byte[0];public volatile string LastError="";
+        public void DisconnectHost(){
+            // Token capture, cancellation and replacement share a lock: a probe
+            // must not read Token from a source another host thread just disposed.
+            lock(connectionSync)connectionStop.Cancel();
+            SignalEndpointChanged();hostGate.Wait();
+            try {
+                if(host!=null){host.Dispose();host=null;}
+                lock(connectionSync){connectionStop.Dispose();connectionStop=new CancellationTokenSource();}
+                Descriptor=new byte[0];Configuration=0;ConnectionGeneration++;
+            }finally{hostGate.Release();}
+        }
         // Ending the data host is distinct from losing VBUS. Generic USBConnection.Dispose
         // raises OTG session-end, which is incorrect for Computer -> Charger or stopping USB/IP.
         public void EndSession(){DisconnectHost();var active=session;session=null;if(active!=null)lock(ioSync)active.Dispose();}
-        public new void Reset(){lock(ioSync??this){pullupConnected=false;completedOut=0;rxFifoSize=txFifoSize=txFifoConfig=0;recoveryReady=true;if(recovery!=null)recovery.Enabled=false;base.Reset();phy=0;if(endpointEvents!=null)Array.Clear(endpointEvents,0,endpointEvents.Length);Descriptor=new byte[0];if(endpointChanged!=null)endpointChanged.Set();UpdateIRQ();}}
+        public new void Reset(){lock(ioSync??this){pullupConnected=in0Stall=out0Stall=false;completedOut=0;rxFifoSize=txFifoSize=txFifoConfig=0;recoveryReady=true;if(recovery!=null)recovery.Enabled=false;base.Reset();phy=in0SizeEncoding=out0SizeEncoding=0;if(endpointEvents!=null)Array.Clear(endpointEvents,0,endpointEvents.Length);Descriptor=new byte[0];if(endpointChanged!=null)SignalEndpointChanged();UpdateIRQ();}}
         private void SyncAccess(){ICPU current;if(b!=null&&b.Machine.SystemBus.TryGetCurrentCPU(out current))current.SyncTime();}
-        public new uint ReadDoubleWord(long o){SyncAccess();lock(ioSync){uint value=base.ReadDoubleWord(o)|(o==0xC?phy:0);if(o>=0x908&&o<0xB00&&(o-0x908)%0x20==0)value|=endpointEvents[(o-0x908)/0x20];if(o==0x24)value=rxFifoSize;if(o==0x28)value=txFifoConfig;
+        public new uint ReadDoubleWord(long o){SyncAccess();lock(ioSync){uint value=base.ReadDoubleWord(o)|(o==0xC?phy:0);if(o==0x900)value=(value&~0x2007FFu)|in0SizeEncoding|(in0Stall?1u<<21:0);if(o==0xB00)value=(value&~0x2007FFu)|out0SizeEncoding|(out0Stall?1u<<21:0);if(o>=0x908&&o<0xB00&&(o-0x908)%0x20==0)value|=endpointEvents[(o-0x908)/0x20];if(o==0x24)value=rxFifoSize;if(o==0x28)value=txFifoConfig;
             if(o>=0xB08&&o<0xD00&&(o-0xB08)%0x20==0&&(completedOut&(1u<<(int)((o-0xB08)/0x20)))!=0)value|=1;
             if(o==0x818)value|=completedOut<<16;if(o==0x14&&ExtraOutPending())value|=1u<<19;
             if(o==0x20&&((value>>17)&15)==2&&((value>>4)&0x7FF)==0){completedOut|=1u<<(int)(value&15);UpdateIRQ();}
-            if(o==0x20||o>=0x1000)endpointChanged.Set();return value;}}
-        public new void WriteDoubleWord(long o,uint v){SyncAccess();lock(ioSync){if(o==0xC)phy=v&64;
+            if(o==0x20||o>=0x1000)SignalEndpointChanged();return value;}}
+        public new void WriteDoubleWord(long o,uint v){SyncAccess();lock(ioSync){if(o==0x910&&(v&(3u<<19))!=0)in0Generation++;if(o==0xC)phy=v&64;
             if(o>=0x900&&o<0xB00&&(o-0x900)%0x20==0){int ep=(int)((o-0x900)/0x20);if((v&(1u<<27))!=0)endpointEvents[ep]|=1u<<6;if((v&(1u<<30))!=0)endpointEvents[ep]|=1u<<1;}
             if(o>=0x908&&o<0xB00&&(o-0x908)%0x20==0)endpointEvents[(o-0x908)/0x20]&=~v;
             if(o>=0xB08&&o<0xD00&&(o-0xB08)%0x20==0&&(v&1)!=0)completedOut&=~(1u<<(int)((o-0xB08)/0x20));
-            if(o==0x24){rxFifoSize=v&0xFFFF;endpointChanged.Set();return;}
-            if(o==0x28){txFifoConfig=v;txFifoSize=(v>>16)&0xFFFF;fifoGeneration++;endpointChanged.Set();return;}
+            if(o==0x24){rxFifoSize=v&0xFFFF;SignalEndpointChanged();return;}
+            if(o==0x28){txFifoConfig=v;txFifoSize=(v>>16)&0xFFFF;fifoGeneration++;SignalEndpointChanged();return;}
             if(o==0x10&&(v&1)!=0){uint config=base.ReadDoubleWord(0xC),power=base.ReadDoubleWord(0x38);base.Reset();base.WriteDoubleWord(0xC,config);base.WriteDoubleWord(0x38,power);Array.Clear(endpointEvents,0,endpointEvents.Length);completedOut=0;rxFifoSize=txFifoSize=txFifoConfig=0;pullupConnected=false;}
             if(o==0x14&&(v&0x3000)!=0&&session!=null&&b.ConnectionMode==2)RecoverFromBusReset();
+            // EP0 MPSIZ is an STM32 2-bit encoding (0=64, 1=32,
+            // 2=16, 3=8); Renode's generic endpoint expects a byte count.
+            if(o==0x900){in0Stall=(v&(1u<<21))!=0;in0SizeEncoding=v&3;v=(v&~0x7FFu)|(64u>>(int)in0SizeEncoding);}
+            if(o==0xB00){out0Stall=(v&(1u<<21))!=0;out0SizeEncoding=v&3;v=(v&~0x7FFu)|(64u>>(int)out0SizeEncoding);}
             base.WriteDoubleWord(o,v);
             if(o==0x804){bool connected=(v&2)==0;if(connected&&!pullupConnected&&session!=null&&b.ConnectionMode==2){awaitedFifoGeneration=fifoGeneration+1;session=base.ConnectUSB();RecoverFromBusReset();}pullupConnected=connected;}
-            UpdateIRQ();endpointChanged.Set();}
+            UpdateIRQ();SignalEndpointChanged();}
         }
         public byte[] Transfer(byte[] setup,byte[] payload,CancellationToken cancel){
             if(b.ConnectionMode!=2)throw new IOException("Computer mode / VBUS is required");
             if(b.Machine.IsPaused)throw new IOException("Emulation is paused; resume before a USB transfer");
-            using(var linked=CancellationTokenSource.CreateLinkedTokenSource(cancel,connectionStop.Token)){
+            CancellationTokenSource linked;
+            lock(connectionSync)linked=CancellationTokenSource.CreateLinkedTokenSource(cancel,connectionStop.Token);
+            using(linked){
                 hostGate.Wait(linked.Token);
                 try{if(host==null)host=ConnectUSB();var pipe=host.ConnectEndpointSetup(0);
                     var packet=new SetupPacket{Recipient=(PacketRecipient)(setup[0]&31),Type=(PacketType)((setup[0]>>5)&3),Direction=(Antmicro.Renode.Core.USB.Direction)((setup[0]>>7)&1),Request=setup[1],Value=(ushort)(setup[2]|setup[3]<<8),Index=(ushort)(setup[4]|setup[5]<<8),Count=(ushort)(setup[6]|setup[7]<<8)};
@@ -100,14 +118,19 @@ namespace Antmicro.Renode.Peripherals.N120
                     using(var received=new AutoResetEvent(false)){
                         Action notify=()=>{try{received.Set();}catch(ObjectDisposedException){}};pipe.NewPacket+=notify;
                         try {
+                            long generation,setupEpoch;lock(ioSync){generation=in0Generation;setupEpoch=setupGeneration;}
                             pipe.SetupPacketWrite(packet);
-                            if((setup[0]&128)!=0){var data=new List<byte>();int maxPacket=(int)(ReadDoubleWord(0x900)&0x7FF);if(maxPacket<8)maxPacket=64;
-                                while(data.Count<packet.Count){byte[] part;while(!pipe.TryRead(out part)){WaitHandle.WaitAny(new[]{received,linked.Token.WaitHandle});linked.Token.ThrowIfCancellationRequested();}data.AddRange(part);if(part.Length<maxPacket)break;}
+                            // The generic pipe exposes EPENA from the preceding
+                            // transaction until firmware services the SETUP IRQ.
+                            // Wait for firmware to program this response's DIEPTSIZ0.
+                            Action waitResponse=()=>{while(true){lock(ioSync){if(setupGeneration>setupEpoch){if(in0Stall||out0Stall)throw new IOException("Firmware STALL on endpoint zero");if(in0Generation>generation)break;}}WaitHandle.WaitAny(new[]{transferChanged,linked.Token.WaitHandle});linked.Token.ThrowIfCancellationRequested();}};
+                            if((setup[0]&128)!=0){waitResponse();var data=new List<byte>();int maxPacket=64>>(int)(ReadDoubleWord(0x900)&3);
+                                while(data.Count<packet.Count){byte[] part;while(!pipe.TryRead(out part)){WaitHandle.WaitAny(new[]{received,transferChanged,linked.Token.WaitHandle});linked.Token.ThrowIfCancellationRequested();}data.AddRange(part);if(part.Length<maxPacket)break;}
                                 if(data.Count>packet.Count)data.RemoveRange(packet.Count,data.Count-packet.Count);result=data.ToArray();pipe.Write(new byte[0]);
-                            }else{if(payload.Length>0)for(int i=0;i<payload.Length;i+=64)pipe.Write(payload.Skip(i).Take(64).ToArray());byte[] status;while(!pipe.TryRead(out status)){WaitHandle.WaitAny(new[]{received,linked.Token.WaitHandle});linked.Token.ThrowIfCancellationRequested();}result=new byte[0];}
+                            }else{if(payload.Length>0)for(int i=0,packetSize=64>>(int)(ReadDoubleWord(0xB00)&3);i<payload.Length;i+=packetSize)pipe.Write(payload.Skip(i).Take(packetSize).ToArray());waitResponse();byte[] status;while(!pipe.TryRead(out status)){WaitHandle.WaitAny(new[]{received,transferChanged,linked.Token.WaitHandle});linked.Token.ThrowIfCancellationRequested();}result=new byte[0];}
                         }finally{pipe.NewPacket-=notify;}
-                    }((ReadyConnection)host).Flush(linked.Token);Transfers++;return result;
-                }finally{hostGate.Release();}
+                    }((ReadyConnection)host).Flush(linked.Token);Transfers++;if(setup[0]==0&&setup[1]==9)Configuration=setup[2];if(setup[0]==128&&setup[1]==6&&setup[3]==1)Descriptor=result;return result;
+                }catch(OperationCanceledException){if(host!=null){host.Dispose();host=null;}Descriptor=new byte[0];Configuration=0;throw;}finally{hostGate.Release();}
             }
         }
         public string GetDescriptor(){
@@ -116,7 +139,8 @@ namespace Antmicro.Renode.Peripherals.N120
         }
         public void Probe(){if(ProbePending)return;ProbePending=true;ThreadPool.QueueUserWorkItem(_=>{try{GetDescriptor();}finally{ProbePending=false;}});}
         private LocalUsbIp server;public int UsbIpPort;
-        public void StartUsbIp(int port){if(server!=null)throw new ArgumentException("USB/IP already running");DisconnectHost();server=new LocalUsbIp(port,Transfer,message=>LastError=message);UsbIpPort=server.Port;}
+        public int UsbIpClients {get{var active=server;return active==null?0:active.ClientCount;}}public bool UsbIpImported {get{var active=server;return active!=null&&active.Imported;}}
+        public void StartUsbIp(int port){if(server!=null)throw new ArgumentException("USB/IP already running");DisconnectHost();server=new LocalUsbIp(port,Transfer,DisconnectHost,message=>LastError=message);UsbIpPort=server.Port;}
         public void StopUsbIp(){var active=server;server=null;UsbIpPort=0;if(active!=null)active.Dispose();DisconnectHost();}
 
     }
@@ -132,6 +156,13 @@ namespace Antmicro.Renode.Peripherals.N120
         public Board(IMachine machine, CortexM cpu,Exti exti,MappedMemory internalFlash) { Machine = machine; Cpu = cpu; Exti=exti; InternalFlash=internalFlash;wfiHook=value=>CpuWaiting=value;Cpu.AddHookAtWfiStateChange(wfiHook); }
         private readonly Action<bool> wfiHook;public volatile bool CpuWaiting;
         private readonly MappedMemory InternalFlash;
+        private uint bootAddress=0x08000000;
+        public void ConfigureBoot(bool boot0){bootAddress=boot0?0x1FF00000u:0x08000000u;Cpu.InitVectorTableOffset=bootAddress;}
+        private void ResetMcu(){Usb.StopUsbIp();bool resume=!Machine.IsPaused;Machine.Pause();try{((Machine)Machine).Reset();Cpu.InitVectorTableOffset=bootAddress;}finally{if(resume)Machine.Start();}}
+        public int GdbPort;
+        public void StartDebug(int port){if(port<1024||port>65535)throw new ArgumentException("GDB port must be 1024..65535");if(GdbPort!=0)throw new ArgumentException("Stop the existing GDB server first");Machine.StartGdbServer(port,true,(string)null);GdbPort=port;}
+        public void StopDebug(){if(GdbPort!=0)Machine.StopGdbServer(GdbPort);GdbPort=0;}
+
         public readonly IMachine Machine;
         public readonly CortexM Cpu;
         public readonly Exti Exti;
@@ -147,7 +178,7 @@ namespace Antmicro.Renode.Peripherals.N120
         private static double VoltageFor(int percent){for(int i=1;i<pct.Length;i++)if(percent<=pct[i])return v[i-1]+(v[i]-v[i-1])*(percent-pct[i-1])/(pct[i]-pct[i-1]);return 4.2;}
         public double Backlight {get {var p=Ports[3];return p!=null&&p.Mode(3)==1&&(p.Odr&8)!=0?1:0;}}
         public void SetBattery(int percent) {if(percent<0||percent>100)throw new ArgumentException("Battery percentage out of range");lock(Sync){if(BatteryPercent==percent)return;BatteryPercent=percent;batteryVoltage=VoltageFor(percent);batteryAdc=(uint)Math.Round(Math.Min(65535,batteryVoltage/5*65535));}}
-        public void SetConnection(int mode) {if(mode<0||mode>2)throw new ArgumentException("Invalid cable mode");bool before=ConnectionMode!=0;ConnectionMode=mode;if(mode!=2&&Usb!=null){if(mode==0)Usb.EndSession();else Usb.DisconnectHost();}if(before!=(mode!=0))SignalExti(9,mode!=0);}
+        public void SetConnection(int mode) {if(mode<0||mode>2)throw new ArgumentException("Invalid cable mode");bool before=ConnectionMode!=0;ConnectionMode=mode;if(mode!=2&&Usb!=null){Usb.StopUsbIp();if(mode==0)Usb.EndSession();else Usb.DisconnectHost();}if(before!=(mode!=0))SignalExti(9,mode!=0);}
         private readonly Stopwatch paceClock=new Stopwatch();
         private double paceEpoch,targetSpeed;
         private MasterTimeSource master;
@@ -267,7 +298,7 @@ namespace Antmicro.Renode.Peripherals.N120
                     ",\"cpuHz\":"+CpuFrequency()+",\"backlight\":"+Number(Backlight)+",\"batteryPercent\":"+BatteryPercent+",\"batteryVoltage\":"+Number(BatteryVoltage)+",\"batteryAdc\":"+BatterySample+",\"batteryReads\":"+BatteryReads+",\"lastBatterySample\":"+LastBatterySample+",\"connectionMode\":"+ConnectionMode+",\"targetSpeed\":"+Number(targetSpeed)+",\"sequencePending\":"+sequence.Count+
                     ",\"rows\":"+Rows()+
                     ",\"cfsr\":"+Machine.SystemBus.ReadDoubleWord(0xE000ED28)+",\"hfsr\":"+Machine.SystemBus.ReadDoubleWord(0xE000ED2C)+
-                    ",\"usbIn0\":"+(Usb==null?0:Usb.ReadDoubleWord(0x900))+",\"usbOut0\":"+(Usb==null?0:Usb.ReadDoubleWord(0xB00))+",\"usbIpPort\":"+(Usb==null?0:Usb.UsbIpPort)+
+                    ",\"usbIn0\":"+(Usb==null?0:Usb.ReadDoubleWord(0x900))+",\"usbOut0\":"+(Usb==null?0:Usb.ReadDoubleWord(0xB00))+",\"usbIpPort\":"+(Usb==null?0:Usb.UsbIpPort)+",\"usbClients\":"+(Usb==null?0:Usb.UsbIpClients)+",\"usbImported\":"+(Usb!=null&&Usb.UsbIpImported?"true":"false")+",\"usbConfiguration\":"+(Usb==null?0:Usb.Configuration)+",\"gdbPort\":"+GdbPort+",\"gdbConnected\":"+(GdbPort!=0&&Machine.IsGdbConnectedToServer(GdbPort)?"true":"false")+",\"bootAddress\":"+bootAddress+
                     ",\"pressed\":["+string.Join(",",Enumerable.Range(0,54).Where(i=>Keys[i/6,i%6]))+"],\"usbTransfers\":"+(Usb==null?0:Usb.Transfers)+",\"usbAddress\":"+(Usb==null?0:Usb.Address)+",\"usbDescriptor\":\""+(Usb==null?"":Convert.ToBase64String(Usb.Descriptor))+"\""+
                     ",\"lcdId\":"+(Display==null?0:Display.Id)+",\"lcdActive\":"+(Display!=null && Display.Active?"true":"false")+
                     ",\"gamma\":"+(Display!=null && Display.GammaValid?"true":"false")+
@@ -279,41 +310,85 @@ namespace Antmicro.Renode.Peripherals.N120
                     "],\"usbPending\":"+(Usb!=null&&Usb.ProbePending?"true":"false")+",\"usbError\":\""+(Usb==null?"":JsonEscape(Usb.LastError))+"\",\"frame\":\""+Convert.ToBase64String(pixels)+"\"}";
             }
         }
+        internal static byte[] ReadImage(string path,int limit) {
+            using(var input=File.OpenRead(path)) {
+                if(input.Length>limit)throw new ArgumentException("Image exceeds its mapped capacity");
+                var bytes=new byte[(int)input.Length];int offset=0;
+                while(offset<bytes.Length) {
+                    int count=input.Read(bytes,offset,bytes.Length-offset);
+                    if(count==0)throw new IOException("Image changed or was truncated while reading");
+                    offset+=count;
+                }
+                if(input.ReadByte()!=-1)throw new IOException("Image grew while reading");
+                return bytes;
+            }
+        }
         public void Reload(string internalPath,string externalPath,int offset,string persistentPath) {
-            var image=File.ReadAllBytes(internalPath);if(image.Length<8||image.Length>0x80000)throw new ArgumentException("Internal image must fit 512 KiB");
-            uint sp=BitConverter.ToUInt32(image,0),pc=BitConverter.ToUInt32(image,4);if((pc&1)==0||pc<0x08000001||pc>=0x08080000||sp<0x20000000||sp>0x24050000)throw new ArgumentException("Invalid reset vectors");
-            var external=externalPath==""?new byte[0]:File.ReadAllBytes(externalPath);if(offset<0||external.Length>0x800000-offset)throw new ArgumentException("External image exceeds 8 MiB");
-            var persistent=persistentPath==""?new byte[0]:File.ReadAllBytes(persistentPath);if(persistent.Length>0x800000)throw new ArgumentException("Persistent image exceeds 8 MiB");
+            var image=ReadImage(internalPath,0x80000);if(image.Length<8||image.Length>0x80000)throw new ArgumentException("Internal image must fit 512 KiB");
+            uint sp=BitConverter.ToUInt32(image,0),pc=BitConverter.ToUInt32(image,4);if((pc&1)==0||pc<0x08000001||pc>=0x08000000+image.Length||(sp&7)!=0||!((sp>0x20000000&&sp<=0x20020000)||(sp>0x24000000&&sp<=0x24050000)||(sp>0x30000000&&sp<=0x30008000)||(sp>0x38000000&&sp<=0x38004000)))throw new ArgumentException("Invalid reset vectors");
+            if(offset<0||offset>0x800000)throw new ArgumentException("Invalid external image offset");
+            var external=externalPath==""?new byte[0]:ReadImage(externalPath,0x800000-offset);if(offset<0||external.Length>0x800000-offset)throw new ArgumentException("External image exceeds 8 MiB");
+            var persistent=persistentPath==""?new byte[0]:ReadImage(persistentPath,0x800000);if(persistent.Length>0x800000)throw new ArgumentException("Persistent image exceeds 8 MiB");
             bool resume=!Machine.IsPaused;Usb.StopUsbIp();Machine.Pause();
-            try {((Machine)Machine).Reset();var erased=Enumerable.Repeat((byte)255,0x80000).ToArray();InternalFlash.WriteBytes(0,erased);InternalFlash.WriteBytes(0,image);Flash.Replace(external,offset,persistent);Display.ConfigureRevision(image.Length>=0x7FA04?BitConverter.ToUInt32(image,0x7FA00):uint.MaxValue);Reset();}
+            try {((Machine)Machine).Reset();var erased=Enumerable.Repeat((byte)255,0x80000).ToArray();InternalFlash.WriteBytes(0,erased);InternalFlash.WriteBytes(0,image);Flash.Replace(external,offset,persistent);Display.ConfigureRevision(image.Length>=0x7FA04?BitConverter.ToUInt32(image,0x7FA00):uint.MaxValue);Reset();Cpu.InitVectorTableOffset=bootAddress;}
             finally {if(resume){if(master!=null){paceEpoch=master.ElapsedVirtualTime.TotalSeconds;paceClock.Restart();}Machine.Start();}}
         }
         private static string JsonEscape(string value) {return value.Replace("\\","\\\\").Replace("\"","\\\"").Replace("\r","\\r").Replace("\n","\\n").Replace("\t","\\t");}
         private static string Number(double value) {return value.ToString(System.Globalization.CultureInfo.InvariantCulture);}
+        // Bound command lines so a local client cannot grow an unbounded ReadLine buffer.
+        private static string ReadCommand(StreamReader reader) {
+            var line=new StringBuilder();
+            int next;
+            while((next=reader.Read())!=-1) {
+                if(next=='\n')return line.ToString().TrimEnd('\r');
+                if(line.Length>=65536)throw new IOException("Bridge command exceeds 64 KiB");
+                line.Append((char)next);
+            }
+            return line.Length==0?null:line.ToString();
+        }
         public void StartBridge(int port)
         {
-            listener=new TcpListener(IPAddress.Loopback,port); listener.Start();
+            if(listener!=null)throw new ArgumentException("Bridge is already listening");
+            var server=new TcpListener(IPAddress.Loopback,port);
+            server.Start();listener=server;
             thread=new Thread(()=> {
-                try { while(listener!=null) using(var client=listener.AcceptTcpClient()) {
-                    client.NoDelay=true;
-                    using(var reader=new StreamReader(client.GetStream(),Encoding.UTF8))
-                    using(var writer=new StreamWriter(client.GetStream(),new UTF8Encoding(false)) {AutoFlush=true}) {
-                        string line;
-                        while((line=reader.ReadLine())!=null) {
-                            try { writer.WriteLine(Command(line)); if(line=="shutdown") { Usb.StopUsbIp();Machine.Pause(); ((Machine)Machine).Dispose(); Environment.Exit(0); } }
-                            catch(Exception e) when(e is ArgumentException || e is FormatException || e is IOException || e is UnauthorizedAccessException || e is SocketException) { Error(e.GetType().Name+": "+e.Message); writer.WriteLine("{\"ok\":false,\"error\":\""+JsonEscape(e.Message)+"\"}"); }
+                try { while(listener!=null) {
+                    try { using(var client=server.AcceptTcpClient()) {
+                        bridgeClient=client;client.NoDelay=true;
+                        using(var reader=new StreamReader(client.GetStream(),Encoding.UTF8))
+                        using(var writer=new StreamWriter(client.GetStream(),new UTF8Encoding(false)) {AutoFlush=true}) {
+                            string line;
+                            while((line=ReadCommand(reader))!=null) {
+                                try {
+                                    writer.WriteLine(Command(line));
+                                    if(line=="shutdown") { Usb.StopUsbIp();Machine.Pause(); ((Machine)Machine).Dispose(); Environment.Exit(0); }
+                                } catch(Exception e) when(e is ArgumentException || e is OverflowException || e is FormatException || e is IOException || e is UnauthorizedAccessException || e is SocketException) {
+                                    Error(e.GetType().Name+": "+e.Message);
+                                    writer.WriteLine("{\"ok\":false,\"error\":\""+JsonEscape(e.Message)+"\"}");
+                                }
+                            }
                         }
-                    }
-                }} catch(SocketException) {} catch(IOException) {} catch(ObjectDisposedException) {}
-            }); thread.IsBackground=true; thread.Start();
+                    }} catch(SocketException e) {if(listener!=null)Error(e.Message);}
+                    catch(IOException e) {if(listener!=null)Error(e.Message);}
+                    finally {bridgeClient=null;}
+                }} catch(ObjectDisposedException) {}
+            }); thread.IsBackground=true;thread.Name="N120 GUI bridge";thread.Start();
         }
         private string Command(string line)
         {
             var p=line.Split(' ');
+            int arguments;
+            switch(p[0]) {
+            case "reload": arguments=5;break;
+            case "key": arguments=4;break;
+            case "battery":case "cable":case "speed":case "sequence":case "usbip":case "gdb-start":case "save":arguments=2;break;
+            default:arguments=1;break;
+            }
+            if(p.Length!=arguments)throw new ArgumentException("Invalid bridge command arguments");
             if(p[0]=="snapshot") return Snapshot();
             if(p[0]=="shutdown") return "{\"ok\":true}";
             if(p[0]=="reload") {Reload(Encoding.UTF8.GetString(Convert.FromBase64String(p[1])),p[2]=="-"?"":Encoding.UTF8.GetString(Convert.FromBase64String(p[2])),int.Parse(p[3]),p[4]=="-"?"":Encoding.UTF8.GetString(Convert.FromBase64String(p[4])));return "{\"ok\":true,\"reloaded\":true}";}
-            if(p[0]=="reset") { Reset();((Machine)Machine).Reset();return "{\"ok\":true}"; }
+            if(p[0]=="reset") { ResetMcu();return "{\"ok\":true}"; }
             if(p[0]=="pause") Machine.Pause();
             else if(p[0]=="resume") {if(master!=null){paceEpoch=master.ElapsedVirtualTime.TotalSeconds;paceClock.Restart();}Machine.Start();}
             else if(p[0]=="battery") SetBattery(int.Parse(p[1]));
@@ -324,14 +399,17 @@ namespace Antmicro.Renode.Peripherals.N120
             else if(p[0]=="usb-probe") Usb.Probe();
             else if(p[0]=="usbip") Usb.StartUsbIp(int.Parse(p[1]));
             else if(p[0]=="usbip-stop") Usb.StopUsbIp();
-            else if(p[0]=="key" && p.Length==4) { lock(Sync) {int r=int.Parse(p[1]),c=int.Parse(p[2]);directKeys[r,c]=p[3]=="1";Keys[r,c]=directKeys[r,c]||sequenceKey==r*6+c;UpdateColumns(true);} }
+            else if(p[0]=="gdb-start") StartDebug(int.Parse(p[1]));
+            else if(p[0]=="gdb-stop") StopDebug();
+            else if(p[0]=="key" && p.Length==4) { lock(Sync) {int r=int.Parse(p[1]),c=int.Parse(p[2]);if(r<0||r>=9||c<0||c>=6||(p[3]!="0"&&p[3]!="1"))throw new ArgumentException("Invalid matrix key");directKeys[r,c]=p[3]=="1";Keys[r,c]=directKeys[r,c]||sequenceKey==r*6+c;UpdateColumns(true);} }
             else if(p[0]=="release") Reset();
             else if(p[0]=="save" && Flash!=null) Flash.Save(Encoding.UTF8.GetString(Convert.FromBase64String(p[1])));
             else if(p[0]!="pause") throw new ArgumentException("Unknown bridge command");
             return "{\"ok\":true}";
         }
-        public void Dispose() {Cpu.RemoveHookAtWfiStateChange(wfiHook); if(master!=null)master.SyncHook-=Pace;var l=listener; listener=null; if(l!=null) l.Stop(); }
-        private TcpListener listener;
+        public void Dispose() {StopDebug();Usb.StopUsbIp();Cpu.RemoveHookAtWfiStateChange(wfiHook); if(master!=null)master.SyncHook-=Pace;var l=listener; listener=null; if(l!=null) l.Stop();var client=bridgeClient;if(client!=null)client.Close();if(thread!=null&&thread!=Thread.CurrentThread)thread.Join(1000); }
+        private volatile TcpClient bridgeClient;
+        private volatile TcpListener listener;
         private Thread thread;
     }
 
@@ -415,6 +493,9 @@ namespace Antmicro.Renode.Peripherals.N120
     {
         public void StartBridge(int port) { b.StartBridge(port); }
         public string Snapshot() { return b.Snapshot(); }
+        public void ConfigureBoot(bool boot0){b.ConfigureBoot(boot0);}
+        public void StartDebug(int port){b.StartDebug(port);}
+        public void StopDebug(){b.StopDebug();}
         public void ConfigureRevision(uint encoded) { b.RevisedKeyboard = encoded!=0 && ~encoded>=420;b.InvalidateMatrix(); }
         public void ConfigureBattery(int percent) {b.SetBattery(percent);}
         public Lcd(Board board,uint id=0x4E4101) { b=board; b.Display=this; Id=id; expected=Expected(id); Reset(); }
@@ -529,10 +610,21 @@ namespace Antmicro.Renode.Peripherals.N120
         public long ProgramBytes,Erases;
         public byte Status {get {return (byte)((wel?2:0)|(busyReads>0?1:0));}}
         public void Load(string path,int offset=0) {
-            var bytes=File.ReadAllBytes(path); if(offset<0 || bytes.Length>0x800000-offset)throw new ArgumentException("Flash image exceeds 8 MiB");
+            if(offset<0||offset>0x800000)throw new ArgumentException("Invalid flash offset");
+            var bytes=Board.ReadImage(path,0x800000-offset); if(offset<0 || bytes.Length>0x800000-offset)throw new ArgumentException("Flash image exceeds 8 MiB");
             m.WriteBytes(offset,bytes); }
         public void Replace(byte[] external,int offset,byte[] persistent) {m.WriteBytes(0,Enumerable.Repeat((byte)255,0x800000).ToArray());m.WriteBytes(offset,external);if(persistent.Length!=0)m.WriteBytes(0,persistent);ProgramBytes=Erases=0;}
-        public void Save(string path) {lock(b.Sync) File.WriteAllBytes(path,m.ReadBytes(0,0x800000));}
+        public void Save(string path) {
+            // Stage beside the destination so a failed write preserves the previous image.
+            var destination=Path.GetFullPath(path);
+            var temporary=destination+"."+Guid.NewGuid().ToString("N")+".tmp";
+            try {
+                byte[] image;lock(b.Sync)image=m.ReadBytes(0,0x800000);
+                File.WriteAllBytes(temporary,image);
+                if(File.Exists(destination))File.Replace(temporary,destination,null);
+                else File.Move(temporary,destination);
+            } finally {if(File.Exists(temporary))File.Delete(temporary);}
+        }
         public void Reset() {Array.Clear(regs,0,regs.Length);wel=powerDown=resetEnable=false;status2=0;opcode=0;cursor=0;busyReads=0;}
         public uint ReadDoubleWord(long o) { lock(b.Sync) { b.Accesses++;if(o==0x20)return 2; if(o==0x50)return ReadData();return regs[o/4];} }
         public void WriteDoubleWord(long o,uint v) {
@@ -576,10 +668,10 @@ namespace Antmicro.Renode.Peripherals.N120
             } else b.Error("Unhandled flash data write");
             if(++cursor>=count) {wel=false;busyReads=2;}
         }
-        public byte ReadByte(long o) {return o==0x50?ReadData():(byte)(ReadDoubleWord(o&~3)>>(8*(int)(o&3)));}
-        public ushort ReadWord(long o) {return o==0x50?(ushort)(ReadData()|(ReadData()<<8)):(ushort)ReadDoubleWord(o);}
+        public byte ReadByte(long o) {lock(b.Sync)return o==0x50?ReadData():(byte)(ReadDoubleWord(o&~3)>>(8*(int)(o&3)));}
+        public ushort ReadWord(long o) {lock(b.Sync)return o==0x50?(ushort)(ReadData()|(ReadData()<<8)):(ushort)ReadDoubleWord(o);}
         public void WriteByte(long o,byte v) {lock(b.Sync) {if(o==0x50)WriteData(v);else WriteDoubleWord(o&~3,(ReadDoubleWord(o&~3)&~(255u<<(8*(int)(o&3))))|((uint)v<<(8*(int)(o&3))));}}
-        public void WriteWord(long o,ushort v) {if(o==0x50){WriteData((byte)v);WriteData((byte)(v>>8));}else WriteDoubleWord(o,v);}
+        public void WriteWord(long o,ushort v) {lock(b.Sync){if(o==0x50){WriteData((byte)v);WriteData((byte)(v>>8));}else WriteDoubleWord(o,v);}}
         private readonly Board b;private readonly MappedMemory m;private readonly uint[] regs=new uint[256];
         private byte opcode,status2;private bool wel,powerDown,resetEnable;private int cursor,busyReads;
     }

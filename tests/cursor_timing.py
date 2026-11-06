@@ -1,7 +1,8 @@
 import sys,pathlib,socket,json,argparse,base64
 sys.path.insert(0,str(pathlib.Path(__file__).resolve().parents[1]/'tests'))
 from integration import Engine,ROOT,free_port,png
-a=argparse.Namespace(renode='F:/Programs/Renode/renode.exe',internal=pathlib.Path('C:/Users/Dotmazy/Desktop/NEW/internal to test.bin'),external=pathlib.Path('C:/Users/Dotmazy/Desktop/NEW/external to test.bin'));e=Engine(a)
+from integration import arguments
+a=arguments();e=Engine(a)
 try:
  e.machine(0x4E4101);e.run(5);port=free_port();e.cmd('lcd StartBridge %d'%port)
  with socket.create_connection(('127.0.0.1',port)) as sock:

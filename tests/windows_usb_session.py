@@ -3,7 +3,8 @@ Stop by creating build/stop-usb-session (bounded maximum 30 minutes).
 """
 import argparse,json,pathlib,socket,time
 from integration import Engine,ROOT
-a=argparse.Namespace(renode='F:/Programs/Renode/renode.exe',internal=pathlib.Path('C:/Users/Dotmazy/Desktop/NEW/internal to test.bin'),external=pathlib.Path('C:/Users/Dotmazy/Desktop/NEW/external to test.bin'))
+from integration import arguments
+a=arguments()
 e=Engine(a);stop=ROOT/'build/stop-usb-session'
 if stop.exists():stop.unlink()
 try:

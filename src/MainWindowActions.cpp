@@ -39,8 +39,8 @@ void MainWindow::buildMenus(){
     add(tools,"export","Export Diagnostic Report…",QStyle::SP_DialogSaveButton,[this]{exportReport();});
     add(tools,"settings","Settings…",QStyle::SP_FileDialogDetailedView,[this]{settings();},QKeySequence("Ctrl+,"),true);
     add(help,"shortcuts","Keyboard Shortcuts",QStyle::SP_DialogHelpButton,[this]{QMessageBox::information(this,"Keyboard shortcuts","Arrows: navigation · F1: OK · F2: Power\nF3: physical Shift · F4: physical Alpha\nEnter: EXE · Esc: Back · Home: Home · Backspace/Delete: erase\nType letters and symbols for physical Alpha/Shift sequences. OS text input supports AZERTY and QWERTY.\nF6: Pause · F7: Resume · F8: Stop\nCtrl+1/2/3: Compact/Developer/Standard · F11: Fullscreen\nCustomize raw key bindings in Settings → Keyboard.");});
-    add(help,"guide","User Guide",QStyle::SP_DialogHelpButton,[this]{QDesktopServices::openUrl(QUrl::fromLocalFile(QStringLiteral(N120_SOURCE_DIR)+"/README.md"));});
-    add(help,"about","About / Version Information",QStyle::SP_MessageBoxInformation,[this]{QMessageBox::about(this,"N120 Studio","N120 Studio 0.3.0\nC++20 / Qt "+QString(qVersion())+" / Renode\nReal STM32H725 firmware / 320 × 240 LCD\nCalculator artwork provided by the user.\nSee the upgrade report for hardware coverage and USB limitations.");});
+    add(help,"guide","User Guide",QStyle::SP_DialogHelpButton,[this]{QDesktopServices::openUrl(QUrl::fromLocalFile(QCoreApplication::applicationDirPath()+"/README.md"));});
+    add(help,"about","About / Version Information",QStyle::SP_MessageBoxInformation,[this]{QMessageBox::about(this,"N120 Studio","N120 Studio 0.3.0\nC++20 / Qt "+QString(qVersion())+" / Renode\nReal STM32H725 firmware / 320 × 240 LCD\nCalculator artwork provided by the user.\nSee README.md for hardware coverage and USB limitations.");});
     toolbar->insertAction(actions["settings"],actions["screenshot"]);
 }
 void MainWindow::updateActions(){bool on=engine.connected(),paused=hardware["paused"].toBool();for(auto id:{"reset","pause","resume","stop","saveFlash","console"})actions[id]->setEnabled(on);actions["stop"]->setEnabled(engine.running());actions["pause"]->setEnabled(on);actions["pause"]->setIcon(studioIcon(paused?"start":"pause",qApp->palette().color(QPalette::ButtonText)));actions["pause"]->setText(paused?"Resume":"Pause");actions["pause"]->setToolTip(paused?"Resume simulation":"Pause simulation");actions["resume"]->setEnabled(on&&paused);for(auto id:{"openInternal","loadExternal","lcdModel"})actions[id]->setEnabled(!engine.running());actions["start"]->setEnabled((on&&paused)||(!engine.running()&&!config.internal.isEmpty()));actions["restart"]->setEnabled(!config.internal.isEmpty()&&(on||!engine.running()));actions["restartEngine"]->setEnabled(!config.internal.isEmpty()&&!pendingRestart);if(auto button=findChild<QPushButton*>("usbProbe"))button->setEnabled(on&&!paused&&!hardware["usbPending"].toBool());if(auto button=findChild<QPushButton*>("usbIpStop"))button->setEnabled(on&&hardware["usbIpPort"].toInt()!=0);if(auto button=findChild<QPushButton*>("usbIpStart"))button->setEnabled(on&&!paused&&hardware["usbIpPort"].toInt()==0);}
@@ -56,7 +56,7 @@ void MainWindow::exportReport(){
     auto path=QFileDialog::getSaveFileName(this,"Export diagnostic report","n120-diagnostics.json","JSON (*.json)");
     if(path.isEmpty())return;
     auto state=hardware;state.remove("frame");QString log=logs->text();
-    for(auto local:{QDir::homePath(),QStringLiteral(N120_SOURCE_DIR)}){
+    for(auto local:{QDir::homePath(),QCoreApplication::applicationDirPath()}){
         log.replace(local,"<local>",Qt::CaseInsensitive);
         log.replace(QDir::toNativeSeparators(local),"<local>",Qt::CaseInsensitive);
     }

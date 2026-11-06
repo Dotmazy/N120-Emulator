@@ -1,7 +1,8 @@
 import sys,pathlib,argparse,socket,json,time,base64,zlib
 sys.path.insert(0,str(pathlib.Path(__file__).resolve().parent))
 from integration import Engine,ROOT,free_port,png
-args=argparse.Namespace(renode='F:/Programs/Renode/renode.exe',internal=pathlib.Path('C:/Users/Dotmazy/Desktop/NEW/internal to test.bin'),external=pathlib.Path('C:/Users/Dotmazy/Desktop/NEW/external to test.bin'))
+from integration import arguments
+args=arguments()
 e=Engine(args);results=[]
 try:
  e.machine(0x4E4101);e.run(5);port=free_port();e.cmd('lcd StartBridge %d'%port)

@@ -1,7 +1,8 @@
 import sys,pathlib,argparse,socket,json,base64,time
 sys.path.insert(0,str(pathlib.Path(__file__).resolve().parent))
 from integration import Engine,ROOT,free_port
-args=argparse.Namespace(renode='F:/Programs/Renode/renode.exe',internal=pathlib.Path('C:/Users/Dotmazy/Desktop/NEW/internal to test.bin'),external=pathlib.Path('C:/Users/Dotmazy/Desktop/NEW/external to test.bin'))
+from integration import arguments
+args=arguments()
 e=Engine(args);results=[]
 def check(name,passed,detail=None):
  results.append(dict(name=name,passed=bool(passed),detail=detail));print(('PASS ' if passed else 'FAIL ')+name+' '+str(detail),flush=True);assert passed,name

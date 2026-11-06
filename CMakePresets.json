@@ -1,6 +1,92 @@
 {
- "version": 6,
- "configurePresets": [{"name":"windows-qt-mingw","displayName":"Windows Qt 6 MinGW","generator":"Ninja","binaryDir":"${sourceDir}/build","cacheVariables":{"CMAKE_BUILD_TYPE":"RelWithDebInfo","CMAKE_PREFIX_PATH":"F:/Programs/Qt/6.11.1/mingw_64","CMAKE_CXX_COMPILER":"F:/Programs/Qt/Tools/mingw1310_64/bin/g++.exe","CMAKE_MAKE_PROGRAM":"F:/Programs/Qt/Tools/Ninja/ninja.exe"}},{"name":"studio-upgrade","inherits":"windows-qt-mingw","displayName":"N120 Studio upgrade (separate output)","binaryDir":"${sourceDir}/build-upgrade"}],
- "buildPresets":[{"name":"windows-qt-mingw","configurePreset":"windows-qt-mingw"},{"name":"studio-upgrade","configurePreset":"studio-upgrade"}],
- "testPresets":[{"name":"windows-qt-mingw","configurePreset":"windows-qt-mingw","output":{"outputOnFailure":true}},{"name":"studio-upgrade","configurePreset":"studio-upgrade","output":{"outputOnFailure":true}}]
+  "version": 5,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 24,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "debug",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "release",
+      "inherits": "debug",
+      "binaryDir": "${sourceDir}/build/release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "windows-qt-mingw",
+      "displayName": "windows-qt-mingw (legacy output)",
+      "inherits": "release",
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+      }
+    },
+    {
+      "name": "studio-upgrade",
+      "displayName": "studio-upgrade (legacy output)",
+      "inherits": "release",
+      "binaryDir": "${sourceDir}/build-upgrade",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "debug",
+      "configurePreset": "debug"
+    },
+    {
+      "name": "release",
+      "configurePreset": "release"
+    },
+    {
+      "name": "windows-qt-mingw",
+      "configurePreset": "windows-qt-mingw"
+    },
+    {
+      "name": "studio-upgrade",
+      "configurePreset": "studio-upgrade"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "debug",
+      "configurePreset": "debug",
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "release",
+      "configurePreset": "release",
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "windows-qt-mingw",
+      "configurePreset": "windows-qt-mingw",
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "studio-upgrade",
+      "configurePreset": "studio-upgrade",
+      "output": {
+        "outputOnFailure": true
+      }
+    }
+  ]
 }

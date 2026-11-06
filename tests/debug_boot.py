@@ -1,7 +1,8 @@
 """Real Renode GDB remote protocol and reset-vector selection checks."""
 import argparse,json,pathlib,socket,struct
 from integration import Engine,free_port,ROOT
-a=argparse.Namespace(renode='F:/Programs/Renode/renode.exe',internal=pathlib.Path('C:/Users/Dotmazy/Desktop/NEW/internal to test.bin'),external=pathlib.Path('C:/Users/Dotmazy/Desktop/NEW/external to test.bin'))
+from integration import arguments
+a=arguments()
 results=[]
 def check(name,value):
  print(('PASS ' if value else 'FAIL ')+name,flush=True);results.append(dict(name=name,passed=bool(value)));assert value,name
@@ -11,7 +12,10 @@ try:
  port=free_port();e.cmd('lcd StartDebug %d'%port)
  with socket.create_connection(('localhost',port),timeout=5) as g:
   def receive():
-   while g.recv(1)!=b'$':pass
+   while True:
+    byte=g.recv(1)
+    if not byte:raise EOFError('GDB disconnected before packet')
+    if byte==b'$':break
    data=b''
    while True:
     c=g.recv(1)
@@ -19,7 +23,10 @@ try:
     if not c:raise EOFError()
     data+=c
    checksum=b''
-   while len(checksum)<2:checksum+=g.recv(2-len(checksum))
+   while len(checksum)<2:
+    byte=g.recv(2-len(checksum))
+    if not byte:raise EOFError('GDB disconnected during checksum')
+    checksum+=byte
    assert int(checksum,16)==sum(data)%256,(data,checksum)
    g.sendall(b'+')
    decoded=bytearray();i=0

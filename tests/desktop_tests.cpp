@@ -31,6 +31,13 @@ private slots:
         QKeyEvent down(QEvent::KeyPress,Qt::Key_F2,Qt::NoModifier),up(QEvent::KeyRelease,Qt::Key_F2,Qt::NoModifier);QVERIFY(t.handle(&down));QVERIFY(t.handle(&up));QCOMPARE(physical.count(),2);QCOMPARE(physical[0][0].toInt(),8);QCOMPARE(physical[0][1].toBool(),true);QCOMPARE(physical[1][1].toBool(),false);
         QKeyEvent repeat(QEvent::KeyPress,Qt::Key_P,Qt::NoModifier,"p",true);QVERIFY(t.handle(&repeat));QCOMPARE(sequences.count(),1);
     }
+    void corruptMappingsAreRejected(){
+        QSettings settings;
+        settings.setValue("keyboard/mapping",QVariantMap{{"invalid",1},{"1",-1},{"2",54},{"3",8}});
+        KeyboardTranslator translator;
+        const QMap<int,int> expected={{3,8}};QCOMPARE(translator.mapping,expected);
+        settings.remove("keyboard/mapping");
+    }
     void mappingsPersist(){KeyboardTranslator t;t.mapping={{Qt::Key_F10,8}};t.textEnabled=false;t.save();KeyboardTranslator restored;QCOMPARE(restored.mapping,t.mapping);QVERIFY(!restored.textEnabled);restored.mapping=KeyboardTranslator::defaults();restored.textEnabled=true;restored.save();}
     void overlappingMappingsAndModifiedRelease(){
         KeyboardTranslator t;QSignalSpy keys(&t,&KeyboardTranslator::physicalKey);

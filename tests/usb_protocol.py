@@ -1,7 +1,8 @@
 """Real firmware USB/IP validation, distinct responses and cancellation recovery."""
 import argparse,json,pathlib,socket,struct,time
 from integration import Engine,ROOT,free_port
-a=argparse.Namespace(renode='F:/Programs/Renode/renode.exe',internal=pathlib.Path('C:/Users/Dotmazy/Desktop/NEW/internal to test.bin'),external=pathlib.Path('C:/Users/Dotmazy/Desktop/NEW/external to test.bin'))
+from integration import arguments
+a=arguments()
 results=[]
 def check(name,value):
  print(('PASS ' if value else 'FAIL ')+name,flush=True);results.append({'name':name,'passed':bool(value)});assert value,name
