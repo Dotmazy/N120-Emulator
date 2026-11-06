@@ -9,6 +9,7 @@
 class ManagerTests : public QObject {
     Q_OBJECT
   private slots:
+
     void invalidVectors_data() {
         QTest::addColumn<quint32>("sp");
         QTest::addColumn<quint32>("pc");
@@ -17,6 +18,7 @@ class ManagerTests : public QObject {
         QTest::newRow("pc-outside-image") << quint32(0x24001000) << quint32(0x08000101);
         QTest::newRow("non-thumb-pc") << quint32(0x24001000) << quint32(0x08000008);
     }
+
     void invalidVectors() {
         QFETCH(quint32, sp);
         QFETCH(quint32, pc);
@@ -40,6 +42,7 @@ class ManagerTests : public QObject {
         QCOMPARE(state.last().at(0).toString(), QString("Configuration error"));
         QVERIFY(log.last().at(0).toString().contains("reset vector"));
     }
+
     void missingEngine() {
         Configuration configuration;
         RenodeManager manager;
