@@ -1,0 +1,139 @@
+// STM32H725xE N120, deliberately not an include of the incompatible generic H7 board.
+cpu: CPU.CortexM @ sysbus
+    cpuType: "cortex-m7"
+    nvic: nvic
+    numberOfMPURegions: 16
+    InitVectorTableOffset: 0x08000000
+nvic: N120.Nvic @ sysbus 0xE000E000
+    priorityMask: 0xF0
+    systickFrequency: 64000000
+    -> cpu@0
+flash: Memory.MappedMemory @ sysbus 0x08000000
+    size: 0x80000
+    ResetByte: 0xFF
+systemRom: Memory.MappedMemory @ sysbus 0x1FF00000
+    size: 0x20000
+    init:
+        WriteDoubleWord 0x1E800 0x3032314E
+        WriteDoubleWord 0x1E804 0x454D554C
+        WriteDoubleWord 0x1E808 0x41544F52
+        WriteWord 0x1E880 512
+dtcm: Memory.MappedMemory @ sysbus 0x20000000
+    size: 0x20000
+axi: Memory.MappedMemory @ sysbus 0x24000000
+    size: 0x50000
+itcm: Memory.MappedMemory @ sysbus 0x00000000
+    size: 0x10000
+sram1: Memory.MappedMemory @ sysbus 0x30000000
+    size: 0x4000
+sram2: Memory.MappedMemory @ sysbus 0x30004000
+    size: 0x4000
+sram4: Memory.MappedMemory @ sysbus 0x38000000
+    size: 0x4000
+xip: Memory.MappedMemory @ sysbus 0x90000000
+    size: 0x800000
+    ResetByte: 0xFF
+board: N120.Board @ none
+    internalFlash: flash
+    cpu: cpu
+    exti: exti
+gpioA: N120.Gpio @ sysbus 0x58020000
+    board: board
+    port: 0
+gpioB: N120.Gpio @ sysbus 0x58020400
+    board: board
+    port: 1
+gpioC: N120.Gpio @ sysbus 0x58020800
+    board: board
+    port: 2
+gpioD: N120.Gpio @ sysbus 0x58020C00
+    board: board
+    port: 3
+gpioE: N120.Gpio @ sysbus 0x58021000
+    board: board
+    port: 4
+lcd: N120.Lcd @ sysbus 0x60000000
+    board: board
+ospi: N120.Ospi @ sysbus 0x52005000
+    board: board
+    memory: xip
+rccCore: Miscellaneous.STM32H7_RCC @ none
+    systick: nvic
+rcc: N120.Rcc @ sysbus 0x58024400
+    core: rccCore
+    board: board
+    systick: nvic
+pwr: N120.Support @ sysbus 0x58024800
+    board: board
+    kind: "pwr"
+syscfg: N120.Support @ sysbus 0x58000400
+    board: board
+    kind: "syscfg"
+fmc: N120.Support @ sysbus 0x52004000
+    board: board
+    kind: "fmc"
+adc: N120.Support @ sysbus 0x40022000
+    board: board
+    kind: "adc"
+kbdadc: N120.Support @ sysbus 0x58026000
+    board: board
+    kind: "kbdadc"
+crs: N120.Support @ sysbus 0x40008400
+    board: board
+    kind: "crs"
+vref: N120.Support @ sysbus 0x58003C00
+    board: board
+    kind: "vref"
+rng: Miscellaneous.STM32_RNG @ sysbus 0x48021800
+    series: STM32Series.H7
+crc: CRC.STM32_CRC @ sysbus 0x58024C00
+    series: STM32Series.F0
+    configurablePoly: true
+timer1: N120.Timer @ sysbus 0x40010000
+    clock: rcc
+    board: board
+    number: 1
+    UpdateInterrupt -> nvic@25
+timer2: N120.Timer @ sysbus 0x40000000
+    clock: rcc
+    board: board
+    number: 2
+    -> nvic@28
+timer3: N120.Timer @ sysbus 0x40000400
+    clock: rcc
+    board: board
+    number: 3
+    -> nvic@29
+timer4: N120.Timer @ sysbus 0x40000800
+    clock: rcc
+    board: board
+    number: 4
+    -> nvic@30
+timer6: N120.Timer @ sysbus 0x40001000
+    clock: rcc
+    board: board
+    number: 6
+    -> nvic@54
+timer8: N120.Timer @ sysbus 0x40010400
+    clock: rcc
+    board: board
+    number: 8
+    UpdateInterrupt -> nvic@44
+exti: N120.Exti @ sysbus 0x58000000
+    [0-4] -> nvic@[6-10]
+    [5-9] -> exti5_9@[0-4]
+    [10-15] -> exti10_15@[0-5]
+exti5_9: Miscellaneous.CombinedInput @ none
+    numberOfInputs: 5
+    -> nvic@23
+exti10_15: Miscellaneous.CombinedInput @ none
+    numberOfInputs: 6
+    -> nvic@40
+flashControl: N120.Support @ sysbus 0x52002000
+    board: board
+    kind: "flash"
+usb: N120.Usb @ sysbus 0x40040000
+    clock: rcc
+    board: board
+    IRQ -> nvic@77
+

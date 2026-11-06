@@ -1,0 +1,27 @@
+PASS Power sleep/wake cycle 0 None
+PASS Power sleep/wake cycle 1 None
+PASS Power sleep/wake cycle 2 None
+PASS Power sleep/wake cycle 3 None
+PASS Power sleep/wake cycle 4 None
+PASS Power sleep/wake cycle 5 None
+PASS Power sleep/wake cycle 6 None
+PASS Power sleep/wake cycle 7 None
+PASS Power sleep/wake cycle 8 None
+PASS Power sleep/wake cycle 9 None
+PASS Power sleep/wake cycle 10 None
+PASS Power sleep/wake cycle 11 None
+PASS SysTick divided reference selection None
+PASS SysTick processor clock selection None
+PASS invalid reload preserves paused firmware None
+PASS reload acknowledges and preserves pause 0 None
+PASS reloaded firmware boots 0 None
+PASS reload acknowledges and preserves pause 1 None
+PASS reloaded firmware boots 1 None
+PASS reload acknowledges and preserves pause 2 None
+PASS reloaded firmware boots 2 None
+PASS in-process reload durations [0.016115500002342742, 0.009158799999568146, 0.008321599998453166]
+PASS RCC /512 core prescaler None
+PASS RCC /512 timer propagation None
+PASS slow LED PWM follows counter phase [1, 0]
+PASS forced active LED output without running counter None
+PASS shutdown after repeated reload None

@@ -1,0 +1,1 @@
+{'faulted': False, 'pending': 0, 'pressed': [], 'evaluation_and_settle_wall_s': 0.20296809999854304, 'evaluation_and_settle_virtual_ms': 230, 'instructions': 5584118, 'pixels': 224528}

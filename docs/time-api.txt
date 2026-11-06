@@ -1,0 +1,72 @@
+Antmicro.Renode.Time.TimeInterval
+Int32 CompareTo(Antmicro.Renode.Time.TimeInterval)
+System.TimeSpan ToTimeSpan()
+System.TimeSpan ToTimeSpan(UInt32 ByRef)
+Boolean Equals(System.Object)
+Boolean Equals(Antmicro.Renode.Time.TimeInterval)
+Int32 GetHashCode()
+System.String ToString()
+Antmicro.Renode.Time.TimeInterval WithTicksMin(UInt64)
+Antmicro.Renode.Time.TimeInterval WithScaledTicks(Double)
+UInt64 ToCPUCycles(UInt32, UInt64 ByRef)
+UInt64 get_Ticks()
+UInt64 get_TotalNanoseconds()
+Double get_TotalMicroseconds()
+Double get_TotalMilliseconds()
+Double get_TotalSeconds()
+UInt64 Ticks
+UInt64 TotalNanoseconds
+Double TotalMicroseconds
+Double TotalMilliseconds
+Double TotalSeconds
+Antmicro.Renode.Time.TimeStamp
+System.String ToString()
+Antmicro.Renode.Time.TimeInterval get_TimeElapsed()
+Antmicro.Renode.Time.ITimeDomain get_Domain()
+Void .ctor(Antmicro.Renode.Time.TimeInterval, Antmicro.Renode.Time.ITimeDomain)
+Antmicro.Renode.Time.TimeInterval TimeElapsed
+Antmicro.Renode.Time.ITimeDomain Domain
+Antmicro.Renode.Peripherals.Timers.LimitTimer
+UInt64 GetValueAndLimit(UInt64 ByRef)
+UInt64 Increment(UInt64)
+UInt64 Decrement(UInt64)
+Void Reset()
+Void ResetValue()
+Void ClearInterrupt()
+System.String get_LocalName()
+Antmicro.Renode.Time.Direction get_Direction()
+Void set_Direction(Antmicro.Renode.Time.Direction)
+Boolean get_RawInterrupt()
+Boolean get_EventEnabled()
+Void set_EventEnabled(Boolean)
+Boolean get_Interrupt()
+Boolean get_AutoUpdate()
+Void set_AutoUpdate(Boolean)
+UInt64 get_Limit()
+Void set_Limit(UInt64)
+UInt64 get_Divider()
+Void set_Divider(UInt64)
+Antmicro.Renode.Time.WorkMode get_Mode()
+Void set_Mode(Antmicro.Renode.Time.WorkMode)
+UInt64 get_Value()
+Void set_Value(UInt64)
+UInt64 get_Frequency()
+Void set_Frequency(UInt64)
+Boolean get_Enabled()
+Void set_Enabled(Boolean)
+Void add_LimitReached(System.Action)
+Void remove_LimitReached(System.Action)
+Void .ctor(Antmicro.Renode.Time.IClockSource, UInt64, Antmicro.Renode.Peripherals.IPeripheral, System.String, UInt64, Antmicro.Renode.Time.Direction, Boolean, Antmicro.Renode.Time.WorkMode, Boolean, Boolean, UInt64)
+System.String LocalName
+Antmicro.Renode.Time.Direction Direction
+Boolean RawInterrupt
+Boolean EventEnabled
+Boolean Interrupt
+Boolean AutoUpdate
+UInt64 Limit
+UInt64 Divider
+Antmicro.Renode.Time.WorkMode Mode
+UInt64 Value
+UInt64 Frequency
+Boolean Enabled
+System.Action LimitReached

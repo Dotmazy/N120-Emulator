@@ -1,0 +1,6 @@
+{
+ "version": 6,
+ "configurePresets": [{"name":"windows-qt-mingw","displayName":"Windows Qt 6 MinGW","generator":"Ninja","binaryDir":"${sourceDir}/build","cacheVariables":{"CMAKE_BUILD_TYPE":"RelWithDebInfo","CMAKE_PREFIX_PATH":"F:/Programs/Qt/6.11.1/mingw_64","CMAKE_CXX_COMPILER":"F:/Programs/Qt/Tools/mingw1310_64/bin/g++.exe","CMAKE_MAKE_PROGRAM":"F:/Programs/Qt/Tools/Ninja/ninja.exe"}},{"name":"studio-upgrade","inherits":"windows-qt-mingw","displayName":"N120 Studio upgrade (separate output)","binaryDir":"${sourceDir}/build-upgrade"}],
+ "buildPresets":[{"name":"windows-qt-mingw","configurePreset":"windows-qt-mingw"},{"name":"studio-upgrade","configurePreset":"studio-upgrade"}],
+ "testPresets":[{"name":"windows-qt-mingw","configurePreset":"windows-qt-mingw","output":{"outputOnFailure":true}},{"name":"studio-upgrade","configurePreset":"studio-upgrade","output":{"outputOnFailure":true}}]
+}

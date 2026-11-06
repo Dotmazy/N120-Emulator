@@ -1,0 +1,57 @@
+PASS firmware gamma/init 4E4101 {'ok': True, 'pc': 134229148, 'sp': 604123032, 'paused': True, 'faulted': False, 'instructions': 100000000, 'virtualMs': 1000, 'cpuHz': 540000000, 'backlight': 1, 'batteryPercent': 70, 'batteryVoltage': 3.925, 'batteryAdc': 51445, 'connectionMode': 0, 'targetSpeed': 0, 'sequencePending': 0, 'rows': 65279, 'cfsr': 0, 'hfsr': 0, 'usbIn0': 32768, 'usbOut0': 2147516416, 'usbIpPort': 0, 'pressed': [], 'usbTransfers': 0, 'usbAddress': 0, 'usbDescriptor': '', 'lcdId': 5128449, 'lcdActive': True, 'gamma': True, 'pixelWrites': 161958, 'accesses': 548469, 'rgb': [1, 1, 1], 'columns': 65535, 'flashWrites': 0, 'flashErases': 0, 'flashStatus': 0, 'errors': []}
+PASS fault registers 4E4101 
+PASS reject wrong gamma 4E4101 
+PASS gamma recovery 4E4101 
+PASS LCD software reset 4E4101 
+PASS firmware gamma/init 4E4102 {'ok': True, 'pc': 134229152, 'sp': 604123032, 'paused': True, 'faulted': False, 'instructions': 100000000, 'virtualMs': 1000, 'cpuHz': 540000000, 'backlight': 1, 'batteryPercent': 70, 'batteryVoltage': 3.925, 'batteryAdc': 51445, 'connectionMode': 0, 'targetSpeed': 0, 'sequencePending': 0, 'rows': 65279, 'cfsr': 0, 'hfsr': 0, 'usbIn0': 32768, 'usbOut0': 2147516416, 'usbIpPort': 0, 'pressed': [], 'usbTransfers': 0, 'usbAddress': 0, 'usbDescriptor': '', 'lcdId': 5128450, 'lcdActive': True, 'gamma': True, 'pixelWrites': 161958, 'accesses': 548486, 'rgb': [1, 1, 1], 'columns': 65535, 'flashWrites': 0, 'flashErases': 0, 'flashStatus': 0, 'errors': []}
+PASS fault registers 4E4102 
+PASS reject wrong gamma 4E4102 
+PASS gamma recovery 4E4102 
+PASS LCD software reset 4E4102 
+PASS firmware gamma/init 4E4105 {'ok': True, 'pc': 134229144, 'sp': 604123032, 'paused': True, 'faulted': False, 'instructions': 100000000, 'virtualMs': 1000, 'cpuHz': 540000000, 'backlight': 1, 'batteryPercent': 70, 'batteryVoltage': 3.925, 'batteryAdc': 51445, 'connectionMode': 0, 'targetSpeed': 0, 'sequencePending': 0, 'rows': 65279, 'cfsr': 0, 'hfsr': 0, 'usbIn0': 32768, 'usbOut0': 2147516416, 'usbIpPort': 0, 'pressed': [], 'usbTransfers': 0, 'usbAddress': 0, 'usbDescriptor': '', 'lcdId': 5128453, 'lcdActive': True, 'gamma': True, 'pixelWrites': 161958, 'accesses': 548469, 'rgb': [1, 1, 1], 'columns': 65535, 'flashWrites': 0, 'flashErases': 0, 'flashStatus': 0, 'errors': []}
+PASS fault registers 4E4105 
+PASS reject wrong gamma 4E4105 
+PASS gamma recovery 4E4105 
+PASS LCD software reset 4E4105 
+PASS firmware gamma/init 4E4106 {'ok': True, 'pc': 134229144, 'sp': 604123032, 'paused': True, 'faulted': False, 'instructions': 100000000, 'virtualMs': 1000, 'cpuHz': 540000000, 'backlight': 1, 'batteryPercent': 70, 'batteryVoltage': 3.925, 'batteryAdc': 51445, 'connectionMode': 0, 'targetSpeed': 0, 'sequencePending': 0, 'rows': 65279, 'cfsr': 0, 'hfsr': 0, 'usbIn0': 32768, 'usbOut0': 2147516416, 'usbIpPort': 0, 'pressed': [], 'usbTransfers': 0, 'usbAddress': 0, 'usbDescriptor': '', 'lcdId': 5128454, 'lcdActive': True, 'gamma': True, 'pixelWrites': 161958, 'accesses': 548469, 'rgb': [1, 1, 1], 'columns': 65535, 'flashWrites': 0, 'flashErases': 0, 'flashStatus': 0, 'errors': []}
+PASS fault registers 4E4106 
+PASS reject wrong gamma 4E4106 
+PASS gamma recovery 4E4106 
+PASS LCD software reset 4E4106 
+PASS firmware gamma/init 4E4601 {'ok': True, 'pc': 134229174, 'sp': 604123032, 'paused': True, 'faulted': False, 'instructions': 100000000, 'virtualMs': 1000, 'cpuHz': 540000000, 'backlight': 1, 'batteryPercent': 70, 'batteryVoltage': 3.925, 'batteryAdc': 51445, 'connectionMode': 0, 'targetSpeed': 0, 'sequencePending': 0, 'rows': 65279, 'cfsr': 0, 'hfsr': 0, 'usbIn0': 32768, 'usbOut0': 2147516416, 'usbIpPort': 0, 'pressed': [], 'usbTransfers': 0, 'usbAddress': 0, 'usbDescriptor': '', 'lcdId': 5129729, 'lcdActive': True, 'gamma': True, 'pixelWrites': 161958, 'accesses': 548469, 'rgb': [1, 1, 1], 'columns': 65535, 'flashWrites': 0, 'flashErases': 0, 'flashStatus': 0, 'errors': []}
+PASS fault registers 4E4601 
+PASS reject wrong gamma 4E4601 
+PASS gamma recovery 4E4601 
+PASS LCD software reset 4E4601 
+PASS firmware gamma/init 4E4801 {'ok': True, 'pc': 134229162, 'sp': 604123032, 'paused': True, 'faulted': False, 'instructions': 100000000, 'virtualMs': 1000, 'cpuHz': 540000000, 'backlight': 1, 'batteryPercent': 70, 'batteryVoltage': 3.925, 'batteryAdc': 51445, 'connectionMode': 0, 'targetSpeed': 0, 'sequencePending': 0, 'rows': 65279, 'cfsr': 0, 'hfsr': 0, 'usbIn0': 32768, 'usbOut0': 2147516416, 'usbIpPort': 0, 'pressed': [], 'usbTransfers': 0, 'usbAddress': 0, 'usbDescriptor': '', 'lcdId': 5130241, 'lcdActive': True, 'gamma': True, 'pixelWrites': 161958, 'accesses': 548469, 'rgb': [1, 1, 1], 'columns': 65535, 'flashWrites': 0, 'flashErases': 0, 'flashStatus': 0, 'errors': []}
+PASS fault registers 4E4801 
+PASS reject wrong gamma 4E4801 
+PASS gamma recovery 4E4801 
+PASS LCD software reset 4E4801 
+PASS firmware gamma/init 4E5401 {'ok': True, 'pc': 134229148, 'sp': 604123032, 'paused': True, 'faulted': False, 'instructions': 100000000, 'virtualMs': 1000, 'cpuHz': 540000000, 'backlight': 1, 'batteryPercent': 70, 'batteryVoltage': 3.925, 'batteryAdc': 51445, 'connectionMode': 0, 'targetSpeed': 0, 'sequencePending': 0, 'rows': 65279, 'cfsr': 0, 'hfsr': 0, 'usbIn0': 32768, 'usbOut0': 2147516416, 'usbIpPort': 0, 'pressed': [], 'usbTransfers': 0, 'usbAddress': 0, 'usbDescriptor': '', 'lcdId': 5133313, 'lcdActive': True, 'gamma': True, 'pixelWrites': 161958, 'accesses': 548486, 'rgb': [1, 1, 1], 'columns': 65535, 'flashWrites': 0, 'flashErases': 0, 'flashStatus': 0, 'errors': []}
+PASS fault registers 4E5401 
+PASS reject wrong gamma 4E5401 
+PASS gamma recovery 4E5401 
+PASS LCD software reset 4E5401 
+PASS external firmware executes 
+PASS firmware responds to physical Down key 
+PASS asynchronous pause/resume (5300, 5792.32736, 5792.32736)
+PASS all 46 switches press/release 
+PASS simultaneous key electrical scan 
+PASS PWM effective 25/75 percent [0.25, 0.75, 0]
+PASS PWM disabled outputs off 
+PASS blue PWM 50 percent 
+PASS mapped writes rejected 
+PASS 4 KiB erase 
+PASS program requires WEL 
+PASS NOR program 
+PASS flash busy status 
+PASS flash busy completion 
+PASS NOR cannot program zero back to one 
+PASS flash save size 
+PASS flash persistence reload 
+PASS MCU reset retains flash 
+PASS firmware reboot reinitializes LCD 
+PASS shutdown acknowledged 
+PASS Renode terminates cleanly 
+56 checks passed

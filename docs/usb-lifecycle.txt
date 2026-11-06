@@ -1,0 +1,19 @@
+{'usbIn0': 32832, 'usbOut0': 2147516416, 'usbIpPort': 0, 'usbTransfers': 1, 'usbAddress': 0, 'usbDescriptor': 'EgEQAgAAAECDBJGiIAEBAgMB', 'usbPending': False, 'usbError': ''} regs ['0x4000020', '0x42010', '0x0', '0x8009', '0x40', '0x80']
+PASS descriptor cable cycle 0
+{'usbIn0': 32832, 'usbOut0': 2147516416, 'usbIpPort': 0, 'usbTransfers': 2, 'usbAddress': 0, 'usbDescriptor': 'EgEQAgAAAECDBJGiIAEBAgMB', 'usbPending': False, 'usbError': ''} regs ['0x4000024', '0x42010', '0x0', '0x8009', '0x40', '0x80']
+PASS descriptor cable cycle 2
+{'usbIn0': 32832, 'usbOut0': 2147516416, 'usbIpPort': 0, 'usbTransfers': 3, 'usbAddress': 0, 'usbDescriptor': 'EgEQAgAAAECDBJGiIAEBAgMB', 'usbPending': False, 'usbError': ''} regs ['0x4000024', '0x42010', '0x0', '0x8009', '0x40', '0x80']
+PASS descriptor cable cycle 4
+{'usbIn0': 32832, 'usbOut0': 2147516416, 'usbIpPort': 0, 'usbTransfers': 4, 'usbAddress': 0, 'usbDescriptor': 'EgEQAgAAAECDBJGiIAEBAgMB', 'usbPending': False, 'usbError': ''} regs ['0x4000024', '0x42010', '0x0', '0x8009', '0x40', '0x80']
+PASS descriptor cable cycle 8
+PASS server stop with client 0
+PASS USB/IP port released 0
+PASS USB/IP DEVLIST firmware identity
+PASS server stop with client 1
+PASS USB/IP port released 1
+PASS USB/IP imported EP0 descriptor
+PASS USB/IP short packet completes 64-byte request
+PASS server stop with client 2
+PASS USB/IP port released 2
+PASS server stop without a client
+PASS shutdown with listening server and client

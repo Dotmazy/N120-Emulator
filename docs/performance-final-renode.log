@@ -1,0 +1,59 @@
+[21:11:41.9939] [INFO] Loaded monitor commands from: F:\Programs\Renode\scripts/monitor.py
+[21:11:42.0157] [INFO] Robot Framework remote server is listening on port 64852
+[21:11:42.1005] [INFO] Including script(s): D:\Document (D)\CPPProjects\N120 Emulator\renode\UsbHost.cs
+[21:11:43.3640] [INFO] System bus created.
+[21:11:44.2490] [INFO] sysbus: Loading block of 524288 bytes length at 0x8000000.
+[21:11:44.4596] [INFO] cpu: Setting initial values: PC = 0x8008159, SP = 0x2403FFF8.
+[21:11:44.4616] [INFO] N120: Machine started.
+[21:11:44.5321] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [6] when writing value 0x1FF0060. Tags: PLL2RGE (0x1).
+[21:11:44.5324] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [22] when writing value 0x1BF0020. Tags: DIVP3EN (0x0).
+[21:11:44.5325] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [23] when writing value 0x17F0020. Tags: DIVQ3EN (0x0).
+[21:11:44.5325] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [24] when writing value 0xFF0020. Tags: DIVR3EN (0x0).
+[21:11:44.5349] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [0] when writing value 0x1. Tags: FMCSEL (0x1).
+[21:11:44.5350] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [5] when writing value 0x20. Tags: QSPISEL (0x2).
+[21:11:44.5354] [WARNING] Unhandled write to offset 0x54. Unhandled bits: [20-21] when writing value 0x300000. Tags: USBSEL (0x3).
+[21:11:44.5414] [WARNING] usb: Unhandled write to offset 0xC. Unhandled bits: [6, 10-11] when writing value 0x40001840. Tags: Full speed serial transceiver mode select (PHYSEL) (0x1), USB turnaround time (TRDT) (0x6).
+[21:11:44.5422] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:11:44.5422] [WARNING] usb: Unhandled write to offset 0x38. Unhandled bits: [16] when writing value 0x10000. Tags: Power down of FS PHY (PWRDWN) (0x1).
+[21:11:44.5425] [WARNING] usb: Unhandled write to offset 0x14. Unhandled bits: [5, 26] when writing value 0x0. Tags: RESERVED (0x0), RESERVED (0x0).
+[21:11:44.5425] [WARNING] usb: Unhandled write to offset 0x800. Unhandled bits: [0-1] when writing value 0x2200003. Tags: Device speed (DSPD) (0x3).
+[21:11:44.5426] [WARNING] usb: Unhandled write to offset 0x24. Unhandled bits: [7] when writing value 0x80. Tags: Rx FIFO depth (RXFD) (0x80).
+[21:11:47.4563] [WARNING] Unhandled write to offset 0xFC. Unhandled bits: [0, 4-5, 8, 12, 14, 16] when writing value 0xF0000000. Tags: MDMALPEN (0x0), DMA2DLPEN (0x0), JPGDECLPEN (0x0), FLASHLPEN (0x0), FMCLPEN (0x0), QSPILPEN (0x0), SDMMC1LPEN (0x0).
+[21:11:47.4565] [WARNING] Unhandled write to offset 0x108. Unhandled bits: [3-10, 19, 21, 24, 28-29] when writing value 0x7. Tags: GPIODLPEN (0x0), GPIOELPEN (0x0), GPIOFLPEN (0x0), GPIOGLPEN (0x0), GPIOHLPEN (0x0), GPIOILPEN (0x0), GPIOJLPEN (0x0), GPIOKLPEN (0x0), CRCLPEN (0x0), BDMALPEN (0x0), ADC3LPEN (0x0), BKPRAMLPEN (0x0), SRAM4LPEN (0x0).
+[21:11:47.4566] [WARNING] Unhandled write to offset 0x110. Unhandled bits: [0, 3-9, 11, 14-23, 27, 29-31] when writing value 0x6. Tags: TIM2LPEN (0x0), TIM5LPEN (0x0), TIM6LPEN (0x0), TIM7LPEN (0x0), TIM12LPEN (0x0), TIM13LPEN (0x0), TIM14LPEN (0x0), LPTIM1LPEN (0x0), RESERVED (0x0), SPI2LPEN (0x0), SPI3LPEN (0x0), SPDIFRXLPEN (0x0), USART2LPEN (0x0), USART3LPEN (0x0), UART4LPEN (0x0), UART5LPEN (0x0), I2C1LPEN (0x0), I2C2LPEN (0x0), I2C3LPEN (0x0), CECLPEN (0x0), DAC12LPEN (0x0), UART7LPEN (0x0), UART8LPEN (0x0).
+[21:11:47.4566] [WARNING] Unhandled write to offset 0x118. Unhandled bits: [1, 4-5, 12-13, 16-18, 20, 22-24, 28-29] when writing value 0x1. Tags: TIM8LPEN (0x0), USART1LPEN (0x0), USART6LPEN (0x0), SPI1LPEN (0x0), SPI4LPEN (0x0), TIM15LPEN (0x0), TIM16LPEN (0x0), TIM17LPEN (0x0), SAI1LPEN (0x0), SAI2LPEN (0x0), SAI3LPEN (0x0), DFSDM1LPEN (0x0), HRTIMLPEN (0x0).
+[21:11:47.4567] [WARNING] Unhandled write to offset 0x10C. Unhandled bits: [3-4, 6] when writing value 0x0. Tags: LTDCLPEN (0x0), RESERVED (0x0), WWDG1LPEN (0x0).
+[21:11:47.4567] [WARNING] Unhandled write to offset 0x100. Unhandled bits: [0-1, 5, 14-17, 25-28] when writing value 0x0. Tags: DMA1LPEN (0x0), DMA2LPEN (0x0), ADC12LPEN (0x0), RESERVED (0x0), ETH1MACLPEN (0x0), ETH1TXLPEN (0x0), ETH1RXLPEN (0x0), USB1OTGHSLPEN (0x0), USB1OTGHSULPILPEN (0x0), USB2OTGHSLPEN (0x0), USB2OTGHSULPILPEN (0x0).
+[21:11:47.4567] [WARNING] Unhandled write to offset 0x104. Unhandled bits: [0, 4-6, 9, 29-31] when writing value 0x0. Tags: DCMILPEN (0x0), CRYPTLPEN (0x0), HASHLPEN (0x0), RNGLPEN (0x0), SDMMC2LPEN (0x0), SRAM1LPEN (0x0), SRAM2LPEN (0x0), SRAM3LPEN (0x0).
+[21:11:47.4567] [WARNING] Unhandled write to offset 0x114. Unhandled bits: [1-2, 4-5, 8] when writing value 0x0. Tags: CRSLPEN (0x0), SWPLPEN (0x0), OPAMPLPEN (0x0), MDIOSLPEN (0x0), FDCANLPEN (0x0).
+[21:11:47.4568] [WARNING] Unhandled write to offset 0x11C. Unhandled bits: [1, 3, 5, 7, 9-12, 14-16, 21, 26] when writing value 0x0. Tags: SYSCFGLPEN (0x0), LPUART1LPEN (0x0), SPI6LPEN (0x0), I2C4LPEN (0x0), LPTIM2LPEN (0x0), LPTIM3LPEN (0x0), LPTIM4LPEN (0x0), LPTIM5LPEN (0x0), COMP12LPEN (0x0), VREFLPEN (0x0), RTCAPBLPEN (0x0), SAI4LPEN (0x0), RESERVED (0x0).
+[21:11:47.4578] [WARNING] nvic: Unhandled write to offset 0xF50 (ICacheInvalidateAllToPoUaIgnored), value 0x0.
+[21:11:47.4589] [WARNING] cpu: Trying to enable instruction cache, but it's not supported
+[21:11:47.4591] [WARNING] nvic: Unhandled write to offset 0xF60 (DCacheInvalidateBySetWay), value 0x0.
+[21:11:47.9503] [WARNING] timer1: Unhandled write to offset 0x8. Unhandled bits: [7] when writing value 0x80. Tags: Master/Slave mode (MSM) (0x1).
+[21:11:48.0301] [WARNING] nvic: Unhandled write to offset 0xF60 (DCacheInvalidateBySetWay), value 0x0.
+[21:11:49.4640] [INFO] N120: Machine paused.
+[21:11:49.4876] [INFO] N120: Machine resumed.
+[21:11:49.7140] [INFO] N120: Machine paused.
+[21:11:49.7158] [INFO] N120: Machine resumed.
+[21:11:49.7278] [INFO] N120: Machine paused.
+[21:11:49.7289] [INFO] N120: Machine resumed.
+[21:11:49.8793] [INFO] N120: Machine paused.
+[21:11:49.8814] [INFO] N120: Machine resumed.
+[21:11:49.9522] [INFO] N120: Machine paused.
+[21:11:49.9538] [INFO] N120: Machine resumed.
+[21:11:50.1387] [INFO] N120: Machine paused.
+[21:11:50.1417] [INFO] N120: Machine resumed.
+[21:11:50.1870] [INFO] N120: Machine paused.
+[21:11:50.1889] [INFO] N120: Machine resumed.
+[21:11:50.3936] [INFO] N120: Machine paused.
+[21:11:50.3952] [INFO] N120: Machine resumed.
+[21:11:50.4208] [INFO] N120: Machine paused.
+[21:11:50.8809] [INFO] N120: Machine resumed.
+[21:11:51.8810] [INFO] N120: Machine paused.
+[21:11:51.9946] [INFO] N120: Machine resumed.
+[21:11:52.9947] [INFO] N120: Machine paused.
+[21:11:53.0215] [INFO] N120: Machine resumed.
+[21:11:54.0216] [INFO] N120: Machine paused.
+[21:11:54.0366] [INFO] Robot Framework remote servers listener thread stopped
+[21:11:54.0479] [INFO] N120: Disposed.

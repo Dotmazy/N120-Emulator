@@ -1,0 +1,2 @@
+{'percent': 20, 'adc': 47841, 'firmware_reads': 2, 'refresh_virtual_ms': 250, 'passed': True}
+{'percent': 100, 'adc': 55049, 'firmware_reads': 2, 'refresh_virtual_ms': 250, 'passed': True}

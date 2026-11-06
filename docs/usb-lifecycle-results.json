@@ -1,0 +1,62 @@
+[
+  {
+    "name": "descriptor cable cycle 0",
+    "passed": true
+  },
+  {
+    "name": "descriptor cable cycle 2",
+    "passed": true
+  },
+  {
+    "name": "descriptor cable cycle 4",
+    "passed": true
+  },
+  {
+    "name": "descriptor cable cycle 8",
+    "passed": true
+  },
+  {
+    "name": "server stop with client 0",
+    "passed": true
+  },
+  {
+    "name": "USB/IP port released 0",
+    "passed": true
+  },
+  {
+    "name": "USB/IP DEVLIST firmware identity",
+    "passed": true
+  },
+  {
+    "name": "server stop with client 1",
+    "passed": true
+  },
+  {
+    "name": "USB/IP port released 1",
+    "passed": true
+  },
+  {
+    "name": "USB/IP imported EP0 descriptor",
+    "passed": true
+  },
+  {
+    "name": "USB/IP short packet completes 64-byte request",
+    "passed": true
+  },
+  {
+    "name": "server stop with client 2",
+    "passed": true
+  },
+  {
+    "name": "USB/IP port released 2",
+    "passed": true
+  },
+  {
+    "name": "server stop without a client",
+    "passed": true
+  },
+  {
+    "name": "shutdown with listening server and client",
+    "passed": true
+  }
+]

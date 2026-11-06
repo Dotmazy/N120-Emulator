@@ -1,0 +1,52 @@
+Antmicro.Renode.Core.USB.PacketRecipient
+Device=0
+Interface=1
+Endpoint=2
+Other=3
+Boolean HasFlag(System.Enum)
+Boolean Equals(System.Object)
+Int32 GetHashCode()
+Int32 CompareTo(System.Object)
+System.String ToString()
+System.String ToString(System.String)
+System.String ToString(System.IFormatProvider)
+System.String ToString(System.String, System.IFormatProvider)
+System.TypeCode GetTypeCode()
+System.Type GetType()
+Byte value__
+Antmicro.Renode.Core.USB.PacketType
+Standard=0
+Class=1
+Vendor=2
+Boolean HasFlag(System.Enum)
+Boolean Equals(System.Object)
+Int32 GetHashCode()
+Int32 CompareTo(System.Object)
+System.String ToString()
+System.String ToString(System.String)
+System.String ToString(System.IFormatProvider)
+System.String ToString(System.String, System.IFormatProvider)
+System.TypeCode GetTypeCode()
+System.Type GetType()
+Byte value__
+Antmicro.Renode.Extensions.Utilities.USB.DeviceDescriptor
+Byte[] get_AsBytes()
+System.String ToString()
+Boolean Equals(System.Object)
+Int32 GetHashCode()
+System.Type GetType()
+Byte[] AsBytes
+Byte Length
+Byte Type
+UInt16 ProtocolVersion
+Byte Class
+Byte Subclass
+Byte Protocol
+Byte MaximumPacketSize
+UInt16 VendorId
+UInt16 ProductId
+UInt16 DeviceReleaseNumber
+Byte ManufacturerNameIndex
+Byte ProductNameIndex
+Byte SerialNumberIndex
+Byte NumberOfConfigurations

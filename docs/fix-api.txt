@@ -1,0 +1,129 @@
+Antmicro.Renode.Peripherals.Miscellaneous.DWT
+Void Reset()
+Int64 get_Size()
+UInt32 ReadDoubleWord(Int64)
+Void WriteDoubleWord(Int64, UInt32)
+System.String OffsetToString(Int64)
+Antmicro.Renode.Core.Structure.Registers.DoubleWordRegisterCollection get_RegistersCollection()
+System.Type GetType()
+System.String ToString()
+Boolean Equals(System.Object)
+Int32 GetHashCode()
+Void .ctor(Antmicro.Renode.Core.IMachine, UInt32)
+Int64 Size
+Antmicro.Renode.Core.Structure.Registers.DoubleWordRegisterCollection RegistersCollection
+Antmicro.Renode.Peripherals.Miscellaneous.STM32H7_RCC
+Void Register(Antmicro.Renode.Peripherals.IPeripheral, Antmicro.Renode.Core.Structure.EnumRegistrationPoint`1[Antmicro.Renode.Peripherals.Miscellaneous.STM32H7_RCC+RegistrationPeripheralAlias])
+Void Unregister(Antmicro.Renode.Peripherals.IPeripheral)
+Void Reset()
+System.Nullable`1[System.UInt64] get_Pll1Frequecy()
+Int64 get_Size()
+UInt32 ReadDoubleWord(Int64)
+Void WriteDoubleWord(Int64, UInt32)
+System.String OffsetToString(Int64)
+Antmicro.Renode.Core.Structure.Registers.DoubleWordRegisterCollection get_RegistersCollection()
+System.Type GetType()
+System.String ToString()
+Boolean Equals(System.Object)
+Int32 GetHashCode()
+Void .ctor(Antmicro.Renode.Core.IMachine, Antmicro.Renode.Peripherals.IHasDivisibleFrequency, UInt64, UInt64)
+System.Nullable`1[System.UInt64] Pll1Frequecy
+Int64 Size
+Antmicro.Renode.Core.Structure.Registers.DoubleWordRegisterCollection RegistersCollection
+Antmicro.Renode.Peripherals.Miscellaneous.STM32H7_RCC+RegistrationPeripheralAlias
+Antmicro.Renode.Peripherals.Miscellaneous.STM32H7_RCC+SystemClockSourceSelection
+Antmicro.Renode.Peripherals.Miscellaneous.STM32H7_RCC+PllSourceSelection
+Antmicro.Renode.Peripherals.Miscellaneous.STM32H7_RCC+HsiFrequencySelection
+Antmicro.Renode.Peripherals.Miscellaneous.STM32H7_RCC+Registers
+Antmicro.Renode.Peripherals.IRQControllers.NVIC
+System.Collections.Generic.IEnumerable`1[System.Int32] GetEnabledExternalInterrupts()
+InterruptTargetSecurityState GetTargetInterruptSecurityState(Int32)
+System.Nullable`1[System.Int32] FindPendingInterrupt()
+Void SetSevOnPendingOnAllCPUs(Boolean)
+Void OnGPIO(Int32, Boolean)
+Void SetPendingIRQ(Int32)
+SynchronousFaultResult SetPendingSynchronousFault(Int32)
+SynchronousFaultResult SetPendingStackingFault(Int32, Int32)
+SynchronousFaultResult SetPendingVectorFault(Boolean, Int32, Boolean)
+UInt32 GetFpccrReadyBits(Int32, Boolean)
+LazyFpFaultResult SetPendingLazyFpFault(Int32, UInt32)
+Void EnterResetLockup(Boolean)
+Void SetLockupState(Boolean)
+Boolean CompleteIRQ(Int32)
+System.Nullable`1[System.Int32] AcknowledgeIRQ()
+Void SetSleepOnExceptionExitOnAllCPUs(Boolean)
+Void WriteDoubleWord(Int64, UInt32, Boolean)
+Void WriteDoubleWord(Int64, UInt32)
+Void WriteDoubleWordNonSecureAlias(Int64, UInt32)
+UInt32 ReadDoubleWord(Int64, Boolean)
+UInt32 ReadDoubleWord(Int64)
+System.String OffsetToString(Int64)
+Void Reset()
+UInt32 ReadDoubleWordNonSecureAlias(Int64)
+System.Collections.Generic.IEnumerable`1[System.Int32] GetEnabledInternalInterrupts()
+Void AttachCPU(Antmicro.Renode.Peripherals.CPU.CortexM)
+Boolean get_IsBFHFNMINSEnabled()
+Byte get_BASEPRI_S()
+Void set_BASEPRI_S(Byte)
+Byte get_BASEPRI_NS()
+Void set_BASEPRI_NS(Byte)
+Boolean get_MaskedInterruptPresent()
+Boolean get_PauseInsteadOfReset()
+Void set_PauseInsteadOfReset(Boolean)
+UInt64 get_Frequency()
+Void set_Frequency(UInt64)
+UInt64 get_Divider()
+Void set_Divider(UInt64)
+Boolean get_HaltSystickOnDeepSleep()
+Void set_HaltSystickOnDeepSleep(Boolean)
+Boolean get_FilterCcrDiv0Write()
+Void set_FilterCcrDiv0Write(Boolean)
+Antmicro.Renode.Core.GPIO get_IRQ()
+Antmicro.Renode.Core.GPIO get_SystemResetRequest()
+Antmicro.Renode.Core.GPIO get_InSleep()
+Antmicro.Renode.Core.GPIO get_InDeepSleep()
+Antmicro.Renode.Core.GPIO get_Lockup()
+Int64 get_Size()
+Antmicro.Renode.Core.Structure.Registers.DoubleWordRegisterCollection get_RegisterCollection()
+Boolean get_DeepSleepEnabled()
+Void set_DeepSleepEnabled(Boolean)
+System.Type GetType()
+System.String ToString()
+Boolean Equals(System.Object)
+Int32 GetHashCode()
+Void .ctor(Antmicro.Renode.Core.IMachine, UInt64, Byte, Boolean)
+Boolean IsBFHFNMINSEnabled
+Byte BASEPRI_S
+Byte BASEPRI_NS
+Boolean MaskedInterruptPresent
+Boolean PauseInsteadOfReset
+UInt64 Frequency
+UInt64 Divider
+Boolean HaltSystickOnDeepSleep
+Boolean FilterCcrDiv0Write
+Antmicro.Renode.Core.GPIO IRQ
+Antmicro.Renode.Core.GPIO SystemResetRequest
+Antmicro.Renode.Core.GPIO InSleep
+Antmicro.Renode.Core.GPIO InDeepSleep
+Antmicro.Renode.Core.GPIO Lockup
+Int64 Size
+Antmicro.Renode.Core.Structure.Registers.DoubleWordRegisterCollection RegisterCollection
+Boolean DeepSleepEnabled
+Antmicro.Renode.Peripherals.IRQControllers.NVIC+LazyFpFaultResult
+Antmicro.Renode.Peripherals.IRQControllers.NVIC+SynchronousFaultResult
+Antmicro.Renode.Peripherals.IRQControllers.NVIC+InterruptTargetSecurityState
+Antmicro.Renode.Extensions.Utilities.USBIP.USBIPServer
+Void Dispose()
+Void Run()
+Void Reset()
+Void Register(Antmicro.Renode.Core.USB.IUSBDevice, Antmicro.Renode.Core.Structure.NumberRegistrationPoint`1[System.Int32])
+Void Unregister(Antmicro.Renode.Core.USB.IUSBDevice)
+Void Register(Antmicro.Renode.Core.USB.IUSBDevice, Int32)
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Core.Structure.NumberRegistrationPoint`1[System.Int32]] GetRegistrationPoints(Antmicro.Renode.Core.USB.IUSBDevice)
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Core.Structure.IRegistered`2[Antmicro.Renode.Core.USB.IUSBDevice,Antmicro.Renode.Core.Structure.NumberRegistrationPoint`1[System.Int32]]] get_Children()
+System.Type GetType()
+System.String ToString()
+Boolean Equals(System.Object)
+Int32 GetHashCode()
+Void .ctor(Int32)
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Core.Structure.IRegistered`2[Antmicro.Renode.Core.USB.IUSBDevice,Antmicro.Renode.Core.Structure.NumberRegistrationPoint`1[System.Int32]]] Children

@@ -1,0 +1,9 @@
+{'ok': True, 'usbDescriptor': 'EgEQAgAAAECDBJGiIAEBAgMB'}
+{'faulted': False, 'usbIn0': 32832, 'usbOut0': 2147516416, 'usbIpPort': 0, 'usbTransfers': 1, 'usbAddress': 0, 'usbDescriptor': 'EgEQAgAAAECDBJGiIAEBAgMB', 'usbPending': False, 'usbError': ''}
+regs ['0x4000020', '0x2200000', '0x8040', '0x80008000']
+{'ok': True, 'usbDescriptor': 'EgEQAgAAAECDBJGiIAEBAgMB'}
+{'faulted': False, 'usbIn0': 32832, 'usbOut0': 2147516416, 'usbIpPort': 0, 'usbTransfers': 2, 'usbAddress': 0, 'usbDescriptor': 'EgEQAgAAAECDBJGiIAEBAgMB', 'usbPending': False, 'usbError': ''}
+regs ['0x4000020', '0x2200000', '0x8040', '0x80008000']
+{'ok': True, 'usbDescriptor': 'EgEQAgAAAECDBJGiIAEBAgMB'}
+{'faulted': False, 'usbIn0': 32832, 'usbOut0': 2147516416, 'usbIpPort': 0, 'usbTransfers': 3, 'usbAddress': 0, 'usbDescriptor': 'EgEQAgAAAECDBJGiIAEBAgMB', 'usbPending': False, 'usbError': ''}
+regs ['0x4000020', '0x2200000', '0x8040', '0x80008000']

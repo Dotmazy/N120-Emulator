@@ -1,0 +1,66 @@
+{
+  "launch_s": 2.7921266999983345,
+  "machine_load_s": 0.643104000002495,
+  "vector": "0x2403F400\n\n",
+  "idle": {
+    "wall_s": 0.9092187999995076,
+    "virtual_ratio": 1.0998452737674822,
+    "instructions": 590005,
+    "accesses": 684,
+    "pixels": 0,
+    "pc": "0x900045ee"
+  },
+  "held_down": {
+    "wall_s": 3.3244689000057406,
+    "virtual_ratio": 0.30079992626740265,
+    "instructions": 85727318,
+    "accesses": 807381,
+    "pixels": 86620,
+    "pc": "0x90001952"
+  },
+  "held_home": {
+    "wall_s": 3.3251776000033715,
+    "virtual_ratio": 0.300735816336242,
+    "instructions": 85622005,
+    "accesses": 790584,
+    "pixels": 81534,
+    "pc": "0x90001940"
+  },
+  "power_0": {
+    "off": true,
+    "on": true,
+    "pc": "0x900045ee"
+  },
+  "power_1": {
+    "off": true,
+    "on": true,
+    "pc": "0x900045ee"
+  },
+  "power_2": {
+    "off": true,
+    "on": true,
+    "pc": "0x900045ee"
+  },
+  "power_3": {
+    "off": true,
+    "on": true,
+    "pc": "0x900045ee"
+  },
+  "power_4": {
+    "off": true,
+    "on": true,
+    "pc": "0x900045ee"
+  },
+  "descriptor1": {
+    "ok": true,
+    "usbDescriptor": "EgEQAgAAAECDBJGiIAEBAgMB"
+  },
+  "descriptor2": {
+    "ok": true,
+    "usbDescriptor": "EgEQAgAAAECDBJGiIAEBAgMB"
+  },
+  "descriptor_replug": {
+    "ok": true,
+    "usbDescriptor": ""
+  }
+}

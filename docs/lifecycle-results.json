@@ -1,0 +1,144 @@
+[
+  {
+    "name": "Power sleep/wake cycle 0",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "Power sleep/wake cycle 1",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "Power sleep/wake cycle 2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "Power sleep/wake cycle 3",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "Power sleep/wake cycle 4",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "Power sleep/wake cycle 5",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "Power sleep/wake cycle 6",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "Power sleep/wake cycle 7",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "Power sleep/wake cycle 8",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "Power sleep/wake cycle 9",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "Power sleep/wake cycle 10",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "Power sleep/wake cycle 11",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "SysTick divided reference selection",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "SysTick processor clock selection",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "invalid reload preserves paused firmware",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "reload acknowledges and preserves pause 0",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "reloaded firmware boots 0",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "reload acknowledges and preserves pause 1",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "reloaded firmware boots 1",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "reload acknowledges and preserves pause 2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "reloaded firmware boots 2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "in-process reload durations",
+    "passed": true,
+    "detail": [
+      0.016115500002342742,
+      0.009158799999568146,
+      0.008321599998453166
+    ]
+  },
+  {
+    "name": "RCC /512 core prescaler",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "RCC /512 timer propagation",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "slow LED PWM follows counter phase",
+    "passed": true,
+    "detail": [
+      1,
+      0
+    ]
+  },
+  {
+    "name": "forced active LED output without running counter",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "name": "shutdown after repeated reload",
+    "passed": true,
+    "detail": null
+  }
+]

@@ -1,0 +1,209 @@
+Antmicro.Renode.Peripherals.USB.STM_USB
+Void Reset()
+Antmicro.Renode.Core.USB.IUSBConnection ConnectUSB()
+Int64 get_Size()
+Antmicro.Renode.Core.GPIO get_IRQ()
+Void set_IRQ(Antmicro.Renode.Core.GPIO)
+Byte get_Address()
+UInt32 ReadDoubleWord(Int64)
+Void WriteDoubleWord(Int64, UInt32)
+System.String OffsetToString(Int64)
+Antmicro.Renode.Core.Structure.Registers.DoubleWordRegisterCollection get_RegistersCollection()
+System.Type GetType()
+System.String ToString()
+Boolean Equals(System.Object)
+Int32 GetHashCode()
+Void .ctor(Antmicro.Renode.Core.IMachine)
+Int64 Size
+Antmicro.Renode.Core.GPIO IRQ
+Byte Address
+Antmicro.Renode.Core.Structure.Registers.DoubleWordRegisterCollection RegistersCollection
+Antmicro.Renode.Extensions.Utilities.USBIP.USBIPServer
+Void Dispose()
+Void Run()
+Void Reset()
+Void Register(Antmicro.Renode.Core.USB.IUSBDevice, Antmicro.Renode.Core.Structure.NumberRegistrationPoint`1[System.Int32])
+Void Unregister(Antmicro.Renode.Core.USB.IUSBDevice)
+Void Register(Antmicro.Renode.Core.USB.IUSBDevice, Int32)
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Core.Structure.NumberRegistrationPoint`1[System.Int32]] GetRegistrationPoints(Antmicro.Renode.Core.USB.IUSBDevice)
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Core.Structure.IRegistered`2[Antmicro.Renode.Core.USB.IUSBDevice,Antmicro.Renode.Core.Structure.NumberRegistrationPoint`1[System.Int32]]] get_Children()
+System.Type GetType()
+System.String ToString()
+Boolean Equals(System.Object)
+Int32 GetHashCode()
+Void .ctor(Int32)
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Core.Structure.IRegistered`2[Antmicro.Renode.Core.USB.IUSBDevice,Antmicro.Renode.Core.Structure.NumberRegistrationPoint`1[System.Int32]]] Children
+Antmicro.Renode.Time.MasterTimeSource
+Void Dispose()
+Void RunFor(Antmicro.Renode.Time.TimeInterval)
+Void Run(UInt32)
+Void Start()
+Void Stop()
+Antmicro.Renode.Time.ITimeDomain get_Domain()
+System.String ToString()
+System.Nullable`1[System.UInt64] ExecuteInNearestSyncedState(System.Action`1[Antmicro.Renode.Time.TimeStamp], Boolean)
+UInt64 ExecuteInSyncedState(System.Action`1[Antmicro.Renode.Time.TimeStamp], Antmicro.Renode.Time.TimeStamp)
+Boolean CancelActionToExecuteInSyncedState(UInt64)
+Void RegisterSink(Antmicro.Renode.Time.ITimeSink)
+Void ReportHandleActive()
+Void ReportTimeProgress(UInt64)
+Boolean get_ExecuteInSerial()
+Void set_ExecuteInSerial(Boolean)
+Boolean get_IsOnSyncPhaseThread()
+Antmicro.Renode.Time.TimeInterval get_NearestSyncPoint()
+Antmicro.Renode.Time.TimeInterval get_ElapsedVirtualHostTimeDifference()
+Antmicro.Renode.Time.TimeInterval get_ElapsedHostTime()
+Antmicro.Renode.Time.TimeInterval get_ElapsedVirtualTime()
+Int64 get_NumberOfSyncPoints()
+Double get_CurrentLoad()
+Antmicro.Renode.Time.TimeInterval get_Quantum()
+Void set_Quantum(Antmicro.Renode.Time.TimeInterval)
+Antmicro.Renode.Time.TimeSourceState get_State()
+Double get_CumulativeLoad()
+Boolean get_AdvanceImmediately()
+Void set_AdvanceImmediately(Boolean)
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Time.ITimeSink] get_Sinks()
+Void add_TimePassed(System.Action`1[Antmicro.Renode.Time.TimeInterval])
+Void remove_TimePassed(System.Action`1[Antmicro.Renode.Time.TimeInterval])
+Void add_SinksReportedHook(System.Action)
+Void remove_SinksReportedHook(System.Action)
+Void add_QuantumChanged(System.Action`2[Antmicro.Renode.Time.TimeInterval,Antmicro.Renode.Time.TimeInterval])
+Void remove_QuantumChanged(System.Action`2[Antmicro.Renode.Time.TimeInterval,Antmicro.Renode.Time.TimeInterval])
+Void add_SyncHook(System.Action`1[Antmicro.Renode.Time.TimeInterval])
+Void remove_SyncHook(System.Action`1[Antmicro.Renode.Time.TimeInterval])
+Void add_BlockHook(System.Action)
+Void remove_BlockHook(System.Action)
+Void add_StopRequested(System.Action)
+Void remove_StopRequested(System.Action)
+System.Type GetType()
+Boolean Equals(System.Object)
+Int32 GetHashCode()
+Void .ctor()
+Antmicro.Renode.Time.ITimeDomain Domain
+Boolean ExecuteInSerial
+Boolean IsOnSyncPhaseThread
+Antmicro.Renode.Time.TimeInterval NearestSyncPoint
+Antmicro.Renode.Time.TimeInterval ElapsedVirtualHostTimeDifference
+Antmicro.Renode.Time.TimeInterval ElapsedHostTime
+Antmicro.Renode.Time.TimeInterval ElapsedVirtualTime
+Int64 NumberOfSyncPoints
+Double CurrentLoad
+Antmicro.Renode.Time.TimeInterval Quantum
+Antmicro.Renode.Time.TimeSourceState State
+Double CumulativeLoad
+Boolean AdvanceImmediately
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Time.ITimeSink] Sinks
+System.Action`1[Antmicro.Renode.Time.TimeInterval] TimePassed
+System.Action SinksReportedHook
+System.Action`2[Antmicro.Renode.Time.TimeInterval,Antmicro.Renode.Time.TimeInterval] QuantumChanged
+System.Action`1[Antmicro.Renode.Time.TimeInterval] SyncHook
+System.Action BlockHook
+System.Action StopRequested
+Antmicro.Renode.Core.Emulation
+System.IDisposable ObtainSafeState()
+System.IDisposable ObtainPausedState()
+Void PauseAll()
+Void StartAll()
+Void RunToNearestSyncPoint()
+Void RunUntil(Antmicro.Renode.Time.TimeInterval)
+Void RunFor(Antmicro.Renode.Time.TimeInterval)
+Int32 GetSeed()
+Void SetSeed(Int32)
+Boolean TryAddMachine(Antmicro.Renode.Core.IMachine, System.String)
+System.String GetNextMachineName(Antmicro.Renode.Core.Platform, System.Collections.Generic.HashSet`1[System.String])
+Boolean TryGetMachineByName(System.String, Antmicro.Renode.Core.IMachine ByRef)
+Void AddMachine(Antmicro.Renode.Core.IMachine, System.String)
+Boolean TryGetExecutionContext(Antmicro.Renode.Core.IMachine ByRef, Antmicro.Renode.Peripherals.CPU.ICPU ByRef)
+Void SetNameForMachine(System.String, Antmicro.Renode.Core.IMachine)
+Void RemoveMachine(Antmicro.Renode.Core.IMachine)
+Boolean TryGetMachineName(Antmicro.Renode.Core.IMachine, System.String ByRef)
+Boolean TryGetMachine(System.String, Antmicro.Renode.Core.IMachine ByRef)
+Boolean TryRemoveMachine(System.String)
+Boolean TryGetMachineForPeripheral(Antmicro.Renode.Peripherals.IPeripheral, Antmicro.Renode.Core.IMachine ByRef)
+Boolean TryGetEmulationElementName(System.Object, System.String ByRef)
+Boolean TryGetEmulationElementName(System.Object, System.String ByRef, System.String ByRef)
+Boolean TryGetEmulationElementByName(System.String, System.Object, Antmicro.Renode.IEmulationElement ByRef)
+System.Collections.Generic.IEnumerable`1[T] GetEmulationElementsOfType[T]()
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.IEmulationElement] GetEmulationElementsOfType(System.Type)
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.IEmulationElement] GetEmulationElements()
+Void Dispose()
+Void AddOrUpdateInBag[T](System.String, T)
+Void TryRemoveFromBag(System.String)
+Boolean TryGetFromBag[T](System.String, T ByRef)
+Void RemoveMachine(System.String)
+System.Threading.AutoResetEvent GetStartedStateChangedEvent(Boolean, Boolean)
+Antmicro.Renode.Core.PseudorandomNumberGenerator get_RandomGenerator()
+Boolean get_SingleStepBlocking()
+Void set_SingleStepBlocking(Boolean)
+EmulationMode get_Mode()
+Void set_Mode(EmulationMode)
+Boolean get_IsStarted()
+System.Collections.Generic.IEnumerable`1[System.String] get_Names()
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Core.IMachine] get_Machines()
+Int32 get_MachinesCount()
+Antmicro.Renode.Core.HostMachine get_HostMachine()
+Antmicro.Renode.Core.Structure.MACRepository get_MACRepository()
+Antmicro.Renode.Core.Connector get_Connector()
+Antmicro.Renode.Core.ExternalsManager get_ExternalsManager()
+Antmicro.Renode.Utilities.CachingFileFetcher get_FileFetcher()
+Void set_FileFetcher(Antmicro.Renode.Utilities.CachingFileFetcher)
+Boolean get_AllMachinesStarted()
+Antmicro.Renode.Logging.ILogger get_CurrentLogger()
+Boolean get_AnyMachineStarted()
+Antmicro.Renode.Time.MasterTimeSource get_MasterTimeSource()
+Antmicro.Renode.Peripherals.BackendManager get_BackendManager()
+Antmicro.Renode.Utilities.SnapshotTracker get_SnapshotTracker()
+Antmicro.Renode.Utilities.BlobManager get_BlobManager()
+Void set_BlobManager(Antmicro.Renode.Utilities.BlobManager)
+Antmicro.Renode.Utilities.AutoSnapshotCreator get_AutoSnapshotCreator()
+Boolean get_ReverseExecutionEnabled()
+Void set_ReverseExecutionEnabled(Boolean)
+Void add_MachineStateChanged(System.Action`2[Antmicro.Renode.Core.IMachine,Antmicro.Renode.Core.MachineStateChangedEventArgs])
+Void remove_MachineStateChanged(System.Action`2[Antmicro.Renode.Core.IMachine,Antmicro.Renode.Core.MachineStateChangedEventArgs])
+Void add_MachineExchanged(System.Action`2[Antmicro.Renode.Core.IMachine,Antmicro.Renode.Core.IMachine])
+Void remove_MachineExchanged(System.Action`2[Antmicro.Renode.Core.IMachine,Antmicro.Renode.Core.IMachine])
+Void add_IsStartedChanged(System.Action`2[Antmicro.Renode.Core.Emulation,System.Boolean])
+Void remove_IsStartedChanged(System.Action`2[Antmicro.Renode.Core.Emulation,System.Boolean])
+Void add_SingleStepBlockingChanged(System.Action)
+Void remove_SingleStepBlockingChanged(System.Action)
+Void add_MachineAdded(System.Action`1[Antmicro.Renode.Core.IMachine])
+Void remove_MachineAdded(System.Action`1[Antmicro.Renode.Core.IMachine])
+Void add_MachineRemoved(System.Action`1[Antmicro.Renode.Core.IMachine])
+Void remove_MachineRemoved(System.Action`1[Antmicro.Renode.Core.IMachine])
+Antmicro.Renode.Core.IMachine get_Item(System.String)
+System.String get_Item(Antmicro.Renode.Core.IMachine)
+System.Type GetType()
+System.String ToString()
+Boolean Equals(System.Object)
+Int32 GetHashCode()
+Void .ctor()
+Antmicro.Renode.Core.PseudorandomNumberGenerator RandomGenerator
+Boolean SingleStepBlocking
+EmulationMode Mode
+Boolean IsStarted
+System.Collections.Generic.IEnumerable`1[System.String] Names
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Core.IMachine] Machines
+Int32 MachinesCount
+Antmicro.Renode.Core.HostMachine HostMachine
+Antmicro.Renode.Core.Structure.MACRepository MACRepository
+Antmicro.Renode.Core.Connector Connector
+Antmicro.Renode.Core.ExternalsManager ExternalsManager
+Antmicro.Renode.Utilities.CachingFileFetcher FileFetcher
+Boolean AllMachinesStarted
+Antmicro.Renode.Logging.ILogger CurrentLogger
+Boolean AnyMachineStarted
+Antmicro.Renode.Time.MasterTimeSource MasterTimeSource
+Antmicro.Renode.Peripherals.BackendManager BackendManager
+Antmicro.Renode.Utilities.SnapshotTracker SnapshotTracker
+Antmicro.Renode.Utilities.BlobManager BlobManager
+Antmicro.Renode.Utilities.AutoSnapshotCreator AutoSnapshotCreator
+Boolean ReverseExecutionEnabled
+Antmicro.Renode.Core.IMachine Item [System.String]
+System.String Item [Antmicro.Renode.Core.IMachine]
+System.Action`2[Antmicro.Renode.Core.IMachine,Antmicro.Renode.Core.MachineStateChangedEventArgs] MachineStateChanged
+System.Action`2[Antmicro.Renode.Core.IMachine,Antmicro.Renode.Core.IMachine] MachineExchanged
+System.Action`2[Antmicro.Renode.Core.Emulation,System.Boolean] IsStartedChanged
+System.Action SingleStepBlockingChanged
+System.Action`1[Antmicro.Renode.Core.IMachine] MachineAdded
+System.Action`1[Antmicro.Renode.Core.IMachine] MachineRemoved
+Antmicro.Renode.Core.Emulation+EmulationMode

@@ -1,0 +1,667 @@
+Antmicro.Renode.Peripherals.Bus.SystemBus
+Void Register(Antmicro.Renode.Peripherals.CPU.ICPU, Antmicro.Renode.Peripherals.CPU.CPURegistrationPoint)
+Void AddSymbol(Antmicro.Renode.Core.Range, System.String, Antmicro.Renode.Peripherals.CPU.ICPU)
+Void LoadUImage(Antmicro.Renode.Utilities.ReadFilePath, Antmicro.Renode.Peripherals.CPU.IInitableCPU)
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Core.BinaryFingerprint] GetLoadedFingerprints()
+Antmicro.Renode.Core.BinaryFingerprint GetFingerprint(Antmicro.Renode.Utilities.ReadFilePath)
+Boolean TryGetAllSymbolAddresses(System.String, System.Collections.Generic.IEnumerable`1[System.UInt64] ByRef, Antmicro.Renode.Peripherals.CPU.ICPU)
+System.Collections.Generic.IEnumerable`1[System.UInt64] GetAllSymbolAddresses(System.String, Antmicro.Renode.Peripherals.CPU.ICPU)
+System.String FindSymbolAt(UInt64, Antmicro.Renode.Peripherals.CPU.ICPU)
+Boolean TryFindSymbolAt(UInt64, System.String ByRef, Antmicro.Renode.Core.Symbol ByRef, Antmicro.Renode.Peripherals.CPU.ICPU, Boolean)
+Void MapMemory(Antmicro.Renode.Core.IMappedSegment, Antmicro.Renode.Peripherals.Bus.IBusPeripheral, Boolean, Antmicro.Renode.Peripherals.CPU.ICPUWithMappedMemory)
+Void UnmapMemory(Antmicro.Renode.Core.Range, Antmicro.Renode.Peripherals.CPU.ICPU)
+Void SetPageAccessViaIo(UInt64)
+Void ClearPageAccessViaIo(UInt64)
+Void AddWatchpointHook(UInt64, Antmicro.Renode.Peripherals.Bus.SysbusAccessWidth, Antmicro.Renode.Peripherals.Bus.Access, Antmicro.Renode.Peripherals.Bus.BusHookDelegate)
+Void RemoveWatchpointHook(UInt64, Antmicro.Renode.Peripherals.Bus.BusHookDelegate)
+Void RemoveAllWatchpointHooks(UInt64)
+Boolean TryGetWatchpointsAt(UInt64, Antmicro.Renode.Peripherals.Bus.Access, System.Collections.Generic.List`1[Antmicro.Renode.Peripherals.Bus.BusHookHandler] ByRef)
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Peripherals.Bus.BusRangeRegistration] GetRegistrationPoints(Antmicro.Renode.Peripherals.Bus.IBusPeripheral, Antmicro.Renode.Peripherals.CPU.ICPU)
+System.IDisposable SetLocalContext(Antmicro.Renode.Peripherals.IPeripheral, System.Nullable`1[System.UInt64])
+System.Collections.Generic.IReadOnlyDictionary`2[System.String,System.Int32] GetStateBits(System.String)
+System.Collections.Generic.IReadOnlyDictionary`2[System.String,System.Int32] GetCommonStateBits()
+Antmicro.Renode.Core.SymbolLookup GetLookup(Antmicro.Renode.Peripherals.CPU.ICPU)
+System.String DecorateWithCPUNameAndPC(System.String)
+Void Reset()
+Void ClearSymbols(Antmicro.Renode.Peripherals.CPU.ICPU)
+Void Clear()
+Boolean IsAddressRangeLocked(Antmicro.Renode.Core.Range, Antmicro.Renode.Peripherals.IPeripheral)
+Void SetPeripheralEnabled(Antmicro.Renode.Peripherals.IPeripheral, Boolean)
+Void SetAddressRangeLocked(Antmicro.Renode.Core.Range, Boolean, Antmicro.Renode.Peripherals.IPeripheral)
+Void RemoveTag(UInt64)
+Void Tag(Antmicro.Renode.Core.Range, System.String, UInt64, Boolean, Boolean, Boolean)
+Void ApplySVD(System.String)
+Boolean IsPeripheralEnabled(Antmicro.Renode.Peripherals.IPeripheral)
+Void LoadSymbolsFrom(ELFSharp.ELF.IELF, Boolean, System.Nullable`1[System.UInt64], Antmicro.Renode.Peripherals.CPU.ICPU)
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Peripherals.Bus.BusRangeRegistration] GetRegistrationPoints(Antmicro.Renode.Peripherals.Bus.IBusPeripheral)
+Void WriteBytes(Int64, Byte[], Int32, Int32, Antmicro.Renode.Peripherals.IPeripheral)
+Void Unregister(Antmicro.Renode.Peripherals.CPU.ICPU)
+Void SetPCOnAllCores(UInt64)
+Void LogAllPeripheralsAccess(Boolean, Boolean)
+Void LogPeripheralAccess(Antmicro.Renode.Peripherals.Bus.IBusPeripheral, Boolean, Boolean)
+Boolean IsLoggingPeripheralAccessEnabled(Antmicro.Renode.Peripherals.Bus.IBusPeripheral)
+Boolean ArePeripheralAccessWrappersEnabled(Antmicro.Renode.Peripherals.Bus.IBusPeripheral, System.Type, System.Type)
+Void EnableAllPeripheralAccessWrappers(System.Type, System.Type, Boolean, System.String, Boolean)
+Void EnablePeripheralAccessWrappers(Antmicro.Renode.Peripherals.Bus.IBusPeripheral, System.Type, System.Type, Boolean, System.String, Boolean)
+Void EnableAllTranslations(Boolean)
+Void EnableAllTranslations(Antmicro.Renode.Peripherals.Bus.IBusPeripheral, Boolean)
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Peripherals.CPU.ICPU] GetCPUs()
+Int32 GetCPUSlot(Antmicro.Renode.Peripherals.CPU.ICPU)
+Antmicro.Renode.Peripherals.CPU.ICPU GetCurrentCPU()
+Int32 GetCurrentCPUId()
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Peripherals.IPeripheral] GetAllContextKeys()
+Boolean TryGetCurrentContextState[T](Antmicro.Renode.Peripherals.IPeripheralWithTransactionState ByRef, T ByRef)
+Boolean TryGetCurrentCPU(Antmicro.Renode.Peripherals.CPU.ICPU ByRef)
+Boolean TryGetTransactionInitiator(Antmicro.Renode.Peripherals.IPeripheral ByRef)
+Boolean TryConvertStateToUlongForContext(Antmicro.Renode.Peripherals.IPeripheral, Antmicro.Renode.Peripherals.IContextState, System.Nullable`1[System.UInt64] ByRef)
+Void Dispose()
+Void WriteBytes(Byte[], UInt64, Int64, Boolean, Antmicro.Renode.Peripherals.IPeripheral, System.Nullable`1[System.UInt64])
+Void WriteBytes(Byte[], UInt64, Int32, Int64, Boolean, Antmicro.Renode.Peripherals.IPeripheral, System.Nullable`1[System.UInt64])
+Void WriteBytes(Byte[], UInt64, Boolean, Antmicro.Renode.Peripherals.IPeripheral, System.Nullable`1[System.UInt64])
+Byte[] ReadBytes(Int64, Int32, Antmicro.Renode.Peripherals.IPeripheral)
+Byte[] ReadBytes(UInt64, Int32, Boolean, Antmicro.Renode.Peripherals.IPeripheral, System.Nullable`1[System.UInt64])
+Void ReadBytes(UInt64, Int32, Byte[], Int32, Boolean, Antmicro.Renode.Peripherals.IPeripheral, System.Nullable`1[System.UInt64])
+UInt64[] FindBytes(Byte[], UInt64, System.Nullable`1[System.UInt64], Antmicro.Renode.Peripherals.IPeripheral)
+UInt64[] FindBytes(System.String, UInt64, System.Nullable`1[System.UInt64], Antmicro.Renode.Peripherals.IPeripheral)
+Void UnregisterFromAddress(UInt64, Antmicro.Renode.Peripherals.CPU.ICPU)
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Peripherals.Bus.IBusRegistered`1[Antmicro.Renode.Peripherals.Bus.IBusPeripheral]] GetRegisteredPeripherals(Antmicro.Renode.Peripherals.IPeripheral)
+Void SilenceRange(Antmicro.Renode.Core.Range)
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Peripherals.Bus.IBusRegistered`1[Antmicro.Renode.Peripherals.IMapped]] GetMappedPeripherals(Antmicro.Renode.Peripherals.IPeripheral)
+Boolean IsMemory(UInt64, Antmicro.Renode.Peripherals.CPU.ICPU, System.Nullable`1[System.UInt64])
+Antmicro.Renode.Peripherals.Bus.IBusRegistered`1[Antmicro.Renode.Peripherals.Memory.MappedMemory] FindMemory(UInt64, Antmicro.Renode.Peripherals.CPU.ICPU)
+Antmicro.Renode.Peripherals.IPeripheral WhatPeripheralIsAt(UInt64, Antmicro.Renode.Peripherals.IPeripheral, System.Nullable`1[System.UInt64])
+Antmicro.Renode.Peripherals.Bus.IBusRegistered`1[Antmicro.Renode.Peripherals.Bus.IBusPeripheral] WhatIsAt(UInt64, Antmicro.Renode.Peripherals.IPeripheral)
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Peripherals.Bus.IBusRegistered`1[Antmicro.Renode.Peripherals.Bus.IBusPeripheral]] GetRegistrationsForPeripheralType[T](Antmicro.Renode.Peripherals.IPeripheral)
+Void ZeroRange(Antmicro.Renode.Core.Range, Antmicro.Renode.Peripherals.IPeripheral)
+Void LoadFileChunks(System.String, System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Utilities.FileChunk], Antmicro.Renode.Peripherals.IPeripheral)
+Void Unregister(Antmicro.Renode.Peripherals.Bus.IBusPeripheral)
+Void Unregister(Antmicro.Renode.Peripherals.Bus.IBusRegistered`1[Antmicro.Renode.Peripherals.Bus.IBusPeripheral])
+Void Unregister(Antmicro.Renode.Peripherals.IPeripheral)
+Void Register(Antmicro.Renode.Peripherals.IPeripheral, Antmicro.Renode.Core.Structure.NullRegistrationPoint)
+Void Register(Antmicro.Renode.Peripherals.Bus.IBusPeripheral, Antmicro.Renode.Peripherals.Bus.BusRangeRegistration)
+Void Register(Antmicro.Renode.Peripherals.Bus.IBusPeripheral, Antmicro.Renode.Peripherals.Bus.BusMultiRegistration)
+Void Register(Antmicro.Renode.Peripherals.Bus.IBusPeripheral, Antmicro.Renode.Peripherals.Bus.BusParametrizedRegistration)
+Void Register(Antmicro.Renode.Peripherals.IKnownSize, Antmicro.Renode.Peripherals.Bus.BusPointRegistration)
+Void Unregister(Antmicro.Renode.Peripherals.IKnownSize)
+Void MoveRegistrationWithinContext(Antmicro.Renode.Peripherals.Bus.IBusPeripheral, Antmicro.Renode.Peripherals.Bus.BusRangeRegistration, Antmicro.Renode.Peripherals.CPU.ICPU, System.Func`2[System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Peripherals.Bus.IBusRegistered`1[Antmicro.Renode.Peripherals.Bus.IBusPeripheral]],Antmicro.Renode.Peripherals.Bus.IBusRegistered`1[Antmicro.Renode.Peripherals.Bus.IBusPeripheral]])
+Void ChangePeripheralAccessCondition(Antmicro.Renode.Peripherals.Bus.IBusPeripheral, System.String, System.String)
+Antmicro.Renode.Peripherals.DelayedInvalidationContext EnterDelayedInvalidationContext()
+Void SetDelayedInvalidation(Boolean)
+System.Object ExtractPreservedState()
+Void LoadPreservedState(System.Object)
+System.String get_PreservableName()
+Antmicro.Renode.Peripherals.Bus.UnhandledAccessBehaviour get_UnhandledAccessBehaviour()
+Void set_UnhandledAccessBehaviour(Antmicro.Renode.Peripherals.Bus.UnhandledAccessBehaviour)
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Core.Structure.IRegistered`2[Antmicro.Renode.Peripherals.Bus.IBusPeripheral,Antmicro.Renode.Peripherals.Bus.BusRangeRegistration]] get_Children()
+ELFSharp.ELF.Endianess get_Endianess()
+Void set_Endianess(ELFSharp.ELF.Endianess)
+Boolean get_IsMultiCore()
+System.Nullable`1[System.UInt64] get_LowestLoadedAddress()
+Int32 get_UnexpectedReads()
+Antmicro.Renode.Core.IMachine get_Machine()
+Int32 get_UnexpectedWrites()
+System.Collections.Generic.IEnumerable`1[System.Collections.Generic.KeyValuePair`2[Antmicro.Renode.Core.Range,Antmicro.Renode.Peripherals.Bus.SystemBus+TagEntry]] get_Tags()
+Void add_OnSymbolsChanged(System.Action`1[Antmicro.Renode.Core.IMachine])
+Void remove_OnSymbolsChanged(System.Action`1[Antmicro.Renode.Core.IMachine])
+Byte ReadByte(UInt64, Antmicro.Renode.Peripherals.IPeripheral, System.Nullable`1[System.UInt64])
+Byte ReadByteWithState(UInt64, Antmicro.Renode.Peripherals.IPeripheral, Antmicro.Renode.Peripherals.IContextState)
+Void WriteByte(UInt64, Byte, Antmicro.Renode.Peripherals.IPeripheral, System.Nullable`1[System.UInt64])
+Void WriteByteWithState(UInt64, Byte, Antmicro.Renode.Peripherals.IPeripheral, Antmicro.Renode.Peripherals.IContextState)
+UInt16 ReadWord(UInt64, Antmicro.Renode.Peripherals.IPeripheral, System.Nullable`1[System.UInt64])
+UInt16 ReadWordWithState(UInt64, Antmicro.Renode.Peripherals.IPeripheral, Antmicro.Renode.Peripherals.IContextState)
+Void WriteWord(UInt64, UInt16, Antmicro.Renode.Peripherals.IPeripheral, System.Nullable`1[System.UInt64])
+Void WriteWordWithState(UInt64, UInt16, Antmicro.Renode.Peripherals.IPeripheral, Antmicro.Renode.Peripherals.IContextState)
+UInt32 ReadDoubleWord(UInt64, Antmicro.Renode.Peripherals.IPeripheral, System.Nullable`1[System.UInt64])
+UInt32 ReadDoubleWordWithState(UInt64, Antmicro.Renode.Peripherals.IPeripheral, Antmicro.Renode.Peripherals.IContextState)
+Void WriteDoubleWord(UInt64, UInt32, Antmicro.Renode.Peripherals.IPeripheral, System.Nullable`1[System.UInt64])
+Void WriteDoubleWordWithState(UInt64, UInt32, Antmicro.Renode.Peripherals.IPeripheral, Antmicro.Renode.Peripherals.IContextState)
+UInt64 ReadQuadWord(UInt64, Antmicro.Renode.Peripherals.IPeripheral, System.Nullable`1[System.UInt64])
+UInt64 ReadQuadWordWithState(UInt64, Antmicro.Renode.Peripherals.IPeripheral, Antmicro.Renode.Peripherals.IContextState)
+Void WriteQuadWord(UInt64, UInt64, Antmicro.Renode.Peripherals.IPeripheral, System.Nullable`1[System.UInt64])
+Void WriteQuadWordWithState(UInt64, UInt64, Antmicro.Renode.Peripherals.IPeripheral, Antmicro.Renode.Peripherals.IContextState)
+Void ClearHookAfterPeripheralRead[T](Antmicro.Renode.Peripherals.Bus.IBusPeripheral)
+Void SetHookAfterPeripheralRead[T](Antmicro.Renode.Peripherals.Bus.IBusPeripheral, System.Func`3[T,System.Int64,T], System.Nullable`1[Antmicro.Renode.Core.Range])
+Void ClearHookBeforePeripheralWrite[T](Antmicro.Renode.Peripherals.Bus.IBusPeripheral)
+Void SetHookBeforePeripheralWrite[T](Antmicro.Renode.Peripherals.Bus.IBusPeripheral, System.Func`3[T,System.Int64,T], System.Nullable`1[Antmicro.Renode.Core.Range])
+System.Type GetType()
+System.String ToString()
+Boolean Equals(System.Object)
+Int32 GetHashCode()
+System.String PreservableName
+Antmicro.Renode.Peripherals.Bus.UnhandledAccessBehaviour UnhandledAccessBehaviour
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Core.Structure.IRegistered`2[Antmicro.Renode.Peripherals.Bus.IBusPeripheral,Antmicro.Renode.Peripherals.Bus.BusRangeRegistration]] Children
+ELFSharp.ELF.Endianess Endianess
+Boolean IsMultiCore
+System.Nullable`1[System.UInt64] LowestLoadedAddress
+Int32 UnexpectedReads
+Antmicro.Renode.Core.IMachine Machine
+Int32 UnexpectedWrites
+System.Collections.Generic.IEnumerable`1[System.Collections.Generic.KeyValuePair`2[Antmicro.Renode.Core.Range,Antmicro.Renode.Peripherals.Bus.SystemBus+TagEntry]] Tags
+System.Action`1[Antmicro.Renode.Core.IMachine] OnSymbolsChanged
+Antmicro.Renode.Peripherals.Bus.SystemBus+MappedSegmentWrapper
+Antmicro.Renode.Peripherals.Bus.SystemBus+TagEntry
+Antmicro.Renode.Peripherals.CPU.CortexM
+Void Reset()
+Void OnGPIO(Int32, Boolean)
+Void InitFromElf(ELFSharp.ELF.IELF)
+Void InitFromUImage(ELFSharp.UImage.UImage)
+Void SetSleepOnExceptionExit(Boolean)
+Void DoLazyFloatingPointStatePreservation(Boolean)
+UInt32 GetFaultmask(Boolean)
+Boolean TryConvertUlongToStateObj(System.Nullable`1[System.UInt64], Antmicro.Renode.Peripherals.IContextState ByRef)
+Boolean TryRemoveImplementationDefinedExemptionRegion(UInt32, UInt32)
+Boolean TryAddImplementationDefinedExemptionRegion(UInt32, UInt32)
+UInt32 GetPrimask(Boolean)
+Void SetIDAURegion(UInt32, UInt32, UInt32, Boolean, Boolean)
+Void SetIDAURegion(UInt32, IDAURegion)
+IDAURegion GetIDAURegion(UInt32)
+Boolean TryConvertStateObjToUlong(Antmicro.Renode.Peripherals.IContextState, System.Nullable`1[System.UInt64] ByRef)
+Void SetIDAURegion(UInt32, UInt32, UInt32)
+System.String GetLLVMTriple(UInt32)
+System.Nullable`1[System.UInt32] get_InitVectorTableOffsetNonSecure()
+Void set_InitVectorTableOffsetNonSecure(System.Nullable`1[System.UInt32])
+System.Nullable`1[System.UInt32] get_InitVectorTableOffset()
+Void set_InitVectorTableOffset(System.Nullable`1[System.UInt32])
+Antmicro.Renode.Core.GPIO get_CpuWaitSignal()
+System.String get_Architecture()
+System.Collections.Generic.List`1[Antmicro.Renode.Peripherals.CPU.GDBFeatureDescriptor] get_GDBFeatures()
+MemorySystemArchitectureType get_MemorySystemArchitecture()
+UInt32 get_ExceptionVectorAddress()
+Void set_ExceptionVectorAddress(UInt32)
+Boolean get_IsLockedUp()
+Boolean get_IsUsingProcessSP()
+Void set_IsUsingProcessSP(Boolean)
+UInt32 get_PmsaV8Mair0()
+Void set_PmsaV8Mair0(UInt32)
+UInt32 get_PmsaV8RbarAlias3_NS()
+Void set_PmsaV8RbarAlias3_NS(UInt32)
+UInt32 get_PmsaV8Rlar()
+Void set_PmsaV8Rlar(UInt32)
+UInt32 get_PmsaV8RlarAlias1()
+Void set_PmsaV8RlarAlias1(UInt32)
+UInt32 get_PmsaV8RlarAlias2()
+Void set_PmsaV8RlarAlias2(UInt32)
+UInt32 get_PmsaV8RlarAlias3()
+Void set_PmsaV8RlarAlias3(UInt32)
+UInt32 get_PmsaV8Rlar_NS()
+Void set_PmsaV8Rlar_NS(UInt32)
+UInt32 get_PmsaV8RlarAlias1_NS()
+Void set_PmsaV8RlarAlias1_NS(UInt32)
+UInt32 get_PmsaV8RlarAlias2_NS()
+Void set_PmsaV8RlarAlias2_NS(UInt32)
+UInt32 get_PmsaV8RlarAlias3_NS()
+Void set_PmsaV8RlarAlias3_NS(UInt32)
+UInt32 get_PmsaV8Mair0_NS()
+Void set_PmsaV8Mair0_NS(UInt32)
+Void set_MPURegionNumber(UInt32)
+UInt32 get_MPURegionNumber()
+UInt32 get_PmsaV8Mair1_NS()
+Void set_PmsaV8Mair1_NS(UInt32)
+Boolean get_MPUEnabled()
+Void set_MPUEnabled(Boolean)
+Void set_MPURegionBaseAddress(UInt32)
+UInt32 get_MPURegionBaseAddress()
+Void set_MPURegionAttributeAndSize(UInt32)
+UInt32 get_MPURegionAttributeAndSize()
+UInt32 get_PmsaV8RbarAlias2_NS()
+Void set_PmsaV8RbarAlias2_NS(UInt32)
+UInt32 get_SAUControl()
+Void set_SAUControl(UInt32)
+UInt32 get_SAURegionNumber()
+Void set_SAURegionNumber(UInt32)
+UInt32 get_SAURegionBaseAddress()
+Void set_SAURegionBaseAddress(UInt32)
+UInt32 get_SAURegionLimitAddress()
+Void set_SAURegionLimitAddress(UInt32)
+Void set_ImplementationDefinedAttributionUnit(Antmicro.Renode.Peripherals.CPU.CortexMImplementationDefinedAttributionUnit)
+UInt32 get_XProgramStatusRegister()
+UInt32 get_PmsaV8Mair1()
+Void set_PmsaV8Mair1(UInt32)
+UInt32 get_PmsaV8RbarAlias1_NS()
+Void set_PmsaV8RbarAlias1_NS(UInt32)
+UInt32 get_PmsaV8Rbar_NS()
+Void set_PmsaV8Rbar_NS(UInt32)
+UInt32 get_PmsaV8RbarAlias3()
+Void set_PmsaV8RbarAlias3(UInt32)
+System.Collections.Generic.IReadOnlyDictionary`2[System.String,System.Int32] get_StateBits()
+UInt32 get_VectorTableOffset()
+Void set_VectorTableOffset(UInt32)
+UInt32 get_VectorTableOffsetNonSecure()
+Void set_VectorTableOffsetNonSecure(UInt32)
+Antmicro.Renode.Peripherals.CPU.RegisterValue get_FPCAR_NS()
+Void set_FPCAR_NS(Antmicro.Renode.Peripherals.CPU.RegisterValue)
+Antmicro.Renode.Peripherals.CPU.RegisterValue get_FPDSCR_NS()
+Void set_FPDSCR_NS(Antmicro.Renode.Peripherals.CPU.RegisterValue)
+Antmicro.Renode.Peripherals.CPU.RegisterValue get_FPCCR_NS()
+Void set_FPCCR_NS(Antmicro.Renode.Peripherals.CPU.RegisterValue)
+Antmicro.Renode.Peripherals.CPU.RegisterValue get_FPSCR_NS()
+Void set_FPSCR_NS(Antmicro.Renode.Peripherals.CPU.RegisterValue)
+Antmicro.Renode.Peripherals.CPU.RegisterValue get_CPACR_NS()
+Void set_CPACR_NS(Antmicro.Renode.Peripherals.CPU.RegisterValue)
+Boolean get_IDAUEnabled()
+Void set_IDAUEnabled(Boolean)
+UInt32 get_NumberOfIDAURegions()
+Void set_NumberOfIDAURegions(UInt32)
+UInt32 get_NumberOfSAURegions()
+Void set_NumberOfSAURegions(UInt32)
+Void set_FpuEnabled(Boolean)
+Boolean get_TrustZoneEnabled()
+UInt32 get_FaultStatus()
+Void set_FaultStatus(UInt32)
+Boolean get_SecureState()
+Void set_SecureState(Boolean)
+UInt32 get_MemoryFaultAddress()
+UInt32 get_BusFaultAddress()
+UInt32 get_PmsaV8RbarAlias2()
+Void set_PmsaV8RbarAlias2(UInt32)
+UInt32 get_PmsaV8RbarAlias1()
+Void set_PmsaV8RbarAlias1(UInt32)
+UInt32 get_PmsaV8Rbar()
+Void set_PmsaV8Rbar(UInt32)
+UInt32 get_FaultStatusNonSecure()
+Void set_FaultStatusNonSecure(UInt32)
+UInt32 get_ConfigurationAndControlRegister()
+Void set_ConfigurationAndControlRegister(UInt32)
+UInt32 get_ConfigurationAndControlRegisterNonSecure()
+Void set_ConfigurationAndControlRegisterNonSecure(UInt32)
+UInt32 get_PmsaV8Rnr()
+Void set_PmsaV8Rnr(UInt32)
+UInt32 get_PmsaV8Ctrl_NS()
+Void set_PmsaV8Ctrl_NS(UInt32)
+UInt32 get_PmsaV8Rnr_NS()
+Void set_PmsaV8Rnr_NS(UInt32)
+UInt32 get_ArchitectureVersion()
+Boolean get_IsV8()
+UInt32 get_SecureFaultStatus()
+Void set_SecureFaultStatus(UInt32)
+UInt32 get_SecureFaultAddress()
+UInt32 get_MemoryFaultAddressNonSecure()
+UInt32 get_PmsaV8Ctrl()
+Void set_PmsaV8Ctrl(UInt32)
+System.String[] get_AllLLVMTriples()
+System.String get_LLVMModel()
+Void SetRegister(Int32, Antmicro.Renode.Peripherals.CPU.RegisterValue)
+Antmicro.Renode.Peripherals.CPU.RegisterValue GetRegister(Int32)
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Peripherals.CPU.CPURegister] GetRegisters()
+Antmicro.Renode.Peripherals.CPU.RegisterValue get_Control()
+Void set_Control(Antmicro.Renode.Peripherals.CPU.RegisterValue)
+Antmicro.Renode.Peripherals.CPU.RegisterValue get_BasePri()
+Void set_BasePri(Antmicro.Renode.Peripherals.CPU.RegisterValue)
+Antmicro.Renode.Peripherals.CPU.RegisterValue get_VecBase()
+Void set_VecBase(Antmicro.Renode.Peripherals.CPU.RegisterValue)
+Antmicro.Renode.Peripherals.CPU.RegisterValue get_OtherSP()
+Void set_OtherSP(Antmicro.Renode.Peripherals.CPU.RegisterValue)
+Antmicro.Renode.Peripherals.CPU.RegisterValue get_FPCCR()
+Void set_FPCCR(Antmicro.Renode.Peripherals.CPU.RegisterValue)
+Antmicro.Renode.Peripherals.CPU.RegisterValue get_FPCAR()
+Void set_FPCAR(Antmicro.Renode.Peripherals.CPU.RegisterValue)
+Antmicro.Renode.Peripherals.CPU.RegisterValue get_FPDSCR()
+Void set_FPDSCR(Antmicro.Renode.Peripherals.CPU.RegisterValue)
+Antmicro.Renode.Peripherals.CPU.RegisterValue get_CPACR()
+Void set_CPACR(Antmicro.Renode.Peripherals.CPU.RegisterValue)
+Antmicro.Renode.Peripherals.CPU.RegisterValue get_PRIMASK()
+Void set_PRIMASK(Antmicro.Renode.Peripherals.CPU.RegisterValue)
+Antmicro.Renode.Peripherals.CPU.RegisterValue get_FAULTMASK()
+Void set_FAULTMASK(Antmicro.Renode.Peripherals.CPU.RegisterValue)
+Antmicro.Renode.Peripherals.CPU.RegisterValue get_VPR()
+Void set_VPR(Antmicro.Renode.Peripherals.CPU.RegisterValue)
+Antmicro.Renode.Peripherals.CPU.RegisterValue get_NSACR()
+Void set_NSACR(Antmicro.Renode.Peripherals.CPU.RegisterValue)
+Antmicro.Renode.Peripherals.CPU.RegisterValue get_FPSCR()
+Void set_FPSCR(Antmicro.Renode.Peripherals.CPU.RegisterValue)
+Antmicro.Renode.Peripherals.CPU.Registers.RegistersGroup get_D()
+Antmicro.Renode.Peripherals.CPU.Registers.RegistersGroup get_S()
+Void SetSystemRegisterValue(System.String, UInt64)
+UInt64 GetSystemRegisterValue(System.String)
+Void RegisterTCMRegion(Antmicro.Renode.Peripherals.IMemory, UInt32, UInt32)
+Void SetSevOnPending(Boolean)
+Void SetEventFlag()
+Void Dispose()
+Boolean EvaluateConditionCode(UInt32)
+Boolean WillNextItInstructionExecute(UInt32)
+UInt32 GetItState()
+Void Register(Antmicro.Renode.Peripherals.CPU.SemihostingHandler, Antmicro.Renode.Core.Structure.NullRegistrationPoint)
+Void Unregister(Antmicro.Renode.Peripherals.CPU.SemihostingHandler)
+Void Register(Antmicro.Renode.Peripherals.Miscellaneous.ArmPerformanceMonitoringUnit, Antmicro.Renode.Core.Structure.NullRegistrationPoint)
+Void Unregister(Antmicro.Renode.Peripherals.Miscellaneous.ArmPerformanceMonitoringUnit)
+Boolean GetArmFeature(ArmFeatures)
+Boolean get_IsSemihostingEnabled()
+Void set_IsSemihostingEnabled(Boolean)
+UInt32 get_ModelID()
+Void set_ModelID(UInt32)
+Boolean get_WfiAsNop()
+Void set_WfiAsNop(Boolean)
+Boolean get_WfeAndSevAsNop()
+Void set_WfeAndSevAsNop(Boolean)
+UInt32 get_NumberOfMPURegions()
+Void set_NumberOfMPURegions(UInt32)
+System.String get_GDBArchitecture()
+Boolean get_ImplementsPMSA()
+Boolean get_ImplementsVMSA()
+ELFSharp.ELF.Endianess get_DisassemblyHexFormatting()
+Antmicro.Renode.Peripherals.CPU.RegisterValue get_SP()
+Void set_SP(Antmicro.Renode.Peripherals.CPU.RegisterValue)
+Antmicro.Renode.Peripherals.CPU.RegisterValue get_LR()
+Void set_LR(Antmicro.Renode.Peripherals.CPU.RegisterValue)
+Antmicro.Renode.Peripherals.CPU.RegisterValue get_PC()
+Void set_PC(Antmicro.Renode.Peripherals.CPU.RegisterValue)
+Antmicro.Renode.Peripherals.CPU.RegisterValue get_CPSR()
+Void set_CPSR(Antmicro.Renode.Peripherals.CPU.RegisterValue)
+Antmicro.Renode.Peripherals.CPU.Registers.RegistersGroup get_R()
+Void AddHookAtInterruptBegin(System.Action`1[System.UInt64])
+Void MapMemory(Antmicro.Renode.Core.IMappedSegment)
+Void RegisterAccessFlags(UInt64, UInt64, Boolean)
+Void SetMappedMemoryEnabled(Antmicro.Renode.Core.Range, Boolean)
+Void UnmapMemory(Antmicro.Renode.Core.Range)
+Void SetPageAccessViaIo(UInt64)
+Void ClearPageAccessViaIo(UInt64)
+Void LogFunctionNames(Boolean, Boolean, Boolean)
+UInt64 GetCurrentInstructionsCount()
+Void LogFunctionNames(Boolean, System.String, Boolean, Boolean)
+Antmicro.Renode.Peripherals.CPU.RegisterValue GetRegisterUnsafe(Int32)
+Void NativeUnwind()
+Void ClearHookAtBlockBegin()
+Void EnterSingleStepModeSafely(Antmicro.Renode.Peripherals.CPU.HaltArguments)
+Void SetHookAtBlockBegin(System.Action`2[System.UInt64,System.UInt32])
+Void SetHookAtMemoryAccess(Antmicro.Renode.Peripherals.CPU.MemoryAccessHook)
+Void AddHookOnMmuFault(Antmicro.Renode.Peripherals.CPU.ExternalMmuFaultHook)
+Void RemoveHookOnMmuFault(Antmicro.Renode.Peripherals.CPU.ExternalMmuFaultHook)
+Void AddHookAtInterruptEnd(System.Action`1[System.UInt64])
+Void LogCpuInterrupts(Boolean)
+Void AddHookAtWfiStateChange(System.Action`1[System.Boolean])
+Void RemoveHookAtWfiStateChange(System.Action`1[System.Boolean])
+Void SetRegisterUnsafe(Int32, Antmicro.Renode.Peripherals.CPU.RegisterValue)
+Void AddHook(UInt64, Antmicro.Renode.Peripherals.CPU.CpuAddressHook)
+Void RemoveHook(UInt64, Antmicro.Renode.Peripherals.CPU.CpuAddressHook)
+Void OrderTranslationBlocksInvalidation(IntPtr, IntPtr, Boolean)
+Void InvalidateTranslationBlocks()
+Void LoadPreservedState(System.Object)
+System.Object ExtractPreservedState()
+Void SetHookAtBlockEnd(System.Action`2[System.UInt64,System.UInt32])
+Void EnableReadCache(UInt64, UInt64, UInt64)
+Void EnableWriteCache(UInt64, UInt64, UInt64)
+Boolean RequestTranslationBlockRestart(Boolean)
+UInt32 AssembleBlock(UInt64, System.String, System.String, Boolean)
+UInt32 GetMmuWindowPrivileges(UInt64)
+UInt64 GetMmuWindowEnd(UInt64)
+UInt64 GetMmuWindowStart(UInt64)
+UInt64 GetMmuWindowAddend(UInt64)
+Void SetMmuWindowPrivileges(UInt64, Privilege)
+Void SetMmuWindowEnd(UInt64, UInt64)
+Void SetMmuWindowStart(UInt64, UInt64)
+Void SetMmuWindowAddend(UInt64, UInt64)
+Void ResetMmuWindow(UInt64)
+Void ResetMmuWindowsCoveringAddress(UInt64)
+Void ResetAllMmuWindows()
+UInt64 AcquireExternalMmuWindow(Privilege)
+Void EnableExternalWindowMmu(Boolean)
+Void EnableExternalWindowMmu(Antmicro.Renode.Peripherals.CPU.ExternalMmuPosition)
+Void FlushTlb()
+Void RaiseException(UInt32)
+System.String ToString()
+Void FlushTlbPage(UInt64)
+Boolean TryTranslateAddress(UInt64, Antmicro.Renode.Peripherals.CPU.MpuAccess, UInt64 ByRef)
+UInt64 TranslateAddress(UInt64, Antmicro.Renode.Peripherals.CPU.MpuAccess)
+Void EnableProfiling()
+Void RemoveAllHooks()
+Void RequestReturn()
+Void SyncTime()
+Void ActivateNewHooks()
+System.String DisassembleBlock(UInt64, UInt32, System.String, Boolean)
+Antmicro.Renode.Peripherals.CPU.ExecutionResult ExecuteInstructions(UInt64, UInt64 ByRef)
+Void SetBroadcastDirty(Boolean)
+Void ClearTranslationCache()
+Void InitStoreTable()
+Void RequestTranslationCacheClearing()
+Void RemoveHooksAt(UInt64)
+Void RemoveHooks(Antmicro.Renode.Peripherals.CPU.CpuAddressHook)
+System.Collections.Generic.IEnumerator`1[Antmicro.Renode.Peripherals.CPU.TranslationCPU] GetEnumerator()
+UInt32 CheckExternalPermissions(UInt64)
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Peripherals.CPU.CPURegister] GetAllRegisters()
+System.String get_PreservableName()
+Antmicro.Renode.Peripherals.CPU.Disassembler.LLVMDisassembler get_Disassembler()
+UInt32 get_PageSize()
+Boolean get_TbCacheEnabled()
+Void set_TbCacheEnabled(Boolean)
+Boolean get_SyncPCEveryInstructionDisabled()
+Void set_SyncPCEveryInstructionDisabled(Boolean)
+Boolean get_ChainingEnabled()
+Void set_ChainingEnabled(Boolean)
+Int32 get_MaximumBlockSize()
+Void set_MaximumBlockSize(Int32)
+System.Decimal get_CyclesPerInstruction()
+Void set_CyclesPerInstruction(System.Decimal)
+Void set_LogTranslationBlockFetch(Boolean)
+Boolean get_LogTranslationBlockFetch()
+UInt32 get_CurrentBlockDisassemblyFlags()
+UInt32 get_ExternalMmuWindowsCount()
+Boolean get_ThreadSentinelEnabled()
+Void set_ThreadSentinelEnabled(Boolean)
+UInt64 get_ExecutedInstructions()
+Int32 get_Slot()
+System.String get_LogFile()
+Void set_LogFile(System.String)
+Antmicro.Renode.Peripherals.CPU.ExecutionMode get_ExecutionMode()
+Void set_ExecutionMode(Antmicro.Renode.Peripherals.CPU.ExecutionMode)
+Boolean get_LogTranslatedBlocks()
+Void set_LogTranslatedBlocks(Boolean)
+UInt32 get_IRQ()
+Antmicro.Renode.Peripherals.CPU.Assembler.LLVMAssembler get_Assembler()
+Boolean get_UpdateContextOnLoadAndStore()
+Void set_UpdateContextOnLoadAndStore(Boolean)
+UInt64 get_SkipInstructions()
+Boolean get_DisableInterruptsWhileStepping()
+Void set_DisableInterruptsWhileStepping(Boolean)
+Boolean get_IsHalted()
+Void set_IsHalted(Boolean)
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Peripherals.ICluster`1[Antmicro.Renode.Peripherals.CPU.TranslationCPU]] get_Clusters()
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Peripherals.CPU.TranslationCPU] get_Clustered()
+Void InstallOpcodeCounterPattern(System.String, System.String)
+Void InstallOpcodeCounterPattern(System.String, UInt64, UInt64)
+UInt64 GetOpcodeCounter(System.String)
+System.String[,] GetAllOpcodesCounters()
+Void SaveAllOpcodesCounters(System.String)
+Void ResetOpcodesCounters()
+Void set_EnableOpcodesCounting(Boolean)
+Void EnablePreOpcodeExecutionHooks(Boolean)
+Void EnablePostOpcodeExecutionHooks(Boolean)
+Void AddPreOpcodeExecutionHook(UInt64, UInt64, System.Action`2[System.UInt64,System.UInt64])
+Void AddPostOpcodeExecutionHook(UInt64, UInt64, System.Action`2[System.UInt64,System.UInt64])
+Void EnableProfiler(ProfilerType, System.String, Boolean, Boolean, System.Nullable`1[System.Int64], System.Nullable`1[System.Int32], Boolean)
+Void EnableProfilerCollapsedStack(System.String, Boolean, System.Nullable`1[System.Int64], System.Nullable`1[System.Int32], Boolean)
+Void EnableProfilerPerfetto(System.String, Boolean, Boolean, System.Nullable`1[System.Int64], System.Nullable`1[System.Int32])
+Void DisableProfiler()
+Void FlushProfiler()
+System.String GetProfilerStack()
+Antmicro.Renode.Peripherals.CPU.GuestProfiling.BaseProfiler get_Profiler()
+Void SkipTime(Antmicro.Renode.Time.TimeInterval)
+UInt64 Step(Int32)
+Void DelayStepCommand()
+Void ContinueAndEnterStepModeAfterFinishingTimeInterval()
+System.Collections.Generic.IEnumerator`1[Antmicro.Renode.Peripherals.CPU.BaseCPU] GetEnumerator()
+Boolean get_DebuggerConnected()
+Void set_DebuggerConnected(Boolean)
+Boolean get_IsPaused()
+UInt64 get_SkippedInstructions()
+Antmicro.Renode.Time.TimeHandle get_TimeHandle()
+Void set_TimeHandle(Antmicro.Renode.Time.TimeHandle)
+Antmicro.Renode.Peripherals.CPU.EmulationCPUState get_EmulationState()
+Boolean get_OnPossessedThread()
+UInt32 get_PerformanceInMips()
+Void set_PerformanceInMips(UInt32)
+System.String get_Model()
+UInt64 get_ElapsedCycles()
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Peripherals.CPU.BaseCPU] get_Clustered()
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Peripherals.ICluster`1[Antmicro.Renode.Peripherals.CPU.BaseCPU]] get_Clusters()
+Antmicro.Renode.Peripherals.Bus.IBusController get_Bus()
+ELFSharp.ELF.Endianess get_Endianness()
+Boolean get_ShouldEnterDebugMode()
+Void set_ShouldEnterDebugMode(Boolean)
+Void add_Halted(System.Action`1[Antmicro.Renode.Peripherals.CPU.HaltArguments])
+Void remove_Halted(System.Action`1[Antmicro.Renode.Peripherals.CPU.HaltArguments])
+Void add_StateChanged(System.Action`3[Antmicro.Renode.Peripherals.CPU.ICPU,Antmicro.Renode.Peripherals.CPU.EmulationCPUState,Antmicro.Renode.Peripherals.CPU.EmulationCPUState])
+Void remove_StateChanged(System.Action`3[Antmicro.Renode.Peripherals.CPU.ICPU,Antmicro.Renode.Peripherals.CPU.EmulationCPUState,Antmicro.Renode.Peripherals.CPU.EmulationCPUState])
+Void Start()
+Void Resume()
+Void Pause()
+UInt32 get_MultiprocessingId()
+Boolean get_IsStarted()
+Int32 get_UniqueObjectId()
+System.Type GetType()
+Boolean Equals(System.Object)
+Int32 GetHashCode()
+Void .ctor(System.String, Antmicro.Renode.Core.IMachine, Antmicro.Renode.Peripherals.IRQControllers.NVIC, UInt32, ELFSharp.ELF.Endianess, System.Nullable`1[System.UInt32], System.Nullable`1[System.UInt32], Boolean, System.Nullable`1[System.UInt32], System.Nullable`1[System.UInt32], Boolean)
+System.Nullable`1[System.UInt32] InitVectorTableOffsetNonSecure
+System.Nullable`1[System.UInt32] InitVectorTableOffset
+Antmicro.Renode.Core.GPIO CpuWaitSignal
+System.String Architecture
+System.Collections.Generic.List`1[Antmicro.Renode.Peripherals.CPU.GDBFeatureDescriptor] GDBFeatures
+MemorySystemArchitectureType MemorySystemArchitecture
+UInt32 ExceptionVectorAddress
+Boolean IsLockedUp
+Boolean IsUsingProcessSP
+UInt32 PmsaV8Mair0
+UInt32 PmsaV8RbarAlias3_NS
+UInt32 PmsaV8Rlar
+UInt32 PmsaV8RlarAlias1
+UInt32 PmsaV8RlarAlias2
+UInt32 PmsaV8RlarAlias3
+UInt32 PmsaV8Rlar_NS
+UInt32 PmsaV8RlarAlias1_NS
+UInt32 PmsaV8RlarAlias2_NS
+UInt32 PmsaV8RlarAlias3_NS
+UInt32 PmsaV8Mair0_NS
+UInt32 MPURegionNumber
+UInt32 PmsaV8Mair1_NS
+Boolean MPUEnabled
+UInt32 MPURegionBaseAddress
+UInt32 MPURegionAttributeAndSize
+UInt32 PmsaV8RbarAlias2_NS
+UInt32 SAUControl
+UInt32 SAURegionNumber
+UInt32 SAURegionBaseAddress
+UInt32 SAURegionLimitAddress
+Antmicro.Renode.Peripherals.CPU.CortexMImplementationDefinedAttributionUnit ImplementationDefinedAttributionUnit
+UInt32 XProgramStatusRegister
+UInt32 PmsaV8Mair1
+UInt32 PmsaV8RbarAlias1_NS
+UInt32 PmsaV8Rbar_NS
+UInt32 PmsaV8RbarAlias3
+System.Collections.Generic.IReadOnlyDictionary`2[System.String,System.Int32] StateBits
+UInt32 VectorTableOffset
+UInt32 VectorTableOffsetNonSecure
+Antmicro.Renode.Peripherals.CPU.RegisterValue FPCAR_NS
+Antmicro.Renode.Peripherals.CPU.RegisterValue FPDSCR_NS
+Antmicro.Renode.Peripherals.CPU.RegisterValue FPCCR_NS
+Antmicro.Renode.Peripherals.CPU.RegisterValue FPSCR_NS
+Antmicro.Renode.Peripherals.CPU.RegisterValue CPACR_NS
+Boolean IDAUEnabled
+UInt32 NumberOfIDAURegions
+UInt32 NumberOfSAURegions
+Boolean FpuEnabled
+Boolean TrustZoneEnabled
+UInt32 FaultStatus
+Boolean SecureState
+UInt32 MemoryFaultAddress
+UInt32 BusFaultAddress
+UInt32 PmsaV8RbarAlias2
+UInt32 PmsaV8RbarAlias1
+UInt32 PmsaV8Rbar
+UInt32 FaultStatusNonSecure
+UInt32 ConfigurationAndControlRegister
+UInt32 ConfigurationAndControlRegisterNonSecure
+UInt32 PmsaV8Rnr
+UInt32 PmsaV8Ctrl_NS
+UInt32 PmsaV8Rnr_NS
+UInt32 ArchitectureVersion
+Boolean IsV8
+UInt32 SecureFaultStatus
+UInt32 SecureFaultAddress
+UInt32 MemoryFaultAddressNonSecure
+UInt32 PmsaV8Ctrl
+System.String[] AllLLVMTriples
+System.String LLVMModel
+Antmicro.Renode.Peripherals.CPU.RegisterValue Control
+Antmicro.Renode.Peripherals.CPU.RegisterValue BasePri
+Antmicro.Renode.Peripherals.CPU.RegisterValue VecBase
+Antmicro.Renode.Peripherals.CPU.RegisterValue OtherSP
+Antmicro.Renode.Peripherals.CPU.RegisterValue FPCCR
+Antmicro.Renode.Peripherals.CPU.RegisterValue FPCAR
+Antmicro.Renode.Peripherals.CPU.RegisterValue FPDSCR
+Antmicro.Renode.Peripherals.CPU.RegisterValue CPACR
+Antmicro.Renode.Peripherals.CPU.RegisterValue PRIMASK
+Antmicro.Renode.Peripherals.CPU.RegisterValue FAULTMASK
+Antmicro.Renode.Peripherals.CPU.RegisterValue VPR
+Antmicro.Renode.Peripherals.CPU.RegisterValue NSACR
+Antmicro.Renode.Peripherals.CPU.RegisterValue FPSCR
+Antmicro.Renode.Peripherals.CPU.Registers.RegistersGroup D
+Antmicro.Renode.Peripherals.CPU.Registers.RegistersGroup S
+Boolean IsSemihostingEnabled
+UInt32 ModelID
+Boolean WfiAsNop
+Boolean WfeAndSevAsNop
+UInt32 NumberOfMPURegions
+System.String GDBArchitecture
+Boolean ImplementsPMSA
+Boolean ImplementsVMSA
+ELFSharp.ELF.Endianess DisassemblyHexFormatting
+Antmicro.Renode.Peripherals.CPU.RegisterValue SP
+Antmicro.Renode.Peripherals.CPU.RegisterValue LR
+Antmicro.Renode.Peripherals.CPU.RegisterValue PC
+Antmicro.Renode.Peripherals.CPU.RegisterValue CPSR
+Antmicro.Renode.Peripherals.CPU.Registers.RegistersGroup R
+System.String PreservableName
+Antmicro.Renode.Peripherals.CPU.Disassembler.LLVMDisassembler Disassembler
+UInt32 PageSize
+Boolean TbCacheEnabled
+Boolean SyncPCEveryInstructionDisabled
+Boolean ChainingEnabled
+Int32 MaximumBlockSize
+System.Decimal CyclesPerInstruction
+Boolean LogTranslationBlockFetch
+UInt32 CurrentBlockDisassemblyFlags
+UInt32 ExternalMmuWindowsCount
+Boolean ThreadSentinelEnabled
+UInt64 ExecutedInstructions
+Int32 Slot
+System.String LogFile
+Antmicro.Renode.Peripherals.CPU.ExecutionMode ExecutionMode
+Boolean LogTranslatedBlocks
+UInt32 IRQ
+Antmicro.Renode.Peripherals.CPU.Assembler.LLVMAssembler Assembler
+Boolean UpdateContextOnLoadAndStore
+UInt64 SkipInstructions
+Boolean DisableInterruptsWhileStepping
+Boolean IsHalted
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Peripherals.ICluster`1[Antmicro.Renode.Peripherals.CPU.TranslationCPU]] Clusters
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Peripherals.CPU.TranslationCPU] Clustered
+Boolean EnableOpcodesCounting
+Antmicro.Renode.Peripherals.CPU.GuestProfiling.BaseProfiler Profiler
+Boolean DebuggerConnected
+Boolean IsPaused
+UInt64 SkippedInstructions
+Antmicro.Renode.Time.TimeHandle TimeHandle
+Antmicro.Renode.Peripherals.CPU.EmulationCPUState EmulationState
+Boolean OnPossessedThread
+UInt32 PerformanceInMips
+System.String Model
+UInt64 ElapsedCycles
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Peripherals.CPU.BaseCPU] Clustered
+System.Collections.Generic.IEnumerable`1[Antmicro.Renode.Peripherals.ICluster`1[Antmicro.Renode.Peripherals.CPU.BaseCPU]] Clusters
+Antmicro.Renode.Peripherals.Bus.IBusController Bus
+ELFSharp.ELF.Endianess Endianness
+Boolean ShouldEnterDebugMode
+UInt32 MultiprocessingId
+Boolean IsStarted
+Int32 UniqueObjectId
+System.Action`1[Antmicro.Renode.Peripherals.CPU.HaltArguments] Halted
+System.Action`3[Antmicro.Renode.Peripherals.CPU.ICPU,Antmicro.Renode.Peripherals.CPU.EmulationCPUState,Antmicro.Renode.Peripherals.CPU.EmulationCPUState] StateChanged
+System.Func`1[System.UInt32] TlibGetExceptionVectorAddress
+System.Action`1[System.UInt32] TlibSetExceptionVectorAddress
+System.Action`2[System.Int32,System.UInt32] TlibUpdatePmuCounters
+System.Action`1[System.UInt32] TlibPmuSetDebug
+Boolean UseMachineAtomicState
+System.Collections.Generic.HashSet`1[System.String] FrameProfilerIgnoredSymbols
+Antmicro.Renode.Peripherals.CPU.CortexM+ContextState
+Antmicro.Renode.Peripherals.CPU.CortexM+IDAURegion
+Antmicro.Renode.Peripherals.CPU.CortexM+CpuSignal

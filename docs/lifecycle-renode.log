@@ -1,0 +1,1039 @@
+[21:00:32.1184] [INFO] Loaded monitor commands from: F:\Programs\Renode\scripts/monitor.py
+[21:00:32.1420] [INFO] Robot Framework remote server is listening on port 38252
+[21:00:32.2779] [INFO] Including script(s): D:\Document (D)\CPPProjects\N120 Emulator\renode\UsbHost.cs
+[21:00:33.6107] [INFO] System bus created.
+[21:00:34.7100] [INFO] sysbus: Loading block of 524288 bytes length at 0x8000000.
+[21:00:34.9408] [INFO] cpu: Setting initial values: PC = 0x8008159, SP = 0x2403FFF8.
+[21:00:34.9425] [INFO] N120: Machine started.
+[21:00:34.9951] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [6] when writing value 0x1FF0060. Tags: PLL2RGE (0x1).
+[21:00:34.9953] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [22] when writing value 0x1BF0020. Tags: DIVP3EN (0x0).
+[21:00:34.9954] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [23] when writing value 0x17F0020. Tags: DIVQ3EN (0x0).
+[21:00:34.9954] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [24] when writing value 0xFF0020. Tags: DIVR3EN (0x0).
+[21:00:34.9974] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [0] when writing value 0x1. Tags: FMCSEL (0x1).
+[21:00:34.9985] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [5] when writing value 0x20. Tags: QSPISEL (0x2).
+[21:00:34.9991] [WARNING] Unhandled write to offset 0x54. Unhandled bits: [20-21] when writing value 0x300000. Tags: USBSEL (0x3).
+[21:00:35.0029] [WARNING] usb: Unhandled write to offset 0xC. Unhandled bits: [6, 10-11] when writing value 0x40001840. Tags: Full speed serial transceiver mode select (PHYSEL) (0x1), USB turnaround time (TRDT) (0x6).
+[21:00:35.0034] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:35.0035] [WARNING] usb: Unhandled write to offset 0x38. Unhandled bits: [16] when writing value 0x10000. Tags: Power down of FS PHY (PWRDWN) (0x1).
+[21:00:35.0036] [WARNING] usb: Unhandled write to offset 0x14. Unhandled bits: [5, 26] when writing value 0x0. Tags: RESERVED (0x0), RESERVED (0x0).
+[21:00:35.0036] [WARNING] usb: Unhandled write to offset 0x800. Unhandled bits: [0-1] when writing value 0x2200003. Tags: Device speed (DSPD) (0x3).
+[21:00:35.0037] [WARNING] usb: Unhandled write to offset 0x24. Unhandled bits: [7] when writing value 0x80. Tags: Rx FIFO depth (RXFD) (0x80).
+[21:00:37.9362] [WARNING] Unhandled write to offset 0xFC. Unhandled bits: [0, 4-5, 8, 12, 14, 16] when writing value 0xF0000000. Tags: MDMALPEN (0x0), DMA2DLPEN (0x0), JPGDECLPEN (0x0), FLASHLPEN (0x0), FMCLPEN (0x0), QSPILPEN (0x0), SDMMC1LPEN (0x0).
+[21:00:37.9364] [WARNING] Unhandled write to offset 0x108. Unhandled bits: [3-10, 19, 21, 24, 28-29] when writing value 0x7. Tags: GPIODLPEN (0x0), GPIOELPEN (0x0), GPIOFLPEN (0x0), GPIOGLPEN (0x0), GPIOHLPEN (0x0), GPIOILPEN (0x0), GPIOJLPEN (0x0), GPIOKLPEN (0x0), CRCLPEN (0x0), BDMALPEN (0x0), ADC3LPEN (0x0), BKPRAMLPEN (0x0), SRAM4LPEN (0x0).
+[21:00:37.9365] [WARNING] Unhandled write to offset 0x110. Unhandled bits: [0, 3-9, 11, 14-23, 27, 29-31] when writing value 0x6. Tags: TIM2LPEN (0x0), TIM5LPEN (0x0), TIM6LPEN (0x0), TIM7LPEN (0x0), TIM12LPEN (0x0), TIM13LPEN (0x0), TIM14LPEN (0x0), LPTIM1LPEN (0x0), RESERVED (0x0), SPI2LPEN (0x0), SPI3LPEN (0x0), SPDIFRXLPEN (0x0), USART2LPEN (0x0), USART3LPEN (0x0), UART4LPEN (0x0), UART5LPEN (0x0), I2C1LPEN (0x0), I2C2LPEN (0x0), I2C3LPEN (0x0), CECLPEN (0x0), DAC12LPEN (0x0), UART7LPEN (0x0), UART8LPEN (0x0).
+[21:00:37.9365] [WARNING] Unhandled write to offset 0x118. Unhandled bits: [1, 4-5, 12-13, 16-18, 20, 22-24, 28-29] when writing value 0x1. Tags: TIM8LPEN (0x0), USART1LPEN (0x0), USART6LPEN (0x0), SPI1LPEN (0x0), SPI4LPEN (0x0), TIM15LPEN (0x0), TIM16LPEN (0x0), TIM17LPEN (0x0), SAI1LPEN (0x0), SAI2LPEN (0x0), SAI3LPEN (0x0), DFSDM1LPEN (0x0), HRTIMLPEN (0x0).
+[21:00:37.9365] [WARNING] Unhandled write to offset 0x10C. Unhandled bits: [3-4, 6] when writing value 0x0. Tags: LTDCLPEN (0x0), RESERVED (0x0), WWDG1LPEN (0x0).
+[21:00:37.9365] [WARNING] Unhandled write to offset 0x100. Unhandled bits: [0-1, 5, 14-17, 25-28] when writing value 0x0. Tags: DMA1LPEN (0x0), DMA2LPEN (0x0), ADC12LPEN (0x0), RESERVED (0x0), ETH1MACLPEN (0x0), ETH1TXLPEN (0x0), ETH1RXLPEN (0x0), USB1OTGHSLPEN (0x0), USB1OTGHSULPILPEN (0x0), USB2OTGHSLPEN (0x0), USB2OTGHSULPILPEN (0x0).
+[21:00:37.9366] [WARNING] Unhandled write to offset 0x104. Unhandled bits: [0, 4-6, 9, 29-31] when writing value 0x0. Tags: DCMILPEN (0x0), CRYPTLPEN (0x0), HASHLPEN (0x0), RNGLPEN (0x0), SDMMC2LPEN (0x0), SRAM1LPEN (0x0), SRAM2LPEN (0x0), SRAM3LPEN (0x0).
+[21:00:37.9366] [WARNING] Unhandled write to offset 0x114. Unhandled bits: [1-2, 4-5, 8] when writing value 0x0. Tags: CRSLPEN (0x0), SWPLPEN (0x0), OPAMPLPEN (0x0), MDIOSLPEN (0x0), FDCANLPEN (0x0).
+[21:00:37.9366] [WARNING] Unhandled write to offset 0x11C. Unhandled bits: [1, 3, 5, 7, 9-12, 14-16, 21, 26] when writing value 0x0. Tags: SYSCFGLPEN (0x0), LPUART1LPEN (0x0), SPI6LPEN (0x0), I2C4LPEN (0x0), LPTIM2LPEN (0x0), LPTIM3LPEN (0x0), LPTIM4LPEN (0x0), LPTIM5LPEN (0x0), COMP12LPEN (0x0), VREFLPEN (0x0), RTCAPBLPEN (0x0), SAI4LPEN (0x0), RESERVED (0x0).
+[21:00:37.9378] [WARNING] nvic: Unhandled write to offset 0xF50 (ICacheInvalidateAllToPoUaIgnored), value 0x0.
+[21:00:37.9387] [WARNING] cpu: Trying to enable instruction cache, but it's not supported
+[21:00:37.9388] [WARNING] nvic: Unhandled write to offset 0xF60 (DCacheInvalidateBySetWay), value 0x0.
+[21:00:38.4415] [WARNING] timer1: Unhandled write to offset 0x8. Unhandled bits: [7] when writing value 0x80. Tags: Master/Slave mode (MSM) (0x1).
+[21:00:38.5200] [WARNING] nvic: Unhandled write to offset 0xF60 (DCacheInvalidateBySetWay), value 0x0.
+[21:00:39.9448] [INFO] N120: Machine paused.
+[21:00:39.9640] [INFO] N120: Machine resumed.
+[21:00:40.1865] [INFO] N120: Machine paused.
+[21:00:40.1895] [INFO] N120: Machine resumed.
+[21:00:40.1973] [INFO] N120: Machine paused.
+[21:00:40.1989] [INFO] N120: Machine resumed.
+[21:00:40.2279] [INFO] N120: Machine paused.
+[21:00:40.2299] [INFO] N120: Machine resumed.
+[21:00:40.4118] [INFO] N120: Machine paused.
+[21:00:40.4136] [INFO] N120: Machine resumed.
+[21:00:40.4188] [INFO] N120: Machine paused.
+[21:00:40.4202] [INFO] N120: Machine resumed.
+[21:00:40.4933] [INFO] N120: Machine paused.
+[21:00:40.4971] [INFO] N120: Machine resumed.
+[21:00:40.7360] [INFO] N120: Machine paused.
+[21:00:40.7396] [INFO] N120: Machine resumed.
+[21:00:40.7477] [INFO] N120: Machine paused.
+[21:00:40.7495] [INFO] N120: Machine resumed.
+[21:00:40.7663] [INFO] N120: Machine paused.
+[21:00:40.7680] [INFO] N120: Machine resumed.
+[21:00:41.1206] [INFO] N120: Machine paused.
+[21:00:41.1224] [INFO] N120: Machine resumed.
+[21:00:41.4757] [INFO] N120: Machine paused.
+[21:00:41.5170] [INFO] N120: Machine resumed.
+[21:00:41.7580] [INFO] N120: Machine paused.
+[21:00:41.7976] [INFO] N120: Machine resumed.
+[21:00:42.0353] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:42.0356] [WARNING] usb: Unhandled write to offset 0xE00. Unhandled bits: [0] when writing value 0x200B8001. Tags: Stop PHY clock (STPPCLK) (0x1).
+[21:00:42.0370] [WARNING] timer1: Unhandled write to offset 0x8. Unhandled bits: [7] when writing value 0x80. Tags: Master/Slave mode (MSM) (0x1).
+[21:00:42.0384] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:42.0385] [WARNING] usb: Unhandled write to offset 0xE00. Unhandled bits: [0] when writing value 0x200B8001. Tags: Stop PHY clock (STPPCLK) (0x1).
+[21:00:42.0391] [WARNING] Unhandled write to offset 0x110. Unhandled bits: [2] when writing value 0xE8FFCBFB. Tags: TIM4LPEN (0x0).
+[21:00:42.0395] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000400.
+[21:00:42.0398] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000400, value 0x0
+[21:00:42.0399] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010000.
+[21:00:42.0399] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010000, value 0x0
+[21:00:42.0399] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000428, value 0x31F
+[21:00:42.0399] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010028, value 0x31F
+[21:00:42.0399] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010018.
+[21:00:42.0399] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x4001001C.
+[21:00:42.0399] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000414.
+[21:00:42.0399] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000414, value 0x1
+[21:00:42.0399] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010014.
+[21:00:42.0399] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010014, value 0x1
+[21:00:42.0404] [INFO] N120: Machine paused.
+[21:00:42.0612] [INFO] N120: Machine resumed.
+[21:00:42.0629] [WARNING] Unhandled write to offset 0xF4. Unhandled bits: [16] when writing value 0x0. Tags: RTCAPBEN (0x0).
+[21:00:42.0634] [WARNING] Wrong configuration of DIVN1. Assigned value 0
+[21:00:42.0635] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [16-21] when writing value 0x1C00020. Tags: DIVP1EN (0x0), DIVQ1EN (0x0), DIVR1EN (0x0), DIVP2EN (0x0), DIVQ2EN (0x0), DIVR2EN (0x0).
+[21:00:42.0677] [INFO] N120: Machine paused.
+[21:00:42.0859] [INFO] N120: Machine resumed.
+[21:00:42.0864] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [6] when writing value 0x1FF0060. Tags: PLL2RGE (0x1).
+[21:00:42.0866] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [22] when writing value 0x1BF0020. Tags: DIVP3EN (0x0).
+[21:00:42.0866] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [23] when writing value 0x17F0020. Tags: DIVQ3EN (0x0).
+[21:00:42.0867] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [24] when writing value 0xFF0020. Tags: DIVR3EN (0x0).
+[21:00:42.0872] [WARNING] Cannot modify DIVN1 while PLL1 is enabled. Ignoring write.
+[21:00:42.0872] [WARNING] Cannot modify DIVP1 while PLL1 is enabled. Ignoring write.
+[21:00:42.0872] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [6] when writing value 0x1FF0060. Tags: PLL2RGE (0x1).
+[21:00:42.0875] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [0] when writing value 0x1. Tags: FMCSEL (0x1).
+[21:00:42.0875] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [5] when writing value 0x20. Tags: QSPISEL (0x2).
+[21:00:42.0876] [WARNING] Unhandled write to offset 0x54. Unhandled bits: [20-21] when writing value 0x300000. Tags: USBSEL (0x3).
+[21:00:42.0903] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000400.
+[21:00:42.0903] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000400, value 0x0
+[21:00:42.0903] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010000.
+[21:00:42.0903] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010000, value 0x0
+[21:00:42.0903] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000428, value 0xD2EF
+[21:00:42.0903] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010028, value 0xD2EF
+[21:00:42.0903] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010018.
+[21:00:42.0903] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x4001001C.
+[21:00:42.0903] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000414.
+[21:00:42.0903] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000414, value 0x1
+[21:00:42.0903] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010014.
+[21:00:42.0903] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010014, value 0x1
+[21:00:42.0905] [WARNING] Unhandled write to offset 0xFC. Unhandled bits: [0, 4-5, 8, 12, 14, 16] when writing value 0xF0000000. Tags: MDMALPEN (0x0), DMA2DLPEN (0x0), JPGDECLPEN (0x0), FLASHLPEN (0x0), FMCLPEN (0x0), QSPILPEN (0x0), SDMMC1LPEN (0x0).
+[21:00:42.0905] [WARNING] Unhandled write to offset 0x108. Unhandled bits: [3-10, 19, 21, 24, 28-29] when writing value 0x7. Tags: GPIODLPEN (0x0), GPIOELPEN (0x0), GPIOFLPEN (0x0), GPIOGLPEN (0x0), GPIOHLPEN (0x0), GPIOILPEN (0x0), GPIOJLPEN (0x0), GPIOKLPEN (0x0), CRCLPEN (0x0), BDMALPEN (0x0), ADC3LPEN (0x0), BKPRAMLPEN (0x0), SRAM4LPEN (0x0).
+[21:00:42.0905] [WARNING] Unhandled write to offset 0x110. Unhandled bits: [0, 3-9, 11, 14-23, 27, 29-31] when writing value 0x6. Tags: TIM2LPEN (0x0), TIM5LPEN (0x0), TIM6LPEN (0x0), TIM7LPEN (0x0), TIM12LPEN (0x0), TIM13LPEN (0x0), TIM14LPEN (0x0), LPTIM1LPEN (0x0), RESERVED (0x0), SPI2LPEN (0x0), SPI3LPEN (0x0), SPDIFRXLPEN (0x0), USART2LPEN (0x0), USART3LPEN (0x0), UART4LPEN (0x0), UART5LPEN (0x0), I2C1LPEN (0x0), I2C2LPEN (0x0), I2C3LPEN (0x0), CECLPEN (0x0), DAC12LPEN (0x0), UART7LPEN (0x0), UART8LPEN (0x0).
+[21:00:42.0906] [WARNING] Unhandled write to offset 0x118. Unhandled bits: [1, 4-5, 12-13, 16-18, 20, 22-24, 28-29] when writing value 0x1. Tags: TIM8LPEN (0x0), USART1LPEN (0x0), USART6LPEN (0x0), SPI1LPEN (0x0), SPI4LPEN (0x0), TIM15LPEN (0x0), TIM16LPEN (0x0), TIM17LPEN (0x0), SAI1LPEN (0x0), SAI2LPEN (0x0), SAI3LPEN (0x0), DFSDM1LPEN (0x0), HRTIMLPEN (0x0).
+[21:00:42.0906] [WARNING] Unhandled write to offset 0x10C. Unhandled bits: [3-4, 6] when writing value 0x0. Tags: LTDCLPEN (0x0), RESERVED (0x0), WWDG1LPEN (0x0).
+[21:00:42.0906] [WARNING] Unhandled write to offset 0x100. Unhandled bits: [0-1, 5, 14-17, 25-28] when writing value 0x0. Tags: DMA1LPEN (0x0), DMA2LPEN (0x0), ADC12LPEN (0x0), RESERVED (0x0), ETH1MACLPEN (0x0), ETH1TXLPEN (0x0), ETH1RXLPEN (0x0), USB1OTGHSLPEN (0x0), USB1OTGHSULPILPEN (0x0), USB2OTGHSLPEN (0x0), USB2OTGHSULPILPEN (0x0).
+[21:00:42.0906] [WARNING] Unhandled write to offset 0x104. Unhandled bits: [0, 4-6, 9, 29-31] when writing value 0x0. Tags: DCMILPEN (0x0), CRYPTLPEN (0x0), HASHLPEN (0x0), RNGLPEN (0x0), SDMMC2LPEN (0x0), SRAM1LPEN (0x0), SRAM2LPEN (0x0), SRAM3LPEN (0x0).
+[21:00:42.0906] [WARNING] Unhandled write to offset 0x114. Unhandled bits: [1-2, 4-5, 8] when writing value 0x0. Tags: CRSLPEN (0x0), SWPLPEN (0x0), OPAMPLPEN (0x0), MDIOSLPEN (0x0), FDCANLPEN (0x0).
+[21:00:42.0906] [WARNING] Unhandled write to offset 0x11C. Unhandled bits: [1, 3, 5, 7, 9-12, 14-16, 21, 26] when writing value 0x0. Tags: SYSCFGLPEN (0x0), LPUART1LPEN (0x0), SPI6LPEN (0x0), I2C4LPEN (0x0), LPTIM2LPEN (0x0), LPTIM3LPEN (0x0), LPTIM4LPEN (0x0), LPTIM5LPEN (0x0), COMP12LPEN (0x0), VREFLPEN (0x0), RTCAPBLPEN (0x0), SAI4LPEN (0x0), RESERVED (0x0).
+[21:00:42.1071] [WARNING] usb: Unhandled write to offset 0xC. Unhandled bits: [6, 10-11] when writing value 0x40001840. Tags: Full speed serial transceiver mode select (PHYSEL) (0x1), USB turnaround time (TRDT) (0x6).
+[21:00:42.1073] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:42.1073] [WARNING] usb: Unhandled write to offset 0x38. Unhandled bits: [16] when writing value 0x10000. Tags: Power down of FS PHY (PWRDWN) (0x1).
+[21:00:42.1074] [WARNING] usb: Unhandled write to offset 0x14. Unhandled bits: [5, 26] when writing value 0x0. Tags: RESERVED (0x0), RESERVED (0x0).
+[21:00:42.1074] [WARNING] usb: Unhandled write to offset 0x800. Unhandled bits: [0-1] when writing value 0x2200003. Tags: Device speed (DSPD) (0x3).
+[21:00:42.1075] [WARNING] usb: Unhandled write to offset 0x24. Unhandled bits: [7] when writing value 0x80. Tags: Rx FIFO depth (RXFD) (0x80).
+[21:00:42.1085] [WARNING] timer1: Unhandled write to offset 0x8. Unhandled bits: [7] when writing value 0x80. Tags: Master/Slave mode (MSM) (0x1).
+[21:00:42.2582] [INFO] N120: Machine paused.
+[21:00:42.2597] [INFO] N120: Machine resumed.
+[21:00:42.2684] [INFO] N120: Machine paused.
+[21:00:42.3016] [INFO] N120: Machine resumed.
+[21:00:42.6515] [INFO] N120: Machine paused.
+[21:00:42.6592] [INFO] N120: Machine resumed.
+[21:00:43.0189] [INFO] N120: Machine paused.
+[21:00:43.0388] [INFO] N120: Machine resumed.
+[21:00:43.2888] [INFO] N120: Machine paused.
+[21:00:43.3106] [INFO] N120: Machine resumed.
+[21:00:43.5511] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:43.5512] [WARNING] usb: Unhandled write to offset 0xE00. Unhandled bits: [0] when writing value 0x200B8001. Tags: Stop PHY clock (STPPCLK) (0x1).
+[21:00:43.5525] [WARNING] timer1: Unhandled write to offset 0x8. Unhandled bits: [7] when writing value 0x80. Tags: Master/Slave mode (MSM) (0x1).
+[21:00:43.5535] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:43.5536] [WARNING] usb: Unhandled write to offset 0xE00. Unhandled bits: [0] when writing value 0x200B8001. Tags: Stop PHY clock (STPPCLK) (0x1).
+[21:00:43.5539] [WARNING] Unhandled write to offset 0x110. Unhandled bits: [2] when writing value 0xE8FFCBFB. Tags: TIM4LPEN (0x0).
+[21:00:43.5539] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000400.
+[21:00:43.5539] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000400, value 0x0
+[21:00:43.5539] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010000.
+[21:00:43.5539] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010000, value 0x0
+[21:00:43.5539] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000428, value 0x31F
+[21:00:43.5539] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010028, value 0x31F
+[21:00:43.5539] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010018.
+[21:00:43.5539] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x4001001C.
+[21:00:43.5539] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000414.
+[21:00:43.5539] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000414, value 0x1
+[21:00:43.5540] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010014.
+[21:00:43.5540] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010014, value 0x1
+[21:00:43.5546] [INFO] N120: Machine paused.
+[21:00:43.5745] [INFO] N120: Machine resumed.
+[21:00:43.5756] [WARNING] Unhandled write to offset 0xF4. Unhandled bits: [16] when writing value 0x0. Tags: RTCAPBEN (0x0).
+[21:00:43.5759] [WARNING] Wrong configuration of DIVN1. Assigned value 0
+[21:00:43.5760] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [16-21] when writing value 0x1C00020. Tags: DIVP1EN (0x0), DIVQ1EN (0x0), DIVR1EN (0x0), DIVP2EN (0x0), DIVQ2EN (0x0), DIVR2EN (0x0).
+[21:00:43.5770] [INFO] N120: Machine paused.
+[21:00:43.5955] [INFO] N120: Machine resumed.
+[21:00:43.6218] [INFO] N120: Machine paused.
+[21:00:43.6233] [INFO] N120: Machine resumed.
+[21:00:43.6237] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [6] when writing value 0x1FF0060. Tags: PLL2RGE (0x1).
+[21:00:43.6237] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [22] when writing value 0x1BF0020. Tags: DIVP3EN (0x0).
+[21:00:43.6238] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [23] when writing value 0x17F0020. Tags: DIVQ3EN (0x0).
+[21:00:43.6238] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [24] when writing value 0xFF0020. Tags: DIVR3EN (0x0).
+[21:00:43.6242] [WARNING] Cannot modify DIVN1 while PLL1 is enabled. Ignoring write.
+[21:00:43.6242] [WARNING] Cannot modify DIVP1 while PLL1 is enabled. Ignoring write.
+[21:00:43.6243] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [6] when writing value 0x1FF0060. Tags: PLL2RGE (0x1).
+[21:00:43.6245] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [0] when writing value 0x1. Tags: FMCSEL (0x1).
+[21:00:43.6245] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [5] when writing value 0x20. Tags: QSPISEL (0x2).
+[21:00:43.6246] [WARNING] Unhandled write to offset 0x54. Unhandled bits: [20-21] when writing value 0x300000. Tags: USBSEL (0x3).
+[21:00:43.6271] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000400.
+[21:00:43.6271] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000400, value 0x0
+[21:00:43.6271] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010000.
+[21:00:43.6271] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010000, value 0x0
+[21:00:43.6271] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000428, value 0xD2EF
+[21:00:43.6271] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010028, value 0xD2EF
+[21:00:43.6271] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010018.
+[21:00:43.6271] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x4001001C.
+[21:00:43.6271] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000414.
+[21:00:43.6271] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000414, value 0x1
+[21:00:43.6271] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010014.
+[21:00:43.6271] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010014, value 0x1
+[21:00:43.6272] [WARNING] Unhandled write to offset 0xFC. Unhandled bits: [0, 4-5, 8, 12, 14, 16] when writing value 0xF0000000. Tags: MDMALPEN (0x0), DMA2DLPEN (0x0), JPGDECLPEN (0x0), FLASHLPEN (0x0), FMCLPEN (0x0), QSPILPEN (0x0), SDMMC1LPEN (0x0).
+[21:00:43.6273] [WARNING] Unhandled write to offset 0x108. Unhandled bits: [3-10, 19, 21, 24, 28-29] when writing value 0x7. Tags: GPIODLPEN (0x0), GPIOELPEN (0x0), GPIOFLPEN (0x0), GPIOGLPEN (0x0), GPIOHLPEN (0x0), GPIOILPEN (0x0), GPIOJLPEN (0x0), GPIOKLPEN (0x0), CRCLPEN (0x0), BDMALPEN (0x0), ADC3LPEN (0x0), BKPRAMLPEN (0x0), SRAM4LPEN (0x0).
+[21:00:43.6273] [WARNING] Unhandled write to offset 0x110. Unhandled bits: [0, 3-9, 11, 14-23, 27, 29-31] when writing value 0x6. Tags: TIM2LPEN (0x0), TIM5LPEN (0x0), TIM6LPEN (0x0), TIM7LPEN (0x0), TIM12LPEN (0x0), TIM13LPEN (0x0), TIM14LPEN (0x0), LPTIM1LPEN (0x0), RESERVED (0x0), SPI2LPEN (0x0), SPI3LPEN (0x0), SPDIFRXLPEN (0x0), USART2LPEN (0x0), USART3LPEN (0x0), UART4LPEN (0x0), UART5LPEN (0x0), I2C1LPEN (0x0), I2C2LPEN (0x0), I2C3LPEN (0x0), CECLPEN (0x0), DAC12LPEN (0x0), UART7LPEN (0x0), UART8LPEN (0x0).
+[21:00:43.6274] [WARNING] Unhandled write to offset 0x118. Unhandled bits: [1, 4-5, 12-13, 16-18, 20, 22-24, 28-29] when writing value 0x1. Tags: TIM8LPEN (0x0), USART1LPEN (0x0), USART6LPEN (0x0), SPI1LPEN (0x0), SPI4LPEN (0x0), TIM15LPEN (0x0), TIM16LPEN (0x0), TIM17LPEN (0x0), SAI1LPEN (0x0), SAI2LPEN (0x0), SAI3LPEN (0x0), DFSDM1LPEN (0x0), HRTIMLPEN (0x0).
+[21:00:43.6274] [WARNING] Unhandled write to offset 0x10C. Unhandled bits: [3-4, 6] when writing value 0x0. Tags: LTDCLPEN (0x0), RESERVED (0x0), WWDG1LPEN (0x0).
+[21:00:43.6274] [WARNING] Unhandled write to offset 0x100. Unhandled bits: [0-1, 5, 14-17, 25-28] when writing value 0x0. Tags: DMA1LPEN (0x0), DMA2LPEN (0x0), ADC12LPEN (0x0), RESERVED (0x0), ETH1MACLPEN (0x0), ETH1TXLPEN (0x0), ETH1RXLPEN (0x0), USB1OTGHSLPEN (0x0), USB1OTGHSULPILPEN (0x0), USB2OTGHSLPEN (0x0), USB2OTGHSULPILPEN (0x0).
+[21:00:43.6274] [WARNING] Unhandled write to offset 0x104. Unhandled bits: [0, 4-6, 9, 29-31] when writing value 0x0. Tags: DCMILPEN (0x0), CRYPTLPEN (0x0), HASHLPEN (0x0), RNGLPEN (0x0), SDMMC2LPEN (0x0), SRAM1LPEN (0x0), SRAM2LPEN (0x0), SRAM3LPEN (0x0).
+[21:00:43.6275] [WARNING] Unhandled write to offset 0x114. Unhandled bits: [1-2, 4-5, 8] when writing value 0x0. Tags: CRSLPEN (0x0), SWPLPEN (0x0), OPAMPLPEN (0x0), MDIOSLPEN (0x0), FDCANLPEN (0x0).
+[21:00:43.6275] [WARNING] Unhandled write to offset 0x11C. Unhandled bits: [1, 3, 5, 7, 9-12, 14-16, 21, 26] when writing value 0x0. Tags: SYSCFGLPEN (0x0), LPUART1LPEN (0x0), SPI6LPEN (0x0), I2C4LPEN (0x0), LPTIM2LPEN (0x0), LPTIM3LPEN (0x0), LPTIM4LPEN (0x0), LPTIM5LPEN (0x0), COMP12LPEN (0x0), VREFLPEN (0x0), RTCAPBLPEN (0x0), SAI4LPEN (0x0), RESERVED (0x0).
+[21:00:43.6409] [WARNING] usb: Unhandled write to offset 0xC. Unhandled bits: [6, 10-11] when writing value 0x40001840. Tags: Full speed serial transceiver mode select (PHYSEL) (0x1), USB turnaround time (TRDT) (0x6).
+[21:00:43.6409] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:43.6409] [WARNING] usb: Unhandled write to offset 0x38. Unhandled bits: [16] when writing value 0x10000. Tags: Power down of FS PHY (PWRDWN) (0x1).
+[21:00:43.6409] [WARNING] usb: Unhandled write to offset 0x14. Unhandled bits: [5, 26] when writing value 0x0. Tags: RESERVED (0x0), RESERVED (0x0).
+[21:00:43.6410] [WARNING] usb: Unhandled write to offset 0x800. Unhandled bits: [0-1] when writing value 0x2200003. Tags: Device speed (DSPD) (0x3).
+[21:00:43.6410] [WARNING] usb: Unhandled write to offset 0x24. Unhandled bits: [7] when writing value 0x80. Tags: Rx FIFO depth (RXFD) (0x80).
+[21:00:43.6420] [WARNING] timer1: Unhandled write to offset 0x8. Unhandled bits: [7] when writing value 0x80. Tags: Master/Slave mode (MSM) (0x1).
+[21:00:43.6942] [INFO] N120: Machine paused.
+[21:00:43.6956] [INFO] N120: Machine resumed.
+[21:00:43.7005] [INFO] N120: Machine paused.
+[21:00:43.7354] [INFO] N120: Machine resumed.
+[21:00:44.0944] [INFO] N120: Machine paused.
+[21:00:44.0983] [INFO] N120: Machine resumed.
+[21:00:44.4663] [INFO] N120: Machine paused.
+[21:00:44.4879] [INFO] N120: Machine resumed.
+[21:00:44.7377] [INFO] N120: Machine paused.
+[21:00:44.7585] [INFO] N120: Machine resumed.
+[21:00:45.0074] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:45.0074] [WARNING] usb: Unhandled write to offset 0xE00. Unhandled bits: [0] when writing value 0x200B8001. Tags: Stop PHY clock (STPPCLK) (0x1).
+[21:00:45.0087] [WARNING] timer1: Unhandled write to offset 0x8. Unhandled bits: [7] when writing value 0x80. Tags: Master/Slave mode (MSM) (0x1).
+[21:00:45.0097] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:45.0098] [WARNING] usb: Unhandled write to offset 0xE00. Unhandled bits: [0] when writing value 0x200B8001. Tags: Stop PHY clock (STPPCLK) (0x1).
+[21:00:45.0101] [WARNING] Unhandled write to offset 0x110. Unhandled bits: [2] when writing value 0xE8FFCBFB. Tags: TIM4LPEN (0x0).
+[21:00:45.0101] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000400.
+[21:00:45.0101] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000400, value 0x0
+[21:00:45.0101] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010000.
+[21:00:45.0101] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010000, value 0x0
+[21:00:45.0101] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000428, value 0x31F
+[21:00:45.0101] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010028, value 0x31F
+[21:00:45.0101] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010018.
+[21:00:45.0101] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x4001001C.
+[21:00:45.0101] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000414.
+[21:00:45.0101] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000414, value 0x1
+[21:00:45.0101] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010014.
+[21:00:45.0101] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010014, value 0x1
+[21:00:45.0105] [INFO] N120: Machine paused.
+[21:00:45.0289] [INFO] N120: Machine resumed.
+[21:00:45.0300] [WARNING] Unhandled write to offset 0xF4. Unhandled bits: [16] when writing value 0x0. Tags: RTCAPBEN (0x0).
+[21:00:45.0304] [WARNING] Wrong configuration of DIVN1. Assigned value 0
+[21:00:45.0304] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [16-21] when writing value 0x1C00020. Tags: DIVP1EN (0x0), DIVQ1EN (0x0), DIVR1EN (0x0), DIVP2EN (0x0), DIVQ2EN (0x0), DIVR2EN (0x0).
+[21:00:45.0315] [INFO] N120: Machine paused.
+[21:00:45.0514] [INFO] N120: Machine resumed.
+[21:00:45.0547] [INFO] N120: Machine paused.
+[21:00:45.0558] [INFO] N120: Machine resumed.
+[21:00:45.0561] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [6] when writing value 0x1FF0060. Tags: PLL2RGE (0x1).
+[21:00:45.0562] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [22] when writing value 0x1BF0020. Tags: DIVP3EN (0x0).
+[21:00:45.0563] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [23] when writing value 0x17F0020. Tags: DIVQ3EN (0x0).
+[21:00:45.0563] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [24] when writing value 0xFF0020. Tags: DIVR3EN (0x0).
+[21:00:45.0567] [WARNING] Cannot modify DIVN1 while PLL1 is enabled. Ignoring write.
+[21:00:45.0567] [WARNING] Cannot modify DIVP1 while PLL1 is enabled. Ignoring write.
+[21:00:45.0568] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [6] when writing value 0x1FF0060. Tags: PLL2RGE (0x1).
+[21:00:45.0570] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [0] when writing value 0x1. Tags: FMCSEL (0x1).
+[21:00:45.0570] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [5] when writing value 0x20. Tags: QSPISEL (0x2).
+[21:00:45.0571] [WARNING] Unhandled write to offset 0x54. Unhandled bits: [20-21] when writing value 0x300000. Tags: USBSEL (0x3).
+[21:00:45.0594] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000400.
+[21:00:45.0594] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000400, value 0x0
+[21:00:45.0594] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010000.
+[21:00:45.0594] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010000, value 0x0
+[21:00:45.0594] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000428, value 0xD2EF
+[21:00:45.0594] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010028, value 0xD2EF
+[21:00:45.0594] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010018.
+[21:00:45.0594] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x4001001C.
+[21:00:45.0594] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000414.
+[21:00:45.0594] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000414, value 0x1
+[21:00:45.0594] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010014.
+[21:00:45.0594] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010014, value 0x1
+[21:00:45.0595] [WARNING] Unhandled write to offset 0xFC. Unhandled bits: [0, 4-5, 8, 12, 14, 16] when writing value 0xF0000000. Tags: MDMALPEN (0x0), DMA2DLPEN (0x0), JPGDECLPEN (0x0), FLASHLPEN (0x0), FMCLPEN (0x0), QSPILPEN (0x0), SDMMC1LPEN (0x0).
+[21:00:45.0595] [WARNING] Unhandled write to offset 0x108. Unhandled bits: [3-10, 19, 21, 24, 28-29] when writing value 0x7. Tags: GPIODLPEN (0x0), GPIOELPEN (0x0), GPIOFLPEN (0x0), GPIOGLPEN (0x0), GPIOHLPEN (0x0), GPIOILPEN (0x0), GPIOJLPEN (0x0), GPIOKLPEN (0x0), CRCLPEN (0x0), BDMALPEN (0x0), ADC3LPEN (0x0), BKPRAMLPEN (0x0), SRAM4LPEN (0x0).
+[21:00:45.0595] [WARNING] Unhandled write to offset 0x110. Unhandled bits: [0, 3-9, 11, 14-23, 27, 29-31] when writing value 0x6. Tags: TIM2LPEN (0x0), TIM5LPEN (0x0), TIM6LPEN (0x0), TIM7LPEN (0x0), TIM12LPEN (0x0), TIM13LPEN (0x0), TIM14LPEN (0x0), LPTIM1LPEN (0x0), RESERVED (0x0), SPI2LPEN (0x0), SPI3LPEN (0x0), SPDIFRXLPEN (0x0), USART2LPEN (0x0), USART3LPEN (0x0), UART4LPEN (0x0), UART5LPEN (0x0), I2C1LPEN (0x0), I2C2LPEN (0x0), I2C3LPEN (0x0), CECLPEN (0x0), DAC12LPEN (0x0), UART7LPEN (0x0), UART8LPEN (0x0).
+[21:00:45.0595] [WARNING] Unhandled write to offset 0x118. Unhandled bits: [1, 4-5, 12-13, 16-18, 20, 22-24, 28-29] when writing value 0x1. Tags: TIM8LPEN (0x0), USART1LPEN (0x0), USART6LPEN (0x0), SPI1LPEN (0x0), SPI4LPEN (0x0), TIM15LPEN (0x0), TIM16LPEN (0x0), TIM17LPEN (0x0), SAI1LPEN (0x0), SAI2LPEN (0x0), SAI3LPEN (0x0), DFSDM1LPEN (0x0), HRTIMLPEN (0x0).
+[21:00:45.0595] [WARNING] Unhandled write to offset 0x10C. Unhandled bits: [3-4, 6] when writing value 0x0. Tags: LTDCLPEN (0x0), RESERVED (0x0), WWDG1LPEN (0x0).
+[21:00:45.0595] [WARNING] Unhandled write to offset 0x100. Unhandled bits: [0-1, 5, 14-17, 25-28] when writing value 0x0. Tags: DMA1LPEN (0x0), DMA2LPEN (0x0), ADC12LPEN (0x0), RESERVED (0x0), ETH1MACLPEN (0x0), ETH1TXLPEN (0x0), ETH1RXLPEN (0x0), USB1OTGHSLPEN (0x0), USB1OTGHSULPILPEN (0x0), USB2OTGHSLPEN (0x0), USB2OTGHSULPILPEN (0x0).
+[21:00:45.0596] [WARNING] Unhandled write to offset 0x104. Unhandled bits: [0, 4-6, 9, 29-31] when writing value 0x0. Tags: DCMILPEN (0x0), CRYPTLPEN (0x0), HASHLPEN (0x0), RNGLPEN (0x0), SDMMC2LPEN (0x0), SRAM1LPEN (0x0), SRAM2LPEN (0x0), SRAM3LPEN (0x0).
+[21:00:45.0596] [WARNING] Unhandled write to offset 0x114. Unhandled bits: [1-2, 4-5, 8] when writing value 0x0. Tags: CRSLPEN (0x0), SWPLPEN (0x0), OPAMPLPEN (0x0), MDIOSLPEN (0x0), FDCANLPEN (0x0).
+[21:00:45.0596] [WARNING] Unhandled write to offset 0x11C. Unhandled bits: [1, 3, 5, 7, 9-12, 14-16, 21, 26] when writing value 0x0. Tags: SYSCFGLPEN (0x0), LPUART1LPEN (0x0), SPI6LPEN (0x0), I2C4LPEN (0x0), LPTIM2LPEN (0x0), LPTIM3LPEN (0x0), LPTIM4LPEN (0x0), LPTIM5LPEN (0x0), COMP12LPEN (0x0), VREFLPEN (0x0), RTCAPBLPEN (0x0), SAI4LPEN (0x0), RESERVED (0x0).
+[21:00:45.0732] [WARNING] usb: Unhandled write to offset 0xC. Unhandled bits: [6, 10-11] when writing value 0x40001840. Tags: Full speed serial transceiver mode select (PHYSEL) (0x1), USB turnaround time (TRDT) (0x6).
+[21:00:45.0733] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:45.0733] [WARNING] usb: Unhandled write to offset 0x38. Unhandled bits: [16] when writing value 0x10000. Tags: Power down of FS PHY (PWRDWN) (0x1).
+[21:00:45.0733] [WARNING] usb: Unhandled write to offset 0x14. Unhandled bits: [5, 26] when writing value 0x0. Tags: RESERVED (0x0), RESERVED (0x0).
+[21:00:45.0734] [WARNING] usb: Unhandled write to offset 0x800. Unhandled bits: [0-1] when writing value 0x2200003. Tags: Device speed (DSPD) (0x3).
+[21:00:45.0734] [WARNING] usb: Unhandled write to offset 0x24. Unhandled bits: [7] when writing value 0x80. Tags: Rx FIFO depth (RXFD) (0x80).
+[21:00:45.0743] [WARNING] timer1: Unhandled write to offset 0x8. Unhandled bits: [7] when writing value 0x80. Tags: Master/Slave mode (MSM) (0x1).
+[21:00:45.1468] [INFO] N120: Machine paused.
+[21:00:45.1481] [INFO] N120: Machine resumed.
+[21:00:45.1563] [INFO] N120: Machine paused.
+[21:00:45.1790] [INFO] N120: Machine resumed.
+[21:00:45.5120] [INFO] N120: Machine paused.
+[21:00:45.5137] [INFO] N120: Machine resumed.
+[21:00:45.8707] [INFO] N120: Machine paused.
+[21:00:45.8880] [INFO] N120: Machine resumed.
+[21:00:46.1244] [INFO] N120: Machine paused.
+[21:00:46.1418] [INFO] N120: Machine resumed.
+[21:00:46.3664] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:46.3665] [WARNING] usb: Unhandled write to offset 0xE00. Unhandled bits: [0] when writing value 0x200B8001. Tags: Stop PHY clock (STPPCLK) (0x1).
+[21:00:46.3677] [WARNING] timer1: Unhandled write to offset 0x8. Unhandled bits: [7] when writing value 0x80. Tags: Master/Slave mode (MSM) (0x1).
+[21:00:46.3687] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:46.3687] [WARNING] usb: Unhandled write to offset 0xE00. Unhandled bits: [0] when writing value 0x200B8001. Tags: Stop PHY clock (STPPCLK) (0x1).
+[21:00:46.3690] [WARNING] Unhandled write to offset 0x110. Unhandled bits: [2] when writing value 0xE8FFCBFB. Tags: TIM4LPEN (0x0).
+[21:00:46.3691] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000400.
+[21:00:46.3691] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000400, value 0x0
+[21:00:46.3691] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010000.
+[21:00:46.3691] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010000, value 0x0
+[21:00:46.3691] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000428, value 0x31F
+[21:00:46.3691] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010028, value 0x31F
+[21:00:46.3691] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010018.
+[21:00:46.3691] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x4001001C.
+[21:00:46.3691] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000414.
+[21:00:46.3691] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000414, value 0x1
+[21:00:46.3691] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010014.
+[21:00:46.3692] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010014, value 0x1
+[21:00:46.3697] [INFO] N120: Machine paused.
+[21:00:46.3903] [INFO] N120: Machine resumed.
+[21:00:46.3914] [WARNING] Unhandled write to offset 0xF4. Unhandled bits: [16] when writing value 0x0. Tags: RTCAPBEN (0x0).
+[21:00:46.3917] [WARNING] Wrong configuration of DIVN1. Assigned value 0
+[21:00:46.3918] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [16-21] when writing value 0x1C00020. Tags: DIVP1EN (0x0), DIVQ1EN (0x0), DIVR1EN (0x0), DIVP2EN (0x0), DIVQ2EN (0x0), DIVR2EN (0x0).
+[21:00:46.3940] [INFO] N120: Machine paused.
+[21:00:46.4132] [INFO] N120: Machine resumed.
+[21:00:46.4136] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [6] when writing value 0x1FF0060. Tags: PLL2RGE (0x1).
+[21:00:46.4137] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [22] when writing value 0x1BF0020. Tags: DIVP3EN (0x0).
+[21:00:46.4137] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [23] when writing value 0x17F0020. Tags: DIVQ3EN (0x0).
+[21:00:46.4138] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [24] when writing value 0xFF0020. Tags: DIVR3EN (0x0).
+[21:00:46.4141] [WARNING] Cannot modify DIVN1 while PLL1 is enabled. Ignoring write.
+[21:00:46.4141] [WARNING] Cannot modify DIVP1 while PLL1 is enabled. Ignoring write.
+[21:00:46.4142] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [6] when writing value 0x1FF0060. Tags: PLL2RGE (0x1).
+[21:00:46.4144] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [0] when writing value 0x1. Tags: FMCSEL (0x1).
+[21:00:46.4144] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [5] when writing value 0x20. Tags: QSPISEL (0x2).
+[21:00:46.4145] [WARNING] Unhandled write to offset 0x54. Unhandled bits: [20-21] when writing value 0x300000. Tags: USBSEL (0x3).
+[21:00:46.4225] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000400.
+[21:00:46.4225] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000400, value 0x0
+[21:00:46.4225] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010000.
+[21:00:46.4225] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010000, value 0x0
+[21:00:46.4225] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000428, value 0xD2EF
+[21:00:46.4225] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010028, value 0xD2EF
+[21:00:46.4225] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010018.
+[21:00:46.4225] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x4001001C.
+[21:00:46.4225] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000414.
+[21:00:46.4225] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000414, value 0x1
+[21:00:46.4225] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010014.
+[21:00:46.4225] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010014, value 0x1
+[21:00:46.4227] [WARNING] Unhandled write to offset 0xFC. Unhandled bits: [0, 4-5, 8, 12, 14, 16] when writing value 0xF0000000. Tags: MDMALPEN (0x0), DMA2DLPEN (0x0), JPGDECLPEN (0x0), FLASHLPEN (0x0), FMCLPEN (0x0), QSPILPEN (0x0), SDMMC1LPEN (0x0).
+[21:00:46.4227] [WARNING] Unhandled write to offset 0x108. Unhandled bits: [3-10, 19, 21, 24, 28-29] when writing value 0x7. Tags: GPIODLPEN (0x0), GPIOELPEN (0x0), GPIOFLPEN (0x0), GPIOGLPEN (0x0), GPIOHLPEN (0x0), GPIOILPEN (0x0), GPIOJLPEN (0x0), GPIOKLPEN (0x0), CRCLPEN (0x0), BDMALPEN (0x0), ADC3LPEN (0x0), BKPRAMLPEN (0x0), SRAM4LPEN (0x0).
+[21:00:46.4227] [WARNING] Unhandled write to offset 0x110. Unhandled bits: [0, 3-9, 11, 14-23, 27, 29-31] when writing value 0x6. Tags: TIM2LPEN (0x0), TIM5LPEN (0x0), TIM6LPEN (0x0), TIM7LPEN (0x0), TIM12LPEN (0x0), TIM13LPEN (0x0), TIM14LPEN (0x0), LPTIM1LPEN (0x0), RESERVED (0x0), SPI2LPEN (0x0), SPI3LPEN (0x0), SPDIFRXLPEN (0x0), USART2LPEN (0x0), USART3LPEN (0x0), UART4LPEN (0x0), UART5LPEN (0x0), I2C1LPEN (0x0), I2C2LPEN (0x0), I2C3LPEN (0x0), CECLPEN (0x0), DAC12LPEN (0x0), UART7LPEN (0x0), UART8LPEN (0x0).
+[21:00:46.4227] [WARNING] Unhandled write to offset 0x118. Unhandled bits: [1, 4-5, 12-13, 16-18, 20, 22-24, 28-29] when writing value 0x1. Tags: TIM8LPEN (0x0), USART1LPEN (0x0), USART6LPEN (0x0), SPI1LPEN (0x0), SPI4LPEN (0x0), TIM15LPEN (0x0), TIM16LPEN (0x0), TIM17LPEN (0x0), SAI1LPEN (0x0), SAI2LPEN (0x0), SAI3LPEN (0x0), DFSDM1LPEN (0x0), HRTIMLPEN (0x0).
+[21:00:46.4227] [WARNING] Unhandled write to offset 0x10C. Unhandled bits: [3-4, 6] when writing value 0x0. Tags: LTDCLPEN (0x0), RESERVED (0x0), WWDG1LPEN (0x0).
+[21:00:46.4227] [WARNING] Unhandled write to offset 0x100. Unhandled bits: [0-1, 5, 14-17, 25-28] when writing value 0x0. Tags: DMA1LPEN (0x0), DMA2LPEN (0x0), ADC12LPEN (0x0), RESERVED (0x0), ETH1MACLPEN (0x0), ETH1TXLPEN (0x0), ETH1RXLPEN (0x0), USB1OTGHSLPEN (0x0), USB1OTGHSULPILPEN (0x0), USB2OTGHSLPEN (0x0), USB2OTGHSULPILPEN (0x0).
+[21:00:46.4227] [WARNING] Unhandled write to offset 0x104. Unhandled bits: [0, 4-6, 9, 29-31] when writing value 0x0. Tags: DCMILPEN (0x0), CRYPTLPEN (0x0), HASHLPEN (0x0), RNGLPEN (0x0), SDMMC2LPEN (0x0), SRAM1LPEN (0x0), SRAM2LPEN (0x0), SRAM3LPEN (0x0).
+[21:00:46.4227] [WARNING] Unhandled write to offset 0x114. Unhandled bits: [1-2, 4-5, 8] when writing value 0x0. Tags: CRSLPEN (0x0), SWPLPEN (0x0), OPAMPLPEN (0x0), MDIOSLPEN (0x0), FDCANLPEN (0x0).
+[21:00:46.4227] [WARNING] Unhandled write to offset 0x11C. Unhandled bits: [1, 3, 5, 7, 9-12, 14-16, 21, 26] when writing value 0x0. Tags: SYSCFGLPEN (0x0), LPUART1LPEN (0x0), SPI6LPEN (0x0), I2C4LPEN (0x0), LPTIM2LPEN (0x0), LPTIM3LPEN (0x0), LPTIM4LPEN (0x0), LPTIM5LPEN (0x0), COMP12LPEN (0x0), VREFLPEN (0x0), RTCAPBLPEN (0x0), SAI4LPEN (0x0), RESERVED (0x0).
+[21:00:46.4370] [WARNING] usb: Unhandled write to offset 0xC. Unhandled bits: [6, 10-11] when writing value 0x40001840. Tags: Full speed serial transceiver mode select (PHYSEL) (0x1), USB turnaround time (TRDT) (0x6).
+[21:00:46.4371] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:46.4371] [WARNING] usb: Unhandled write to offset 0x38. Unhandled bits: [16] when writing value 0x10000. Tags: Power down of FS PHY (PWRDWN) (0x1).
+[21:00:46.4372] [WARNING] usb: Unhandled write to offset 0x14. Unhandled bits: [5, 26] when writing value 0x0. Tags: RESERVED (0x0), RESERVED (0x0).
+[21:00:46.4372] [WARNING] usb: Unhandled write to offset 0x800. Unhandled bits: [0-1] when writing value 0x2200003. Tags: Device speed (DSPD) (0x3).
+[21:00:46.4372] [WARNING] usb: Unhandled write to offset 0x24. Unhandled bits: [7] when writing value 0x80. Tags: Rx FIFO depth (RXFD) (0x80).
+[21:00:46.4382] [WARNING] timer1: Unhandled write to offset 0x8. Unhandled bits: [7] when writing value 0x80. Tags: Master/Slave mode (MSM) (0x1).
+[21:00:46.5407] [INFO] N120: Machine paused.
+[21:00:46.5425] [INFO] N120: Machine resumed.
+[21:00:46.5503] [INFO] N120: Machine paused.
+[21:00:46.5859] [INFO] N120: Machine resumed.
+[21:00:46.9500] [INFO] N120: Machine paused.
+[21:00:46.9513] [INFO] N120: Machine resumed.
+[21:00:47.3247] [INFO] N120: Machine paused.
+[21:00:47.3458] [INFO] N120: Machine resumed.
+[21:00:47.5871] [INFO] N120: Machine paused.
+[21:00:47.6092] [INFO] N120: Machine resumed.
+[21:00:47.8700] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:47.8701] [WARNING] usb: Unhandled write to offset 0xE00. Unhandled bits: [0] when writing value 0x200B8001. Tags: Stop PHY clock (STPPCLK) (0x1).
+[21:00:47.8716] [WARNING] timer1: Unhandled write to offset 0x8. Unhandled bits: [7] when writing value 0x80. Tags: Master/Slave mode (MSM) (0x1).
+[21:00:47.8730] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:47.8730] [WARNING] usb: Unhandled write to offset 0xE00. Unhandled bits: [0] when writing value 0x200B8001. Tags: Stop PHY clock (STPPCLK) (0x1).
+[21:00:47.8733] [WARNING] Unhandled write to offset 0x110. Unhandled bits: [2] when writing value 0xE8FFCBFB. Tags: TIM4LPEN (0x0).
+[21:00:47.8733] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000400.
+[21:00:47.8733] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000400, value 0x0
+[21:00:47.8733] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010000.
+[21:00:47.8733] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010000, value 0x0
+[21:00:47.8733] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000428, value 0x31F
+[21:00:47.8733] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010028, value 0x31F
+[21:00:47.8734] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010018.
+[21:00:47.8734] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x4001001C.
+[21:00:47.8734] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000414.
+[21:00:47.8734] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000414, value 0x1
+[21:00:47.8734] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010014.
+[21:00:47.8734] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010014, value 0x1
+[21:00:47.8740] [INFO] N120: Machine paused.
+[21:00:47.8977] [INFO] N120: Machine resumed.
+[21:00:47.8990] [WARNING] Unhandled write to offset 0xF4. Unhandled bits: [16] when writing value 0x0. Tags: RTCAPBEN (0x0).
+[21:00:47.8993] [WARNING] Wrong configuration of DIVN1. Assigned value 0
+[21:00:47.8993] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [16-21] when writing value 0x1C00020. Tags: DIVP1EN (0x0), DIVQ1EN (0x0), DIVR1EN (0x0), DIVP2EN (0x0), DIVQ2EN (0x0), DIVR2EN (0x0).
+[21:00:47.9019] [INFO] N120: Machine paused.
+[21:00:47.9206] [INFO] N120: Machine resumed.
+[21:00:47.9246] [INFO] N120: Machine paused.
+[21:00:47.9258] [INFO] N120: Machine resumed.
+[21:00:47.9261] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [6] when writing value 0x1FF0060. Tags: PLL2RGE (0x1).
+[21:00:47.9263] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [22] when writing value 0x1BF0020. Tags: DIVP3EN (0x0).
+[21:00:47.9263] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [23] when writing value 0x17F0020. Tags: DIVQ3EN (0x0).
+[21:00:47.9263] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [24] when writing value 0xFF0020. Tags: DIVR3EN (0x0).
+[21:00:47.9267] [WARNING] Cannot modify DIVN1 while PLL1 is enabled. Ignoring write.
+[21:00:47.9267] [WARNING] Cannot modify DIVP1 while PLL1 is enabled. Ignoring write.
+[21:00:47.9268] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [6] when writing value 0x1FF0060. Tags: PLL2RGE (0x1).
+[21:00:47.9270] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [0] when writing value 0x1. Tags: FMCSEL (0x1).
+[21:00:47.9270] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [5] when writing value 0x20. Tags: QSPISEL (0x2).
+[21:00:47.9271] [WARNING] Unhandled write to offset 0x54. Unhandled bits: [20-21] when writing value 0x300000. Tags: USBSEL (0x3).
+[21:00:47.9296] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000400.
+[21:00:47.9298] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000400, value 0x0
+[21:00:47.9298] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010000.
+[21:00:47.9298] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010000, value 0x0
+[21:00:47.9298] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000428, value 0xD2EF
+[21:00:47.9298] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010028, value 0xD2EF
+[21:00:47.9298] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010018.
+[21:00:47.9298] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x4001001C.
+[21:00:47.9298] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000414.
+[21:00:47.9298] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000414, value 0x1
+[21:00:47.9298] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010014.
+[21:00:47.9298] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010014, value 0x1
+[21:00:47.9299] [WARNING] Unhandled write to offset 0xFC. Unhandled bits: [0, 4-5, 8, 12, 14, 16] when writing value 0xF0000000. Tags: MDMALPEN (0x0), DMA2DLPEN (0x0), JPGDECLPEN (0x0), FLASHLPEN (0x0), FMCLPEN (0x0), QSPILPEN (0x0), SDMMC1LPEN (0x0).
+[21:00:47.9299] [WARNING] Unhandled write to offset 0x108. Unhandled bits: [3-10, 19, 21, 24, 28-29] when writing value 0x7. Tags: GPIODLPEN (0x0), GPIOELPEN (0x0), GPIOFLPEN (0x0), GPIOGLPEN (0x0), GPIOHLPEN (0x0), GPIOILPEN (0x0), GPIOJLPEN (0x0), GPIOKLPEN (0x0), CRCLPEN (0x0), BDMALPEN (0x0), ADC3LPEN (0x0), BKPRAMLPEN (0x0), SRAM4LPEN (0x0).
+[21:00:47.9299] [WARNING] Unhandled write to offset 0x110. Unhandled bits: [0, 3-9, 11, 14-23, 27, 29-31] when writing value 0x6. Tags: TIM2LPEN (0x0), TIM5LPEN (0x0), TIM6LPEN (0x0), TIM7LPEN (0x0), TIM12LPEN (0x0), TIM13LPEN (0x0), TIM14LPEN (0x0), LPTIM1LPEN (0x0), RESERVED (0x0), SPI2LPEN (0x0), SPI3LPEN (0x0), SPDIFRXLPEN (0x0), USART2LPEN (0x0), USART3LPEN (0x0), UART4LPEN (0x0), UART5LPEN (0x0), I2C1LPEN (0x0), I2C2LPEN (0x0), I2C3LPEN (0x0), CECLPEN (0x0), DAC12LPEN (0x0), UART7LPEN (0x0), UART8LPEN (0x0).
+[21:00:47.9300] [WARNING] Unhandled write to offset 0x118. Unhandled bits: [1, 4-5, 12-13, 16-18, 20, 22-24, 28-29] when writing value 0x1. Tags: TIM8LPEN (0x0), USART1LPEN (0x0), USART6LPEN (0x0), SPI1LPEN (0x0), SPI4LPEN (0x0), TIM15LPEN (0x0), TIM16LPEN (0x0), TIM17LPEN (0x0), SAI1LPEN (0x0), SAI2LPEN (0x0), SAI3LPEN (0x0), DFSDM1LPEN (0x0), HRTIMLPEN (0x0).
+[21:00:47.9300] [WARNING] Unhandled write to offset 0x10C. Unhandled bits: [3-4, 6] when writing value 0x0. Tags: LTDCLPEN (0x0), RESERVED (0x0), WWDG1LPEN (0x0).
+[21:00:47.9300] [WARNING] Unhandled write to offset 0x100. Unhandled bits: [0-1, 5, 14-17, 25-28] when writing value 0x0. Tags: DMA1LPEN (0x0), DMA2LPEN (0x0), ADC12LPEN (0x0), RESERVED (0x0), ETH1MACLPEN (0x0), ETH1TXLPEN (0x0), ETH1RXLPEN (0x0), USB1OTGHSLPEN (0x0), USB1OTGHSULPILPEN (0x0), USB2OTGHSLPEN (0x0), USB2OTGHSULPILPEN (0x0).
+[21:00:47.9300] [WARNING] Unhandled write to offset 0x104. Unhandled bits: [0, 4-6, 9, 29-31] when writing value 0x0. Tags: DCMILPEN (0x0), CRYPTLPEN (0x0), HASHLPEN (0x0), RNGLPEN (0x0), SDMMC2LPEN (0x0), SRAM1LPEN (0x0), SRAM2LPEN (0x0), SRAM3LPEN (0x0).
+[21:00:47.9300] [WARNING] Unhandled write to offset 0x114. Unhandled bits: [1-2, 4-5, 8] when writing value 0x0. Tags: CRSLPEN (0x0), SWPLPEN (0x0), OPAMPLPEN (0x0), MDIOSLPEN (0x0), FDCANLPEN (0x0).
+[21:00:47.9300] [WARNING] Unhandled write to offset 0x11C. Unhandled bits: [1, 3, 5, 7, 9-12, 14-16, 21, 26] when writing value 0x0. Tags: SYSCFGLPEN (0x0), LPUART1LPEN (0x0), SPI6LPEN (0x0), I2C4LPEN (0x0), LPTIM2LPEN (0x0), LPTIM3LPEN (0x0), LPTIM4LPEN (0x0), LPTIM5LPEN (0x0), COMP12LPEN (0x0), VREFLPEN (0x0), RTCAPBLPEN (0x0), SAI4LPEN (0x0), RESERVED (0x0).
+[21:00:47.9447] [WARNING] usb: Unhandled write to offset 0xC. Unhandled bits: [6, 10-11] when writing value 0x40001840. Tags: Full speed serial transceiver mode select (PHYSEL) (0x1), USB turnaround time (TRDT) (0x6).
+[21:00:47.9448] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:47.9448] [WARNING] usb: Unhandled write to offset 0x38. Unhandled bits: [16] when writing value 0x10000. Tags: Power down of FS PHY (PWRDWN) (0x1).
+[21:00:47.9448] [WARNING] usb: Unhandled write to offset 0x14. Unhandled bits: [5, 26] when writing value 0x0. Tags: RESERVED (0x0), RESERVED (0x0).
+[21:00:47.9448] [WARNING] usb: Unhandled write to offset 0x800. Unhandled bits: [0-1] when writing value 0x2200003. Tags: Device speed (DSPD) (0x3).
+[21:00:47.9448] [WARNING] usb: Unhandled write to offset 0x24. Unhandled bits: [7] when writing value 0x80. Tags: Rx FIFO depth (RXFD) (0x80).
+[21:00:47.9458] [WARNING] timer1: Unhandled write to offset 0x8. Unhandled bits: [7] when writing value 0x80. Tags: Master/Slave mode (MSM) (0x1).
+[21:00:48.1244] [INFO] N120: Machine paused.
+[21:00:48.1256] [INFO] N120: Machine resumed.
+[21:00:48.1765] [INFO] N120: Machine paused.
+[21:00:48.2098] [INFO] N120: Machine resumed.
+[21:00:48.5629] [INFO] N120: Machine paused.
+[21:00:48.5643] [INFO] N120: Machine resumed.
+[21:00:48.9169] [INFO] N120: Machine paused.
+[21:00:48.9415] [INFO] N120: Machine resumed.
+[21:00:49.1871] [INFO] N120: Machine paused.
+[21:00:49.2110] [INFO] N120: Machine resumed.
+[21:00:49.4470] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:49.4470] [WARNING] usb: Unhandled write to offset 0xE00. Unhandled bits: [0] when writing value 0x200B8001. Tags: Stop PHY clock (STPPCLK) (0x1).
+[21:00:49.4481] [WARNING] timer1: Unhandled write to offset 0x8. Unhandled bits: [7] when writing value 0x80. Tags: Master/Slave mode (MSM) (0x1).
+[21:00:49.4493] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:49.4493] [WARNING] usb: Unhandled write to offset 0xE00. Unhandled bits: [0] when writing value 0x200B8001. Tags: Stop PHY clock (STPPCLK) (0x1).
+[21:00:49.4496] [WARNING] Unhandled write to offset 0x110. Unhandled bits: [2] when writing value 0xE8FFCBFB. Tags: TIM4LPEN (0x0).
+[21:00:49.4496] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000400.
+[21:00:49.4496] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000400, value 0x0
+[21:00:49.4496] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010000.
+[21:00:49.4496] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010000, value 0x0
+[21:00:49.4496] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000428, value 0x31F
+[21:00:49.4496] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010028, value 0x31F
+[21:00:49.4496] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010018.
+[21:00:49.4496] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x4001001C.
+[21:00:49.4496] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000414.
+[21:00:49.4496] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000414, value 0x1
+[21:00:49.4496] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010014.
+[21:00:49.4496] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010014, value 0x1
+[21:00:49.4500] [INFO] N120: Machine paused.
+[21:00:49.4683] [INFO] N120: Machine resumed.
+[21:00:49.4694] [WARNING] Unhandled write to offset 0xF4. Unhandled bits: [16] when writing value 0x0. Tags: RTCAPBEN (0x0).
+[21:00:49.4697] [WARNING] Wrong configuration of DIVN1. Assigned value 0
+[21:00:49.4698] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [16-21] when writing value 0x1C00020. Tags: DIVP1EN (0x0), DIVQ1EN (0x0), DIVR1EN (0x0), DIVP2EN (0x0), DIVQ2EN (0x0), DIVR2EN (0x0).
+[21:00:49.4703] [INFO] N120: Machine paused.
+[21:00:49.4847] [INFO] N120: Machine resumed.
+[21:00:49.5093] [INFO] N120: Machine paused.
+[21:00:49.5105] [INFO] N120: Machine resumed.
+[21:00:49.5109] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [6] when writing value 0x1FF0060. Tags: PLL2RGE (0x1).
+[21:00:49.5110] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [22] when writing value 0x1BF0020. Tags: DIVP3EN (0x0).
+[21:00:49.5110] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [23] when writing value 0x17F0020. Tags: DIVQ3EN (0x0).
+[21:00:49.5110] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [24] when writing value 0xFF0020. Tags: DIVR3EN (0x0).
+[21:00:49.5114] [WARNING] Cannot modify DIVN1 while PLL1 is enabled. Ignoring write.
+[21:00:49.5114] [WARNING] Cannot modify DIVP1 while PLL1 is enabled. Ignoring write.
+[21:00:49.5115] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [6] when writing value 0x1FF0060. Tags: PLL2RGE (0x1).
+[21:00:49.5117] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [0] when writing value 0x1. Tags: FMCSEL (0x1).
+[21:00:49.5118] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [5] when writing value 0x20. Tags: QSPISEL (0x2).
+[21:00:49.5119] [WARNING] Unhandled write to offset 0x54. Unhandled bits: [20-21] when writing value 0x300000. Tags: USBSEL (0x3).
+[21:00:49.5163] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000400.
+[21:00:49.5163] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000400, value 0x0
+[21:00:49.5163] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010000.
+[21:00:49.5163] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010000, value 0x0
+[21:00:49.5163] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000428, value 0xD2EF
+[21:00:49.5163] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010028, value 0xD2EF
+[21:00:49.5163] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010018.
+[21:00:49.5163] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x4001001C.
+[21:00:49.5163] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000414.
+[21:00:49.5163] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000414, value 0x1
+[21:00:49.5163] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010014.
+[21:00:49.5164] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010014, value 0x1
+[21:00:49.5165] [WARNING] Unhandled write to offset 0xFC. Unhandled bits: [0, 4-5, 8, 12, 14, 16] when writing value 0xF0000000. Tags: MDMALPEN (0x0), DMA2DLPEN (0x0), JPGDECLPEN (0x0), FLASHLPEN (0x0), FMCLPEN (0x0), QSPILPEN (0x0), SDMMC1LPEN (0x0).
+[21:00:49.5165] [WARNING] Unhandled write to offset 0x108. Unhandled bits: [3-10, 19, 21, 24, 28-29] when writing value 0x7. Tags: GPIODLPEN (0x0), GPIOELPEN (0x0), GPIOFLPEN (0x0), GPIOGLPEN (0x0), GPIOHLPEN (0x0), GPIOILPEN (0x0), GPIOJLPEN (0x0), GPIOKLPEN (0x0), CRCLPEN (0x0), BDMALPEN (0x0), ADC3LPEN (0x0), BKPRAMLPEN (0x0), SRAM4LPEN (0x0).
+[21:00:49.5165] [WARNING] Unhandled write to offset 0x110. Unhandled bits: [0, 3-9, 11, 14-23, 27, 29-31] when writing value 0x6. Tags: TIM2LPEN (0x0), TIM5LPEN (0x0), TIM6LPEN (0x0), TIM7LPEN (0x0), TIM12LPEN (0x0), TIM13LPEN (0x0), TIM14LPEN (0x0), LPTIM1LPEN (0x0), RESERVED (0x0), SPI2LPEN (0x0), SPI3LPEN (0x0), SPDIFRXLPEN (0x0), USART2LPEN (0x0), USART3LPEN (0x0), UART4LPEN (0x0), UART5LPEN (0x0), I2C1LPEN (0x0), I2C2LPEN (0x0), I2C3LPEN (0x0), CECLPEN (0x0), DAC12LPEN (0x0), UART7LPEN (0x0), UART8LPEN (0x0).
+[21:00:49.5165] [WARNING] Unhandled write to offset 0x118. Unhandled bits: [1, 4-5, 12-13, 16-18, 20, 22-24, 28-29] when writing value 0x1. Tags: TIM8LPEN (0x0), USART1LPEN (0x0), USART6LPEN (0x0), SPI1LPEN (0x0), SPI4LPEN (0x0), TIM15LPEN (0x0), TIM16LPEN (0x0), TIM17LPEN (0x0), SAI1LPEN (0x0), SAI2LPEN (0x0), SAI3LPEN (0x0), DFSDM1LPEN (0x0), HRTIMLPEN (0x0).
+[21:00:49.5165] [WARNING] Unhandled write to offset 0x10C. Unhandled bits: [3-4, 6] when writing value 0x0. Tags: LTDCLPEN (0x0), RESERVED (0x0), WWDG1LPEN (0x0).
+[21:00:49.5166] [WARNING] Unhandled write to offset 0x100. Unhandled bits: [0-1, 5, 14-17, 25-28] when writing value 0x0. Tags: DMA1LPEN (0x0), DMA2LPEN (0x0), ADC12LPEN (0x0), RESERVED (0x0), ETH1MACLPEN (0x0), ETH1TXLPEN (0x0), ETH1RXLPEN (0x0), USB1OTGHSLPEN (0x0), USB1OTGHSULPILPEN (0x0), USB2OTGHSLPEN (0x0), USB2OTGHSULPILPEN (0x0).
+[21:00:49.5166] [WARNING] Unhandled write to offset 0x104. Unhandled bits: [0, 4-6, 9, 29-31] when writing value 0x0. Tags: DCMILPEN (0x0), CRYPTLPEN (0x0), HASHLPEN (0x0), RNGLPEN (0x0), SDMMC2LPEN (0x0), SRAM1LPEN (0x0), SRAM2LPEN (0x0), SRAM3LPEN (0x0).
+[21:00:49.5166] [WARNING] Unhandled write to offset 0x114. Unhandled bits: [1-2, 4-5, 8] when writing value 0x0. Tags: CRSLPEN (0x0), SWPLPEN (0x0), OPAMPLPEN (0x0), MDIOSLPEN (0x0), FDCANLPEN (0x0).
+[21:00:49.5166] [WARNING] Unhandled write to offset 0x11C. Unhandled bits: [1, 3, 5, 7, 9-12, 14-16, 21, 26] when writing value 0x0. Tags: SYSCFGLPEN (0x0), LPUART1LPEN (0x0), SPI6LPEN (0x0), I2C4LPEN (0x0), LPTIM2LPEN (0x0), LPTIM3LPEN (0x0), LPTIM4LPEN (0x0), LPTIM5LPEN (0x0), COMP12LPEN (0x0), VREFLPEN (0x0), RTCAPBLPEN (0x0), SAI4LPEN (0x0), RESERVED (0x0).
+[21:00:49.5319] [WARNING] usb: Unhandled write to offset 0xC. Unhandled bits: [6, 10-11] when writing value 0x40001840. Tags: Full speed serial transceiver mode select (PHYSEL) (0x1), USB turnaround time (TRDT) (0x6).
+[21:00:49.5319] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:49.5319] [WARNING] usb: Unhandled write to offset 0x38. Unhandled bits: [16] when writing value 0x10000. Tags: Power down of FS PHY (PWRDWN) (0x1).
+[21:00:49.5320] [WARNING] usb: Unhandled write to offset 0x14. Unhandled bits: [5, 26] when writing value 0x0. Tags: RESERVED (0x0), RESERVED (0x0).
+[21:00:49.5322] [WARNING] usb: Unhandled write to offset 0x800. Unhandled bits: [0-1] when writing value 0x2200003. Tags: Device speed (DSPD) (0x3).
+[21:00:49.5322] [WARNING] usb: Unhandled write to offset 0x24. Unhandled bits: [7] when writing value 0x80. Tags: Rx FIFO depth (RXFD) (0x80).
+[21:00:49.5333] [WARNING] timer1: Unhandled write to offset 0x8. Unhandled bits: [7] when writing value 0x80. Tags: Master/Slave mode (MSM) (0x1).
+[21:00:49.6726] [INFO] N120: Machine paused.
+[21:00:49.6738] [INFO] N120: Machine resumed.
+[21:00:49.6787] [INFO] N120: Machine paused.
+[21:00:49.7069] [INFO] N120: Machine resumed.
+[21:00:50.0718] [INFO] N120: Machine paused.
+[21:00:50.0752] [INFO] N120: Machine resumed.
+[21:00:50.4454] [INFO] N120: Machine paused.
+[21:00:50.4537] [INFO] N120: Machine resumed.
+[21:00:50.6600] [INFO] N120: Machine paused.
+[21:00:50.6812] [INFO] N120: Machine resumed.
+[21:00:50.9351] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:50.9352] [WARNING] usb: Unhandled write to offset 0xE00. Unhandled bits: [0] when writing value 0x200B8001. Tags: Stop PHY clock (STPPCLK) (0x1).
+[21:00:50.9366] [WARNING] timer1: Unhandled write to offset 0x8. Unhandled bits: [7] when writing value 0x80. Tags: Master/Slave mode (MSM) (0x1).
+[21:00:50.9377] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:50.9377] [WARNING] usb: Unhandled write to offset 0xE00. Unhandled bits: [0] when writing value 0x200B8001. Tags: Stop PHY clock (STPPCLK) (0x1).
+[21:00:50.9380] [WARNING] Unhandled write to offset 0x110. Unhandled bits: [2] when writing value 0xE8FFCBFB. Tags: TIM4LPEN (0x0).
+[21:00:50.9380] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000400.
+[21:00:50.9380] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000400, value 0x0
+[21:00:50.9380] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010000.
+[21:00:50.9380] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010000, value 0x0
+[21:00:50.9380] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000428, value 0x31F
+[21:00:50.9380] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010028, value 0x31F
+[21:00:50.9380] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010018.
+[21:00:50.9380] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x4001001C.
+[21:00:50.9380] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000414.
+[21:00:50.9380] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000414, value 0x1
+[21:00:50.9380] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010014.
+[21:00:50.9380] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010014, value 0x1
+[21:00:50.9384] [INFO] N120: Machine paused.
+[21:00:50.9537] [INFO] N120: Machine resumed.
+[21:00:50.9543] [WARNING] Unhandled write to offset 0xF4. Unhandled bits: [16] when writing value 0x0. Tags: RTCAPBEN (0x0).
+[21:00:50.9544] [WARNING] Wrong configuration of DIVN1. Assigned value 0
+[21:00:50.9544] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [16-21] when writing value 0x1C00020. Tags: DIVP1EN (0x0), DIVQ1EN (0x0), DIVR1EN (0x0), DIVP2EN (0x0), DIVQ2EN (0x0), DIVR2EN (0x0).
+[21:00:50.9548] [INFO] N120: Machine paused.
+[21:00:50.9630] [INFO] N120: Machine resumed.
+[21:00:50.9633] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [6] when writing value 0x1FF0060. Tags: PLL2RGE (0x1).
+[21:00:50.9633] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [22] when writing value 0x1BF0020. Tags: DIVP3EN (0x0).
+[21:00:50.9633] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [23] when writing value 0x17F0020. Tags: DIVQ3EN (0x0).
+[21:00:50.9633] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [24] when writing value 0xFF0020. Tags: DIVR3EN (0x0).
+[21:00:50.9635] [WARNING] Cannot modify DIVN1 while PLL1 is enabled. Ignoring write.
+[21:00:50.9635] [WARNING] Cannot modify DIVP1 while PLL1 is enabled. Ignoring write.
+[21:00:50.9635] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [6] when writing value 0x1FF0060. Tags: PLL2RGE (0x1).
+[21:00:50.9636] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [0] when writing value 0x1. Tags: FMCSEL (0x1).
+[21:00:50.9636] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [5] when writing value 0x20. Tags: QSPISEL (0x2).
+[21:00:50.9637] [WARNING] Unhandled write to offset 0x54. Unhandled bits: [20-21] when writing value 0x300000. Tags: USBSEL (0x3).
+[21:00:50.9648] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000400.
+[21:00:50.9648] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000400, value 0x0
+[21:00:50.9648] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010000.
+[21:00:50.9648] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010000, value 0x0
+[21:00:50.9648] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000428, value 0xD2EF
+[21:00:50.9648] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010028, value 0xD2EF
+[21:00:50.9649] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010018.
+[21:00:50.9649] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x4001001C.
+[21:00:50.9649] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000414.
+[21:00:50.9649] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000414, value 0x1
+[21:00:50.9649] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010014.
+[21:00:50.9649] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010014, value 0x1
+[21:00:50.9649] [WARNING] Unhandled write to offset 0xFC. Unhandled bits: [0, 4-5, 8, 12, 14, 16] when writing value 0xF0000000. Tags: MDMALPEN (0x0), DMA2DLPEN (0x0), JPGDECLPEN (0x0), FLASHLPEN (0x0), FMCLPEN (0x0), QSPILPEN (0x0), SDMMC1LPEN (0x0).
+[21:00:50.9649] [WARNING] Unhandled write to offset 0x108. Unhandled bits: [3-10, 19, 21, 24, 28-29] when writing value 0x7. Tags: GPIODLPEN (0x0), GPIOELPEN (0x0), GPIOFLPEN (0x0), GPIOGLPEN (0x0), GPIOHLPEN (0x0), GPIOILPEN (0x0), GPIOJLPEN (0x0), GPIOKLPEN (0x0), CRCLPEN (0x0), BDMALPEN (0x0), ADC3LPEN (0x0), BKPRAMLPEN (0x0), SRAM4LPEN (0x0).
+[21:00:50.9649] [WARNING] Unhandled write to offset 0x110. Unhandled bits: [0, 3-9, 11, 14-23, 27, 29-31] when writing value 0x6. Tags: TIM2LPEN (0x0), TIM5LPEN (0x0), TIM6LPEN (0x0), TIM7LPEN (0x0), TIM12LPEN (0x0), TIM13LPEN (0x0), TIM14LPEN (0x0), LPTIM1LPEN (0x0), RESERVED (0x0), SPI2LPEN (0x0), SPI3LPEN (0x0), SPDIFRXLPEN (0x0), USART2LPEN (0x0), USART3LPEN (0x0), UART4LPEN (0x0), UART5LPEN (0x0), I2C1LPEN (0x0), I2C2LPEN (0x0), I2C3LPEN (0x0), CECLPEN (0x0), DAC12LPEN (0x0), UART7LPEN (0x0), UART8LPEN (0x0).
+[21:00:50.9649] [WARNING] Unhandled write to offset 0x118. Unhandled bits: [1, 4-5, 12-13, 16-18, 20, 22-24, 28-29] when writing value 0x1. Tags: TIM8LPEN (0x0), USART1LPEN (0x0), USART6LPEN (0x0), SPI1LPEN (0x0), SPI4LPEN (0x0), TIM15LPEN (0x0), TIM16LPEN (0x0), TIM17LPEN (0x0), SAI1LPEN (0x0), SAI2LPEN (0x0), SAI3LPEN (0x0), DFSDM1LPEN (0x0), HRTIMLPEN (0x0).
+[21:00:50.9649] [WARNING] Unhandled write to offset 0x10C. Unhandled bits: [3-4, 6] when writing value 0x0. Tags: LTDCLPEN (0x0), RESERVED (0x0), WWDG1LPEN (0x0).
+[21:00:50.9649] [WARNING] Unhandled write to offset 0x100. Unhandled bits: [0-1, 5, 14-17, 25-28] when writing value 0x0. Tags: DMA1LPEN (0x0), DMA2LPEN (0x0), ADC12LPEN (0x0), RESERVED (0x0), ETH1MACLPEN (0x0), ETH1TXLPEN (0x0), ETH1RXLPEN (0x0), USB1OTGHSLPEN (0x0), USB1OTGHSULPILPEN (0x0), USB2OTGHSLPEN (0x0), USB2OTGHSULPILPEN (0x0).
+[21:00:50.9649] [WARNING] Unhandled write to offset 0x104. Unhandled bits: [0, 4-6, 9, 29-31] when writing value 0x0. Tags: DCMILPEN (0x0), CRYPTLPEN (0x0), HASHLPEN (0x0), RNGLPEN (0x0), SDMMC2LPEN (0x0), SRAM1LPEN (0x0), SRAM2LPEN (0x0), SRAM3LPEN (0x0).
+[21:00:50.9649] [WARNING] Unhandled write to offset 0x114. Unhandled bits: [1-2, 4-5, 8] when writing value 0x0. Tags: CRSLPEN (0x0), SWPLPEN (0x0), OPAMPLPEN (0x0), MDIOSLPEN (0x0), FDCANLPEN (0x0).
+[21:00:50.9650] [WARNING] Unhandled write to offset 0x11C. Unhandled bits: [1, 3, 5, 7, 9-12, 14-16, 21, 26] when writing value 0x0. Tags: SYSCFGLPEN (0x0), LPUART1LPEN (0x0), SPI6LPEN (0x0), I2C4LPEN (0x0), LPTIM2LPEN (0x0), LPTIM3LPEN (0x0), LPTIM4LPEN (0x0), LPTIM5LPEN (0x0), COMP12LPEN (0x0), VREFLPEN (0x0), RTCAPBLPEN (0x0), SAI4LPEN (0x0), RESERVED (0x0).
+[21:00:50.9785] [WARNING] usb: Unhandled write to offset 0xC. Unhandled bits: [6, 10-11] when writing value 0x40001840. Tags: Full speed serial transceiver mode select (PHYSEL) (0x1), USB turnaround time (TRDT) (0x6).
+[21:00:50.9786] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:50.9786] [WARNING] usb: Unhandled write to offset 0x38. Unhandled bits: [16] when writing value 0x10000. Tags: Power down of FS PHY (PWRDWN) (0x1).
+[21:00:50.9786] [WARNING] usb: Unhandled write to offset 0x14. Unhandled bits: [5, 26] when writing value 0x0. Tags: RESERVED (0x0), RESERVED (0x0).
+[21:00:50.9786] [WARNING] usb: Unhandled write to offset 0x800. Unhandled bits: [0-1] when writing value 0x2200003. Tags: Device speed (DSPD) (0x3).
+[21:00:50.9786] [WARNING] usb: Unhandled write to offset 0x24. Unhandled bits: [7] when writing value 0x80. Tags: Rx FIFO depth (RXFD) (0x80).
+[21:00:50.9795] [WARNING] timer1: Unhandled write to offset 0x8. Unhandled bits: [7] when writing value 0x80. Tags: Master/Slave mode (MSM) (0x1).
+[21:00:51.0318] [INFO] N120: Machine paused.
+[21:00:51.0334] [INFO] N120: Machine resumed.
+[21:00:51.0395] [INFO] N120: Machine paused.
+[21:00:51.0747] [INFO] N120: Machine resumed.
+[21:00:51.4266] [INFO] N120: Machine paused.
+[21:00:51.4282] [INFO] N120: Machine resumed.
+[21:00:51.7129] [INFO] N120: Machine paused.
+[21:00:51.7327] [INFO] N120: Machine resumed.
+[21:00:51.9901] [INFO] N120: Machine paused.
+[21:00:52.0074] [INFO] N120: Machine resumed.
+[21:00:52.2392] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:52.2393] [WARNING] usb: Unhandled write to offset 0xE00. Unhandled bits: [0] when writing value 0x200B8001. Tags: Stop PHY clock (STPPCLK) (0x1).
+[21:00:52.2409] [WARNING] timer1: Unhandled write to offset 0x8. Unhandled bits: [7] when writing value 0x80. Tags: Master/Slave mode (MSM) (0x1).
+[21:00:52.2419] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:52.2420] [WARNING] usb: Unhandled write to offset 0xE00. Unhandled bits: [0] when writing value 0x200B8001. Tags: Stop PHY clock (STPPCLK) (0x1).
+[21:00:52.2423] [WARNING] Unhandled write to offset 0x110. Unhandled bits: [2] when writing value 0xE8FFCBFB. Tags: TIM4LPEN (0x0).
+[21:00:52.2424] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000400.
+[21:00:52.2424] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000400, value 0x0
+[21:00:52.2424] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010000.
+[21:00:52.2424] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010000, value 0x0
+[21:00:52.2424] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000428, value 0x31F
+[21:00:52.2424] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010028, value 0x31F
+[21:00:52.2424] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010018.
+[21:00:52.2424] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x4001001C.
+[21:00:52.2424] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000414.
+[21:00:52.2424] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000414, value 0x1
+[21:00:52.2424] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010014.
+[21:00:52.2424] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010014, value 0x1
+[21:00:52.2428] [INFO] N120: Machine paused.
+[21:00:52.2636] [INFO] N120: Machine resumed.
+[21:00:52.2647] [WARNING] Unhandled write to offset 0xF4. Unhandled bits: [16] when writing value 0x0. Tags: RTCAPBEN (0x0).
+[21:00:52.2650] [WARNING] Wrong configuration of DIVN1. Assigned value 0
+[21:00:52.2650] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [16-21] when writing value 0x1C00020. Tags: DIVP1EN (0x0), DIVQ1EN (0x0), DIVR1EN (0x0), DIVP2EN (0x0), DIVQ2EN (0x0), DIVR2EN (0x0).
+[21:00:52.2670] [INFO] N120: Machine paused.
+[21:00:52.2903] [INFO] N120: Machine resumed.
+[21:00:52.3209] [INFO] N120: Machine paused.
+[21:00:52.3222] [INFO] N120: Machine resumed.
+[21:00:52.3227] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [6] when writing value 0x1FF0060. Tags: PLL2RGE (0x1).
+[21:00:52.3228] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [22] when writing value 0x1BF0020. Tags: DIVP3EN (0x0).
+[21:00:52.3228] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [23] when writing value 0x17F0020. Tags: DIVQ3EN (0x0).
+[21:00:52.3228] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [24] when writing value 0xFF0020. Tags: DIVR3EN (0x0).
+[21:00:52.3232] [WARNING] Cannot modify DIVN1 while PLL1 is enabled. Ignoring write.
+[21:00:52.3232] [WARNING] Cannot modify DIVP1 while PLL1 is enabled. Ignoring write.
+[21:00:52.3233] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [6] when writing value 0x1FF0060. Tags: PLL2RGE (0x1).
+[21:00:52.3235] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [0] when writing value 0x1. Tags: FMCSEL (0x1).
+[21:00:52.3235] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [5] when writing value 0x20. Tags: QSPISEL (0x2).
+[21:00:52.3236] [WARNING] Unhandled write to offset 0x54. Unhandled bits: [20-21] when writing value 0x300000. Tags: USBSEL (0x3).
+[21:00:52.3259] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000400.
+[21:00:52.3259] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000400, value 0x0
+[21:00:52.3259] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010000.
+[21:00:52.3259] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010000, value 0x0
+[21:00:52.3259] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000428, value 0xD2EF
+[21:00:52.3260] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010028, value 0xD2EF
+[21:00:52.3260] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010018.
+[21:00:52.3260] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x4001001C.
+[21:00:52.3260] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000414.
+[21:00:52.3260] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000414, value 0x1
+[21:00:52.3260] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010014.
+[21:00:52.3260] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010014, value 0x1
+[21:00:52.3261] [WARNING] Unhandled write to offset 0xFC. Unhandled bits: [0, 4-5, 8, 12, 14, 16] when writing value 0xF0000000. Tags: MDMALPEN (0x0), DMA2DLPEN (0x0), JPGDECLPEN (0x0), FLASHLPEN (0x0), FMCLPEN (0x0), QSPILPEN (0x0), SDMMC1LPEN (0x0).
+[21:00:52.3261] [WARNING] Unhandled write to offset 0x108. Unhandled bits: [3-10, 19, 21, 24, 28-29] when writing value 0x7. Tags: GPIODLPEN (0x0), GPIOELPEN (0x0), GPIOFLPEN (0x0), GPIOGLPEN (0x0), GPIOHLPEN (0x0), GPIOILPEN (0x0), GPIOJLPEN (0x0), GPIOKLPEN (0x0), CRCLPEN (0x0), BDMALPEN (0x0), ADC3LPEN (0x0), BKPRAMLPEN (0x0), SRAM4LPEN (0x0).
+[21:00:52.3261] [WARNING] Unhandled write to offset 0x110. Unhandled bits: [0, 3-9, 11, 14-23, 27, 29-31] when writing value 0x6. Tags: TIM2LPEN (0x0), TIM5LPEN (0x0), TIM6LPEN (0x0), TIM7LPEN (0x0), TIM12LPEN (0x0), TIM13LPEN (0x0), TIM14LPEN (0x0), LPTIM1LPEN (0x0), RESERVED (0x0), SPI2LPEN (0x0), SPI3LPEN (0x0), SPDIFRXLPEN (0x0), USART2LPEN (0x0), USART3LPEN (0x0), UART4LPEN (0x0), UART5LPEN (0x0), I2C1LPEN (0x0), I2C2LPEN (0x0), I2C3LPEN (0x0), CECLPEN (0x0), DAC12LPEN (0x0), UART7LPEN (0x0), UART8LPEN (0x0).
+[21:00:52.3261] [WARNING] Unhandled write to offset 0x118. Unhandled bits: [1, 4-5, 12-13, 16-18, 20, 22-24, 28-29] when writing value 0x1. Tags: TIM8LPEN (0x0), USART1LPEN (0x0), USART6LPEN (0x0), SPI1LPEN (0x0), SPI4LPEN (0x0), TIM15LPEN (0x0), TIM16LPEN (0x0), TIM17LPEN (0x0), SAI1LPEN (0x0), SAI2LPEN (0x0), SAI3LPEN (0x0), DFSDM1LPEN (0x0), HRTIMLPEN (0x0).
+[21:00:52.3261] [WARNING] Unhandled write to offset 0x10C. Unhandled bits: [3-4, 6] when writing value 0x0. Tags: LTDCLPEN (0x0), RESERVED (0x0), WWDG1LPEN (0x0).
+[21:00:52.3261] [WARNING] Unhandled write to offset 0x100. Unhandled bits: [0-1, 5, 14-17, 25-28] when writing value 0x0. Tags: DMA1LPEN (0x0), DMA2LPEN (0x0), ADC12LPEN (0x0), RESERVED (0x0), ETH1MACLPEN (0x0), ETH1TXLPEN (0x0), ETH1RXLPEN (0x0), USB1OTGHSLPEN (0x0), USB1OTGHSULPILPEN (0x0), USB2OTGHSLPEN (0x0), USB2OTGHSULPILPEN (0x0).
+[21:00:52.3262] [WARNING] Unhandled write to offset 0x104. Unhandled bits: [0, 4-6, 9, 29-31] when writing value 0x0. Tags: DCMILPEN (0x0), CRYPTLPEN (0x0), HASHLPEN (0x0), RNGLPEN (0x0), SDMMC2LPEN (0x0), SRAM1LPEN (0x0), SRAM2LPEN (0x0), SRAM3LPEN (0x0).
+[21:00:52.3262] [WARNING] Unhandled write to offset 0x114. Unhandled bits: [1-2, 4-5, 8] when writing value 0x0. Tags: CRSLPEN (0x0), SWPLPEN (0x0), OPAMPLPEN (0x0), MDIOSLPEN (0x0), FDCANLPEN (0x0).
+[21:00:52.3262] [WARNING] Unhandled write to offset 0x11C. Unhandled bits: [1, 3, 5, 7, 9-12, 14-16, 21, 26] when writing value 0x0. Tags: SYSCFGLPEN (0x0), LPUART1LPEN (0x0), SPI6LPEN (0x0), I2C4LPEN (0x0), LPTIM2LPEN (0x0), LPTIM3LPEN (0x0), LPTIM4LPEN (0x0), LPTIM5LPEN (0x0), COMP12LPEN (0x0), VREFLPEN (0x0), RTCAPBLPEN (0x0), SAI4LPEN (0x0), RESERVED (0x0).
+[21:00:52.3471] [WARNING] usb: Unhandled write to offset 0xC. Unhandled bits: [6, 10-11] when writing value 0x40001840. Tags: Full speed serial transceiver mode select (PHYSEL) (0x1), USB turnaround time (TRDT) (0x6).
+[21:00:52.3471] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:52.3472] [WARNING] usb: Unhandled write to offset 0x38. Unhandled bits: [16] when writing value 0x10000. Tags: Power down of FS PHY (PWRDWN) (0x1).
+[21:00:52.3472] [WARNING] usb: Unhandled write to offset 0x14. Unhandled bits: [5, 26] when writing value 0x0. Tags: RESERVED (0x0), RESERVED (0x0).
+[21:00:52.3472] [WARNING] usb: Unhandled write to offset 0x800. Unhandled bits: [0-1] when writing value 0x2200003. Tags: Device speed (DSPD) (0x3).
+[21:00:52.3472] [WARNING] usb: Unhandled write to offset 0x24. Unhandled bits: [7] when writing value 0x80. Tags: Rx FIFO depth (RXFD) (0x80).
+[21:00:52.3481] [WARNING] timer1: Unhandled write to offset 0x8. Unhandled bits: [7] when writing value 0x80. Tags: Master/Slave mode (MSM) (0x1).
+[21:00:52.4300] [INFO] N120: Machine paused.
+[21:00:52.4318] [INFO] N120: Machine resumed.
+[21:00:52.4395] [INFO] N120: Machine paused.
+[21:00:52.4842] [INFO] N120: Machine resumed.
+[21:00:52.8487] [INFO] N120: Machine paused.
+[21:00:52.8525] [INFO] N120: Machine resumed.
+[21:00:53.2073] [INFO] N120: Machine paused.
+[21:00:53.2258] [INFO] N120: Machine resumed.
+[21:00:53.4791] [INFO] N120: Machine paused.
+[21:00:53.4987] [INFO] N120: Machine resumed.
+[21:00:53.7503] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:53.7504] [WARNING] usb: Unhandled write to offset 0xE00. Unhandled bits: [0] when writing value 0x200B8001. Tags: Stop PHY clock (STPPCLK) (0x1).
+[21:00:53.7518] [WARNING] timer1: Unhandled write to offset 0x8. Unhandled bits: [7] when writing value 0x80. Tags: Master/Slave mode (MSM) (0x1).
+[21:00:53.7529] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:53.7529] [WARNING] usb: Unhandled write to offset 0xE00. Unhandled bits: [0] when writing value 0x200B8001. Tags: Stop PHY clock (STPPCLK) (0x1).
+[21:00:53.7532] [WARNING] Unhandled write to offset 0x110. Unhandled bits: [2] when writing value 0xE8FFCBFB. Tags: TIM4LPEN (0x0).
+[21:00:53.7532] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000400.
+[21:00:53.7532] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000400, value 0x0
+[21:00:53.7532] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010000.
+[21:00:53.7532] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010000, value 0x0
+[21:00:53.7532] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000428, value 0x31F
+[21:00:53.7532] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010028, value 0x31F
+[21:00:53.7532] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010018.
+[21:00:53.7532] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x4001001C.
+[21:00:53.7532] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000414.
+[21:00:53.7532] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000414, value 0x1
+[21:00:53.7532] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010014.
+[21:00:53.7532] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010014, value 0x1
+[21:00:53.7536] [INFO] N120: Machine paused.
+[21:00:53.7632] [INFO] N120: Machine resumed.
+[21:00:53.7637] [WARNING] Unhandled write to offset 0xF4. Unhandled bits: [16] when writing value 0x0. Tags: RTCAPBEN (0x0).
+[21:00:53.7639] [WARNING] Wrong configuration of DIVN1. Assigned value 0
+[21:00:53.7639] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [16-21] when writing value 0x1C00020. Tags: DIVP1EN (0x0), DIVQ1EN (0x0), DIVR1EN (0x0), DIVP2EN (0x0), DIVQ2EN (0x0), DIVR2EN (0x0).
+[21:00:53.7646] [INFO] N120: Machine paused.
+[21:00:53.7735] [INFO] N120: Machine resumed.
+[21:00:53.7761] [INFO] N120: Machine paused.
+[21:00:53.7768] [INFO] N120: Machine resumed.
+[21:00:53.7769] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [6] when writing value 0x1FF0060. Tags: PLL2RGE (0x1).
+[21:00:53.7770] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [22] when writing value 0x1BF0020. Tags: DIVP3EN (0x0).
+[21:00:53.7770] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [23] when writing value 0x17F0020. Tags: DIVQ3EN (0x0).
+[21:00:53.7770] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [24] when writing value 0xFF0020. Tags: DIVR3EN (0x0).
+[21:00:53.7772] [WARNING] Cannot modify DIVN1 while PLL1 is enabled. Ignoring write.
+[21:00:53.7772] [WARNING] Cannot modify DIVP1 while PLL1 is enabled. Ignoring write.
+[21:00:53.7772] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [6] when writing value 0x1FF0060. Tags: PLL2RGE (0x1).
+[21:00:53.7773] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [0] when writing value 0x1. Tags: FMCSEL (0x1).
+[21:00:53.7773] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [5] when writing value 0x20. Tags: QSPISEL (0x2).
+[21:00:53.7773] [WARNING] Unhandled write to offset 0x54. Unhandled bits: [20-21] when writing value 0x300000. Tags: USBSEL (0x3).
+[21:00:53.7785] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000400.
+[21:00:53.7785] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000400, value 0x0
+[21:00:53.7785] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010000.
+[21:00:53.7785] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010000, value 0x0
+[21:00:53.7785] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000428, value 0xD2EF
+[21:00:53.7785] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010028, value 0xD2EF
+[21:00:53.7785] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010018.
+[21:00:53.7785] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x4001001C.
+[21:00:53.7785] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000414.
+[21:00:53.7785] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000414, value 0x1
+[21:00:53.7785] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010014.
+[21:00:53.7785] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010014, value 0x1
+[21:00:53.7786] [WARNING] Unhandled write to offset 0xFC. Unhandled bits: [0, 4-5, 8, 12, 14, 16] when writing value 0xF0000000. Tags: MDMALPEN (0x0), DMA2DLPEN (0x0), JPGDECLPEN (0x0), FLASHLPEN (0x0), FMCLPEN (0x0), QSPILPEN (0x0), SDMMC1LPEN (0x0).
+[21:00:53.7786] [WARNING] Unhandled write to offset 0x108. Unhandled bits: [3-10, 19, 21, 24, 28-29] when writing value 0x7. Tags: GPIODLPEN (0x0), GPIOELPEN (0x0), GPIOFLPEN (0x0), GPIOGLPEN (0x0), GPIOHLPEN (0x0), GPIOILPEN (0x0), GPIOJLPEN (0x0), GPIOKLPEN (0x0), CRCLPEN (0x0), BDMALPEN (0x0), ADC3LPEN (0x0), BKPRAMLPEN (0x0), SRAM4LPEN (0x0).
+[21:00:53.7786] [WARNING] Unhandled write to offset 0x110. Unhandled bits: [0, 3-9, 11, 14-23, 27, 29-31] when writing value 0x6. Tags: TIM2LPEN (0x0), TIM5LPEN (0x0), TIM6LPEN (0x0), TIM7LPEN (0x0), TIM12LPEN (0x0), TIM13LPEN (0x0), TIM14LPEN (0x0), LPTIM1LPEN (0x0), RESERVED (0x0), SPI2LPEN (0x0), SPI3LPEN (0x0), SPDIFRXLPEN (0x0), USART2LPEN (0x0), USART3LPEN (0x0), UART4LPEN (0x0), UART5LPEN (0x0), I2C1LPEN (0x0), I2C2LPEN (0x0), I2C3LPEN (0x0), CECLPEN (0x0), DAC12LPEN (0x0), UART7LPEN (0x0), UART8LPEN (0x0).
+[21:00:53.7786] [WARNING] Unhandled write to offset 0x118. Unhandled bits: [1, 4-5, 12-13, 16-18, 20, 22-24, 28-29] when writing value 0x1. Tags: TIM8LPEN (0x0), USART1LPEN (0x0), USART6LPEN (0x0), SPI1LPEN (0x0), SPI4LPEN (0x0), TIM15LPEN (0x0), TIM16LPEN (0x0), TIM17LPEN (0x0), SAI1LPEN (0x0), SAI2LPEN (0x0), SAI3LPEN (0x0), DFSDM1LPEN (0x0), HRTIMLPEN (0x0).
+[21:00:53.7786] [WARNING] Unhandled write to offset 0x10C. Unhandled bits: [3-4, 6] when writing value 0x0. Tags: LTDCLPEN (0x0), RESERVED (0x0), WWDG1LPEN (0x0).
+[21:00:53.7786] [WARNING] Unhandled write to offset 0x100. Unhandled bits: [0-1, 5, 14-17, 25-28] when writing value 0x0. Tags: DMA1LPEN (0x0), DMA2LPEN (0x0), ADC12LPEN (0x0), RESERVED (0x0), ETH1MACLPEN (0x0), ETH1TXLPEN (0x0), ETH1RXLPEN (0x0), USB1OTGHSLPEN (0x0), USB1OTGHSULPILPEN (0x0), USB2OTGHSLPEN (0x0), USB2OTGHSULPILPEN (0x0).
+[21:00:53.7786] [WARNING] Unhandled write to offset 0x104. Unhandled bits: [0, 4-6, 9, 29-31] when writing value 0x0. Tags: DCMILPEN (0x0), CRYPTLPEN (0x0), HASHLPEN (0x0), RNGLPEN (0x0), SDMMC2LPEN (0x0), SRAM1LPEN (0x0), SRAM2LPEN (0x0), SRAM3LPEN (0x0).
+[21:00:53.7786] [WARNING] Unhandled write to offset 0x114. Unhandled bits: [1-2, 4-5, 8] when writing value 0x0. Tags: CRSLPEN (0x0), SWPLPEN (0x0), OPAMPLPEN (0x0), MDIOSLPEN (0x0), FDCANLPEN (0x0).
+[21:00:53.7786] [WARNING] Unhandled write to offset 0x11C. Unhandled bits: [1, 3, 5, 7, 9-12, 14-16, 21, 26] when writing value 0x0. Tags: SYSCFGLPEN (0x0), LPUART1LPEN (0x0), SPI6LPEN (0x0), I2C4LPEN (0x0), LPTIM2LPEN (0x0), LPTIM3LPEN (0x0), LPTIM4LPEN (0x0), LPTIM5LPEN (0x0), COMP12LPEN (0x0), VREFLPEN (0x0), RTCAPBLPEN (0x0), SAI4LPEN (0x0), RESERVED (0x0).
+[21:00:53.7928] [WARNING] usb: Unhandled write to offset 0xC. Unhandled bits: [6, 10-11] when writing value 0x40001840. Tags: Full speed serial transceiver mode select (PHYSEL) (0x1), USB turnaround time (TRDT) (0x6).
+[21:00:53.7928] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:53.7929] [WARNING] usb: Unhandled write to offset 0x38. Unhandled bits: [16] when writing value 0x10000. Tags: Power down of FS PHY (PWRDWN) (0x1).
+[21:00:53.7929] [WARNING] usb: Unhandled write to offset 0x14. Unhandled bits: [5, 26] when writing value 0x0. Tags: RESERVED (0x0), RESERVED (0x0).
+[21:00:53.7929] [WARNING] usb: Unhandled write to offset 0x800. Unhandled bits: [0-1] when writing value 0x2200003. Tags: Device speed (DSPD) (0x3).
+[21:00:53.7929] [WARNING] usb: Unhandled write to offset 0x24. Unhandled bits: [7] when writing value 0x80. Tags: Rx FIFO depth (RXFD) (0x80).
+[21:00:53.7938] [WARNING] timer1: Unhandled write to offset 0x8. Unhandled bits: [7] when writing value 0x80. Tags: Master/Slave mode (MSM) (0x1).
+[21:00:53.8879] [INFO] N120: Machine paused.
+[21:00:53.8894] [INFO] N120: Machine resumed.
+[21:00:53.8960] [INFO] N120: Machine paused.
+[21:00:53.9305] [INFO] N120: Machine resumed.
+[21:00:54.3061] [INFO] N120: Machine paused.
+[21:00:54.3071] [INFO] N120: Machine resumed.
+[21:00:54.6837] [INFO] N120: Machine paused.
+[21:00:54.7025] [INFO] N120: Machine resumed.
+[21:00:54.9507] [INFO] N120: Machine paused.
+[21:00:54.9695] [INFO] N120: Machine resumed.
+[21:00:55.1880] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:55.1880] [WARNING] usb: Unhandled write to offset 0xE00. Unhandled bits: [0] when writing value 0x200B8001. Tags: Stop PHY clock (STPPCLK) (0x1).
+[21:00:55.1892] [WARNING] timer1: Unhandled write to offset 0x8. Unhandled bits: [7] when writing value 0x80. Tags: Master/Slave mode (MSM) (0x1).
+[21:00:55.1902] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:55.1902] [WARNING] usb: Unhandled write to offset 0xE00. Unhandled bits: [0] when writing value 0x200B8001. Tags: Stop PHY clock (STPPCLK) (0x1).
+[21:00:55.1906] [WARNING] Unhandled write to offset 0x110. Unhandled bits: [2] when writing value 0xE8FFCBFB. Tags: TIM4LPEN (0x0).
+[21:00:55.1906] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000400.
+[21:00:55.1906] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000400, value 0x0
+[21:00:55.1906] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010000.
+[21:00:55.1906] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010000, value 0x0
+[21:00:55.1906] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000428, value 0x31F
+[21:00:55.1906] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010028, value 0x31F
+[21:00:55.1906] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010018.
+[21:00:55.1906] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x4001001C.
+[21:00:55.1906] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000414.
+[21:00:55.1906] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000414, value 0x1
+[21:00:55.1906] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010014.
+[21:00:55.1906] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010014, value 0x1
+[21:00:55.1910] [INFO] N120: Machine paused.
+[21:00:55.2081] [INFO] N120: Machine resumed.
+[21:00:55.2092] [WARNING] Unhandled write to offset 0xF4. Unhandled bits: [16] when writing value 0x0. Tags: RTCAPBEN (0x0).
+[21:00:55.2094] [WARNING] Wrong configuration of DIVN1. Assigned value 0
+[21:00:55.2095] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [16-21] when writing value 0x1C00020. Tags: DIVP1EN (0x0), DIVQ1EN (0x0), DIVR1EN (0x0), DIVP2EN (0x0), DIVQ2EN (0x0), DIVR2EN (0x0).
+[21:00:55.2120] [INFO] N120: Machine paused.
+[21:00:55.2297] [INFO] N120: Machine resumed.
+[21:00:55.2302] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [6] when writing value 0x1FF0060. Tags: PLL2RGE (0x1).
+[21:00:55.2303] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [22] when writing value 0x1BF0020. Tags: DIVP3EN (0x0).
+[21:00:55.2304] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [23] when writing value 0x17F0020. Tags: DIVQ3EN (0x0).
+[21:00:55.2304] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [24] when writing value 0xFF0020. Tags: DIVR3EN (0x0).
+[21:00:55.2314] [WARNING] Cannot modify DIVN1 while PLL1 is enabled. Ignoring write.
+[21:00:55.2314] [WARNING] Cannot modify DIVP1 while PLL1 is enabled. Ignoring write.
+[21:00:55.2315] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [6] when writing value 0x1FF0060. Tags: PLL2RGE (0x1).
+[21:00:55.2317] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [0] when writing value 0x1. Tags: FMCSEL (0x1).
+[21:00:55.2317] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [5] when writing value 0x20. Tags: QSPISEL (0x2).
+[21:00:55.2318] [WARNING] Unhandled write to offset 0x54. Unhandled bits: [20-21] when writing value 0x300000. Tags: USBSEL (0x3).
+[21:00:55.2349] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000400.
+[21:00:55.2350] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000400, value 0x0
+[21:00:55.2350] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010000.
+[21:00:55.2350] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010000, value 0x0
+[21:00:55.2350] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000428, value 0xD2EF
+[21:00:55.2350] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010028, value 0xD2EF
+[21:00:55.2350] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010018.
+[21:00:55.2350] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x4001001C.
+[21:00:55.2350] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000414.
+[21:00:55.2350] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000414, value 0x1
+[21:00:55.2350] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010014.
+[21:00:55.2350] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010014, value 0x1
+[21:00:55.2351] [WARNING] Unhandled write to offset 0xFC. Unhandled bits: [0, 4-5, 8, 12, 14, 16] when writing value 0xF0000000. Tags: MDMALPEN (0x0), DMA2DLPEN (0x0), JPGDECLPEN (0x0), FLASHLPEN (0x0), FMCLPEN (0x0), QSPILPEN (0x0), SDMMC1LPEN (0x0).
+[21:00:55.2351] [WARNING] Unhandled write to offset 0x108. Unhandled bits: [3-10, 19, 21, 24, 28-29] when writing value 0x7. Tags: GPIODLPEN (0x0), GPIOELPEN (0x0), GPIOFLPEN (0x0), GPIOGLPEN (0x0), GPIOHLPEN (0x0), GPIOILPEN (0x0), GPIOJLPEN (0x0), GPIOKLPEN (0x0), CRCLPEN (0x0), BDMALPEN (0x0), ADC3LPEN (0x0), BKPRAMLPEN (0x0), SRAM4LPEN (0x0).
+[21:00:55.2352] [WARNING] Unhandled write to offset 0x110. Unhandled bits: [0, 3-9, 11, 14-23, 27, 29-31] when writing value 0x6. Tags: TIM2LPEN (0x0), TIM5LPEN (0x0), TIM6LPEN (0x0), TIM7LPEN (0x0), TIM12LPEN (0x0), TIM13LPEN (0x0), TIM14LPEN (0x0), LPTIM1LPEN (0x0), RESERVED (0x0), SPI2LPEN (0x0), SPI3LPEN (0x0), SPDIFRXLPEN (0x0), USART2LPEN (0x0), USART3LPEN (0x0), UART4LPEN (0x0), UART5LPEN (0x0), I2C1LPEN (0x0), I2C2LPEN (0x0), I2C3LPEN (0x0), CECLPEN (0x0), DAC12LPEN (0x0), UART7LPEN (0x0), UART8LPEN (0x0).
+[21:00:55.2352] [WARNING] Unhandled write to offset 0x118. Unhandled bits: [1, 4-5, 12-13, 16-18, 20, 22-24, 28-29] when writing value 0x1. Tags: TIM8LPEN (0x0), USART1LPEN (0x0), USART6LPEN (0x0), SPI1LPEN (0x0), SPI4LPEN (0x0), TIM15LPEN (0x0), TIM16LPEN (0x0), TIM17LPEN (0x0), SAI1LPEN (0x0), SAI2LPEN (0x0), SAI3LPEN (0x0), DFSDM1LPEN (0x0), HRTIMLPEN (0x0).
+[21:00:55.2352] [WARNING] Unhandled write to offset 0x10C. Unhandled bits: [3-4, 6] when writing value 0x0. Tags: LTDCLPEN (0x0), RESERVED (0x0), WWDG1LPEN (0x0).
+[21:00:55.2352] [WARNING] Unhandled write to offset 0x100. Unhandled bits: [0-1, 5, 14-17, 25-28] when writing value 0x0. Tags: DMA1LPEN (0x0), DMA2LPEN (0x0), ADC12LPEN (0x0), RESERVED (0x0), ETH1MACLPEN (0x0), ETH1TXLPEN (0x0), ETH1RXLPEN (0x0), USB1OTGHSLPEN (0x0), USB1OTGHSULPILPEN (0x0), USB2OTGHSLPEN (0x0), USB2OTGHSULPILPEN (0x0).
+[21:00:55.2352] [WARNING] Unhandled write to offset 0x104. Unhandled bits: [0, 4-6, 9, 29-31] when writing value 0x0. Tags: DCMILPEN (0x0), CRYPTLPEN (0x0), HASHLPEN (0x0), RNGLPEN (0x0), SDMMC2LPEN (0x0), SRAM1LPEN (0x0), SRAM2LPEN (0x0), SRAM3LPEN (0x0).
+[21:00:55.2352] [WARNING] Unhandled write to offset 0x114. Unhandled bits: [1-2, 4-5, 8] when writing value 0x0. Tags: CRSLPEN (0x0), SWPLPEN (0x0), OPAMPLPEN (0x0), MDIOSLPEN (0x0), FDCANLPEN (0x0).
+[21:00:55.2352] [WARNING] Unhandled write to offset 0x11C. Unhandled bits: [1, 3, 5, 7, 9-12, 14-16, 21, 26] when writing value 0x0. Tags: SYSCFGLPEN (0x0), LPUART1LPEN (0x0), SPI6LPEN (0x0), I2C4LPEN (0x0), LPTIM2LPEN (0x0), LPTIM3LPEN (0x0), LPTIM4LPEN (0x0), LPTIM5LPEN (0x0), COMP12LPEN (0x0), VREFLPEN (0x0), RTCAPBLPEN (0x0), SAI4LPEN (0x0), RESERVED (0x0).
+[21:00:55.2508] [WARNING] usb: Unhandled write to offset 0xC. Unhandled bits: [6, 10-11] when writing value 0x40001840. Tags: Full speed serial transceiver mode select (PHYSEL) (0x1), USB turnaround time (TRDT) (0x6).
+[21:00:55.2508] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:55.2509] [WARNING] usb: Unhandled write to offset 0x38. Unhandled bits: [16] when writing value 0x10000. Tags: Power down of FS PHY (PWRDWN) (0x1).
+[21:00:55.2509] [WARNING] usb: Unhandled write to offset 0x14. Unhandled bits: [5, 26] when writing value 0x0. Tags: RESERVED (0x0), RESERVED (0x0).
+[21:00:55.2509] [WARNING] usb: Unhandled write to offset 0x800. Unhandled bits: [0-1] when writing value 0x2200003. Tags: Device speed (DSPD) (0x3).
+[21:00:55.2509] [WARNING] usb: Unhandled write to offset 0x24. Unhandled bits: [7] when writing value 0x80. Tags: Rx FIFO depth (RXFD) (0x80).
+[21:00:55.2522] [WARNING] timer1: Unhandled write to offset 0x8. Unhandled bits: [7] when writing value 0x80. Tags: Master/Slave mode (MSM) (0x1).
+[21:00:55.3959] [INFO] N120: Machine paused.
+[21:00:55.3976] [INFO] N120: Machine resumed.
+[21:00:55.4055] [INFO] N120: Machine paused.
+[21:00:55.5458] [INFO] N120: Machine resumed.
+[21:00:55.9342] [INFO] N120: Machine paused.
+[21:00:55.9357] [INFO] N120: Machine resumed.
+[21:00:56.3039] [INFO] N120: Machine paused.
+[21:00:56.3185] [INFO] N120: Machine resumed.
+[21:00:56.5407] [INFO] N120: Machine paused.
+[21:00:56.5573] [INFO] N120: Machine resumed.
+[21:00:56.8096] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:56.8097] [WARNING] usb: Unhandled write to offset 0xE00. Unhandled bits: [0] when writing value 0x200B8001. Tags: Stop PHY clock (STPPCLK) (0x1).
+[21:00:56.8109] [WARNING] timer1: Unhandled write to offset 0x8. Unhandled bits: [7] when writing value 0x80. Tags: Master/Slave mode (MSM) (0x1).
+[21:00:56.8121] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:56.8121] [WARNING] usb: Unhandled write to offset 0xE00. Unhandled bits: [0] when writing value 0x200B8001. Tags: Stop PHY clock (STPPCLK) (0x1).
+[21:00:56.8124] [WARNING] Unhandled write to offset 0x110. Unhandled bits: [2] when writing value 0xE8FFCBFB. Tags: TIM4LPEN (0x0).
+[21:00:56.8124] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000400.
+[21:00:56.8124] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000400, value 0x0
+[21:00:56.8124] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010000.
+[21:00:56.8124] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010000, value 0x0
+[21:00:56.8124] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000428, value 0x31F
+[21:00:56.8124] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010028, value 0x31F
+[21:00:56.8124] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010018.
+[21:00:56.8124] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x4001001C.
+[21:00:56.8124] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000414.
+[21:00:56.8125] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000414, value 0x1
+[21:00:56.8125] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010014.
+[21:00:56.8125] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010014, value 0x1
+[21:00:56.8128] [INFO] N120: Machine paused.
+[21:00:56.8309] [INFO] N120: Machine resumed.
+[21:00:56.8320] [WARNING] Unhandled write to offset 0xF4. Unhandled bits: [16] when writing value 0x0. Tags: RTCAPBEN (0x0).
+[21:00:56.8323] [WARNING] Wrong configuration of DIVN1. Assigned value 0
+[21:00:56.8324] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [16-21] when writing value 0x1C00020. Tags: DIVP1EN (0x0), DIVQ1EN (0x0), DIVR1EN (0x0), DIVP2EN (0x0), DIVQ2EN (0x0), DIVR2EN (0x0).
+[21:00:56.8350] [INFO] N120: Machine paused.
+[21:00:56.8538] [INFO] N120: Machine resumed.
+[21:00:56.8656] [INFO] N120: Machine paused.
+[21:00:56.8668] [INFO] N120: Machine resumed.
+[21:00:56.8671] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [6] when writing value 0x1FF0060. Tags: PLL2RGE (0x1).
+[21:00:56.8672] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [22] when writing value 0x1BF0020. Tags: DIVP3EN (0x0).
+[21:00:56.8672] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [23] when writing value 0x17F0020. Tags: DIVQ3EN (0x0).
+[21:00:56.8673] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [24] when writing value 0xFF0020. Tags: DIVR3EN (0x0).
+[21:00:56.8676] [WARNING] Cannot modify DIVN1 while PLL1 is enabled. Ignoring write.
+[21:00:56.8676] [WARNING] Cannot modify DIVP1 while PLL1 is enabled. Ignoring write.
+[21:00:56.8677] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [6] when writing value 0x1FF0060. Tags: PLL2RGE (0x1).
+[21:00:56.8679] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [0] when writing value 0x1. Tags: FMCSEL (0x1).
+[21:00:56.8679] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [5] when writing value 0x20. Tags: QSPISEL (0x2).
+[21:00:56.8680] [WARNING] Unhandled write to offset 0x54. Unhandled bits: [20-21] when writing value 0x300000. Tags: USBSEL (0x3).
+[21:00:56.8718] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000400.
+[21:00:56.8718] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000400, value 0x0
+[21:00:56.8718] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010000.
+[21:00:56.8718] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010000, value 0x0
+[21:00:56.8718] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000428, value 0xD2EF
+[21:00:56.8718] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010028, value 0xD2EF
+[21:00:56.8718] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010018.
+[21:00:56.8718] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x4001001C.
+[21:00:56.8718] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000414.
+[21:00:56.8718] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000414, value 0x1
+[21:00:56.8718] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010014.
+[21:00:56.8718] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010014, value 0x1
+[21:00:56.8719] [WARNING] Unhandled write to offset 0xFC. Unhandled bits: [0, 4-5, 8, 12, 14, 16] when writing value 0xF0000000. Tags: MDMALPEN (0x0), DMA2DLPEN (0x0), JPGDECLPEN (0x0), FLASHLPEN (0x0), FMCLPEN (0x0), QSPILPEN (0x0), SDMMC1LPEN (0x0).
+[21:00:56.8719] [WARNING] Unhandled write to offset 0x108. Unhandled bits: [3-10, 19, 21, 24, 28-29] when writing value 0x7. Tags: GPIODLPEN (0x0), GPIOELPEN (0x0), GPIOFLPEN (0x0), GPIOGLPEN (0x0), GPIOHLPEN (0x0), GPIOILPEN (0x0), GPIOJLPEN (0x0), GPIOKLPEN (0x0), CRCLPEN (0x0), BDMALPEN (0x0), ADC3LPEN (0x0), BKPRAMLPEN (0x0), SRAM4LPEN (0x0).
+[21:00:56.8720] [WARNING] Unhandled write to offset 0x110. Unhandled bits: [0, 3-9, 11, 14-23, 27, 29-31] when writing value 0x6. Tags: TIM2LPEN (0x0), TIM5LPEN (0x0), TIM6LPEN (0x0), TIM7LPEN (0x0), TIM12LPEN (0x0), TIM13LPEN (0x0), TIM14LPEN (0x0), LPTIM1LPEN (0x0), RESERVED (0x0), SPI2LPEN (0x0), SPI3LPEN (0x0), SPDIFRXLPEN (0x0), USART2LPEN (0x0), USART3LPEN (0x0), UART4LPEN (0x0), UART5LPEN (0x0), I2C1LPEN (0x0), I2C2LPEN (0x0), I2C3LPEN (0x0), CECLPEN (0x0), DAC12LPEN (0x0), UART7LPEN (0x0), UART8LPEN (0x0).
+[21:00:56.8720] [WARNING] Unhandled write to offset 0x118. Unhandled bits: [1, 4-5, 12-13, 16-18, 20, 22-24, 28-29] when writing value 0x1. Tags: TIM8LPEN (0x0), USART1LPEN (0x0), USART6LPEN (0x0), SPI1LPEN (0x0), SPI4LPEN (0x0), TIM15LPEN (0x0), TIM16LPEN (0x0), TIM17LPEN (0x0), SAI1LPEN (0x0), SAI2LPEN (0x0), SAI3LPEN (0x0), DFSDM1LPEN (0x0), HRTIMLPEN (0x0).
+[21:00:56.8720] [WARNING] Unhandled write to offset 0x10C. Unhandled bits: [3-4, 6] when writing value 0x0. Tags: LTDCLPEN (0x0), RESERVED (0x0), WWDG1LPEN (0x0).
+[21:00:56.8720] [WARNING] Unhandled write to offset 0x100. Unhandled bits: [0-1, 5, 14-17, 25-28] when writing value 0x0. Tags: DMA1LPEN (0x0), DMA2LPEN (0x0), ADC12LPEN (0x0), RESERVED (0x0), ETH1MACLPEN (0x0), ETH1TXLPEN (0x0), ETH1RXLPEN (0x0), USB1OTGHSLPEN (0x0), USB1OTGHSULPILPEN (0x0), USB2OTGHSLPEN (0x0), USB2OTGHSULPILPEN (0x0).
+[21:00:56.8720] [WARNING] Unhandled write to offset 0x104. Unhandled bits: [0, 4-6, 9, 29-31] when writing value 0x0. Tags: DCMILPEN (0x0), CRYPTLPEN (0x0), HASHLPEN (0x0), RNGLPEN (0x0), SDMMC2LPEN (0x0), SRAM1LPEN (0x0), SRAM2LPEN (0x0), SRAM3LPEN (0x0).
+[21:00:56.8720] [WARNING] Unhandled write to offset 0x114. Unhandled bits: [1-2, 4-5, 8] when writing value 0x0. Tags: CRSLPEN (0x0), SWPLPEN (0x0), OPAMPLPEN (0x0), MDIOSLPEN (0x0), FDCANLPEN (0x0).
+[21:00:56.8720] [WARNING] Unhandled write to offset 0x11C. Unhandled bits: [1, 3, 5, 7, 9-12, 14-16, 21, 26] when writing value 0x0. Tags: SYSCFGLPEN (0x0), LPUART1LPEN (0x0), SPI6LPEN (0x0), I2C4LPEN (0x0), LPTIM2LPEN (0x0), LPTIM3LPEN (0x0), LPTIM4LPEN (0x0), LPTIM5LPEN (0x0), COMP12LPEN (0x0), VREFLPEN (0x0), RTCAPBLPEN (0x0), SAI4LPEN (0x0), RESERVED (0x0).
+[21:00:56.8861] [WARNING] usb: Unhandled write to offset 0xC. Unhandled bits: [6, 10-11] when writing value 0x40001840. Tags: Full speed serial transceiver mode select (PHYSEL) (0x1), USB turnaround time (TRDT) (0x6).
+[21:00:56.8862] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:56.8862] [WARNING] usb: Unhandled write to offset 0x38. Unhandled bits: [16] when writing value 0x10000. Tags: Power down of FS PHY (PWRDWN) (0x1).
+[21:00:56.8862] [WARNING] usb: Unhandled write to offset 0x14. Unhandled bits: [5, 26] when writing value 0x0. Tags: RESERVED (0x0), RESERVED (0x0).
+[21:00:56.8863] [WARNING] usb: Unhandled write to offset 0x800. Unhandled bits: [0-1] when writing value 0x2200003. Tags: Device speed (DSPD) (0x3).
+[21:00:56.8863] [WARNING] usb: Unhandled write to offset 0x24. Unhandled bits: [7] when writing value 0x80. Tags: Rx FIFO depth (RXFD) (0x80).
+[21:00:56.8873] [WARNING] timer1: Unhandled write to offset 0x8. Unhandled bits: [7] when writing value 0x80. Tags: Master/Slave mode (MSM) (0x1).
+[21:00:57.0339] [INFO] N120: Machine paused.
+[21:00:57.0350] [INFO] N120: Machine resumed.
+[21:00:57.0424] [INFO] N120: Machine paused.
+[21:00:57.0758] [INFO] N120: Machine resumed.
+[21:00:57.4302] [INFO] N120: Machine paused.
+[21:00:57.4344] [INFO] N120: Machine resumed.
+[21:00:57.8193] [INFO] N120: Machine paused.
+[21:00:57.8387] [INFO] N120: Machine resumed.
+[21:00:58.0797] [INFO] N120: Machine paused.
+[21:00:58.0972] [INFO] N120: Machine resumed.
+[21:00:58.3029] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:58.3031] [WARNING] usb: Unhandled write to offset 0xE00. Unhandled bits: [0] when writing value 0x200B8001. Tags: Stop PHY clock (STPPCLK) (0x1).
+[21:00:58.3045] [WARNING] timer1: Unhandled write to offset 0x8. Unhandled bits: [7] when writing value 0x80. Tags: Master/Slave mode (MSM) (0x1).
+[21:00:58.3059] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:58.3060] [WARNING] usb: Unhandled write to offset 0xE00. Unhandled bits: [0] when writing value 0x200B8001. Tags: Stop PHY clock (STPPCLK) (0x1).
+[21:00:58.3063] [WARNING] Unhandled write to offset 0x110. Unhandled bits: [2] when writing value 0xE8FFCBFB. Tags: TIM4LPEN (0x0).
+[21:00:58.3063] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000400.
+[21:00:58.3063] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000400, value 0x0
+[21:00:58.3063] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010000.
+[21:00:58.3063] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010000, value 0x0
+[21:00:58.3063] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000428, value 0x31F
+[21:00:58.3063] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010028, value 0x31F
+[21:00:58.3063] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010018.
+[21:00:58.3063] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x4001001C.
+[21:00:58.3063] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000414.
+[21:00:58.3063] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000414, value 0x1
+[21:00:58.3064] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010014.
+[21:00:58.3064] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010014, value 0x1
+[21:00:58.3069] [INFO] N120: Machine paused.
+[21:00:58.3289] [INFO] N120: Machine resumed.
+[21:00:58.3300] [WARNING] Unhandled write to offset 0xF4. Unhandled bits: [16] when writing value 0x0. Tags: RTCAPBEN (0x0).
+[21:00:58.3303] [WARNING] Wrong configuration of DIVN1. Assigned value 0
+[21:00:58.3303] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [16-21] when writing value 0x1C00020. Tags: DIVP1EN (0x0), DIVQ1EN (0x0), DIVR1EN (0x0), DIVP2EN (0x0), DIVQ2EN (0x0), DIVR2EN (0x0).
+[21:00:58.3322] [INFO] N120: Machine paused.
+[21:00:58.3495] [INFO] N120: Machine resumed.
+[21:00:58.3898] [INFO] N120: Machine paused.
+[21:00:58.3911] [INFO] N120: Machine resumed.
+[21:00:58.3918] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [6] when writing value 0x1FF0060. Tags: PLL2RGE (0x1).
+[21:00:58.3919] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [22] when writing value 0x1BF0020. Tags: DIVP3EN (0x0).
+[21:00:58.3920] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [23] when writing value 0x17F0020. Tags: DIVQ3EN (0x0).
+[21:00:58.3920] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [24] when writing value 0xFF0020. Tags: DIVR3EN (0x0).
+[21:00:58.3924] [WARNING] Cannot modify DIVN1 while PLL1 is enabled. Ignoring write.
+[21:00:58.3924] [WARNING] Cannot modify DIVP1 while PLL1 is enabled. Ignoring write.
+[21:00:58.3924] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [6] when writing value 0x1FF0060. Tags: PLL2RGE (0x1).
+[21:00:58.3926] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [0] when writing value 0x1. Tags: FMCSEL (0x1).
+[21:00:58.3927] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [5] when writing value 0x20. Tags: QSPISEL (0x2).
+[21:00:58.3927] [WARNING] Unhandled write to offset 0x54. Unhandled bits: [20-21] when writing value 0x300000. Tags: USBSEL (0x3).
+[21:00:58.3951] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000400.
+[21:00:58.3951] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000400, value 0x0
+[21:00:58.3951] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010000.
+[21:00:58.3951] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010000, value 0x0
+[21:00:58.3951] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000428, value 0xD2EF
+[21:00:58.3951] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010028, value 0xD2EF
+[21:00:58.3951] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010018.
+[21:00:58.3951] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x4001001C.
+[21:00:58.3951] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer3. Address 0x40000414.
+[21:00:58.3951] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer3. Address 0x40000414, value 0x1
+[21:00:58.3951] [WARNING] sysbus: Tried to read a locked peripheral: N120.timer1. Address 0x40010014.
+[21:00:58.3951] [WARNING] sysbus: Tried to write a locked peripheral: N120.timer1. Address 0x40010014, value 0x1
+[21:00:58.3952] [WARNING] Unhandled write to offset 0xFC. Unhandled bits: [0, 4-5, 8, 12, 14, 16] when writing value 0xF0000000. Tags: MDMALPEN (0x0), DMA2DLPEN (0x0), JPGDECLPEN (0x0), FLASHLPEN (0x0), FMCLPEN (0x0), QSPILPEN (0x0), SDMMC1LPEN (0x0).
+[21:00:58.3953] [WARNING] Unhandled write to offset 0x108. Unhandled bits: [3-10, 19, 21, 24, 28-29] when writing value 0x7. Tags: GPIODLPEN (0x0), GPIOELPEN (0x0), GPIOFLPEN (0x0), GPIOGLPEN (0x0), GPIOHLPEN (0x0), GPIOILPEN (0x0), GPIOJLPEN (0x0), GPIOKLPEN (0x0), CRCLPEN (0x0), BDMALPEN (0x0), ADC3LPEN (0x0), BKPRAMLPEN (0x0), SRAM4LPEN (0x0).
+[21:00:58.3953] [WARNING] Unhandled write to offset 0x110. Unhandled bits: [0, 3-9, 11, 14-23, 27, 29-31] when writing value 0x6. Tags: TIM2LPEN (0x0), TIM5LPEN (0x0), TIM6LPEN (0x0), TIM7LPEN (0x0), TIM12LPEN (0x0), TIM13LPEN (0x0), TIM14LPEN (0x0), LPTIM1LPEN (0x0), RESERVED (0x0), SPI2LPEN (0x0), SPI3LPEN (0x0), SPDIFRXLPEN (0x0), USART2LPEN (0x0), USART3LPEN (0x0), UART4LPEN (0x0), UART5LPEN (0x0), I2C1LPEN (0x0), I2C2LPEN (0x0), I2C3LPEN (0x0), CECLPEN (0x0), DAC12LPEN (0x0), UART7LPEN (0x0), UART8LPEN (0x0).
+[21:00:58.3953] [WARNING] Unhandled write to offset 0x118. Unhandled bits: [1, 4-5, 12-13, 16-18, 20, 22-24, 28-29] when writing value 0x1. Tags: TIM8LPEN (0x0), USART1LPEN (0x0), USART6LPEN (0x0), SPI1LPEN (0x0), SPI4LPEN (0x0), TIM15LPEN (0x0), TIM16LPEN (0x0), TIM17LPEN (0x0), SAI1LPEN (0x0), SAI2LPEN (0x0), SAI3LPEN (0x0), DFSDM1LPEN (0x0), HRTIMLPEN (0x0).
+[21:00:58.3953] [WARNING] Unhandled write to offset 0x10C. Unhandled bits: [3-4, 6] when writing value 0x0. Tags: LTDCLPEN (0x0), RESERVED (0x0), WWDG1LPEN (0x0).
+[21:00:58.3953] [WARNING] Unhandled write to offset 0x100. Unhandled bits: [0-1, 5, 14-17, 25-28] when writing value 0x0. Tags: DMA1LPEN (0x0), DMA2LPEN (0x0), ADC12LPEN (0x0), RESERVED (0x0), ETH1MACLPEN (0x0), ETH1TXLPEN (0x0), ETH1RXLPEN (0x0), USB1OTGHSLPEN (0x0), USB1OTGHSULPILPEN (0x0), USB2OTGHSLPEN (0x0), USB2OTGHSULPILPEN (0x0).
+[21:00:58.3953] [WARNING] Unhandled write to offset 0x104. Unhandled bits: [0, 4-6, 9, 29-31] when writing value 0x0. Tags: DCMILPEN (0x0), CRYPTLPEN (0x0), HASHLPEN (0x0), RNGLPEN (0x0), SDMMC2LPEN (0x0), SRAM1LPEN (0x0), SRAM2LPEN (0x0), SRAM3LPEN (0x0).
+[21:00:58.3953] [WARNING] Unhandled write to offset 0x114. Unhandled bits: [1-2, 4-5, 8] when writing value 0x0. Tags: CRSLPEN (0x0), SWPLPEN (0x0), OPAMPLPEN (0x0), MDIOSLPEN (0x0), FDCANLPEN (0x0).
+[21:00:58.3953] [WARNING] Unhandled write to offset 0x11C. Unhandled bits: [1, 3, 5, 7, 9-12, 14-16, 21, 26] when writing value 0x0. Tags: SYSCFGLPEN (0x0), LPUART1LPEN (0x0), SPI6LPEN (0x0), I2C4LPEN (0x0), LPTIM2LPEN (0x0), LPTIM3LPEN (0x0), LPTIM4LPEN (0x0), LPTIM5LPEN (0x0), COMP12LPEN (0x0), VREFLPEN (0x0), RTCAPBLPEN (0x0), SAI4LPEN (0x0), RESERVED (0x0).
+[21:00:58.4092] [WARNING] usb: Unhandled write to offset 0xC. Unhandled bits: [6, 10-11] when writing value 0x40001840. Tags: Full speed serial transceiver mode select (PHYSEL) (0x1), USB turnaround time (TRDT) (0x6).
+[21:00:58.4092] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:58.4093] [WARNING] usb: Unhandled write to offset 0x38. Unhandled bits: [16] when writing value 0x10000. Tags: Power down of FS PHY (PWRDWN) (0x1).
+[21:00:58.4097] [WARNING] usb: Unhandled write to offset 0x14. Unhandled bits: [5, 26] when writing value 0x0. Tags: RESERVED (0x0), RESERVED (0x0).
+[21:00:58.4097] [WARNING] usb: Unhandled write to offset 0x800. Unhandled bits: [0-1] when writing value 0x2200003. Tags: Device speed (DSPD) (0x3).
+[21:00:58.4097] [WARNING] usb: Unhandled write to offset 0x24. Unhandled bits: [7] when writing value 0x80. Tags: Rx FIFO depth (RXFD) (0x80).
+[21:00:58.4107] [WARNING] timer1: Unhandled write to offset 0x8. Unhandled bits: [7] when writing value 0x80. Tags: Master/Slave mode (MSM) (0x1).
+[21:00:58.4704] [INFO] N120: Machine paused.
+[21:00:58.4716] [INFO] N120: Machine resumed.
+[21:00:58.4802] [INFO] N120: Machine paused.
+[21:00:58.5802] [WARNING] No action for reset - macro N120.reset is not registered.
+[21:00:58.5891] [INFO] cpu: Setting initial values: PC = 0x8008159, SP = 0x2403FFF8.
+[21:00:58.5893] [INFO] N120: Machine resumed.
+[21:00:58.5909] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [6] when writing value 0x1FF0060. Tags: PLL2RGE (0x1).
+[21:00:58.5910] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [22] when writing value 0x1BF0020. Tags: DIVP3EN (0x0).
+[21:00:58.5910] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [23] when writing value 0x17F0020. Tags: DIVQ3EN (0x0).
+[21:00:58.5910] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [24] when writing value 0xFF0020. Tags: DIVR3EN (0x0).
+[21:00:58.5917] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [0] when writing value 0x1. Tags: FMCSEL (0x1).
+[21:00:58.5917] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [5] when writing value 0x20. Tags: QSPISEL (0x2).
+[21:00:58.5919] [WARNING] Unhandled write to offset 0x54. Unhandled bits: [20-21] when writing value 0x300000. Tags: USBSEL (0x3).
+[21:00:58.5927] [WARNING] usb: Unhandled write to offset 0xC. Unhandled bits: [6, 10-11] when writing value 0x40001840. Tags: Full speed serial transceiver mode select (PHYSEL) (0x1), USB turnaround time (TRDT) (0x6).
+[21:00:58.5927] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:00:58.5927] [WARNING] usb: Unhandled write to offset 0x38. Unhandled bits: [16] when writing value 0x10000. Tags: Power down of FS PHY (PWRDWN) (0x1).
+[21:00:58.5927] [WARNING] usb: Unhandled write to offset 0x14. Unhandled bits: [5, 26] when writing value 0x0. Tags: RESERVED (0x0), RESERVED (0x0).
+[21:00:58.5927] [WARNING] usb: Unhandled write to offset 0x800. Unhandled bits: [0-1] when writing value 0x2200003. Tags: Device speed (DSPD) (0x3).
+[21:00:58.5928] [WARNING] usb: Unhandled write to offset 0x24. Unhandled bits: [7] when writing value 0x80. Tags: Rx FIFO depth (RXFD) (0x80).
+[21:01:00.1621] [WARNING] Unhandled write to offset 0xFC. Unhandled bits: [0, 4-5, 8, 12, 14, 16] when writing value 0xF0000000. Tags: MDMALPEN (0x0), DMA2DLPEN (0x0), JPGDECLPEN (0x0), FLASHLPEN (0x0), FMCLPEN (0x0), QSPILPEN (0x0), SDMMC1LPEN (0x0).
+[21:01:00.1622] [WARNING] Unhandled write to offset 0x108. Unhandled bits: [3-10, 19, 21, 24, 28-29] when writing value 0x7. Tags: GPIODLPEN (0x0), GPIOELPEN (0x0), GPIOFLPEN (0x0), GPIOGLPEN (0x0), GPIOHLPEN (0x0), GPIOILPEN (0x0), GPIOJLPEN (0x0), GPIOKLPEN (0x0), CRCLPEN (0x0), BDMALPEN (0x0), ADC3LPEN (0x0), BKPRAMLPEN (0x0), SRAM4LPEN (0x0).
+[21:01:00.1622] [WARNING] Unhandled write to offset 0x110. Unhandled bits: [0, 3-9, 11, 14-23, 27, 29-31] when writing value 0x6. Tags: TIM2LPEN (0x0), TIM5LPEN (0x0), TIM6LPEN (0x0), TIM7LPEN (0x0), TIM12LPEN (0x0), TIM13LPEN (0x0), TIM14LPEN (0x0), LPTIM1LPEN (0x0), RESERVED (0x0), SPI2LPEN (0x0), SPI3LPEN (0x0), SPDIFRXLPEN (0x0), USART2LPEN (0x0), USART3LPEN (0x0), UART4LPEN (0x0), UART5LPEN (0x0), I2C1LPEN (0x0), I2C2LPEN (0x0), I2C3LPEN (0x0), CECLPEN (0x0), DAC12LPEN (0x0), UART7LPEN (0x0), UART8LPEN (0x0).
+[21:01:00.1622] [WARNING] Unhandled write to offset 0x118. Unhandled bits: [1, 4-5, 12-13, 16-18, 20, 22-24, 28-29] when writing value 0x1. Tags: TIM8LPEN (0x0), USART1LPEN (0x0), USART6LPEN (0x0), SPI1LPEN (0x0), SPI4LPEN (0x0), TIM15LPEN (0x0), TIM16LPEN (0x0), TIM17LPEN (0x0), SAI1LPEN (0x0), SAI2LPEN (0x0), SAI3LPEN (0x0), DFSDM1LPEN (0x0), HRTIMLPEN (0x0).
+[21:01:00.1622] [WARNING] Unhandled write to offset 0x10C. Unhandled bits: [3-4, 6] when writing value 0x0. Tags: LTDCLPEN (0x0), RESERVED (0x0), WWDG1LPEN (0x0).
+[21:01:00.1622] [WARNING] Unhandled write to offset 0x100. Unhandled bits: [0-1, 5, 14-17, 25-28] when writing value 0x0. Tags: DMA1LPEN (0x0), DMA2LPEN (0x0), ADC12LPEN (0x0), RESERVED (0x0), ETH1MACLPEN (0x0), ETH1TXLPEN (0x0), ETH1RXLPEN (0x0), USB1OTGHSLPEN (0x0), USB1OTGHSULPILPEN (0x0), USB2OTGHSLPEN (0x0), USB2OTGHSULPILPEN (0x0).
+[21:01:00.1622] [WARNING] Unhandled write to offset 0x104. Unhandled bits: [0, 4-6, 9, 29-31] when writing value 0x0. Tags: DCMILPEN (0x0), CRYPTLPEN (0x0), HASHLPEN (0x0), RNGLPEN (0x0), SDMMC2LPEN (0x0), SRAM1LPEN (0x0), SRAM2LPEN (0x0), SRAM3LPEN (0x0).
+[21:01:00.1622] [WARNING] Unhandled write to offset 0x114. Unhandled bits: [1-2, 4-5, 8] when writing value 0x0. Tags: CRSLPEN (0x0), SWPLPEN (0x0), OPAMPLPEN (0x0), MDIOSLPEN (0x0), FDCANLPEN (0x0).
+[21:01:00.1623] [WARNING] Unhandled write to offset 0x11C. Unhandled bits: [1, 3, 5, 7, 9-12, 14-16, 21, 26] when writing value 0x0. Tags: SYSCFGLPEN (0x0), LPUART1LPEN (0x0), SPI6LPEN (0x0), I2C4LPEN (0x0), LPTIM2LPEN (0x0), LPTIM3LPEN (0x0), LPTIM4LPEN (0x0), LPTIM5LPEN (0x0), COMP12LPEN (0x0), VREFLPEN (0x0), RTCAPBLPEN (0x0), SAI4LPEN (0x0), RESERVED (0x0).
+[21:01:00.1625] [WARNING] nvic: Unhandled write to offset 0xF50 (ICacheInvalidateAllToPoUaIgnored), value 0x0.
+[21:01:00.1625] [WARNING] cpu: Trying to enable instruction cache, but it's not supported
+[21:01:00.1626] [WARNING] nvic: Unhandled write to offset 0xF60 (DCacheInvalidateBySetWay), value 0x0.
+[21:01:00.3481] [WARNING] timer1: Unhandled write to offset 0x8. Unhandled bits: [7] when writing value 0x80. Tags: Master/Slave mode (MSM) (0x1).
+[21:01:00.4023] [WARNING] nvic: Unhandled write to offset 0xF60 (DCacheInvalidateBySetWay), value 0x0.
+[21:01:00.7259] [INFO] N120: Machine paused.
+[21:01:00.7925] [WARNING] No action for reset - macro N120.reset is not registered.
+[21:01:00.7993] [INFO] cpu: Setting initial values: PC = 0x8008159, SP = 0x2403FFF8.
+[21:01:00.7996] [INFO] N120: Machine resumed.
+[21:01:00.8015] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [6] when writing value 0x1FF0060. Tags: PLL2RGE (0x1).
+[21:01:00.8016] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [22] when writing value 0x1BF0020. Tags: DIVP3EN (0x0).
+[21:01:00.8016] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [23] when writing value 0x17F0020. Tags: DIVQ3EN (0x0).
+[21:01:00.8016] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [24] when writing value 0xFF0020. Tags: DIVR3EN (0x0).
+[21:01:00.8022] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [0] when writing value 0x1. Tags: FMCSEL (0x1).
+[21:01:00.8024] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [5] when writing value 0x20. Tags: QSPISEL (0x2).
+[21:01:00.8026] [WARNING] Unhandled write to offset 0x54. Unhandled bits: [20-21] when writing value 0x300000. Tags: USBSEL (0x3).
+[21:01:00.8034] [WARNING] usb: Unhandled write to offset 0xC. Unhandled bits: [6, 10-11] when writing value 0x40001840. Tags: Full speed serial transceiver mode select (PHYSEL) (0x1), USB turnaround time (TRDT) (0x6).
+[21:01:00.8034] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:01:00.8034] [WARNING] usb: Unhandled write to offset 0x38. Unhandled bits: [16] when writing value 0x10000. Tags: Power down of FS PHY (PWRDWN) (0x1).
+[21:01:00.8034] [WARNING] usb: Unhandled write to offset 0x14. Unhandled bits: [5, 26] when writing value 0x0. Tags: RESERVED (0x0), RESERVED (0x0).
+[21:01:00.8035] [WARNING] usb: Unhandled write to offset 0x800. Unhandled bits: [0-1] when writing value 0x2200003. Tags: Device speed (DSPD) (0x3).
+[21:01:00.8035] [WARNING] usb: Unhandled write to offset 0x24. Unhandled bits: [7] when writing value 0x80. Tags: Rx FIFO depth (RXFD) (0x80).
+[21:01:02.4323] [WARNING] Unhandled write to offset 0xFC. Unhandled bits: [0, 4-5, 8, 12, 14, 16] when writing value 0xF0000000. Tags: MDMALPEN (0x0), DMA2DLPEN (0x0), JPGDECLPEN (0x0), FLASHLPEN (0x0), FMCLPEN (0x0), QSPILPEN (0x0), SDMMC1LPEN (0x0).
+[21:01:02.4324] [WARNING] Unhandled write to offset 0x108. Unhandled bits: [3-10, 19, 21, 24, 28-29] when writing value 0x7. Tags: GPIODLPEN (0x0), GPIOELPEN (0x0), GPIOFLPEN (0x0), GPIOGLPEN (0x0), GPIOHLPEN (0x0), GPIOILPEN (0x0), GPIOJLPEN (0x0), GPIOKLPEN (0x0), CRCLPEN (0x0), BDMALPEN (0x0), ADC3LPEN (0x0), BKPRAMLPEN (0x0), SRAM4LPEN (0x0).
+[21:01:02.4324] [WARNING] Unhandled write to offset 0x110. Unhandled bits: [0, 3-9, 11, 14-23, 27, 29-31] when writing value 0x6. Tags: TIM2LPEN (0x0), TIM5LPEN (0x0), TIM6LPEN (0x0), TIM7LPEN (0x0), TIM12LPEN (0x0), TIM13LPEN (0x0), TIM14LPEN (0x0), LPTIM1LPEN (0x0), RESERVED (0x0), SPI2LPEN (0x0), SPI3LPEN (0x0), SPDIFRXLPEN (0x0), USART2LPEN (0x0), USART3LPEN (0x0), UART4LPEN (0x0), UART5LPEN (0x0), I2C1LPEN (0x0), I2C2LPEN (0x0), I2C3LPEN (0x0), CECLPEN (0x0), DAC12LPEN (0x0), UART7LPEN (0x0), UART8LPEN (0x0).
+[21:01:02.4325] [WARNING] Unhandled write to offset 0x118. Unhandled bits: [1, 4-5, 12-13, 16-18, 20, 22-24, 28-29] when writing value 0x1. Tags: TIM8LPEN (0x0), USART1LPEN (0x0), USART6LPEN (0x0), SPI1LPEN (0x0), SPI4LPEN (0x0), TIM15LPEN (0x0), TIM16LPEN (0x0), TIM17LPEN (0x0), SAI1LPEN (0x0), SAI2LPEN (0x0), SAI3LPEN (0x0), DFSDM1LPEN (0x0), HRTIMLPEN (0x0).
+[21:01:02.4325] [WARNING] Unhandled write to offset 0x10C. Unhandled bits: [3-4, 6] when writing value 0x0. Tags: LTDCLPEN (0x0), RESERVED (0x0), WWDG1LPEN (0x0).
+[21:01:02.4325] [WARNING] Unhandled write to offset 0x100. Unhandled bits: [0-1, 5, 14-17, 25-28] when writing value 0x0. Tags: DMA1LPEN (0x0), DMA2LPEN (0x0), ADC12LPEN (0x0), RESERVED (0x0), ETH1MACLPEN (0x0), ETH1TXLPEN (0x0), ETH1RXLPEN (0x0), USB1OTGHSLPEN (0x0), USB1OTGHSULPILPEN (0x0), USB2OTGHSLPEN (0x0), USB2OTGHSULPILPEN (0x0).
+[21:01:02.4325] [WARNING] Unhandled write to offset 0x104. Unhandled bits: [0, 4-6, 9, 29-31] when writing value 0x0. Tags: DCMILPEN (0x0), CRYPTLPEN (0x0), HASHLPEN (0x0), RNGLPEN (0x0), SDMMC2LPEN (0x0), SRAM1LPEN (0x0), SRAM2LPEN (0x0), SRAM3LPEN (0x0).
+[21:01:02.4325] [WARNING] Unhandled write to offset 0x114. Unhandled bits: [1-2, 4-5, 8] when writing value 0x0. Tags: CRSLPEN (0x0), SWPLPEN (0x0), OPAMPLPEN (0x0), MDIOSLPEN (0x0), FDCANLPEN (0x0).
+[21:01:02.4325] [WARNING] Unhandled write to offset 0x11C. Unhandled bits: [1, 3, 5, 7, 9-12, 14-16, 21, 26] when writing value 0x0. Tags: SYSCFGLPEN (0x0), LPUART1LPEN (0x0), SPI6LPEN (0x0), I2C4LPEN (0x0), LPTIM2LPEN (0x0), LPTIM3LPEN (0x0), LPTIM4LPEN (0x0), LPTIM5LPEN (0x0), COMP12LPEN (0x0), VREFLPEN (0x0), RTCAPBLPEN (0x0), SAI4LPEN (0x0), RESERVED (0x0).
+[21:01:02.4326] [WARNING] nvic: Unhandled write to offset 0xF50 (ICacheInvalidateAllToPoUaIgnored), value 0x0.
+[21:01:02.4326] [WARNING] cpu: Trying to enable instruction cache, but it's not supported
+[21:01:02.4327] [WARNING] nvic: Unhandled write to offset 0xF60 (DCacheInvalidateBySetWay), value 0x0.
+[21:01:02.6069] [WARNING] timer1: Unhandled write to offset 0x8. Unhandled bits: [7] when writing value 0x80. Tags: Master/Slave mode (MSM) (0x1).
+[21:01:02.6552] [WARNING] nvic: Unhandled write to offset 0xF60 (DCacheInvalidateBySetWay), value 0x0.
+[21:01:03.0098] [INFO] N120: Machine paused.
+[21:01:03.0308] [WARNING] No action for reset - macro N120.reset is not registered.
+[21:01:03.0372] [INFO] cpu: Setting initial values: PC = 0x8008159, SP = 0x2403FFF8.
+[21:01:03.0374] [INFO] N120: Machine resumed.
+[21:01:03.0390] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [6] when writing value 0x1FF0060. Tags: PLL2RGE (0x1).
+[21:01:03.0391] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [22] when writing value 0x1BF0020. Tags: DIVP3EN (0x0).
+[21:01:03.0391] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [23] when writing value 0x17F0020. Tags: DIVQ3EN (0x0).
+[21:01:03.0392] [WARNING] Unhandled write to offset 0x2C. Unhandled bits: [24] when writing value 0xFF0020. Tags: DIVR3EN (0x0).
+[21:01:03.0399] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [0] when writing value 0x1. Tags: FMCSEL (0x1).
+[21:01:03.0399] [WARNING] Unhandled write to offset 0x4C. Unhandled bits: [5] when writing value 0x20. Tags: QSPISEL (0x2).
+[21:01:03.0400] [WARNING] Unhandled write to offset 0x54. Unhandled bits: [20-21] when writing value 0x300000. Tags: USBSEL (0x3).
+[21:01:03.0407] [WARNING] usb: Unhandled write to offset 0xC. Unhandled bits: [6, 10-11] when writing value 0x40001840. Tags: Full speed serial transceiver mode select (PHYSEL) (0x1), USB turnaround time (TRDT) (0x6).
+[21:01:03.0407] [WARNING] usb: Unhandled write to offset 0x10. Unhandled bits: [0] when writing value 0x80000001. Tags: Core soft reset (CSRST) (0x1).
+[21:01:03.0408] [WARNING] usb: Unhandled write to offset 0x38. Unhandled bits: [16] when writing value 0x10000. Tags: Power down of FS PHY (PWRDWN) (0x1).
+[21:01:03.0408] [WARNING] usb: Unhandled write to offset 0x14. Unhandled bits: [5, 26] when writing value 0x0. Tags: RESERVED (0x0), RESERVED (0x0).
+[21:01:03.0408] [WARNING] usb: Unhandled write to offset 0x800. Unhandled bits: [0-1] when writing value 0x2200003. Tags: Device speed (DSPD) (0x3).
+[21:01:03.0408] [WARNING] usb: Unhandled write to offset 0x24. Unhandled bits: [7] when writing value 0x80. Tags: Rx FIFO depth (RXFD) (0x80).
+[21:01:04.5988] [WARNING] Unhandled write to offset 0xFC. Unhandled bits: [0, 4-5, 8, 12, 14, 16] when writing value 0xF0000000. Tags: MDMALPEN (0x0), DMA2DLPEN (0x0), JPGDECLPEN (0x0), FLASHLPEN (0x0), FMCLPEN (0x0), QSPILPEN (0x0), SDMMC1LPEN (0x0).
+[21:01:04.5989] [WARNING] Unhandled write to offset 0x108. Unhandled bits: [3-10, 19, 21, 24, 28-29] when writing value 0x7. Tags: GPIODLPEN (0x0), GPIOELPEN (0x0), GPIOFLPEN (0x0), GPIOGLPEN (0x0), GPIOHLPEN (0x0), GPIOILPEN (0x0), GPIOJLPEN (0x0), GPIOKLPEN (0x0), CRCLPEN (0x0), BDMALPEN (0x0), ADC3LPEN (0x0), BKPRAMLPEN (0x0), SRAM4LPEN (0x0).
+[21:01:04.5989] [WARNING] Unhandled write to offset 0x110. Unhandled bits: [0, 3-9, 11, 14-23, 27, 29-31] when writing value 0x6. Tags: TIM2LPEN (0x0), TIM5LPEN (0x0), TIM6LPEN (0x0), TIM7LPEN (0x0), TIM12LPEN (0x0), TIM13LPEN (0x0), TIM14LPEN (0x0), LPTIM1LPEN (0x0), RESERVED (0x0), SPI2LPEN (0x0), SPI3LPEN (0x0), SPDIFRXLPEN (0x0), USART2LPEN (0x0), USART3LPEN (0x0), UART4LPEN (0x0), UART5LPEN (0x0), I2C1LPEN (0x0), I2C2LPEN (0x0), I2C3LPEN (0x0), CECLPEN (0x0), DAC12LPEN (0x0), UART7LPEN (0x0), UART8LPEN (0x0).
+[21:01:04.5989] [WARNING] Unhandled write to offset 0x118. Unhandled bits: [1, 4-5, 12-13, 16-18, 20, 22-24, 28-29] when writing value 0x1. Tags: TIM8LPEN (0x0), USART1LPEN (0x0), USART6LPEN (0x0), SPI1LPEN (0x0), SPI4LPEN (0x0), TIM15LPEN (0x0), TIM16LPEN (0x0), TIM17LPEN (0x0), SAI1LPEN (0x0), SAI2LPEN (0x0), SAI3LPEN (0x0), DFSDM1LPEN (0x0), HRTIMLPEN (0x0).
+[21:01:04.5989] [WARNING] Unhandled write to offset 0x10C. Unhandled bits: [3-4, 6] when writing value 0x0. Tags: LTDCLPEN (0x0), RESERVED (0x0), WWDG1LPEN (0x0).
+[21:01:04.5989] [WARNING] Unhandled write to offset 0x100. Unhandled bits: [0-1, 5, 14-17, 25-28] when writing value 0x0. Tags: DMA1LPEN (0x0), DMA2LPEN (0x0), ADC12LPEN (0x0), RESERVED (0x0), ETH1MACLPEN (0x0), ETH1TXLPEN (0x0), ETH1RXLPEN (0x0), USB1OTGHSLPEN (0x0), USB1OTGHSULPILPEN (0x0), USB2OTGHSLPEN (0x0), USB2OTGHSULPILPEN (0x0).
+[21:01:04.5989] [WARNING] Unhandled write to offset 0x104. Unhandled bits: [0, 4-6, 9, 29-31] when writing value 0x0. Tags: DCMILPEN (0x0), CRYPTLPEN (0x0), HASHLPEN (0x0), RNGLPEN (0x0), SDMMC2LPEN (0x0), SRAM1LPEN (0x0), SRAM2LPEN (0x0), SRAM3LPEN (0x0).
+[21:01:04.5989] [WARNING] Unhandled write to offset 0x114. Unhandled bits: [1-2, 4-5, 8] when writing value 0x0. Tags: CRSLPEN (0x0), SWPLPEN (0x0), OPAMPLPEN (0x0), MDIOSLPEN (0x0), FDCANLPEN (0x0).
+[21:01:04.5990] [WARNING] Unhandled write to offset 0x11C. Unhandled bits: [1, 3, 5, 7, 9-12, 14-16, 21, 26] when writing value 0x0. Tags: SYSCFGLPEN (0x0), LPUART1LPEN (0x0), SPI6LPEN (0x0), I2C4LPEN (0x0), LPTIM2LPEN (0x0), LPTIM3LPEN (0x0), LPTIM4LPEN (0x0), LPTIM5LPEN (0x0), COMP12LPEN (0x0), VREFLPEN (0x0), RTCAPBLPEN (0x0), SAI4LPEN (0x0), RESERVED (0x0).
+[21:01:04.5990] [WARNING] nvic: Unhandled write to offset 0xF50 (ICacheInvalidateAllToPoUaIgnored), value 0x0.
+[21:01:04.5991] [WARNING] cpu: Trying to enable instruction cache, but it's not supported
+[21:01:04.5991] [WARNING] nvic: Unhandled write to offset 0xF60 (DCacheInvalidateBySetWay), value 0x0.
+[21:01:04.7931] [WARNING] timer1: Unhandled write to offset 0x8. Unhandled bits: [7] when writing value 0x80. Tags: Master/Slave mode (MSM) (0x1).
+[21:01:04.8447] [WARNING] nvic: Unhandled write to offset 0xF60 (DCacheInvalidateBySetWay), value 0x0.
+[21:01:05.1494] [INFO] N120: Machine paused.
+[21:01:05.2342] [INFO] N120: Disposed.

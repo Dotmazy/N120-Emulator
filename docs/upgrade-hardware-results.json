@@ -1,0 +1,107 @@
+[
+  {
+    "name": "initial LCD/backlight ready",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "name": "Power switch sleeps real firmware",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "name": "Power switch wakes real firmware",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "name": "repeated power cycle",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "name": "held Power press/release and wake",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "name": "battery ADC 0%",
+    "passed": true,
+    "detail": "(3, 39321)"
+  },
+  {
+    "name": "battery ADC 20%",
+    "passed": true,
+    "detail": "(3.65, 47841)"
+  },
+  {
+    "name": "battery ADC 70%",
+    "passed": true,
+    "detail": "(3.925, 51445)"
+  },
+  {
+    "name": "battery ADC 100%",
+    "passed": true,
+    "detail": "(4.2, 55049)"
+  },
+  {
+    "name": "cable electrical signals 0",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "name": "cable electrical signals 1",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "name": "cable electrical signals 2",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "name": "cable electrical signals 0",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "name": "key sequence queue drains",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "name": "queued tap preserves a directly held key",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "name": "speed target 0.25x",
+    "passed": true,
+    "detail": "0.248"
+  },
+  {
+    "name": "speed target 1x",
+    "passed": true,
+    "detail": "0.987"
+  },
+  {
+    "name": "speed target 2x",
+    "passed": true,
+    "detail": "1.984"
+  },
+  {
+    "name": "USB descriptor from real firmware",
+    "passed": true,
+    "detail": "1201100200000040830491a2200101020301"
+  },
+  {
+    "name": "USB test does not fault firmware",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "name": "clean shutdown",
+    "passed": true,
+    "detail": ""
+  }
+]
