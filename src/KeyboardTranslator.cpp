@@ -7,9 +7,11 @@ QMap<int, int> KeyboardTranslator::defaults() {
             {Qt::Key_F3, 12},     {Qt::Key_F4, 13},    {Qt::Key_Backspace, 17}, {Qt::Key_Delete, 17},
             {Qt::Key_Return, 52}, {Qt::Key_Enter, 52}};
 }
+
 KeyboardTranslator::KeyboardTranslator(QObject* parent) : QObject(parent) {
     load();
 }
+
 void KeyboardTranslator::load() {
     QSettings s;
     mapping = defaults();
@@ -27,6 +29,7 @@ void KeyboardTranslator::load() {
     }
     textEnabled = s.value("keyboard/text", true).toBool();
 }
+
 void KeyboardTranslator::save() const {
     QVariantMap values;
     for (auto it = mapping.begin(); it != mapping.end(); ++it)
@@ -35,7 +38,9 @@ void KeyboardTranslator::save() const {
     s.setValue("keyboard/mapping", values);
     s.setValue("keyboard/text", textEnabled);
 }
+
 QList<int> KeyboardTranslator::character(QChar c) {
+    // Alphabetic labels follow physical key positions, including gaps in the six-column matrix.
     static const int alpha[] = {18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
                                 31, 32, 33, 34, 36, 37, 38, 39, 40, 42, 43, 44, 45};
     if (c.toLower() >= 'a' && c.toLower() <= 'z') {
@@ -59,12 +64,15 @@ QList<int> KeyboardTranslator::character(QChar c) {
         return {52};
     return {};
 }
+
 bool KeyboardTranslator::handle(QKeyEvent* e) {
+    // Release before checking modifiers: Ctrl/Meta may have changed since the original key press.
     if (e->type() == QEvent::KeyRelease && held.contains(e->key())) {
         if (e->isAutoRepeat())
             return true;
         int key = mapping.value(e->key());
         held.remove(e->key());
+        // Multiple PC bindings can hold the same switch (for example Return and keypad Enter).
         bool another = false;
         for (int pc : held)
             if (mapping.value(pc) == key)
@@ -106,6 +114,7 @@ bool KeyboardTranslator::handle(QKeyEvent* e) {
     }
     return true;
 }
+
 void KeyboardTranslator::releaseAll() {
     QSet<int> released;
     for (int pc : held)

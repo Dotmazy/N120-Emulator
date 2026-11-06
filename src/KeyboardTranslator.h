@@ -14,9 +14,11 @@ class KeyboardTranslator final : public QObject {
     bool textEnabled = true;
     bool handle(QKeyEvent* event);
     void releaseAll();
+
     bool holds(int key) const {
         return held.contains(key);
     }
+
     void load();
     void save() const;
   signals:

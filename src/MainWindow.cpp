@@ -1,86 +1,549 @@
 #include "MainWindow.h"
 #include "LogViewer.h"
-#include <QtWidgets>
 #include <QJsonArray>
-static QString hex(quint64 n){return QString("0x%1").arg(n,8,16,QChar('0'));}
-MainWindow::~MainWindow(){windowsUsb.detach();qApp->removeEventFilter(this);disconnect(&engine,nullptr,this,nullptr);disconnect(&keyboard,nullptr,this,nullptr);}
-MainWindow::MainWindow(bool smoke):engine(this),keyboard(this) {
-    setWindowTitle("N120 Studio — Hardware Emulator");resize(1090,980);setMinimumSize(650,620);
-    surface=new CalculatorWidget;surface->setObjectName("calculatorSurface");
-    auto scroll=new QScrollArea;scroll->setWidget(surface);scroll->setWidgetResizable(true);scroll->setFrameShape(QFrame::NoFrame);setCentralWidget(scroll);
-    sidebar=new QDockWidget("Hardware inspector",this);sidebar->setObjectName("hardwareInspector");sidebar->setAllowedAreas(Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea);sidebar->setMinimumWidth(380);
-    auto inspector=new QWidget;auto inspectorLayout=new QVBoxLayout(inspector);inspectorLayout->setContentsMargins(8,8,8,8);auto inspectorNav=new QComboBox;inspectorNav->setObjectName("inspectorNavigation");inspectorNav->setAccessibleName("Hardware inspector category");inspectorNav->setMinimumContentsLength(20);inspectorLayout->addWidget(inspectorNav);tabs=new QTabWidget;tabs->setDocumentMode(true);tabs->tabBar()->hide();inspectorLayout->addWidget(tabs,1);sidebar->setWidget(inspector);connect(inspectorNav,&QComboBox::currentIndexChanged,tabs,&QTabWidget::setCurrentIndex);connect(tabs,&QTabWidget::currentChanged,inspectorNav,&QComboBox::setCurrentIndex);addDockWidget(Qt::RightDockWidgetArea,sidebar);
-    auto page=[this](const QString& name){auto w=new QWidget;auto l=new QVBoxLayout(w);l->setContentsMargins(18,18,18,18);l->setSpacing(14);auto scroll=new QScrollArea;scroll->setWidgetResizable(true);scroll->setWidget(w);scroll->setFrameShape(QFrame::NoFrame);tabs->addTab(scroll,name);return l;};
-    auto text=[](QVBoxLayout* l,const QString& title){auto heading=new QLabel(title);heading->setObjectName("sectionTitle");if(!title.isEmpty())l->addWidget(heading);else delete heading;auto value=new QLabel("Waiting for hardware…");value->setTextInteractionFlags(Qt::TextSelectableByMouse);value->setWordWrap(true);value->setAlignment(Qt::AlignTop);l->addWidget(value);return value;};
-    auto p=page("Overview");overview=text(p,"N120 / LIVE HARDWARE");p->addStretch();
-    p=page("CPU");cpuInfo=text(p,"CORTEX-M7");auto debugBox=new QGroupBox("GDB Debug Server");auto debugForm=new QFormLayout(debugBox);auto debugPort=new QSpinBox;debugPort->setRange(1024,65535);debugPort->setValue(3333);debugForm->addRow("TCP port",debugPort);auto debugStart=new QPushButton("Enable GDB server");auto debugStop=new QPushButton("Disable GDB server");debugForm->addRow(debugStart);debugForm->addRow(debugStop);auto debugNote=new QLabel("Connect arm-none-eabi-gdb using target remote localhost:3333. Halt, step, inspect registers and memory in the debugger. This controls this calculator's MCU.");debugNote->setWordWrap(true);debugForm->addRow(debugNote);connect(debugStart,&QPushButton::clicked,this,[this,debugPort]{engine.command("gdb-start "+QByteArray::number(debugPort->value()));});connect(debugStop,&QPushButton::clicked,this,[this]{engine.command("gdb-stop");});p->addWidget(debugBox);p->addStretch();
-    p=page("Display");displayInfo=text(p,"320 × 240 / FMC");auto dim=new QCheckBox("Dim LCD when backlight is off");dim->setChecked(QSettings().value("display/dim",true).toBool());p->addWidget(dim);connect(dim,&QCheckBox::toggled,this,[this](bool v){QSettings().setValue("display/dim",v);surface->setDim(v);});auto hit=new QCheckBox("Visualize key hitboxes");p->addWidget(hit);connect(hit,&QCheckBox::toggled,surface,&CalculatorWidget::setHitboxes);p->addStretch();
-    p=page("Power");
-    auto sessionCard=new QGroupBox("SESSION");auto sessionLayout=new QVBoxLayout(sessionCard);standardInfo=new QLabel("Waiting for firmware…");standardInfo->setWordWrap(true);sessionLayout->addWidget(standardInfo);p->addWidget(sessionCard);
-    auto boardCard=new QGroupBox("BOARD");auto boardLayout=new QVBoxLayout(boardCard);boardInfo=new QLabel;boardInfo->setWordWrap(true);boardLayout->addWidget(boardInfo);auto standardDim=new QCheckBox("Dim LCD when backlight is off");standardDim->setChecked(dim->isChecked());boardLayout->addWidget(standardDim);connect(standardDim,&QCheckBox::toggled,dim,&QCheckBox::setChecked);connect(dim,&QCheckBox::toggled,standardDim,&QCheckBox::setChecked);p->addWidget(boardCard);
-    auto batteryCard=new QGroupBox("BATTERY");auto batteryLayout=new QVBoxLayout(batteryCard);powerInfo=text(batteryLayout,"");
-    battery=new QSlider(Qt::Horizontal);battery->setRange(0,100);battery->setValue(QSettings().value("power/percent",70).toInt());battery->setToolTip("Battery state of charge");batteryLayout->addWidget(battery);
-    cable=new QComboBox;cable->setObjectName("usbCable");cable->addItems({"Unplugged","Charger","Computer"});cable->setCurrentIndex(QSettings().value("power/cable",0).toInt());batteryLayout->addWidget(new QLabel("USB cable"));batteryLayout->addWidget(cable);p->addWidget(batteryCard);p->addStretch();
-    connect(battery,&QSlider::valueChanged,this,[this](int n){QSettings().setValue("power/percent",n);engine.command("battery "+QByteArray::number(n));});connect(cable,&QComboBox::currentIndexChanged,this,[this](int n){QSettings().setValue("power/cable",n);if(n!=2)windowsUsb.detach();engine.command("cable "+QByteArray::number(n));});
-    connect(&windowsUsb,&WindowsUsb::status,this,[this](const QString& text){windowsUsbStatus=text;});connect(&windowsUsb,&WindowsUsb::message,this,[this](const QString& text){logs->append(text);});
-    p=page("USB");usbInfo=text(p,"USB CONTROLLER");auto probeUsb=new QPushButton("Read firmware USB descriptor");probeUsb->setObjectName("usbProbe");p->addWidget(probeUsb);connect(probeUsb,&QPushButton::clicked,this,[this]{if(engine.connected()){cable->setCurrentIndex(2);engine.command("usb-probe");}});auto usbip=new QPushButton("Start USB/IP server…");usbip->setObjectName("usbIpStart");usbip->setToolTip("Loopback USB/IP: firmware descriptor and endpoint-zero control transfers. A compatible host driver is required.");p->addWidget(usbip);connect(usbip,&QPushButton::clicked,this,[this]{if(!engine.connected())return;bool ok=false;int port=QInputDialog::getInt(this,"USB/IP server","Loopback TCP port",3240,1024,65535,1,&ok);if(ok){cable->setCurrentIndex(2);engine.command("usbip "+QByteArray::number(port));}});auto stopUsb=new QPushButton("Stop USB/IP server");stopUsb->setObjectName("usbIpStop");p->addWidget(stopUsb);connect(stopUsb,&QPushButton::clicked,this,[this]{windowsUsb.detach();engine.command("usbip-stop");});auto attachWindows=new QPushButton("Attach to Windows");attachWindows->setObjectName("windowsAttach");p->addWidget(attachWindows);connect(attachWindows,&QPushButton::clicked,this,[this]{if(!engine.connected()||hardware["paused"].toBool())return;if(hardware["usbIpPort"].toInt()!=3240){statusBar()->showMessage("Start USB/IP on port 3240 first",5000);return;}windowsUsb.attach();});
-    auto detachWindows=new QPushButton("Detach from Windows");p->addWidget(detachWindows);connect(detachWindows,&QPushButton::clicked,&windowsUsb,&WindowsUsb::detach);
-    auto inspectWindows=new QPushButton("Inspect Windows USB status");p->addWidget(inspectWindows);connect(inspectWindows,&QPushButton::clicked,&windowsUsb,&WindowsUsb::inspect);
-    auto diagnostic=new QPushButton("Open USB diagnostics and setup");p->addWidget(diagnostic);connect(diagnostic,&QPushButton::clicked,this,[]{QDesktopServices::openUrl(QUrl::fromLocalFile(QCoreApplication::applicationDirPath()+"/docs/usb.md"));});p->addStretch();
-    p=page("Flash");flashInfo=text(p,"FIRMWARE & NOR FLASH");auto save=new QPushButton("Save all 8 MiB…");p->addWidget(save);connect(save,&QPushButton::clicked,this,&MainWindow::saveFlash);p->addStretch();
-    logs=new LogViewer;tabs->addTab(logs,"Diagnostics");
-    for(int i=0;i<tabs->count();++i)inspectorNav->addItem(studioIcon(tabs->tabText(i).toLower(),palette().color(QPalette::ButtonText)),tabs->tabText(i));
-    liveStatus=new QLabel("● Stopped");statusBar()->addWidget(liveStatus,1);buildMenus();
-    connect(surface,&CalculatorWidget::physicalKey,this,[this](int i,bool down){if(i==8&&down&&!engine.running()){startWith(config);return;}key(i,down,true);});
-    connect(&keyboard,&KeyboardTranslator::physicalKey,this,[this](int i,bool down){if(i==8&&down&&!engine.running()){startWith(config);return;}key(i,down);});
-    connect(&keyboard,&KeyboardTranslator::sequence,this,[this](const QList<int>& keys){if(!engine.connected())return;QStringList values;for(int i:keys)values<<QString::number(i);engine.command("sequence "+values.join(',').toLatin1());});
-    connect(&keyboard,&KeyboardTranslator::unsupported,this,[this](const QString& c){statusBar()->showMessage("No physical key sequence is mapped for: "+c,4000);});
-    connect(&engine,&RenodeManager::snapshot,this,&MainWindow::updateHardware);connect(&engine,&RenodeManager::log,logs,&LogViewer::append);
-    connect(&engine,&RenodeManager::response,this,[this](const QJsonObject& r){if(r["reloaded"].toBool()){logs->append("Firmware images reloaded; MCU booting");statusBar()->showMessage("Firmware reloaded",3000);}if(!r["ok"].toBool())statusBar()->showMessage(r["error"].toString(),5000);if(r.contains("usbDescriptor"))logs->append(r["usbDescriptor"].toString().isEmpty()?"[WARNING] USB descriptor request timed out":"USB firmware descriptor received");});
-    connect(&engine,&RenodeManager::state,this,[this](const QString& state){liveStatus->setText("● "+state);logs->append(state);if(state=="Connected"){engine.command("battery "+QByteArray::number(battery->value()));engine.command("cable "+QByteArray::number(cable->currentIndex()));engine.command("speed "+QByteArray::number(QSettings().value("emulation/target",1.0).toDouble()));}if(state.startsWith("Stopped")&&pendingRestart){QTimer::singleShot(0,this,[this]{if(pendingRestart){pendingRestart=false;startWith(config);}});}updateActions();});
-    QSettings s;auto detected=qEnvironmentVariable("RENODE_PATH");if(detected.isEmpty())detected=QStandardPaths::findExecutable("renode");
-    config.boot0=s.value("boot0",false).toBool();config.systemRom=s.value("systemRom").toString();config.renode=s.value("renode",detected).toString();config.internal=s.value("internal").toString();config.external=s.value("external").toString();config.persistent=s.value("persistent").toString();config.externalOffset=s.value("externalOffset",0).toUInt();config.lcdId=s.value("lcd",0x4E4101).toUInt();
-    applyPreferences();setLayoutMode(s.value("view/layout",s.value("view/compact",false).toBool()?"Compact":"Standard").toString());recentFiles();qApp->installEventFilter(this);updateActions();
-    if(!smoke)QTimer::singleShot(0,this,[this]{if(QSettings().value("general/restore",false).toBool()&&!config.internal.isEmpty())startWith(config);else configure();});
-}
-void MainWindow::startWith(const Configuration& c){config=c;firmwarePixels=0;externalExecuting=false;hardware={};reportedErrors.clear();lastVirtual=-1;speed=0;sampleClock.invalidate();engine.start(c);updateActions();recentFiles();}
-void MainWindow::updateHardware(const QJsonObject& s){
-    for(auto error:s["errors"].toArray()){auto text=error.toString();if(!reportedErrors.contains(text)){reportedErrors.insert(text);logs->append("[ERROR] Peripheral: "+text);}}
-    double virtualMs=s["virtualMs"].toDouble(),wallMs=sampleClock.isValid()?sampleClock.restart():0;if(!sampleClock.isValid())sampleClock.start();
-    bool paused=s["paused"].toBool();double actual=wallMs>0&&lastVirtual>=0?(virtualMs-lastVirtual)/wallMs:0;
-    if(paused||hardware["paused"].toBool()||actual<0||wallMs>2000)speed=0;else if(lastVirtual>=0)speed=speed==0?actual:.8*speed+.2*actual;lastVirtual=virtualMs;
-    hardware=s;externalExecuting=s["pc"].toInteger()>=0x90000000&&s["pc"].toInteger()<0x90800000;firmwarePixels=s["pixelWrites"].toInteger();
-    if(firmwarePixels!=lastPixels||!s["lcdActive"].toBool())surface->setFrame(QByteArray::fromBase64(s["frame"].toString().toLatin1()));
-    auto rgb=s["rgb"].toArray();surface->setHardware({float(rgb[0].toDouble()),float(rgb[1].toDouble()),float(rgb[2].toDouble())},s["backlight"].toDouble());
-    QSet<int> held=mouseHeld|pcHeld;for(auto v:s["pressed"].toArray())held.insert(v.toInt());surface->setHeld(held);
-    QString state=s["faulted"].toBool()?"Faulted":paused?"Paused":!s["lcdActive"].toBool()&&s["cpuWaiting"].toBool()?"Sleeping":!s["lcdActive"].toBool()?"Power transition":"Running";
-    QString mode=QStringList{"Unplugged","Charger","Computer"}.value(s["connectionMode"].toInt()),multiplier=paused?"—":QString::number(speed,'f',2)+"×";
-    liveStatus->setText(QString("● %1  |  Speed %2  |  CPU %3 MHz  |  LCD %4  |  %5").arg(state,multiplier).arg(s["cpuHz"].toDouble()/1e6,0,'f',1).arg(s["lcdActive"].toBool()?"Ready":"Inactive",mode));
-    if(layoutName!="Developer")liveStatus->setText(QString("● %1  |  %2  |  %3 s").arg(state,multiplier).arg(virtualMs/1000,0,'f',1));
-    overview->setText(QString("State    %1\nActual speed    %2\nTarget    %3\n\nLED duty    R %4% / G %5% / B %6%\n\nHeld keys    %7\nRows    %8\nColumns    %9\nQueued strokes    %10").arg(state,multiplier,s["targetSpeed"].toDouble()==0?"Unlimited":QString::number(s["targetSpeed"].toDouble())+"×").arg(rgb[0].toDouble()*100,0,'f',1).arg(rgb[1].toDouble()*100,0,'f',1).arg(rgb[2].toDouble()*100,0,'f',1).arg(held.size()).arg(hex(s["rows"].toInteger()),hex(s["columns"].toInteger())).arg(s["sequencePending"].toInt()));
-    if(layoutName=="Standard")overview->setText(QString("%1\n\nSpeed    %2\nVirtual time    %3 s\nBattery    %4%\nConnection    %5").arg(state,multiplier).arg(virtualMs/1000,0,'f',1).arg(s["batteryPercent"].toInt()).arg(mode));
-    cpuInfo->setText(QString("State    %1\nPC    %2\nSP    %3\nClock    %4 MHz\nInstructions    %5\nVirtual time    %6 s\nSpeed    %7\nCPU lock-up    %8\n\nSpeed measures virtual seconds per wall second. CPU timing remains instruction-budget based.").arg(state,hex(s["pc"].toInteger()),hex(s["sp"].toInteger())).arg(s["cpuHz"].toDouble()/1e6,0,'f',3).arg(s["instructions"].toInteger()).arg(virtualMs/1000,0,'f',3).arg(multiplier,s["faulted"].toBool()?"Yes":"No"));
-    displayInfo->setText(QString("Controller    %1\nInitialization    %2\nGamma    %3\nBacklight    %4%\nPixel writes    %5\nChanged-frame delivery    %6 Hz").arg(hex(s["lcdId"].toInteger()),s["lcdActive"].toBool()?"Ready":"Inactive",s["gamma"].toBool()?"Valid":"Missing / invalid").arg(s["backlight"].toDouble()*100,0,'f',0).arg(firmwarePixels).arg(wallMs>0&&lastPixels!=firmwarePixels?1000/wallMs:0,0,'f',1));lastPixels=firmwarePixels;
-    updatePowerCard();
-    standardInfo->setText(QString("%1\n\nSpeed     %2\nVirtual time     %3 s\nFirmware     %4").arg(state,multiplier).arg(virtualMs/1000,0,'f',2).arg(QFileInfo(config.external).fileName()));boardInfo->setText(QString("LED     R %1% · G %2% · B %3%\nBacklight     %4").arg(rgb[0].toDouble()*100,0,'f',0).arg(rgb[1].toDouble()*100,0,'f',0).arg(rgb[2].toDouble()*100,0,'f',0).arg(s["backlight"].toDouble()>0?"On":"Off"));
+#include <QtWidgets>
 
-    cpuInfo->setText(cpuInfo->text()+"\nGDB port    "+QString::number(s["gdbPort"].toInt())+"\nGDB client    "+(s["gdbConnected"].toBool()?"Connected":"None")+"\nReset boot address    "+hex(s["bootAddress"].toInteger()));
-    cpuInfo->setText(cpuInfo->text()+"\nCFSR    "+hex(s["cfsr"].toInteger())+"\nHFSR    "+hex(s["hfsr"].toInteger()));
-    auto descriptor=QByteArray::fromBase64(s["usbDescriptor"].toString().toLatin1());QString identity=descriptor.size()>=12?QString("%1:%2").arg(quint8(descriptor[8])|(quint8(descriptor[9])<<8),4,16,QChar('0')).arg(quint8(descriptor[10])|(quint8(descriptor[11])<<8),4,16,QChar('0')):"Not read";
-    usbInfo->setText(QString("Connection    %1\nVBUS    %2\nVID:PID    %3\nUSB address    %4\nControl transfers    %5\nDescriptor    %6\n\nHost and browser access are separate from the firmware probe. Use Windows status and the browser diagnostic page.").arg(mode,s["connectionMode"].toInt()!=0?"Present":"Absent",identity).arg(s["usbAddress"].toInt()).arg(s["usbTransfers"].toInteger()).arg(descriptor.size()==18?"Received from firmware":"Not received"));
-    usbInfo->setText(usbInfo->text()+"\n\nUSB/IP clients    "+QString::number(s["usbClients"].toInt())+"\nUSB/IP imported    "+(s["usbImported"].toBool()?"Yes":"No")+"\nConfiguration request    "+QString::number(s["usbConfiguration"].toInt())+"\n\nWindows USB status\n"+windowsUsbStatus+"\n\nBrowser connection    Check the WebUSB page");
-    if(s["usbIpPort"].toInt()==0)windowsUsb.detach();
-    if(!descriptor.isEmpty())usbInfo->setText(usbInfo->text()+"\nRaw descriptor    "+descriptor.toHex(' '));
-    usbInfo->setText(usbInfo->text()+"\n\nEP0 IN    "+hex(s["usbIn0"].toInteger())+"\nEP0 OUT    "+hex(s["usbOut0"].toInteger())+"\nUSB/IP port    "+QString::number(s["usbIpPort"].toInt()));
-    flashInfo->setText(QString("Internal    %1\nExternal    %2\nPersistence    %3\n\nSlot A    0x90000000 / 4 MiB\nSlot B    0x90400000 / 4 MiB\nStatus    %4\nProgram bytes    %5\nErases    %6").arg(QFileInfo(config.internal).fileName(),QFileInfo(config.external).fileName(),QFileInfo(config.persistent).fileName(),hex(s["flashStatus"].toInteger())).arg(s["flashWrites"].toInteger()).arg(s["flashErases"].toInteger()));
-    if(!s["usbError"].toString().isEmpty())usbInfo->setText(usbInfo->text()+"\n\n"+s["usbError"].toString());
-    if(s["usbPending"].toBool())usbInfo->setText(usbInfo->text()+"\n\nWaiting for firmware EP0…");
-    if(!s["usbError"].toString().isEmpty()&&!reportedErrors.contains("USB: "+s["usbError"].toString())){reportedErrors.insert("USB: "+s["usbError"].toString());logs->append("[WARNING] USB: "+s["usbError"].toString());}
-    updateActions();if(s["faulted"].toBool()&&QSettings().value("emulation/pauseOnFault",true).toBool()&&!paused)engine.command("pause");
+static QString hex(quint64 n) {
+    return QString("0x%1").arg(n, 8, 16, QChar('0'));
 }
-void MainWindow::updatePowerCard(){const auto& s=hardware;QString mode=QStringList{"Unplugged","Charger","Computer"}.value(s["connectionMode"].toInt());if(layoutName=="Standard"){powerInfo->setText(QString("%1%     ·     %2 V\n%3").arg(s["batteryPercent"].toInt()).arg(s["batteryVoltage"].toDouble(),0,'f',2).arg(mode));return;}
-    powerInfo->setText(QString("Configured charge    %1%\nCell voltage    %2 V\nADC1 input    %3 / 65535\nConnection    %4\nCharging signal    %5\nFirmware battery percentage    not exported\nADC data-register reads    %6\nLast ADC sample    %7").arg(s["batteryPercent"].toInt()).arg(s["batteryVoltage"].toDouble(),0,'f',3).arg(s["batteryAdc"].toInt()).arg(mode,s["connectionMode"].toInt()!=0&&s["batteryPercent"].toInt()<100?"Active":"Inactive").arg(s["batteryReads"].toInteger()).arg(s["lastBatterySample"].toInt()));}
-void MainWindow::key(int i,bool down,bool mouse){auto& held=mouse?mouseHeld:pcHeld;bool before=(mouseHeld|pcHeld).contains(i);if(down)held.insert(i);else held.remove(i);bool after=(mouseHeld|pcHeld).contains(i);if(before!=after)engine.command("key "+QByteArray::number(i/6)+' '+QByteArray::number(i%6)+' '+(after?"1":"0"));surface->setHeld(mouseHeld|pcHeld);}
-void MainWindow::releaseKeys(){keyboard.releaseAll();pcHeld.clear();mouseHeld.clear();surface->setHeld({});engine.command("release");}
-bool MainWindow::eventFilter(QObject*,QEvent* e){if(e->type()==QEvent::ApplicationDeactivate){releaseKeys();return false;}if(e->type()!=QEvent::KeyPress&&e->type()!=QEvent::KeyRelease)return false;if(e->type()==QEvent::KeyRelease&&keyboard.holds(static_cast<QKeyEvent*>(e)->key()))return keyboard.handle(static_cast<QKeyEvent*>(e));if(QApplication::activeModalWidget()||!isActiveWindow())return false;auto f=QApplication::focusWidget();if(f&&(qobject_cast<QLineEdit*>(f)||qobject_cast<QPlainTextEdit*>(f)||qobject_cast<QAbstractSpinBox*>(f)||qobject_cast<QComboBox*>(f)||qobject_cast<QAbstractItemView*>(f)))return false;return keyboard.handle(static_cast<QKeyEvent*>(e));}
-void MainWindow::closeEvent(QCloseEvent* e){if(engine.connected()&&QSettings().value("general/confirmClose",false).toBool()&&QMessageBox::question(this,"Close emulator","Stop the running calculator and close?")!=QMessageBox::Yes){e->ignore();return;}pendingRestart=false;releaseKeys();engine.stop();QMainWindow::closeEvent(e);}
+
+MainWindow::~MainWindow() {
+    windowsUsb.detach();
+    qApp->removeEventFilter(this);
+    disconnect(&engine, nullptr, this, nullptr);
+    disconnect(&keyboard, nullptr, this, nullptr);
+}
+
+MainWindow::MainWindow(bool smoke) : engine(this), keyboard(this) {
+    setWindowTitle("N120 Studio — Hardware Emulator");
+    resize(1090, 980);
+    setMinimumSize(650, 620);
+    surface = new CalculatorWidget;
+    surface->setObjectName("calculatorSurface");
+    auto scroll = new QScrollArea;
+    scroll->setWidget(surface);
+    scroll->setWidgetResizable(true);
+    scroll->setFrameShape(QFrame::NoFrame);
+    setCentralWidget(scroll);
+    sidebar = new QDockWidget("Hardware inspector", this);
+    sidebar->setObjectName("hardwareInspector");
+    sidebar->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+    sidebar->setMinimumWidth(380);
+    auto inspector = new QWidget;
+    auto inspectorLayout = new QVBoxLayout(inspector);
+    inspectorLayout->setContentsMargins(8, 8, 8, 8);
+    auto inspectorNav = new QComboBox;
+    inspectorNav->setObjectName("inspectorNavigation");
+    inspectorNav->setAccessibleName("Hardware inspector category");
+    inspectorNav->setMinimumContentsLength(20);
+    inspectorLayout->addWidget(inspectorNav);
+    tabs = new QTabWidget;
+    tabs->setDocumentMode(true);
+    tabs->tabBar()->hide();
+    inspectorLayout->addWidget(tabs, 1);
+    sidebar->setWidget(inspector);
+    connect(inspectorNav, &QComboBox::currentIndexChanged, tabs, &QTabWidget::setCurrentIndex);
+    connect(tabs, &QTabWidget::currentChanged, inspectorNav, &QComboBox::setCurrentIndex);
+    addDockWidget(Qt::RightDockWidgetArea, sidebar);
+    auto page = [this](const QString& name) {
+        auto w = new QWidget;
+        auto l = new QVBoxLayout(w);
+        l->setContentsMargins(18, 18, 18, 18);
+        l->setSpacing(14);
+        auto scroll = new QScrollArea;
+        scroll->setWidgetResizable(true);
+        scroll->setWidget(w);
+        scroll->setFrameShape(QFrame::NoFrame);
+        tabs->addTab(scroll, name);
+        return l;
+    };
+    auto text = [](QVBoxLayout* l, const QString& title) {
+        auto heading = new QLabel(title);
+        heading->setObjectName("sectionTitle");
+        if (!title.isEmpty())
+            l->addWidget(heading);
+        else
+            delete heading;
+        auto value = new QLabel("Waiting for hardware…");
+        value->setTextInteractionFlags(Qt::TextSelectableByMouse);
+        value->setWordWrap(true);
+        value->setAlignment(Qt::AlignTop);
+        l->addWidget(value);
+        return value;
+    };
+    auto p = page("Overview");
+    overview = text(p, "N120 / LIVE HARDWARE");
+    p->addStretch();
+    p = page("CPU");
+    cpuInfo = text(p, "CORTEX-M7");
+    auto debugBox = new QGroupBox("GDB Debug Server");
+    auto debugForm = new QFormLayout(debugBox);
+    auto debugPort = new QSpinBox;
+    debugPort->setRange(1024, 65535);
+    debugPort->setValue(3333);
+    debugForm->addRow("TCP port", debugPort);
+    auto debugStart = new QPushButton("Enable GDB server");
+    auto debugStop = new QPushButton("Disable GDB server");
+    debugForm->addRow(debugStart);
+    debugForm->addRow(debugStop);
+    auto debugNote =
+        new QLabel("Connect arm-none-eabi-gdb using target remote localhost:3333. Halt, step, inspect "
+                   "registers and memory in the debugger. This controls this calculator's MCU.");
+    debugNote->setWordWrap(true);
+    debugForm->addRow(debugNote);
+    connect(debugStart, &QPushButton::clicked, this,
+            [this, debugPort] { engine.command("gdb-start " + QByteArray::number(debugPort->value())); });
+    connect(debugStop, &QPushButton::clicked, this, [this] { engine.command("gdb-stop"); });
+    p->addWidget(debugBox);
+    p->addStretch();
+    p = page("Display");
+    displayInfo = text(p, "320 × 240 / FMC");
+    auto dim = new QCheckBox("Dim LCD when backlight is off");
+    dim->setChecked(QSettings().value("display/dim", true).toBool());
+    p->addWidget(dim);
+    connect(dim, &QCheckBox::toggled, this, [this](bool v) {
+        QSettings().setValue("display/dim", v);
+        surface->setDim(v);
+    });
+    auto hit = new QCheckBox("Visualize key hitboxes");
+    p->addWidget(hit);
+    connect(hit, &QCheckBox::toggled, surface, &CalculatorWidget::setHitboxes);
+    p->addStretch();
+    p = page("Power");
+    auto sessionCard = new QGroupBox("SESSION");
+    auto sessionLayout = new QVBoxLayout(sessionCard);
+    standardInfo = new QLabel("Waiting for firmware…");
+    standardInfo->setWordWrap(true);
+    sessionLayout->addWidget(standardInfo);
+    p->addWidget(sessionCard);
+    auto boardCard = new QGroupBox("BOARD");
+    auto boardLayout = new QVBoxLayout(boardCard);
+    boardInfo = new QLabel;
+    boardInfo->setWordWrap(true);
+    boardLayout->addWidget(boardInfo);
+    auto standardDim = new QCheckBox("Dim LCD when backlight is off");
+    standardDim->setChecked(dim->isChecked());
+    boardLayout->addWidget(standardDim);
+    connect(standardDim, &QCheckBox::toggled, dim, &QCheckBox::setChecked);
+    connect(dim, &QCheckBox::toggled, standardDim, &QCheckBox::setChecked);
+    p->addWidget(boardCard);
+    auto batteryCard = new QGroupBox("BATTERY");
+    auto batteryLayout = new QVBoxLayout(batteryCard);
+    powerInfo = text(batteryLayout, "");
+    battery = new QSlider(Qt::Horizontal);
+    battery->setRange(0, 100);
+    battery->setValue(QSettings().value("power/percent", 70).toInt());
+    battery->setToolTip("Battery state of charge");
+    batteryLayout->addWidget(battery);
+    cable = new QComboBox;
+    cable->setObjectName("usbCable");
+    cable->addItems({"Unplugged", "Charger", "Computer"});
+    cable->setCurrentIndex(QSettings().value("power/cable", 0).toInt());
+    batteryLayout->addWidget(new QLabel("USB cable"));
+    batteryLayout->addWidget(cable);
+    p->addWidget(batteryCard);
+    p->addStretch();
+    connect(battery, &QSlider::valueChanged, this, [this](int n) {
+        QSettings().setValue("power/percent", n);
+        engine.command("battery " + QByteArray::number(n));
+    });
+    connect(cable, &QComboBox::currentIndexChanged, this, [this](int n) {
+        QSettings().setValue("power/cable", n);
+        if (n != 2)
+            windowsUsb.detach();
+        engine.command("cable " + QByteArray::number(n));
+    });
+    connect(&windowsUsb, &WindowsUsb::status, this, [this](const QString& text) { windowsUsbStatus = text; });
+    connect(&windowsUsb, &WindowsUsb::message, this, [this](const QString& text) { logs->append(text); });
+    p = page("USB");
+    usbInfo = text(p, "USB CONTROLLER");
+    auto probeUsb = new QPushButton("Read firmware USB descriptor");
+    probeUsb->setObjectName("usbProbe");
+    p->addWidget(probeUsb);
+    connect(probeUsb, &QPushButton::clicked, this, [this] {
+        if (engine.connected()) {
+            cable->setCurrentIndex(2);
+            engine.command("usb-probe");
+        }
+    });
+    auto usbip = new QPushButton("Start USB/IP server…");
+    usbip->setObjectName("usbIpStart");
+    usbip->setToolTip("Loopback USB/IP: firmware descriptor and endpoint-zero control transfers. A "
+                      "compatible host driver is required.");
+    p->addWidget(usbip);
+    connect(usbip, &QPushButton::clicked, this, [this] {
+        if (!engine.connected())
+            return;
+        bool ok = false;
+        int port =
+            QInputDialog::getInt(this, "USB/IP server", "Loopback TCP port", 3240, 1024, 65535, 1, &ok);
+        if (ok) {
+            cable->setCurrentIndex(2);
+            engine.command("usbip " + QByteArray::number(port));
+        }
+    });
+    auto stopUsb = new QPushButton("Stop USB/IP server");
+    stopUsb->setObjectName("usbIpStop");
+    p->addWidget(stopUsb);
+    connect(stopUsb, &QPushButton::clicked, this, [this] {
+        windowsUsb.detach();
+        engine.command("usbip-stop");
+    });
+    auto attachWindows = new QPushButton("Attach to Windows");
+    attachWindows->setObjectName("windowsAttach");
+    p->addWidget(attachWindows);
+    connect(attachWindows, &QPushButton::clicked, this, [this] {
+        if (!engine.connected() || hardware["paused"].toBool())
+            return;
+        if (hardware["usbIpPort"].toInt() != 3240) {
+            statusBar()->showMessage("Start USB/IP on port 3240 first", 5000);
+            return;
+        }
+        windowsUsb.attach();
+    });
+    auto detachWindows = new QPushButton("Detach from Windows");
+    p->addWidget(detachWindows);
+    connect(detachWindows, &QPushButton::clicked, &windowsUsb, &WindowsUsb::detach);
+    auto inspectWindows = new QPushButton("Inspect Windows USB status");
+    p->addWidget(inspectWindows);
+    connect(inspectWindows, &QPushButton::clicked, &windowsUsb, &WindowsUsb::inspect);
+    auto diagnostic = new QPushButton("Open USB diagnostics and setup");
+    p->addWidget(diagnostic);
+    connect(diagnostic, &QPushButton::clicked, this, [] {
+        QDesktopServices::openUrl(
+            QUrl::fromLocalFile(QCoreApplication::applicationDirPath() + "/docs/usb.md"));
+    });
+    p->addStretch();
+    p = page("Flash");
+    flashInfo = text(p, "FIRMWARE & NOR FLASH");
+    auto save = new QPushButton("Save all 8 MiB…");
+    p->addWidget(save);
+    connect(save, &QPushButton::clicked, this, &MainWindow::saveFlash);
+    p->addStretch();
+    logs = new LogViewer;
+    tabs->addTab(logs, "Diagnostics");
+    for (int i = 0; i < tabs->count(); ++i)
+        inspectorNav->addItem(studioIcon(tabs->tabText(i).toLower(), palette().color(QPalette::ButtonText)),
+                              tabs->tabText(i));
+    liveStatus = new QLabel("● Stopped");
+    statusBar()->addWidget(liveStatus, 1);
+    buildMenus();
+    connect(surface, &CalculatorWidget::physicalKey, this, [this](int i, bool down) {
+        if (i == 8 && down && !engine.running()) {
+            startWith(config);
+            return;
+        }
+        key(i, down, true);
+    });
+    connect(&keyboard, &KeyboardTranslator::physicalKey, this, [this](int i, bool down) {
+        if (i == 8 && down && !engine.running()) {
+            startWith(config);
+            return;
+        }
+        key(i, down);
+    });
+    connect(&keyboard, &KeyboardTranslator::sequence, this, [this](const QList<int>& keys) {
+        if (!engine.connected())
+            return;
+        QStringList values;
+        for (int i : keys)
+            values << QString::number(i);
+        engine.command("sequence " + values.join(',').toLatin1());
+    });
+    connect(&keyboard, &KeyboardTranslator::unsupported, this, [this](const QString& c) {
+        statusBar()->showMessage("No physical key sequence is mapped for: " + c, 4000);
+    });
+    connect(&engine, &RenodeManager::snapshot, this, &MainWindow::updateHardware);
+    connect(&engine, &RenodeManager::log, logs, &LogViewer::append);
+    connect(&engine, &RenodeManager::response, this, [this](const QJsonObject& r) {
+        if (r["reloaded"].toBool()) {
+            logs->append("Firmware images reloaded; MCU booting");
+            statusBar()->showMessage("Firmware reloaded", 3000);
+        }
+        if (!r["ok"].toBool())
+            statusBar()->showMessage(r["error"].toString(), 5000);
+        if (r.contains("usbDescriptor"))
+            logs->append(r["usbDescriptor"].toString().isEmpty()
+                             ? "[WARNING] USB descriptor request timed out"
+                             : "USB firmware descriptor received");
+    });
+    connect(&engine, &RenodeManager::state, this, [this](const QString& state) {
+        liveStatus->setText("● " + state);
+        logs->append(state);
+        if (state == "Connected") {
+            engine.command("battery " + QByteArray::number(battery->value()));
+            engine.command("cable " + QByteArray::number(cable->currentIndex()));
+            engine.command("speed " +
+                           QByteArray::number(QSettings().value("emulation/target", 1.0).toDouble()));
+        }
+        // Restart only after QProcess reports exit; defer until the finished-signal handlers have returned.
+        if (state.startsWith("Stopped") && pendingRestart) {
+            QTimer::singleShot(0, this, [this] {
+                if (pendingRestart) {
+                    pendingRestart = false;
+                    startWith(config);
+                }
+            });
+        }
+        updateActions();
+    });
+    QSettings s;
+    auto detected = qEnvironmentVariable("RENODE_PATH");
+    if (detected.isEmpty())
+        detected = QStandardPaths::findExecutable("renode");
+    config.boot0 = s.value("boot0", false).toBool();
+    config.systemRom = s.value("systemRom").toString();
+    config.renode = s.value("renode", detected).toString();
+    config.internal = s.value("internal").toString();
+    config.external = s.value("external").toString();
+    config.persistent = s.value("persistent").toString();
+    config.externalOffset = s.value("externalOffset", 0).toUInt();
+    config.lcdId = s.value("lcd", 0x4E4101).toUInt();
+    applyPreferences();
+    setLayoutMode(
+        s.value("view/layout", s.value("view/compact", false).toBool() ? "Compact" : "Standard").toString());
+    recentFiles();
+    qApp->installEventFilter(this);
+    updateActions();
+    if (!smoke)
+        QTimer::singleShot(0, this, [this] {
+            if (QSettings().value("general/restore", false).toBool() && !config.internal.isEmpty())
+                startWith(config);
+            else
+                configure();
+        });
+}
+
+void MainWindow::startWith(const Configuration& c) {
+    config = c;
+    firmwarePixels = 0;
+    externalExecuting = false;
+    hardware = {};
+    reportedErrors.clear();
+    lastVirtual = -1;
+    speed = 0;
+    sampleClock.invalidate();
+    engine.start(c);
+    updateActions();
+    recentFiles();
+}
+
+void MainWindow::updateHardware(const QJsonObject& s) {
+    for (auto error : s["errors"].toArray()) {
+        auto text = error.toString();
+        if (!reportedErrors.contains(text)) {
+            reportedErrors.insert(text);
+            logs->append("[ERROR] Peripheral: " + text);
+        }
+    }
+    double virtualMs = s["virtualMs"].toDouble(), wallMs = sampleClock.isValid() ? sampleClock.restart() : 0;
+    if (!sampleClock.isValid())
+        sampleClock.start();
+    bool paused = s["paused"].toBool();
+    // Compare virtual and wall time rather than instruction counts, which change with firmware workload.
+    double actual = wallMs > 0 && lastVirtual >= 0 ? (virtualMs - lastVirtual) / wallMs : 0;
+    if (paused || hardware["paused"].toBool() || actual < 0 || wallMs > 2000)
+        speed = 0;
+    else if (lastVirtual >= 0)
+        speed = speed == 0 ? actual : .8 * speed + .2 * actual;
+    lastVirtual = virtualMs;
+    hardware = s;
+    externalExecuting = s["pc"].toInteger() >= 0x90000000 && s["pc"].toInteger() < 0x90800000;
+    firmwarePixels = s["pixelWrites"].toInteger();
+    if (firmwarePixels != lastPixels || !s["lcdActive"].toBool())
+        surface->setFrame(QByteArray::fromBase64(s["frame"].toString().toLatin1()));
+    auto rgb = s["rgb"].toArray();
+    surface->setHardware({float(rgb[0].toDouble()), float(rgb[1].toDouble()), float(rgb[2].toDouble())},
+                         s["backlight"].toDouble());
+    QSet<int> held = mouseHeld | pcHeld;
+    for (auto v : s["pressed"].toArray())
+        held.insert(v.toInt());
+    surface->setHeld(held);
+    QString state = s["faulted"].toBool()                                  ? "Faulted"
+                    : paused                                               ? "Paused"
+                    : !s["lcdActive"].toBool() && s["cpuWaiting"].toBool() ? "Sleeping"
+                    : !s["lcdActive"].toBool()                             ? "Power transition"
+                                                                           : "Running";
+    QString mode = QStringList{"Unplugged", "Charger", "Computer"}.value(s["connectionMode"].toInt()),
+            multiplier = paused ? "—" : QString::number(speed, 'f', 2) + "×";
+    liveStatus->setText(QString("● %1  |  Speed %2  |  CPU %3 MHz  |  LCD %4  |  %5")
+                            .arg(state, multiplier)
+                            .arg(s["cpuHz"].toDouble() / 1e6, 0, 'f', 1)
+                            .arg(s["lcdActive"].toBool() ? "Ready" : "Inactive", mode));
+    if (layoutName != "Developer")
+        liveStatus->setText(
+            QString("● %1  |  %2  |  %3 s").arg(state, multiplier).arg(virtualMs / 1000, 0, 'f', 1));
+    overview->setText(QString("State    %1\nActual speed    %2\nTarget    %3\n\nLED duty    R %4% / G %5% / "
+                              "B %6%\n\nHeld keys    %7\nRows    %8\nColumns    %9\nQueued strokes    %10")
+                          .arg(state, multiplier,
+                               s["targetSpeed"].toDouble() == 0
+                                   ? "Unlimited"
+                                   : QString::number(s["targetSpeed"].toDouble()) + "×")
+                          .arg(rgb[0].toDouble() * 100, 0, 'f', 1)
+                          .arg(rgb[1].toDouble() * 100, 0, 'f', 1)
+                          .arg(rgb[2].toDouble() * 100, 0, 'f', 1)
+                          .arg(held.size())
+                          .arg(hex(s["rows"].toInteger()), hex(s["columns"].toInteger()))
+                          .arg(s["sequencePending"].toInt()));
+    if (layoutName == "Standard")
+        overview->setText(QString("%1\n\nSpeed    %2\nVirtual time    %3 s\nBattery    %4%\nConnection    %5")
+                              .arg(state, multiplier)
+                              .arg(virtualMs / 1000, 0, 'f', 1)
+                              .arg(s["batteryPercent"].toInt())
+                              .arg(mode));
+    cpuInfo->setText(QString("State    %1\nPC    %2\nSP    %3\nClock    %4 MHz\nInstructions    %5\nVirtual "
+                             "time    %6 s\nSpeed    %7\nCPU lock-up    %8\n\nSpeed measures virtual seconds "
+                             "per wall second. CPU timing remains instruction-budget based.")
+                         .arg(state, hex(s["pc"].toInteger()), hex(s["sp"].toInteger()))
+                         .arg(s["cpuHz"].toDouble() / 1e6, 0, 'f', 3)
+                         .arg(s["instructions"].toInteger())
+                         .arg(virtualMs / 1000, 0, 'f', 3)
+                         .arg(multiplier, s["faulted"].toBool() ? "Yes" : "No"));
+    displayInfo->setText(QString("Controller    %1\nInitialization    %2\nGamma    %3\nBacklight    "
+                                 "%4%\nPixel writes    %5\nChanged-frame delivery    %6 Hz")
+                             .arg(hex(s["lcdId"].toInteger()), s["lcdActive"].toBool() ? "Ready" : "Inactive",
+                                  s["gamma"].toBool() ? "Valid" : "Missing / invalid")
+                             .arg(s["backlight"].toDouble() * 100, 0, 'f', 0)
+                             .arg(firmwarePixels)
+                             .arg(wallMs > 0 && lastPixels != firmwarePixels ? 1000 / wallMs : 0, 0, 'f', 1));
+    lastPixels = firmwarePixels;
+    updatePowerCard();
+    standardInfo->setText(QString("%1\n\nSpeed     %2\nVirtual time     %3 s\nFirmware     %4")
+                              .arg(state, multiplier)
+                              .arg(virtualMs / 1000, 0, 'f', 2)
+                              .arg(QFileInfo(config.external).fileName()));
+    boardInfo->setText(QString("LED     R %1% · G %2% · B %3%\nBacklight     %4")
+                           .arg(rgb[0].toDouble() * 100, 0, 'f', 0)
+                           .arg(rgb[1].toDouble() * 100, 0, 'f', 0)
+                           .arg(rgb[2].toDouble() * 100, 0, 'f', 0)
+                           .arg(s["backlight"].toDouble() > 0 ? "On" : "Off"));
+
+    cpuInfo->setText(cpuInfo->text() + "\nGDB port    " + QString::number(s["gdbPort"].toInt()) +
+                     "\nGDB client    " + (s["gdbConnected"].toBool() ? "Connected" : "None") +
+                     "\nReset boot address    " + hex(s["bootAddress"].toInteger()));
+    cpuInfo->setText(cpuInfo->text() + "\nCFSR    " + hex(s["cfsr"].toInteger()) + "\nHFSR    " +
+                     hex(s["hfsr"].toInteger()));
+    auto descriptor = QByteArray::fromBase64(s["usbDescriptor"].toString().toLatin1());
+    QString identity =
+        descriptor.size() >= 12
+            ? QString("%1:%2")
+                  .arg(quint8(descriptor[8]) | (quint8(descriptor[9]) << 8), 4, 16, QChar('0'))
+                  .arg(quint8(descriptor[10]) | (quint8(descriptor[11]) << 8), 4, 16, QChar('0'))
+            : "Not read";
+    usbInfo->setText(QString("Connection    %1\nVBUS    %2\nVID:PID    %3\nUSB address    %4\nControl "
+                             "transfers    %5\nDescriptor    %6\n\nHost and browser access are separate from "
+                             "the firmware probe. Use Windows status and the browser diagnostic page.")
+                         .arg(mode, s["connectionMode"].toInt() != 0 ? "Present" : "Absent", identity)
+                         .arg(s["usbAddress"].toInt())
+                         .arg(s["usbTransfers"].toInteger())
+                         .arg(descriptor.size() == 18 ? "Received from firmware" : "Not received"));
+    usbInfo->setText(usbInfo->text() + "\n\nUSB/IP clients    " + QString::number(s["usbClients"].toInt()) +
+                     "\nUSB/IP imported    " + (s["usbImported"].toBool() ? "Yes" : "No") +
+                     "\nConfiguration request    " + QString::number(s["usbConfiguration"].toInt()) +
+                     "\n\nWindows USB status\n" + windowsUsbStatus +
+                     "\n\nBrowser connection    Check the WebUSB page");
+    if (s["usbIpPort"].toInt() == 0)
+        windowsUsb.detach();
+    if (!descriptor.isEmpty())
+        usbInfo->setText(usbInfo->text() + "\nRaw descriptor    " + descriptor.toHex(' '));
+    usbInfo->setText(usbInfo->text() + "\n\nEP0 IN    " + hex(s["usbIn0"].toInteger()) + "\nEP0 OUT    " +
+                     hex(s["usbOut0"].toInteger()) + "\nUSB/IP port    " +
+                     QString::number(s["usbIpPort"].toInt()));
+    flashInfo->setText(
+        QString("Internal    %1\nExternal    %2\nPersistence    %3\n\nSlot A    0x90000000 / 4 MiB\nSlot B   "
+                " 0x90400000 / 4 MiB\nStatus    %4\nProgram bytes    %5\nErases    %6")
+            .arg(QFileInfo(config.internal).fileName(), QFileInfo(config.external).fileName(),
+                 QFileInfo(config.persistent).fileName(), hex(s["flashStatus"].toInteger()))
+            .arg(s["flashWrites"].toInteger())
+            .arg(s["flashErases"].toInteger()));
+    if (!s["usbError"].toString().isEmpty())
+        usbInfo->setText(usbInfo->text() + "\n\n" + s["usbError"].toString());
+    if (s["usbPending"].toBool())
+        usbInfo->setText(usbInfo->text() + "\n\nWaiting for firmware EP0…");
+    if (!s["usbError"].toString().isEmpty() && !reportedErrors.contains("USB: " + s["usbError"].toString())) {
+        reportedErrors.insert("USB: " + s["usbError"].toString());
+        logs->append("[WARNING] USB: " + s["usbError"].toString());
+    }
+    updateActions();
+    if (s["faulted"].toBool() && QSettings().value("emulation/pauseOnFault", true).toBool() && !paused)
+        engine.command("pause");
+}
+
+void MainWindow::updatePowerCard() {
+    const auto& s = hardware;
+    QString mode = QStringList{"Unplugged", "Charger", "Computer"}.value(s["connectionMode"].toInt());
+    if (layoutName == "Standard") {
+        powerInfo->setText(QString("%1%     ·     %2 V\n%3")
+                               .arg(s["batteryPercent"].toInt())
+                               .arg(s["batteryVoltage"].toDouble(), 0, 'f', 2)
+                               .arg(mode));
+        return;
+    }
+    powerInfo->setText(QString("Configured charge    %1%\nCell voltage    %2 V\nADC1 input    %3 / "
+                               "65535\nConnection    %4\nCharging signal    %5\nFirmware battery percentage  "
+                               "  not exported\nADC data-register reads    %6\nLast ADC sample    %7")
+                           .arg(s["batteryPercent"].toInt())
+                           .arg(s["batteryVoltage"].toDouble(), 0, 'f', 3)
+                           .arg(s["batteryAdc"].toInt())
+                           .arg(mode, s["connectionMode"].toInt() != 0 && s["batteryPercent"].toInt() < 100
+                                          ? "Active"
+                                          : "Inactive")
+                           .arg(s["batteryReads"].toInteger())
+                           .arg(s["lastBatterySample"].toInt()));
+}
+
+void MainWindow::key(int i, bool down, bool mouse) {
+    // Both input sources share a switch: releasing one must not cancel the other source's hold.
+    auto& held = mouse ? mouseHeld : pcHeld;
+    bool before = (mouseHeld | pcHeld).contains(i);
+    if (down)
+        held.insert(i);
+    else
+        held.remove(i);
+    bool after = (mouseHeld | pcHeld).contains(i);
+    if (before != after)
+        engine.command("key " + QByteArray::number(i / 6) + ' ' + QByteArray::number(i % 6) + ' ' +
+                       (after ? "1" : "0"));
+    surface->setHeld(mouseHeld | pcHeld);
+}
+
+void MainWindow::releaseKeys() {
+    keyboard.releaseAll();
+    pcHeld.clear();
+    mouseHeld.clear();
+    surface->setHeld({});
+    engine.command("release");
+}
+
+bool MainWindow::eventFilter(QObject*, QEvent* e) {
+    if (e->type() == QEvent::ApplicationDeactivate) {
+        releaseKeys();
+        return false;
+    }
+    if (e->type() != QEvent::KeyPress && e->type() != QEvent::KeyRelease)
+        return false;
+    // Focus may have moved into an editor since key-down; release before filtering new input.
+    if (e->type() == QEvent::KeyRelease && keyboard.holds(static_cast<QKeyEvent*>(e)->key()))
+        return keyboard.handle(static_cast<QKeyEvent*>(e));
+    if (QApplication::activeModalWidget() || !isActiveWindow())
+        return false;
+    auto f = QApplication::focusWidget();
+    if (f && (qobject_cast<QLineEdit*>(f) || qobject_cast<QPlainTextEdit*>(f) ||
+              qobject_cast<QAbstractSpinBox*>(f) || qobject_cast<QComboBox*>(f) ||
+              qobject_cast<QAbstractItemView*>(f)))
+        return false;
+    return keyboard.handle(static_cast<QKeyEvent*>(e));
+}
+
+void MainWindow::closeEvent(QCloseEvent* e) {
+    if (engine.connected() && QSettings().value("general/confirmClose", false).toBool() &&
+        QMessageBox::question(this, "Close emulator", "Stop the running calculator and close?") !=
+            QMessageBox::Yes) {
+        e->ignore();
+        return;
+    }
+    pendingRestart = false;
+    releaseKeys();
+    engine.stop();
+    QMainWindow::closeEvent(e);
+}

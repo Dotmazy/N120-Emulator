@@ -71,6 +71,7 @@ class WindowsUsb final : public QObject {
             });
         connect(&process, &QProcess::errorOccurred, this, [this] { emit status(process.errorString()); });
     }
+
     ~WindowsUsb() override {
         disconnect(&process, nullptr, this, nullptr);
         disconnect(this, nullptr, nullptr, nullptr);
@@ -88,9 +89,11 @@ class WindowsUsb final : public QObject {
             }
         }
     }
+
     bool available() const {
         return !executable.isEmpty();
     }
+
     void attach() {
         if (!available()) {
             emit status("USB/IP client missing. Install the signed prerequisite in docs/usb.md.");
@@ -102,6 +105,7 @@ class WindowsUsb final : public QObject {
         }
         run("preflight", {"port"});
     }
+
     void detach() {
         if (process.state() != QProcess::NotRunning) {
             detachPending = true;
@@ -110,6 +114,7 @@ class WindowsUsb final : public QObject {
         if (ownedPort)
             run("verify-detach", {"port"});
     }
+
     void inspect() {
         if (!available()) {
             emit status("USB/IP importing client is not installed");
@@ -130,6 +135,7 @@ class WindowsUsb final : public QObject {
                  "| '+$_.FriendlyName+' | '+$driver+' | '+$_.InstanceId)}")
                  .arg(QString(executable).replace("'", "''"))});
     }
+
   signals:
     void status(const QString&);
     void message(const QString&);
@@ -142,12 +148,14 @@ class WindowsUsb final : public QObject {
                 .match(output);
         return match.hasMatch() ? match.captured(1).toInt() : 0;
     }
+
     void run(const QString& name, const QStringList& args) {
         if (process.state() != QProcess::NotRunning)
             return;
         operation = name;
         process.start(executable, args);
     }
+
     QProcess process;
     QString executable, operation;
     int ownedPort = 0;

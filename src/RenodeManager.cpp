@@ -8,6 +8,7 @@
 #include <QtEndian>
 #include <stdexcept>
 
+// Renode include/LoadBinary paths use @ tokens; peripheral method strings use quoted arguments.
 static QString pathToken(QString p) {
     p = QDir::fromNativeSeparators(p);
     if (p.contains('\n') || p.contains('\r') || p.contains('"'))
@@ -15,17 +16,20 @@ static QString pathToken(QString p) {
     p.replace(" ", "\\ ");
     return "@" + p;
 }
+
 static QString stringToken(QString p) {
     p = QDir::fromNativeSeparators(p);
     if (p.contains('"') || p.contains('\n') || p.contains('\r'))
         throw std::runtime_error("Unsupported character in filename");
     return "\"" + p + "\"";
 }
+
 RenodeManager::RenodeManager(QObject* parent) : QObject(parent) {
     poll.setInterval(100);
     retry.setInterval(250);
     deadline.setSingleShot(true);
     deadline.setInterval(30000);
+    // Keep at most one snapshot in flight so a slow engine cannot accumulate a polling backlog.
     connect(&poll, &QTimer::timeout, this, [this] {
         if (connected() && !pending) {
             pending = true;
@@ -47,6 +51,7 @@ RenodeManager::RenodeManager(QObject* parent) : QObject(parent) {
         stop();
     });
     connect(&socket, &QTcpSocket::connected, this, [this] {
+        // A partial JSON line belongs to the old TCP stream and cannot be continued after reconnect.
         incoming.clear();
         retry.stop();
         deadline.stop();
@@ -82,6 +87,7 @@ RenodeManager::RenodeManager(QObject* parent) : QObject(parent) {
                 emit state(QString("Stopped (exit %1)").arg(code));
             });
 }
+
 RenodeManager::~RenodeManager() {
     stopping = true;
     poll.stop();
@@ -99,13 +105,16 @@ RenodeManager::~RenodeManager() {
         process.waitForFinished(1000);
     }
 }
+
 bool RenodeManager::connected() const {
     return socket.state() == QAbstractSocket::ConnectedState;
 }
+
 void RenodeManager::command(const QByteArray& cmd) {
     if (connected())
         socket.write(cmd + '\n');
 }
+
 void RenodeManager::start(const Configuration& c) {
     if (process.state() != QProcess::NotRunning) {
         emit log("Stop the engine before restarting.");
@@ -122,6 +131,7 @@ void RenodeManager::start(const Configuration& c) {
         auto bytes = internal.readAll();
         if (bytes.size() < 8 || bytes.size() > 0x80000)
             throw std::runtime_error("Internal firmware must contain vectors and fit 512 KiB");
+        // RAM banks are disjoint. A stack may start just past a bank end because ARM stacks descend.
         const quint32 sp = qFromLittleEndian<quint32>(bytes.constData());
         const quint32 pc = qFromLittleEndian<quint32>(bytes.constData() + 4);
         if (!(pc & 1) || pc < 0x08000001 || pc >= 0x08000000 + quint32(bytes.size()) || (sp & 7) ||
@@ -146,6 +156,7 @@ void RenodeManager::start(const Configuration& c) {
             if (file.size() > input.second)
                 throw std::runtime_error("External or persistent flash image exceeds its mapping");
         }
+        // The board model decodes this firmware marker to select original or revised keyboard wiring.
         quint32 revision =
             bytes.size() >= 0x7FA04 ? qFromLittleEndian<quint32>(bytes.constData() + 0x7FA00) : 0xFFFFFFFF;
         session = std::make_unique<QTemporaryDir>();
@@ -169,7 +180,7 @@ void RenodeManager::start(const Configuration& c) {
             QFile rom(c.systemRom);
             if (!rom.open(QIODevice::ReadOnly))
                 throw std::runtime_error("BOOT0 needs a user-supplied STM32H725 system ROM image");
-            if(rom.size()<8||rom.size()>0x20000)
+            if (rom.size() < 8 || rom.size() > 0x20000)
                 throw std::runtime_error("System ROM must contain vectors and fit the 128 KiB mapping");
             const auto image = rom.readAll();
             if (image.size() < 8 || image.size() > 0x20000)
@@ -183,6 +194,7 @@ void RenodeManager::start(const Configuration& c) {
                 romPc >= 0x1FF00000 + quint32(image.size()))
                 throw std::runtime_error("Invalid STM32H725 system ROM vectors");
         }
+        // Hold both reservations until allocation completes to avoid reusing the bridge port for the monitor.
         QTcpServer allocator;
         if (!allocator.listen(QHostAddress::LocalHost, 0))
             throw std::runtime_error("Cannot allocate bridge port");
@@ -201,6 +213,7 @@ void RenodeManager::start(const Configuration& c) {
             script += "sysbus LoadBinary " + pathToken(c.systemRom) + " 0x1FF00000\nlcd ConfigureBoot true\n";
         if (!c.external.isEmpty())
             script += "ospi Load " + stringToken(c.external) + " " + QString::number(c.externalOffset) + "\n";
+        // Persistence overlays the input image; only the separate persistence destination is saved on stop.
         if (!c.persistent.isEmpty())
             script += "ospi Load " + stringToken(c.persistent) + "\n";
         script += "lcd ConfigureRevision " + QString::number(revision) +
@@ -228,6 +241,7 @@ void RenodeManager::start(const Configuration& c) {
         emit state("Configuration error");
     }
 }
+
 void RenodeManager::stop() {
     stopping = true;
     poll.stop();
@@ -238,11 +252,13 @@ void RenodeManager::stop() {
             command("save " + persistencePath.toUtf8().toBase64());
         command("shutdown");
     }
+    // Let Renode process save/shutdown first, then bound cleanup if the bridge stops responding.
     QTimer::singleShot(2000, this, [this] {
         if (stopping && process.state() != QProcess::NotRunning)
             process.kill();
     });
 }
+
 void RenodeManager::finish() {
     poll.stop();
     retry.stop();
@@ -250,6 +266,7 @@ void RenodeManager::finish() {
     socket.abort();
     pending = false;
 }
+
 void RenodeManager::read() {
     incoming += socket.readAll();
     if (incoming.size() > 2 * 1024 * 1024) {

@@ -28,15 +28,19 @@ class RenodeManager final : public QObject {
     void stop();
     void command(const QByteArray&);
     bool connected() const;
+
     bool running() const {
         return process.state() != QProcess::NotRunning;
     }
+
     quint16 consolePort() const {
         return monitorPort;
     }
+
     void setRefreshInterval(int ms) {
         poll.setInterval(qBound(50, ms, 2000));
     }
+
   signals:
     void snapshot(const QJsonObject&);
     void log(const QString&);

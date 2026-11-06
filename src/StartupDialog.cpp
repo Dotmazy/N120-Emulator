@@ -1,5 +1,6 @@
 #include "MainWindow.h"
 #include <QtWidgets>
+
 void MainWindow::configure() {
     if (engine.running()) {
         QMessageBox::information(this, "Configuration",

@@ -5,3 +5,5 @@ BreakBeforeBraces: Attach
 PointerAlignment: Left
 AllowShortFunctionsOnASingleLine: Empty
 SortIncludes: CaseSensitive
+SeparateDefinitionBlocks: Always
+LineEnding: LF

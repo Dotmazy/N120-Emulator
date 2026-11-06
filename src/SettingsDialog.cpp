@@ -1,54 +1,376 @@
-#include "MainWindow.h"
 #include "LogViewer.h"
+#include "MainWindow.h"
 #include <QtWidgets>
 #include <cmath>
-QIcon studioIcon(const QString& id,QColor color){
-    QPixmap icon(QSize(20,20)*qApp->devicePixelRatio());icon.setDevicePixelRatio(qApp->devicePixelRatio());icon.fill(Qt::transparent);QPainter p(&icon);p.setRenderHint(QPainter::Antialiasing);p.setPen(QPen(color,1.8,Qt::SolidLine,Qt::RoundCap,Qt::RoundJoin));p.setBrush(Qt::NoBrush);
-    if(id=="start"){p.drawPolygon(QPolygonF({{5,3},{16,10},{5,17}}));}
-    else if(id=="restart"){p.drawRoundedRect(QRectF(3,2,12,16),1,1);p.drawLine(6,5,12,5);p.drawArc(QRectF(6,8,7,7),30*16,280*16);p.drawLine(13,8,13,11);}
-    else if(id=="power"){p.drawArc(QRectF(3,3,14,14),135*16,270*16);p.drawLine(QPointF(10,1.5),QPointF(10,10));}
-    else if(id=="reset"){p.drawArc(QRectF(3,3,14,14),40*16,285*16);p.drawPolyline(QPolygonF({{13,2},{17,3},{17,7}}));}
-    else if(id=="pause"){p.fillRect(QRectF(5,3,3,14),color);p.fillRect(QRectF(12,3,3,14),color);}
-    else if(id=="stop"){p.fillRect(QRectF(4,4,12,12),color);}
-    else if(id=="screenshot"){p.drawRoundedRect(QRectF(1.5,5.5,17,12),2,2);p.drawEllipse(QPointF(10,11.5),3.5,3.5);p.drawPolyline(QPolygonF({{5,5.5},{6,2.5},{14,2.5},{15,5.5}}));}
-    else if(id=="settings"){p.drawEllipse(QPointF(10,10),5.5,5.5);p.drawEllipse(QPointF(10,10),2,2);for(int i=0;i<8;i++){double a=i*3.141592653589793/4;p.drawLine(QPointF(10+6*std::cos(a),10+6*std::sin(a)),QPointF(10+8*std::cos(a),10+8*std::sin(a)));}}
-    else if(id=="display"||id=="appearance"){p.drawRoundedRect(QRectF(2,3,16,11),1,1);p.drawLine(10,14,10,18);p.drawLine(6,18,14,18);}
-    else if(id=="cpu"||id=="flash"){p.drawRoundedRect(QRectF(5,5,10,10),1,1);for(int i=6;i<=14;i+=4){p.drawLine(i,2,i,5);p.drawLine(i,15,i,18);p.drawLine(2,i,5,i);p.drawLine(15,i,18,i);}}
-    else if(id=="usb"){p.drawLine(10,17,10,2);p.drawPolyline(QPolygonF({{7,5},{10,2},{13,5}}));p.drawPolyline(QPolygonF({{10,13},{5,9},{5,6}}));p.drawPolyline(QPolygonF({{10,10},{15,7},{15,5}}));p.drawEllipse(QPointF(10,17),1,1);}
-    else if(id=="diagnostics"){p.drawPolyline(QPolygonF({{2,11},{6,11},{8,5},{12,16},{15,9},{18,9}}));}
-    else if(id=="keyboard"){p.drawRoundedRect(QRectF(1,4,18,12),2,2);for(int y:{7,10})for(int x:{4,8,12,16})p.drawPoint(x,y);p.drawLine(6,13,14,13);}
-    else {for(int y:{3,11})for(int x:{3,11})p.drawRoundedRect(QRectF(x,y,6,6),1,1);}
+
+QIcon studioIcon(const QString& id, QColor color) {
+    QPixmap icon(QSize(20, 20) * qApp->devicePixelRatio());
+    icon.setDevicePixelRatio(qApp->devicePixelRatio());
+    icon.fill(Qt::transparent);
+    QPainter p(&icon);
+    p.setRenderHint(QPainter::Antialiasing);
+    p.setPen(QPen(color, 1.8, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.setBrush(Qt::NoBrush);
+    if (id == "start") {
+        p.drawPolygon(QPolygonF({{5, 3}, {16, 10}, {5, 17}}));
+    } else if (id == "restart") {
+        p.drawRoundedRect(QRectF(3, 2, 12, 16), 1, 1);
+        p.drawLine(6, 5, 12, 5);
+        p.drawArc(QRectF(6, 8, 7, 7), 30 * 16, 280 * 16);
+        p.drawLine(13, 8, 13, 11);
+    } else if (id == "power") {
+        p.drawArc(QRectF(3, 3, 14, 14), 135 * 16, 270 * 16);
+        p.drawLine(QPointF(10, 1.5), QPointF(10, 10));
+    } else if (id == "reset") {
+        p.drawArc(QRectF(3, 3, 14, 14), 40 * 16, 285 * 16);
+        p.drawPolyline(QPolygonF({{13, 2}, {17, 3}, {17, 7}}));
+    } else if (id == "pause") {
+        p.fillRect(QRectF(5, 3, 3, 14), color);
+        p.fillRect(QRectF(12, 3, 3, 14), color);
+    } else if (id == "stop") {
+        p.fillRect(QRectF(4, 4, 12, 12), color);
+    } else if (id == "screenshot") {
+        p.drawRoundedRect(QRectF(1.5, 5.5, 17, 12), 2, 2);
+        p.drawEllipse(QPointF(10, 11.5), 3.5, 3.5);
+        p.drawPolyline(QPolygonF({{5, 5.5}, {6, 2.5}, {14, 2.5}, {15, 5.5}}));
+    } else if (id == "settings") {
+        p.drawEllipse(QPointF(10, 10), 5.5, 5.5);
+        p.drawEllipse(QPointF(10, 10), 2, 2);
+        for (int i = 0; i < 8; i++) {
+            double a = i * 3.141592653589793 / 4;
+            p.drawLine(QPointF(10 + 6 * std::cos(a), 10 + 6 * std::sin(a)),
+                       QPointF(10 + 8 * std::cos(a), 10 + 8 * std::sin(a)));
+        }
+    } else if (id == "display" || id == "appearance") {
+        p.drawRoundedRect(QRectF(2, 3, 16, 11), 1, 1);
+        p.drawLine(10, 14, 10, 18);
+        p.drawLine(6, 18, 14, 18);
+    } else if (id == "cpu" || id == "flash") {
+        p.drawRoundedRect(QRectF(5, 5, 10, 10), 1, 1);
+        for (int i = 6; i <= 14; i += 4) {
+            p.drawLine(i, 2, i, 5);
+            p.drawLine(i, 15, i, 18);
+            p.drawLine(2, i, 5, i);
+            p.drawLine(15, i, 18, i);
+        }
+    } else if (id == "usb") {
+        p.drawLine(10, 17, 10, 2);
+        p.drawPolyline(QPolygonF({{7, 5}, {10, 2}, {13, 5}}));
+        p.drawPolyline(QPolygonF({{10, 13}, {5, 9}, {5, 6}}));
+        p.drawPolyline(QPolygonF({{10, 10}, {15, 7}, {15, 5}}));
+        p.drawEllipse(QPointF(10, 17), 1, 1);
+    } else if (id == "diagnostics") {
+        p.drawPolyline(QPolygonF({{2, 11}, {6, 11}, {8, 5}, {12, 16}, {15, 9}, {18, 9}}));
+    } else if (id == "keyboard") {
+        p.drawRoundedRect(QRectF(1, 4, 18, 12), 2, 2);
+        for (int y : {7, 10})
+            for (int x : {4, 8, 12, 16})
+                p.drawPoint(x, y);
+        p.drawLine(6, 13, 14, 13);
+    } else {
+        for (int y : {3, 11})
+            for (int x : {3, 11})
+                p.drawRoundedRect(QRectF(x, y, 6, 6), 1, 1);
+    }
     return QIcon(icon);
 }
-void MainWindow::applyPreferences(){
-    QSettings s;static const QPalette systemPalette=qApp->palette();QString theme=s.value("appearance/theme","Dark").toString();QPalette palette=systemPalette;
-    if(theme=="Dark"){palette.setColor(QPalette::Window,QColor("#101015"));palette.setColor(QPalette::WindowText,QColor("#efedf7"));palette.setColor(QPalette::Base,QColor("#14131b"));palette.setColor(QPalette::AlternateBase,QColor("#211f2c"));palette.setColor(QPalette::Text,QColor("#efedf7"));palette.setColor(QPalette::Button,QColor("#24222f"));palette.setColor(QPalette::ButtonText,QColor("#efedf7"));palette.setColor(QPalette::Highlight,QColor("#8d75e8"));palette.setColor(QPalette::HighlightedText,Qt::white);palette.setColor(QPalette::ToolTipBase,QColor("#24222f"));palette.setColor(QPalette::ToolTipText,Qt::white);palette.setColor(QPalette::Disabled,QPalette::ButtonText,QColor("#637084"));}
-    else if(theme=="Light"){palette=QPalette(QColor("#edf1f7"));for(auto role:{QPalette::WindowText,QPalette::Text,QPalette::ButtonText,QPalette::ToolTipText})palette.setColor(role,QColor("#172435"));palette.setColor(QPalette::Base,Qt::white);palette.setColor(QPalette::ToolTipBase,QColor("#f5f7fa"));palette.setColor(QPalette::Highlight,QColor("#286da8"));palette.setColor(QPalette::HighlightedText,Qt::white);}
-    for(auto role:{QPalette::WindowText,QPalette::Text,QPalette::ButtonText})palette.setColor(QPalette::Disabled,role,theme=="Dark"?QColor("#78869b"):QColor("#737e8a"));
-    qApp->setPalette(palette);qApp->setFont(QFont("Segoe UI",s.value("appearance/fontSize",10).toInt()));
-    const bool dark=theme=="Dark"||(theme=="System"&&palette.color(QPalette::Window).lightness()<128);const QString border=dark?"#302d3e":"#d7dce5",panel=dark?"#191820":"#ffffff";
-    qApp->setStyleSheet(QString("QGroupBox{background:%1;border:1px solid %2;border-radius:12px;margin-top:12px;padding:18px 14px 14px;} QGroupBox::title{subcontrol-origin:margin;left:14px;padding:0 5px;color:%3;font-weight:600;} QSlider::groove:horizontal{height:5px;background:%2;border-radius:2px;} QSlider::sub-page:horizontal{background:#8d75e8;border-radius:2px;} QSlider::handle:horizontal{width:14px;margin:-5px 0;background:#9a80f1;border-radius:7px;} QPushButton{border:1px solid %2;border-radius:7px;background:%1;} QPushButton:hover{border-color:#8d75e8;} QPushButton:disabled{color:%4;} ").arg(panel,border,dark?"#aaa4bd":"#596579",dark?"#746f82":"#858b96")+"QToolBar{spacing:6px;padding:6px;border:0;} QToolButton{padding:7px;border-radius:5px;} QToolButton:hover{background:rgba(96,150,210,45);} QTabBar::tab{padding:9px 7px;} QTabWidget::pane{border:0;} QListWidget#settingsNavigation{border:0;background:transparent;outline:0;} QListWidget#settingsNavigation::item{border-radius:6px;padding:0 6px;} QListWidget#settingsNavigation::item:hover{background:rgba(125,120,190,30);} QListWidget#settingsNavigation::item:selected{background:palette(highlight);color:palette(highlighted-text);} QListWidget#settingsNavigation::item:focus{border:1px solid palette(highlight);} QLabel#sectionTitle{font-weight:700;font-size:14px;padding-bottom:8px;} QStatusBar{padding:4px;} QLineEdit,QComboBox{padding:5px;} QAbstractSpinBox{padding:5px 24px 5px 6px;min-height:24px;} QSpinBox::up-button,QDoubleSpinBox::up-button{width:20px;} QSpinBox::down-button,QDoubleSpinBox::down-button{width:20px;} QPushButton{padding:6px 12px;} QDockWidget::title{padding:8px;font-weight:600;}");
-    for(auto widget:QApplication::allWidgets()){if(widget->objectName()=="settingsNavigation"){if(auto nav=qobject_cast<QListWidget*>(widget))for(int i=0;i<nav->count();++i){auto item=nav->item(i);item->setIcon(studioIcon(item->text().toLower()=="emulation"?"start":item->text().toLower(),palette.color(QPalette::ButtonText)));}}if(widget->objectName()=="inspectorNavigation"){if(auto nav=qobject_cast<QComboBox*>(widget))for(int i=0;i<nav->count();++i)nav->setItemIcon(i,studioIcon(nav->itemText(i).toLower(),palette.color(QPalette::ButtonText)));}}
-    zoom=s.value("view/zoom",1).toDouble();applyZoom();surface->setDim(s.value("display/dim",true).toBool());surface->setSmoothLcd(s.value("display/smooth",false).toBool());logs->setLimit(s.value("diagnostics/limit",1500).toInt());engine.setRefreshInterval(s.value("diagnostics/refreshMs",100).toInt());keyboard.load();
-    for(auto a:actions){if(!a->property("defaultShortcut").isValid())a->setProperty("defaultShortcut",a->shortcut().toString());a->setShortcut(s.value("keyboard/shortcuts",true).toBool()?QKeySequence(a->property("defaultShortcut").toString()):QKeySequence());if(QStringList{"start","power","reset","restart","pause","stop","screenshot","settings"}.contains(a->objectName()))a->setIcon(studioIcon(a->objectName(),palette.color(QPalette::ButtonText)));}
+
+void MainWindow::applyPreferences() {
+    QSettings s;
+    static const QPalette systemPalette = qApp->palette();
+    QString theme = s.value("appearance/theme", "Dark").toString();
+    QPalette palette = systemPalette;
+    if (theme == "Dark") {
+        palette.setColor(QPalette::Window, QColor("#101015"));
+        palette.setColor(QPalette::WindowText, QColor("#efedf7"));
+        palette.setColor(QPalette::Base, QColor("#14131b"));
+        palette.setColor(QPalette::AlternateBase, QColor("#211f2c"));
+        palette.setColor(QPalette::Text, QColor("#efedf7"));
+        palette.setColor(QPalette::Button, QColor("#24222f"));
+        palette.setColor(QPalette::ButtonText, QColor("#efedf7"));
+        palette.setColor(QPalette::Highlight, QColor("#8d75e8"));
+        palette.setColor(QPalette::HighlightedText, Qt::white);
+        palette.setColor(QPalette::ToolTipBase, QColor("#24222f"));
+        palette.setColor(QPalette::ToolTipText, Qt::white);
+        palette.setColor(QPalette::Disabled, QPalette::ButtonText, QColor("#637084"));
+    } else if (theme == "Light") {
+        palette = QPalette(QColor("#edf1f7"));
+        for (auto role : {QPalette::WindowText, QPalette::Text, QPalette::ButtonText, QPalette::ToolTipText})
+            palette.setColor(role, QColor("#172435"));
+        palette.setColor(QPalette::Base, Qt::white);
+        palette.setColor(QPalette::ToolTipBase, QColor("#f5f7fa"));
+        palette.setColor(QPalette::Highlight, QColor("#286da8"));
+        palette.setColor(QPalette::HighlightedText, Qt::white);
+    }
+    for (auto role : {QPalette::WindowText, QPalette::Text, QPalette::ButtonText})
+        palette.setColor(QPalette::Disabled, role, theme == "Dark" ? QColor("#78869b") : QColor("#737e8a"));
+    qApp->setPalette(palette);
+    qApp->setFont(QFont("Segoe UI", s.value("appearance/fontSize", 10).toInt()));
+    const bool dark =
+        theme == "Dark" || (theme == "System" && palette.color(QPalette::Window).lightness() < 128);
+    const QString border = dark ? "#302d3e" : "#d7dce5", panel = dark ? "#191820" : "#ffffff";
+    qApp->setStyleSheet(
+        QString("QGroupBox{background:%1;border:1px solid %2;border-radius:12px;margin-top:12px;padding:18px "
+                "14px 14px;} QGroupBox::title{subcontrol-origin:margin;left:14px;padding:0 "
+                "5px;color:%3;font-weight:600;} "
+                "QSlider::groove:horizontal{height:5px;background:%2;border-radius:2px;} "
+                "QSlider::sub-page:horizontal{background:#8d75e8;border-radius:2px;} "
+                "QSlider::handle:horizontal{width:14px;margin:-5px 0;background:#9a80f1;border-radius:7px;} "
+                "QPushButton{border:1px solid %2;border-radius:7px;background:%1;} "
+                "QPushButton:hover{border-color:#8d75e8;} QPushButton:disabled{color:%4;} ")
+            .arg(panel, border, dark ? "#aaa4bd" : "#596579", dark ? "#746f82" : "#858b96") +
+        "QToolBar{spacing:6px;padding:6px;border:0;} QToolButton{padding:7px;border-radius:5px;} "
+        "QToolButton:hover{background:rgba(96,150,210,45);} QTabBar::tab{padding:9px 7px;} "
+        "QTabWidget::pane{border:0;} "
+        "QListWidget#settingsNavigation{border:0;background:transparent;outline:0;} "
+        "QListWidget#settingsNavigation::item{border-radius:6px;padding:0 6px;} "
+        "QListWidget#settingsNavigation::item:hover{background:rgba(125,120,190,30);} "
+        "QListWidget#settingsNavigation::item:selected{background:palette(highlight);color:palette("
+        "highlighted-text);} QListWidget#settingsNavigation::item:focus{border:1px solid "
+        "palette(highlight);} QLabel#sectionTitle{font-weight:700;font-size:14px;padding-bottom:8px;} "
+        "QStatusBar{padding:4px;} QLineEdit,QComboBox{padding:5px;} QAbstractSpinBox{padding:5px 24px 5px "
+        "6px;min-height:24px;} QSpinBox::up-button,QDoubleSpinBox::up-button{width:20px;} "
+        "QSpinBox::down-button,QDoubleSpinBox::down-button{width:20px;} QPushButton{padding:6px 12px;} "
+        "QDockWidget::title{padding:8px;font-weight:600;}");
+    for (auto widget : QApplication::allWidgets()) {
+        if (widget->objectName() == "settingsNavigation") {
+            if (auto nav = qobject_cast<QListWidget*>(widget))
+                for (int i = 0; i < nav->count(); ++i) {
+                    auto item = nav->item(i);
+                    item->setIcon(
+                        studioIcon(item->text().toLower() == "emulation" ? "start" : item->text().toLower(),
+                                   palette.color(QPalette::ButtonText)));
+                }
+        }
+        if (widget->objectName() == "inspectorNavigation") {
+            if (auto nav = qobject_cast<QComboBox*>(widget))
+                for (int i = 0; i < nav->count(); ++i)
+                    nav->setItemIcon(
+                        i, studioIcon(nav->itemText(i).toLower(), palette.color(QPalette::ButtonText)));
+        }
+    }
+    zoom = s.value("view/zoom", 1).toDouble();
+    applyZoom();
+    surface->setDim(s.value("display/dim", true).toBool());
+    surface->setSmoothLcd(s.value("display/smooth", false).toBool());
+    logs->setLimit(s.value("diagnostics/limit", 1500).toInt());
+    engine.setRefreshInterval(s.value("diagnostics/refreshMs", 100).toInt());
+    keyboard.load();
+    for (auto a : actions) {
+        if (!a->property("defaultShortcut").isValid())
+            a->setProperty("defaultShortcut", a->shortcut().toString());
+        a->setShortcut(s.value("keyboard/shortcuts", true).toBool()
+                           ? QKeySequence(a->property("defaultShortcut").toString())
+                           : QKeySequence());
+        if (QStringList{"start", "power", "reset", "restart", "pause", "stop", "screenshot", "settings"}
+                .contains(a->objectName()))
+            a->setIcon(studioIcon(a->objectName(), palette.color(QPalette::ButtonText)));
+    }
 }
-void MainWindow::settings(int index){
+
+void MainWindow::settings(int index) {
     releaseKeys();
-    QSettings s;QDialog d(this);d.setWindowTitle("N120 Studio Settings");d.resize(800,620);auto root=new QVBoxLayout(&d);auto body=new QHBoxLayout;root->addLayout(body,1);auto nav=new QListWidget;nav->setObjectName("settingsNavigation");nav->setFixedWidth(160);nav->setSpacing(4);nav->setAccessibleName("Settings categories");body->addWidget(nav);auto pages=new QTabWidget;pages->setObjectName("settingsPages");pages->tabBar()->hide();body->addWidget(pages,1);connect(nav,&QListWidget::currentRowChanged,pages,&QTabWidget::setCurrentIndex);connect(pages,&QTabWidget::currentChanged,nav,qOverload<int>(&QListWidget::setCurrentRow));
-    auto page=[pages,nav](QString title){auto w=new QWidget;auto form=new QFormLayout(w);form->setContentsMargins(20,20,20,20);form->setSpacing(16);pages->addTab(w,title);auto item=new QListWidgetItem(title,nav);item->setSizeHint(QSize(140,40));item->setIcon(studioIcon(title.toLower()=="emulation"?"start":title.toLower(),qApp->palette().color(QPalette::ButtonText)));return form;};
-    auto check=[&](QFormLayout* f,QString label,QString key,bool def){auto c=new QCheckBox(label);c->setChecked(s.value(key,def).toBool());f->addRow(c);return c;};
-    auto form=page("General");auto restore=check(form,"Restore firmware session on startup","general/restore",false);auto confirm=check(form,"Confirm closing a running calculator","general/confirmClose",false);
-    form=page("Appearance");auto theme=new QComboBox;theme->addItems({"System","Light","Dark"});theme->setCurrentText(s.value("appearance/theme","Dark").toString());form->addRow("Theme",theme);auto font=new QSpinBox;font->setRange(8,16);font->setValue(s.value("appearance/fontSize",10).toInt());form->addRow("Interface font size",font);auto mode=new QComboBox;mode->setObjectName("layoutChoice");mode->addItems({"Standard","Developer","Compact"});mode->setCurrentText(layoutName);form->addRow("Layout",mode);
-    const auto oldTheme=theme->currentText(),oldLayout=layoutName;const int oldFont=font->value();
-    theme->setObjectName("themeChoice");connect(theme,&QComboBox::currentTextChanged,&d,[&](const QString& name){s.setValue("appearance/theme",name);applyPreferences();});connect(font,&QSpinBox::valueChanged,&d,[&](int n){s.setValue("appearance/fontSize",n);applyPreferences();});connect(mode,&QComboBox::currentTextChanged,&d,[&](const QString& name){setLayoutMode(name);});
-    form=page("Display");auto dim=check(form,"Dim LCD when backlight is off","display/dim",true);auto smooth=check(form,"Smooth LCD scaling (off = sharp pixels)","display/smooth",false);auto model=new QLabel("Current LCD ID: "+QString::number(config.lcdId,16).toUpper()+"\nChange hardware identity using Hardware → LCD Model while stopped.");model->setWordWrap(true);form->addRow(model);
-    form=page("Keyboard");auto translate=check(form,"Translate typed characters into physical key sequences","keyboard/text",true);auto shortcuts=check(form,"Enable application keyboard shortcuts","keyboard/shortcuts",true);auto layout=new QLabel("Character input follows the Windows keyboard layout, including AZERTY and QWERTY. F3/F4 send physical Shift/Alpha. Automatic text entry expects firmware Alpha lock to be off.");layout->setWordWrap(true);form->addRow(layout);
-    auto table=new QTableWidget(keyboard.mapping.size(),2);table->setHorizontalHeaderLabels({"PC shortcut","Calculator key index"});table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);int row=0;for(auto it=keyboard.mapping.begin();it!=keyboard.mapping.end();++it){table->setItem(row,0,new QTableWidgetItem(QKeySequence(it.key()).toString()));table->setItem(row++,1,new QTableWidgetItem(QString::number(it.value())));}form->addRow(table);auto defaults=new QPushButton("Restore keyboard defaults");form->addRow(defaults);shortcuts->setObjectName("shortcutsEnabled");table->setObjectName("shortcutTable");defaults->setObjectName("shortcutDefaults");table->setEnabled(shortcuts->isChecked());defaults->setEnabled(shortcuts->isChecked());connect(shortcuts,&QCheckBox::toggled,table,&QWidget::setEnabled);connect(shortcuts,&QCheckBox::toggled,defaults,&QWidget::setEnabled);connect(defaults,&QPushButton::clicked,&d,[table]{auto map=KeyboardTranslator::defaults();table->setRowCount(map.size());int r=0;for(auto it=map.begin();it!=map.end();++it){table->setItem(r,0,new QTableWidgetItem(QKeySequence(it.key()).toString()));table->setItem(r++,1,new QTableWidgetItem(QString::number(it.value())));}});
-    form=page("Emulation");auto renode=new QLineEdit(config.renode);form->addRow("Renode executable",renode);auto target=new QDoubleSpinBox;target->setRange(0,16);target->setDecimals(2);target->setValue(s.value("emulation/target",1).toDouble());target->setSpecialValueText("Unlimited");form->addRow("Virtual-time speed target",target);auto fault=check(form,"Pause on CPU lock-up","emulation/pauseOnFault",true);
-    form=page("Power");auto percent=new QSpinBox;percent->setRange(0,100);percent->setValue(battery->value());percent->setSuffix(" %");percent->setMinimumWidth(135);percent->setObjectName("batteryPercent");form->addRow("Battery state of charge",percent);auto connection=new QComboBox;connection->addItems({"Unplugged","Charger","Computer"});connection->setCurrentIndex(cable->currentIndex());form->addRow("Connection",connection);auto powerNote=new QLabel("The configurable charge uses an illustrative non-linear Li-ion voltage curve. Firmware reads the resulting ADC value; its own battery estimate can differ.");powerNote->setWordWrap(true);form->addRow(powerNote);
-    form=page("USB");auto usbNote=new QLabel("Computer mode forwards USB transactions to the running firmware. Start the USB/IP server on port 3240, then use Attach to Windows in the USB inspector. Windows needs the signed USBip prerequisite. See docs/usb.md for setup, diagnostics and verified limitations.");usbNote->setWordWrap(true);form->addRow(usbNote);
-    form=page("Diagnostics");auto limit=new QSpinBox;limit->setRange(100,10000);limit->setValue(s.value("diagnostics/limit",1500).toInt());form->addRow("Maximum retained log records",limit);auto refresh=new QSpinBox;refresh->setRange(50,2000);refresh->setSingleStep(50);refresh->setSuffix(" ms");refresh->setValue(s.value("diagnostics/refreshMs",100).toInt());form->addRow("Hardware refresh interval",refresh);
-    pages->setCurrentIndex(index);nav->setCurrentRow(index);auto buttons=new QDialogButtonBox(QDialogButtonBox::Save|QDialogButtonBox::Cancel);root->addWidget(buttons);connect(buttons,&QDialogButtonBox::rejected,&d,&QDialog::reject);
-    connect(buttons,&QDialogButtonBox::accepted,&d,[&]{QMap<int,int> map;for(int r=0;r<table->rowCount();r++){auto seq=QKeySequence(table->item(r,0)->text());bool ok=false;int key=table->item(r,1)->text().toInt(&ok);if(seq.count()!=1||!ok||key<0||key>53){QMessageBox::warning(&d,"Keyboard mapping","Each row needs one PC key and a calculator index from 0 to 53.");return;}map[seq[0].toCombined()]=key;}
-        releaseKeys();keyboard.mapping=map;keyboard.textEnabled=translate->isChecked();keyboard.save();s.setValue("general/restore",restore->isChecked());s.setValue("general/confirmClose",confirm->isChecked());s.setValue("appearance/theme",theme->currentText());s.setValue("appearance/fontSize",font->value());s.setValue("display/dim",dim->isChecked());s.setValue("display/smooth",smooth->isChecked());s.setValue("keyboard/shortcuts",shortcuts->isChecked());s.setValue("emulation/target",target->value());s.setValue("emulation/pauseOnFault",fault->isChecked());s.setValue("diagnostics/limit",limit->value());s.setValue("diagnostics/refreshMs",refresh->value());config.renode=renode->text();s.setValue("renode",config.renode);battery->setValue(percent->value());cable->setCurrentIndex(connection->currentIndex());engine.command("speed "+QByteArray::number(target->value()));applyPreferences();setLayoutMode(mode->currentText());d.accept();});if(d.exec()!=QDialog::Accepted){s.setValue("appearance/theme",oldTheme);s.setValue("appearance/fontSize",oldFont);applyPreferences();setLayoutMode(oldLayout);}
+    QSettings s;
+    QDialog d(this);
+    d.setWindowTitle("N120 Studio Settings");
+    d.resize(800, 620);
+    auto root = new QVBoxLayout(&d);
+    auto body = new QHBoxLayout;
+    root->addLayout(body, 1);
+    auto nav = new QListWidget;
+    nav->setObjectName("settingsNavigation");
+    nav->setFixedWidth(160);
+    nav->setSpacing(4);
+    nav->setAccessibleName("Settings categories");
+    body->addWidget(nav);
+    auto pages = new QTabWidget;
+    pages->setObjectName("settingsPages");
+    pages->tabBar()->hide();
+    body->addWidget(pages, 1);
+    connect(nav, &QListWidget::currentRowChanged, pages, &QTabWidget::setCurrentIndex);
+    connect(pages, &QTabWidget::currentChanged, nav, qOverload<int>(&QListWidget::setCurrentRow));
+    auto page = [pages, nav](QString title) {
+        auto w = new QWidget;
+        auto form = new QFormLayout(w);
+        form->setContentsMargins(20, 20, 20, 20);
+        form->setSpacing(16);
+        pages->addTab(w, title);
+        auto item = new QListWidgetItem(title, nav);
+        item->setSizeHint(QSize(140, 40));
+        item->setIcon(studioIcon(title.toLower() == "emulation" ? "start" : title.toLower(),
+                                 qApp->palette().color(QPalette::ButtonText)));
+        return form;
+    };
+    auto check = [&](QFormLayout* f, QString label, QString key, bool def) {
+        auto c = new QCheckBox(label);
+        c->setChecked(s.value(key, def).toBool());
+        f->addRow(c);
+        return c;
+    };
+    auto form = page("General");
+    auto restore = check(form, "Restore firmware session on startup", "general/restore", false);
+    auto confirm = check(form, "Confirm closing a running calculator", "general/confirmClose", false);
+    form = page("Appearance");
+    auto theme = new QComboBox;
+    theme->addItems({"System", "Light", "Dark"});
+    theme->setCurrentText(s.value("appearance/theme", "Dark").toString());
+    form->addRow("Theme", theme);
+    auto font = new QSpinBox;
+    font->setRange(8, 16);
+    font->setValue(s.value("appearance/fontSize", 10).toInt());
+    form->addRow("Interface font size", font);
+    auto mode = new QComboBox;
+    mode->setObjectName("layoutChoice");
+    mode->addItems({"Standard", "Developer", "Compact"});
+    mode->setCurrentText(layoutName);
+    form->addRow("Layout", mode);
+    const auto oldTheme = theme->currentText(), oldLayout = layoutName;
+    const int oldFont = font->value();
+    theme->setObjectName("themeChoice");
+    connect(theme, &QComboBox::currentTextChanged, &d, [&](const QString& name) {
+        s.setValue("appearance/theme", name);
+        applyPreferences();
+    });
+    connect(font, &QSpinBox::valueChanged, &d, [&](int n) {
+        s.setValue("appearance/fontSize", n);
+        applyPreferences();
+    });
+    connect(mode, &QComboBox::currentTextChanged, &d, [&](const QString& name) { setLayoutMode(name); });
+    form = page("Display");
+    auto dim = check(form, "Dim LCD when backlight is off", "display/dim", true);
+    auto smooth = check(form, "Smooth LCD scaling (off = sharp pixels)", "display/smooth", false);
+    auto model = new QLabel("Current LCD ID: " + QString::number(config.lcdId, 16).toUpper() +
+                            "\nChange hardware identity using Hardware → LCD Model while stopped.");
+    model->setWordWrap(true);
+    form->addRow(model);
+    form = page("Keyboard");
+    auto translate =
+        check(form, "Translate typed characters into physical key sequences", "keyboard/text", true);
+    auto shortcuts = check(form, "Enable application keyboard shortcuts", "keyboard/shortcuts", true);
+    auto layout =
+        new QLabel("Character input follows the Windows keyboard layout, including AZERTY and QWERTY. F3/F4 "
+                   "send physical Shift/Alpha. Automatic text entry expects firmware Alpha lock to be off.");
+    layout->setWordWrap(true);
+    form->addRow(layout);
+    auto table = new QTableWidget(keyboard.mapping.size(), 2);
+    table->setHorizontalHeaderLabels({"PC shortcut", "Calculator key index"});
+    table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    int row = 0;
+    for (auto it = keyboard.mapping.begin(); it != keyboard.mapping.end(); ++it) {
+        table->setItem(row, 0, new QTableWidgetItem(QKeySequence(it.key()).toString()));
+        table->setItem(row++, 1, new QTableWidgetItem(QString::number(it.value())));
+    }
+    form->addRow(table);
+    auto defaults = new QPushButton("Restore keyboard defaults");
+    form->addRow(defaults);
+    shortcuts->setObjectName("shortcutsEnabled");
+    table->setObjectName("shortcutTable");
+    defaults->setObjectName("shortcutDefaults");
+    table->setEnabled(shortcuts->isChecked());
+    defaults->setEnabled(shortcuts->isChecked());
+    connect(shortcuts, &QCheckBox::toggled, table, &QWidget::setEnabled);
+    connect(shortcuts, &QCheckBox::toggled, defaults, &QWidget::setEnabled);
+    connect(defaults, &QPushButton::clicked, &d, [table] {
+        auto map = KeyboardTranslator::defaults();
+        table->setRowCount(map.size());
+        int r = 0;
+        for (auto it = map.begin(); it != map.end(); ++it) {
+            table->setItem(r, 0, new QTableWidgetItem(QKeySequence(it.key()).toString()));
+            table->setItem(r++, 1, new QTableWidgetItem(QString::number(it.value())));
+        }
+    });
+    form = page("Emulation");
+    auto renode = new QLineEdit(config.renode);
+    form->addRow("Renode executable", renode);
+    auto target = new QDoubleSpinBox;
+    target->setRange(0, 16);
+    target->setDecimals(2);
+    target->setValue(s.value("emulation/target", 1).toDouble());
+    target->setSpecialValueText("Unlimited");
+    form->addRow("Virtual-time speed target", target);
+    auto fault = check(form, "Pause on CPU lock-up", "emulation/pauseOnFault", true);
+    form = page("Power");
+    auto percent = new QSpinBox;
+    percent->setRange(0, 100);
+    percent->setValue(battery->value());
+    percent->setSuffix(" %");
+    percent->setMinimumWidth(135);
+    percent->setObjectName("batteryPercent");
+    form->addRow("Battery state of charge", percent);
+    auto connection = new QComboBox;
+    connection->addItems({"Unplugged", "Charger", "Computer"});
+    connection->setCurrentIndex(cable->currentIndex());
+    form->addRow("Connection", connection);
+    auto powerNote =
+        new QLabel("The configurable charge uses an illustrative non-linear Li-ion voltage curve. Firmware "
+                   "reads the resulting ADC value; its own battery estimate can differ.");
+    powerNote->setWordWrap(true);
+    form->addRow(powerNote);
+    form = page("USB");
+    auto usbNote =
+        new QLabel("Computer mode forwards USB transactions to the running firmware. Start the USB/IP server "
+                   "on port 3240, then use Attach to Windows in the USB inspector. Windows needs the signed "
+                   "USBip prerequisite. See docs/usb.md for setup, diagnostics and verified limitations.");
+    usbNote->setWordWrap(true);
+    form->addRow(usbNote);
+    form = page("Diagnostics");
+    auto limit = new QSpinBox;
+    limit->setRange(100, 10000);
+    limit->setValue(s.value("diagnostics/limit", 1500).toInt());
+    form->addRow("Maximum retained log records", limit);
+    auto refresh = new QSpinBox;
+    refresh->setRange(50, 2000);
+    refresh->setSingleStep(50);
+    refresh->setSuffix(" ms");
+    refresh->setValue(s.value("diagnostics/refreshMs", 100).toInt());
+    form->addRow("Hardware refresh interval", refresh);
+    pages->setCurrentIndex(index);
+    nav->setCurrentRow(index);
+    auto buttons = new QDialogButtonBox(QDialogButtonBox::Save | QDialogButtonBox::Cancel);
+    root->addWidget(buttons);
+    connect(buttons, &QDialogButtonBox::rejected, &d, &QDialog::reject);
+    connect(buttons, &QDialogButtonBox::accepted, &d, [&] {
+        QMap<int, int> map;
+        for (int r = 0; r < table->rowCount(); r++) {
+            auto seq = QKeySequence(table->item(r, 0)->text());
+            bool ok = false;
+            int key = table->item(r, 1)->text().toInt(&ok);
+            if (seq.count() != 1 || !ok || key < 0 || key > 53) {
+                QMessageBox::warning(&d, "Keyboard mapping",
+                                     "Each row needs one PC key and a calculator index from 0 to 53.");
+                return;
+            }
+            map[seq[0].toCombined()] = key;
+        }
+        releaseKeys();
+        keyboard.mapping = map;
+        keyboard.textEnabled = translate->isChecked();
+        keyboard.save();
+        s.setValue("general/restore", restore->isChecked());
+        s.setValue("general/confirmClose", confirm->isChecked());
+        s.setValue("appearance/theme", theme->currentText());
+        s.setValue("appearance/fontSize", font->value());
+        s.setValue("display/dim", dim->isChecked());
+        s.setValue("display/smooth", smooth->isChecked());
+        s.setValue("keyboard/shortcuts", shortcuts->isChecked());
+        s.setValue("emulation/target", target->value());
+        s.setValue("emulation/pauseOnFault", fault->isChecked());
+        s.setValue("diagnostics/limit", limit->value());
+        s.setValue("diagnostics/refreshMs", refresh->value());
+        config.renode = renode->text();
+        s.setValue("renode", config.renode);
+        battery->setValue(percent->value());
+        cable->setCurrentIndex(connection->currentIndex());
+        engine.command("speed " + QByteArray::number(target->value()));
+        applyPreferences();
+        setLayoutMode(mode->currentText());
+        d.accept();
+    });
+    // Appearance previews update live settings; Cancel restores stored values and the active layout.
+    if (d.exec() != QDialog::Accepted) {
+        s.setValue("appearance/theme", oldTheme);
+        s.setValue("appearance/fontSize", oldFont);
+        applyPreferences();
+        setLayoutMode(oldLayout);
+    }
 }
