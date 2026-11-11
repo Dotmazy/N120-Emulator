@@ -1,4 +1,5 @@
 #include "RenodeManager.h"
+#include "core/Firmware.h"
 #include <QCoreApplication>
 #include <QDir>
 #include <QFile>
@@ -24,7 +25,7 @@ static QString stringToken(QString p) {
     return "\"" + p + "\"";
 }
 
-RenodeManager::RenodeManager(QObject* parent) : QObject(parent) {
+RenodeManager::RenodeManager(QObject* parent) : EmulatorBackend(parent) {
     poll.setInterval(100);
     retry.setInterval(250);
     deadline.setSingleShot(true);
@@ -131,13 +132,10 @@ void RenodeManager::start(const Configuration& c) {
         auto bytes = internal.readAll();
         if (bytes.size() < 8 || bytes.size() > 0x80000)
             throw std::runtime_error("Internal firmware must contain vectors and fit 512 KiB");
-        // RAM banks are disjoint. A stack may start just past a bank end because ARM stacks descend.
-        const quint32 sp = qFromLittleEndian<quint32>(bytes.constData());
-        const quint32 pc = qFromLittleEndian<quint32>(bytes.constData() + 4);
-        if (!(pc & 1) || pc < 0x08000001 || pc >= 0x08000000 + quint32(bytes.size()) || (sp & 7) ||
-            !((sp > 0x20000000 && sp <= 0x20020000) || (sp > 0x24000000 && sp <= 0x24050000) ||
-              (sp > 0x30000000 && sp <= 0x30008000) || (sp > 0x38000000 && sp <= 0x38004000)))
-            throw std::runtime_error("Invalid H725 reset vector");
+        const auto validation = n120::validateInternal(
+            {reinterpret_cast<const std::uint8_t*>(bytes.constData()), std::size_t(bytes.size())});
+        if (!validation.empty())
+            throw std::runtime_error(validation);
         if (c.externalOffset != 0 && c.externalOffset != 0x400000)
             throw std::runtime_error("External image destination must be Slot A or Slot B");
         if (!c.persistent.isEmpty()) {

@@ -1,4 +1,5 @@
 #pragma once
+#include "interfaces/EmulatorBackend.h"
 #include <QElapsedTimer>
 #include <QJsonObject>
 #include <QObject>
@@ -8,28 +9,17 @@
 #include <QTimer>
 #include <memory>
 
-struct Configuration {
-    QString renode;
-    QString internal;
-    QString external;
-    QString persistent;
-    quint32 lcdId = 0x4E4101;
-    quint32 externalOffset = 0;
-    bool boot0 = false;
-    QString systemRom;
-};
-
-class RenodeManager final : public QObject {
+class RenodeManager final : public EmulatorBackend {
     Q_OBJECT
   public:
     explicit RenodeManager(QObject* parent = nullptr);
     ~RenodeManager() override;
-    void start(const Configuration&);
-    void stop();
-    void command(const QByteArray&);
-    bool connected() const;
+    void start(const Configuration&) override;
+    void stop() override;
+    void command(const QByteArray&) override;
+    bool connected() const override;
 
-    bool running() const {
+    bool running() const override {
         return process.state() != QProcess::NotRunning;
     }
 
@@ -40,12 +30,6 @@ class RenodeManager final : public QObject {
     void setRefreshInterval(int ms) {
         poll.setInterval(qBound(50, ms, 2000));
     }
-
-  signals:
-    void snapshot(const QJsonObject&);
-    void log(const QString&);
-    void state(const QString&);
-    void response(const QJsonObject&);
 
   private:
     void read();

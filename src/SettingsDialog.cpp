@@ -1,5 +1,6 @@
 #include "LogViewer.h"
 #include "MainWindow.h"
+#include "resources/CalculatorStyle.h"
 #include <QtWidgets>
 #include <cmath>
 
@@ -151,6 +152,7 @@ void MainWindow::applyPreferences() {
     }
     zoom = s.value("view/zoom", 1).toDouble();
     applyZoom();
+    surface->setCalculatorStyle(s.value("appearance/calculatorStyle", "upsilon").toString());
     surface->setDim(s.value("display/dim", true).toBool());
     surface->setSmoothLcd(s.value("display/smooth", false).toBool());
     logs->setLimit(s.value("diagnostics/limit", 1500).toInt());
@@ -215,6 +217,12 @@ void MainWindow::settings(int index) {
     theme->addItems({"System", "Light", "Dark"});
     theme->setCurrentText(s.value("appearance/theme", "Dark").toString());
     form->addRow("Theme", theme);
+    const auto oldStyle = s.value("appearance/calculatorStyle", "upsilon").toString();
+    auto calculatorStyle = new QComboBox;
+    calculatorStyle->setObjectName("calculatorStyleChoice");
+    for (const auto& style : calculatorStyles()) calculatorStyle->addItem(style.name, style.id);
+    calculatorStyle->setCurrentIndex(calculatorStyle->findData(normalizedCalculatorStyle(oldStyle)));
+    form->addRow("Calculator style", calculatorStyle);
     auto font = new QSpinBox;
     font->setRange(8, 16);
     font->setValue(s.value("appearance/fontSize", 10).toInt());
@@ -233,6 +241,10 @@ void MainWindow::settings(int index) {
     });
     connect(font, &QSpinBox::valueChanged, &d, [&](int n) {
         s.setValue("appearance/fontSize", n);
+        applyPreferences();
+    });
+    connect(calculatorStyle, &QComboBox::currentIndexChanged, &d, [&](int) {
+        s.setValue("appearance/calculatorStyle", calculatorStyle->currentData().toString());
         applyPreferences();
     });
     connect(mode, &QComboBox::currentTextChanged, &d, [&](const QString& name) { setLayoutMode(name); });
@@ -349,6 +361,7 @@ void MainWindow::settings(int index) {
         s.setValue("general/restore", restore->isChecked());
         s.setValue("general/confirmClose", confirm->isChecked());
         s.setValue("appearance/theme", theme->currentText());
+        s.setValue("appearance/calculatorStyle", calculatorStyle->currentData().toString());
         s.setValue("appearance/fontSize", font->value());
         s.setValue("display/dim", dim->isChecked());
         s.setValue("display/smooth", smooth->isChecked());
@@ -369,6 +382,7 @@ void MainWindow::settings(int index) {
     // Appearance previews update live settings; Cancel restores stored values and the active layout.
     if (d.exec() != QDialog::Accepted) {
         s.setValue("appearance/theme", oldTheme);
+        s.setValue("appearance/calculatorStyle", oldStyle);
         s.setValue("appearance/fontSize", oldFont);
         applyPreferences();
         setLayoutMode(oldLayout);

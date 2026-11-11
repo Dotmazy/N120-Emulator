@@ -1,16 +1,11 @@
 #pragma once
+#include "input/CalculatorLayout.h"
 #include <QImage>
 #include <QPainterPath>
 #include <QPixmap>
 #include <QSet>
 #include <QVector3D>
 #include <QWidget>
-
-struct CalculatorKey {
-    int index;
-    QString name;
-    QRectF bounds;
-};
 
 class CalculatorWidget final : public QWidget {
     Q_OBJECT
@@ -26,6 +21,11 @@ class CalculatorWidget final : public QWidget {
     QPointF toImage(QPointF p) const;
     int hitKey(QPointF p) const;
     void setFrame(const QByteArray& rgb565);
+    void setCalculatorStyle(const QString& id);
+
+    QString calculatorStyle() const {
+        return styleId;
+    }
 
     QImage lcdImage() const {
         return frame;
@@ -71,6 +71,7 @@ class CalculatorWidget final : public QWidget {
 
   private:
     QPixmap skin;
+    QString styleId = "upsilon";
     QImage frame;
     QSet<int> held;
     int hover = -1, mouseKey = -1;

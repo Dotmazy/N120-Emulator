@@ -177,7 +177,7 @@ void MainWindow::buildMenus() {
     add(help, "about", "About / Version Information", QStyle::SP_MessageBoxInformation, [this] {
         QMessageBox::about(
             this, "N120 Studio",
-            "N120 Studio 0.3.0\nC++20 / Qt " + QString(qVersion()) +
+            "N120 Studio 0.4.0\nC++20 / Qt " + QString(qVersion()) +
                 " / Renode\nReal STM32H725 firmware / 320 × 240 LCD\nCalculator artwork provided by the "
                 "user.\nSee README.md for hardware coverage and USB limitations.");
     });
@@ -328,7 +328,7 @@ void MainWindow::exportReport() {
         log.replace(local, "<local>", Qt::CaseInsensitive);
         log.replace(QDir::toNativeSeparators(local), "<local>", Qt::CaseInsensitive);
     }
-    QJsonObject report{{"application", "N120 Studio 0.3.0"},
+    QJsonObject report{{"application", "N120 Studio 0.4.0"},
                        {"qt", qVersion()},
                        {"internal", QFileInfo(config.internal).fileName()},
                        {"internalBytes", QFileInfo(config.internal).size()},

@@ -1,5 +1,6 @@
 #pragma once
 #include <QList>
+#include <QPainterPath>
 #include <QRectF>
 #include <QString>
 
@@ -10,3 +11,5 @@ struct CalculatorKey {
 };
 
 const QList<CalculatorKey>& calculatorKeys();
+QPainterPath calculatorKeyHitShape(const CalculatorKey& key);
+int calculatorHitKey(QPointF position);

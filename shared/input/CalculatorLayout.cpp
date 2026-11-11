@@ -1,11 +1,12 @@
 #include "CalculatorLayout.h"
+#include <QPolygonF>
 #include <QStringList>
 
 const QList<CalculatorKey>& calculatorKeys() {
     // Bounds use the original 1160 x 2221 skin coordinates; painting and hit testing share this space.
     static const QList<CalculatorKey> result = [] {
-        QList<CalculatorKey> k = {{0, "Left", {151, 989, 77, 78}},   {1, "Up", {238, 900, 78, 79}},
-                                  {2, "Down", {238, 1078, 78, 80}},  {3, "Right", {325, 989, 78, 78}},
+        QList<CalculatorKey> k = {{0, "Left", {133, 982, 112, 94}},  {1, "Up", {229, 890, 96, 112}},
+                                  {2, "Down", {229, 1058, 96, 112}}, {3, "Right", {309, 982, 112, 94}},
                                   {6, "Home", {503, 907, 158, 103}}, {8, "Power", {503, 1043, 158, 105}},
                                   {4, "OK", {751, 967, 122, 122}},   {5, "Back", {903, 967, 122, 122}}};
         QStringList names = {"Shift", "Alpha", "x,n,t", "Variable", "Toolbox", "Backspace",
@@ -26,4 +27,51 @@ const QList<CalculatorKey>& calculatorKeys() {
         return k;
     }();
     return result;
+}
+
+QPainterPath calculatorKeyHitShape(const CalculatorKey& key) {
+    QPainterPath shape;
+    if (key.index >= 0 && key.index <= 3) {
+        // Four non-overlapping sectors cover the cross and nearby gaps. The center stays neutral.
+        const QPointF center(277, 1030);
+        const QPointF tl(119, 872), tr(435, 872), bl(119, 1188), br(435, 1188);
+        QPolygonF sector;
+        switch (key.index) {
+        case 0:
+            sector = {center, bl, tl};
+            break;
+        case 1:
+            sector = {center, tl, tr};
+            break;
+        case 2:
+            sector = {center, br, bl};
+            break;
+        case 3:
+            sector = {center, tr, br};
+            break;
+        }
+        shape.addPolygon(sector);
+        shape.closeSubpath();
+        QPainterPath outer, neutral;
+        outer.addRoundedRect(QRectF(tl, br), 24, 24);
+        neutral.addEllipse(center, 18, 18);
+        return shape.intersected(outer).subtracted(neutral);
+    }
+    // Padding stays within the gaps between adjacent keys, including the tightly spaced function rows.
+    shape.addRoundedRect(key.bounds.adjusted(-9, -12, 9, 12), 22, 22);
+    return shape;
+}
+
+int calculatorHitKey(QPointF position) {
+    // Cache the paths: desktop hover and Android multi-touch use exactly the same targets.
+    static const auto shapes = [] {
+        QList<QPair<int, QPainterPath>> result;
+        for (const auto& key : calculatorKeys())
+            result.append({key.index, calculatorKeyHitShape(key)});
+        return result;
+    }();
+    for (const auto& shape : shapes)
+        if (shape.second.contains(position))
+            return shape.first;
+    return -1;
 }
