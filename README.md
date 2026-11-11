@@ -10,11 +10,11 @@
 
 <p align="center">
   <img alt="Windows desktop" src="https://img.shields.io/badge/Windows-Desktop-DC3545?style=flat-square" />
-  <img alt="Android remote client" src="https://img.shields.io/badge/Android-Remote%20client-B52B3A?style=flat-square" />
-  <img alt="C++20" src="https://img.shields.io/badge/C%2B%2B-20-922B35?style=flat-square" />
-  <img alt="Qt 6" src="https://img.shields.io/badge/Qt-6-C43E4D?style=flat-square" />
-  <img alt="Renode" src="https://img.shields.io/badge/Engine-Renode-E35D65?style=flat-square" />
-  <img alt="Release version" src="https://img.shields.io/badge/Release-v1.0.0-FF4D5A?style=flat-square" />
+  <img alt="Android remote client" src="https://img.shields.io/badge/Android-Remote%20client-DC3545?style=flat-square" />
+  <img alt="C++20" src="https://img.shields.io/badge/C%2B%2B-20-DC3545?style=flat-square" />
+  <img alt="Qt 6" src="https://img.shields.io/badge/Qt-6-DC3545?style=flat-square" />
+  <img alt="Renode" src="https://img.shields.io/badge/Engine-Renode-DC3545?style=flat-square" />
+  <img alt="Release version" src="https://img.shields.io/badge/Release-v1.0.0-DC3545?style=flat-square" />
 </p>
 
 <p align="center">
