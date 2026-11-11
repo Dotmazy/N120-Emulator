@@ -1,6 +1,7 @@
 #include "MobileController.h"
 #include "core/Firmware.h"
 #include "input/CalculatorLayout.h"
+#include "resources/CalculatorStyle.h"
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
@@ -14,6 +15,8 @@
 MobileController::MobileController(QObject* parent)
     : QObject(parent), framebuffer(320, 240, QImage::Format_RGB16) {
     directory = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+    selectedStyle =
+        normalizedCalculatorStyle(settings.value("appearance/calculatorStyle", "upsilon").toString());
     QDir().mkpath(directory);
     framebuffer.fill(Qt::black);
     connect(&backend, &RemoteBackend::state, this, [this](const QString& text) {
@@ -234,6 +237,28 @@ QVariantList MobileController::held() const {
     return result;
 }
 
+QVariantList MobileController::styleOptions() const {
+    QVariantList result;
+    for (const auto& style : calculatorStyles())
+        result << QVariantMap{{"id", style.id}, {"name", style.name}};
+    return result;
+}
+
+QString MobileController::calculatorSkin() const {
+    return "qrc" + calculatorStyleResource(selectedStyle);
+}
+
+void MobileController::setCalculatorStyle(const QString& id) {
+    const auto selected = normalizedCalculatorStyle(id);
+    if (selectedStyle == selected)
+        return;
+    releaseTouches();
+    keyboard.releaseAll();
+    selectedStyle = selected;
+    setSetting("appearance/calculatorStyle", selected);
+    emit calculatorStyleChanged();
+}
+
 QColor MobileController::led() const {
     const auto rgb = snapshotData["rgb"].toArray();
     return QColor::fromRgbF(qBound(0.0, rgb[0].toDouble(), 1.0), qBound(0.0, rgb[1].toDouble(), 1.0),
@@ -247,14 +272,7 @@ QString MobileController::diagnostics() const {
 void MobileController::touch(int id, double x, double y, bool down) {
     int key = -1;
     if (down)
-        for (const auto& k : calculatorKeys()) {
-            const double dx = (x - k.bounds.center().x()) / (k.bounds.width() / 2),
-                         dy = (y - k.bounds.center().y()) / (k.bounds.height() / 2);
-            if (dx * dx + dy * dy <= 1) {
-                key = k.index;
-                break;
-            }
-        }
+        key = calculatorHitKey(QPointF(x, y));
     if (key < 0)
         fingers.remove(id);
     else

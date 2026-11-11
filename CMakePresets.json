@@ -39,6 +39,46 @@
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "RelWithDebInfo"
       }
+    },
+    {
+      "name": "android-arm64",
+      "displayName": "Android arm64-v8a (Qt kit from environment)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/android-arm64",
+      "condition": {
+        "type": "notEquals",
+        "lhs": "$env{QT_ANDROID_ARM64}",
+        "rhs": ""
+      },
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "$env{QT_ANDROID_ARM64}/lib/cmake/Qt6/qt.toolchain.cmake",
+        "QT_HOST_PATH": "$env{QT_HOST_PATH}",
+        "ANDROID_SDK_ROOT": "$env{ANDROID_SDK_ROOT}",
+        "ANDROID_NDK_ROOT": "$env{ANDROID_NDK_ROOT}",
+        "N120_ANDROID_OPENSSL_ROOT": "$env{N120_ANDROID_OPENSSL_ROOT}",
+        "CMAKE_BUILD_TYPE": "Release",
+        "BUILD_TESTING": "OFF"
+      }
+    },
+    {
+      "name": "android-x86_64",
+      "displayName": "Android x86_64 (Qt kit from environment)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/android-x86_64",
+      "condition": {
+        "type": "notEquals",
+        "lhs": "$env{QT_ANDROID_X86_64}",
+        "rhs": ""
+      },
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "$env{QT_ANDROID_X86_64}/lib/cmake/Qt6/qt.toolchain.cmake",
+        "QT_HOST_PATH": "$env{QT_HOST_PATH}",
+        "ANDROID_SDK_ROOT": "$env{ANDROID_SDK_ROOT}",
+        "ANDROID_NDK_ROOT": "$env{ANDROID_NDK_ROOT}",
+        "N120_ANDROID_OPENSSL_ROOT": "$env{N120_ANDROID_OPENSSL_ROOT}",
+        "CMAKE_BUILD_TYPE": "Release",
+        "BUILD_TESTING": "OFF"
+      }
     }
   ],
   "buildPresets": [
@@ -57,6 +97,20 @@
     {
       "name": "studio-upgrade",
       "configurePreset": "studio-upgrade"
+    },
+    {
+      "name": "android-arm64",
+      "configurePreset": "android-arm64",
+      "targets": [
+        "apk"
+      ]
+    },
+    {
+      "name": "android-x86_64",
+      "configurePreset": "android-x86_64",
+      "targets": [
+        "apk"
+      ]
     }
   ],
   "testPresets": [

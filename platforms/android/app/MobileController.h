@@ -20,6 +20,10 @@ class MobileController final : public QObject {
     Q_PROPERTY(QString logs READ logs NOTIFY changed)
     Q_PROPERTY(QVariantList keys READ keys CONSTANT)
     Q_PROPERTY(QVariantList held READ held NOTIFY heldChanged)
+    Q_PROPERTY(QVariantList calculatorStyles READ styleOptions CONSTANT)
+    Q_PROPERTY(
+        QString calculatorStyle READ calculatorStyle WRITE setCalculatorStyle NOTIFY calculatorStyleChanged)
+    Q_PROPERTY(QString calculatorSkin READ calculatorSkin NOTIFY calculatorStyleChanged)
     Q_PROPERTY(QColor led READ led NOTIFY changed)
     Q_PROPERTY(double backlight READ backlight NOTIFY changed)
     Q_PROPERTY(double actualSpeed READ actualSpeed NOTIFY changed)
@@ -56,6 +60,14 @@ class MobileController final : public QObject {
 
     QVariantList keys() const;
     QVariantList held() const;
+    QVariantList styleOptions() const;
+
+    QString calculatorStyle() const {
+        return selectedStyle;
+    }
+
+    QString calculatorSkin() const;
+    void setCalculatorStyle(const QString& id);
     QColor led() const;
 
     double backlight() const {
@@ -97,6 +109,7 @@ class MobileController final : public QObject {
   signals:
     void changed();
     void heldChanged();
+    void calculatorStyleChanged();
     void frameChanged();
     void flashReady();
 
@@ -107,6 +120,7 @@ class MobileController final : public QObject {
     RemoteBackend backend;
     KeyboardTranslator keyboard;
     QSettings settings;
+    QString selectedStyle = "upsilon";
     QString directory, statusText = "Offline · connect a Windows host", errorText;
     QStringList logLines;
     QJsonObject snapshotData;

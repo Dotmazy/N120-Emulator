@@ -41,6 +41,8 @@ Choose an LCD identity in Settings while stopped, then Start. A complete firmwar
 
 ## Calculator and controls
 
+Settings → Appearance & input → Calculator style switches between the supplied Epsilon, Upsilon and Omega artwork immediately and remembers the choice. The LCD and running firmware stay intact. The directional pad uses larger, separate directional targets with a small neutral center; other keys have padded rounded targets shared with Windows.
+
 Tap, hold or combine keys on the calculator artwork. Each pointer owns a matrix switch; moving outside a key releases it, moving onto another changes the switch, and duplicate fingers share a switch until all release. Cancellation, page changes, focus loss and backgrounding release held keys. Android Back navigates from another page to Calculator, then exits; it is separate from the calculator's Back key. TalkBack exposes the physical keys as named actions.
 
 Physical keyboards use the shared desktop translator: arrows, F1 OK, F2 Power, F3 Shift, F4 Alpha, Enter EXE and Backspace/Delete. Typed text becomes physical Alpha/Shift/key sequences while Calculator has focus. Android's soft keyboard is for app text fields; calculator soft-keyboard translation and haptics are not implemented.

@@ -8,12 +8,17 @@ This file records dependencies; it does not grant a license to the application o
 | Qt SVG and optional Qt plugins | May be selected by Windows runtime deployment | Inventory the exact staged plugins and their Qt/third-party licenses |
 | Direct3D / DX compiler DLLs | May be copied by windeployqt | Microsoft/LLVM distribution notices must be checked for the exact staged DLLs |
 | Qt Test | Build-time tests | Qt licensing; not part of the application runtime |
+| Qt QML, Quick, Quick Controls / Android platform plugin | Dynamically linked Android frontend | Qt LGPL-3.0 / GPL / commercial options and module-specific third-party notices; retain exact kit's notices and replacement/source obligations |
+| OpenSSL 3.5.9 | Android TLS, built from checked upstream source | Apache-2.0; archive SHA-256 and build/filename adaptations are recorded in `scripts/prepare-openssl-android.ps1`; preserve upstream `LICENSE.txt` |
+| AndroidX Core / Gradle / Android Gradle plugin | Android packaging and Qt Android integration | AndroidX and Android tooling licenses apply; inventory Gradle-resolved runtime artifacts. Gradle/JDK/SDK/NDK remain development tools |
+| Unicorn 2.1.4 | Optional native CPU research probe only, excluded from APKs | GPL-2.0 with separately licensed components; future application integration requires licensing review. No application license is inferred |
 | Renode 1.17 | Separately installed CPU/peripheral engine | MIT for Renode; libraries carry their own notices |
 | usbip-win2 | Optional separately installed Windows importing client and driver | BSD-2-Clause project; retain the selected release's own notices and signature requirements |
 | MinGW GCC runtime | Windows compiler support DLLs in local builds | GCC runtime licensing and Runtime Library Exception; preserve distribution notices |
 | Python | Optional firmware integration tests | Separately installed interpreter; core tests use only the standard library |
 | Windows / Segoe UI | System UI facilities and fonts | Used from the operating system; no font files bundled |
 | Calculator skin (`assets/calculator.png`) | Embedded calculator image | Redistribution permission has not been established; release blocked pending evidence or replacement |
+| Epsilon, Upsilon and Omega skins (`assets/*-background.png`) | User-supplied selectable calculator artwork | Supplied for this customization; no additional redistribution license is inferred. The existing artwork-rights requirements still apply |
 | Custom hardware model | C# model loaded by Renode | Source provenance review remains open; no project-wide relicensing asserted |
 | Firmware and STM32 system ROM | User-supplied runtime input | Not bundled, downloaded, or licensed by this project |
 

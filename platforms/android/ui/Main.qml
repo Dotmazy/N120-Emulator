@@ -166,7 +166,7 @@ ApplicationWindow {
                         anchors.centerIn: parent
                         Image {
                             anchors.fill: parent
-                            source: "qrc:/assets/calculator.png"
+                            source: emulator.calculatorSkin
                             fillMode: Image.PreserveAspectFit
                             asynchronous: true
                         }
@@ -603,6 +603,26 @@ ApplicationWindow {
                     font.pixelSize: 18
                     font.bold: true
                     Layout.leftMargin: 16
+                }
+                Label {
+                    text: "Calculator style"
+                    Layout.leftMargin: 16
+                }
+                ComboBox {
+                    objectName: "calculatorStyleChoice"
+                    Layout.fillWidth: true
+                    Layout.leftMargin: 16
+                    Layout.rightMargin: 16
+                    model: emulator.calculatorStyles
+                    textRole: "name"
+                    valueRole: "id"
+                    currentIndex: {
+                        for (let i = 0; i < emulator.calculatorStyles.length; ++i)
+                            if (emulator.calculatorStyles[i].id === emulator.calculatorStyle)
+                                return i;
+                        return 1;
+                    }
+                    onActivated: emulator.calculatorStyle = currentValue
                 }
                 ComboBox {
                     Layout.fillWidth: true

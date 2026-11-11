@@ -403,7 +403,7 @@ namespace Antmicro.Renode.Peripherals.N120
             else if(p[0]=="gdb-stop") StopDebug();
             else if(p[0]=="key" && p.Length==4) { lock(Sync) {int r=int.Parse(p[1]),c=int.Parse(p[2]);if(r<0||r>=9||c<0||c>=6||(p[3]!="0"&&p[3]!="1"))throw new ArgumentException("Invalid matrix key");directKeys[r,c]=p[3]=="1";Keys[r,c]=directKeys[r,c]||sequenceKey==r*6+c;UpdateColumns(true);} }
             else if(p[0]=="release") Reset();
-            else if(p[0]=="save" && Flash!=null) Flash.Save(Encoding.UTF8.GetString(Convert.FromBase64String(p[1])));
+            else if(p[0]=="save" && Flash!=null) {Flash.Save(Encoding.UTF8.GetString(Convert.FromBase64String(p[1])));return "{\"ok\":true,\"saved\":true,\"savedPath\":\""+p[1]+"\"}";}
             else if(p[0]!="pause") throw new ArgumentException("Unknown bridge command");
             return "{\"ok\":true}";
         }
