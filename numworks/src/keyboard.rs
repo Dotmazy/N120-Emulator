@@ -3,11 +3,12 @@ use std::sync::{Arc, Mutex};
 
 use crate::exti::Exti;
 use stm32_emulator::{
-    peripherals::{Device, Gpio},
+    peripherals::{Device, Gpio, H7Power},
     snapshot::SnapshotError,
 };
 
 const ROWS: [u8; 9] = [1, 0, 2, 3, 6, 7, 8, 10, 15];
+const POWER_SWITCH: Key = Key(8);
 
 /// A physical switch number, with a six-column stride.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
@@ -31,6 +32,8 @@ pub struct Matrix {
     resolved: Option<[u32; 2]>,
     #[serde(skip)]
     exti: Option<Arc<Mutex<Exti>>>,
+    #[serde(skip)]
+    power: Option<H7Power>,
     last: [u32; 2],
     vbus: bool,
     charging: bool,
@@ -48,14 +51,16 @@ impl Matrix {
             ports: [(u32::MAX, 0, 0); 2],
             resolved: None,
             exti: None,
+            power: None,
             last: [0xffff & !(1 << 9), 0xffff],
             vbus: false,
             charging: false,
         }
     }
 
-    pub fn connect_exti(&mut self, exti: Arc<Mutex<Exti>>) {
+    pub fn connect_inputs(&mut self, exti: Arc<Mutex<Exti>>, power: H7Power) {
         self.exti = Some(exti);
+        self.power = Some(power);
     }
 
     pub(crate) fn restore(&mut self, mut saved: Self) -> Result<(), SnapshotError> {
@@ -63,6 +68,7 @@ impl Matrix {
             return Err(SnapshotError("invalid keyboard column mapping".into()));
         }
         saved.exti = self.exti.take();
+        saved.power = self.power.take();
         *self = saved;
         Ok(())
     }
@@ -96,12 +102,23 @@ impl Matrix {
         if next != self.pressed {
             self.pressed = next;
             self.update_lines();
+            if key == POWER_SWITCH
+                && let Some(power) = &self.power
+            {
+                // Row B is PA0/WKUP1. Closing OnOff connects it to the
+                // column's external pull-up even when GPIO is clock gated.
+                power.wake_pin_edge(1, down);
+            }
         }
     }
 
     pub fn release_all(&mut self) {
+        let power_held = self.pressed & (1 << POWER_SWITCH.index()) != 0;
         self.pressed = 0;
         self.update_lines();
+        if power_held && let Some(power) = &self.power {
+            power.wake_pin_edge(1, false);
+        }
     }
 
     pub fn analog_column(&mut self, sample: usize) -> u32 {

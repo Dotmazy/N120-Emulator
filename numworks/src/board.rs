@@ -11,7 +11,7 @@ use serde::{Deserialize, Serialize};
 use stm32_emulator::{
     Engine, Profile, State, Width,
     engine::StopReason,
-    peripherals::Device,
+    peripherals::{Device, H7Power},
     snapshot::{self, SnapshotError},
 };
 
@@ -226,7 +226,11 @@ impl Calculator {
             .expect("Cortex-M system has interrupt lines");
         let usb = Usb::new(lines.clone());
         let exti = Arc::new(Mutex::new(Exti::new(lines.clone())));
-        keyboard.lock().unwrap().connect_exti(exti.clone());
+        let power = H7Power::new(lines.clone());
+        keyboard
+            .lock()
+            .unwrap()
+            .connect_inputs(exti.clone(), power.clone());
         bus.map_device("EXTI", 0x5800_0000, 0x400, ExtiBus(exti.clone()))?;
         let clock = bus
             .instruction_clock()
@@ -264,8 +268,8 @@ impl Calculator {
             flash::CAPACITY as u32,
             MappedNor::new(nor.clone()),
         )?;
+        bus.map_device("PWR", 0x5802_4800, 0x400, power)?;
         for (name, address, model) in [
-            ("PWR", 0x5802_4800, ControlKind::Power),
             ("SYSCFG", 0x5800_0400, ControlKind::Syscfg),
             ("FLASH interface", FLASH_INTERFACE, ControlKind::Registers),
             ("FMC", 0x5200_4000, ControlKind::Registers),
@@ -716,7 +720,6 @@ fn valid_stack(stack: u32) -> bool {
 
 #[derive(Clone, Copy)]
 enum ControlKind {
-    Power,
     Syscfg,
     Registers,
     Vref,
@@ -765,8 +768,6 @@ impl Device for Control {
         let register = &mut self.registers[offset as usize / 4];
         let value = (*register & !mask) | (value & mask);
         *register = match (self.kind, offset) {
-            (ControlKind::Power, 0x04 | 0x18) => value | (1 << 13),
-            (ControlKind::Power, 0x0c) => (value & !(1 << 26)) | ((value & (1 << 24)) << 2),
             (ControlKind::Syscfg, 0x20) => (value & !256) | ((value & 1) << 8),
             (ControlKind::Syscfg, 0x08..=0x14) => {
                 if let Some(exti) = &self.exti {
@@ -787,10 +788,6 @@ impl Device for Control {
 
     fn reset(&mut self) {
         self.registers.fill(0);
-        if matches!(self.kind, ControlKind::Power) {
-            self.registers[1] = 0x6000;
-            self.registers[6] = 0x6000;
-        }
     }
 }
 

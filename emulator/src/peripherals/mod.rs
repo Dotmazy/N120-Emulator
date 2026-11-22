@@ -1,7 +1,9 @@
 use crate::snapshot::{SnapshotError, decode, encode};
 use crate::{memory::Width, profiles::PeripheralKind};
 
+mod power;
 pub(crate) mod system;
+pub use power::H7Power;
 
 /// A change requested by a controller linked to a nonvolatile storage region.
 pub enum StorageOperation {

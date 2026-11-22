@@ -1,6 +1,27 @@
 use super::*;
 
 #[test]
+fn power_switch_wakes_wfe_and_latches_the_dedicated_wakeup_flag() {
+    let mut calc = Calculator::boot(&firmware(&[0xbf20, 0x2007, 0xbe00], &[])).unwrap();
+    let pwr = 0x5802_4800;
+    let switch = Key::new(8).unwrap();
+    calc.step().unwrap();
+    let waiting_pc = calc.engine().cpu().pc();
+    calc.key(switch, true);
+    calc.step().unwrap();
+    assert_eq!(calc.engine().cpu().pc(), waiting_pc);
+    calc.key(switch, false);
+
+    calc.engine.bus_mut().write(pwr + 0x28, Width::Word, 0x0002_0001).unwrap();
+    calc.key(switch, true);
+    assert_eq!(calc.read_memory(pwr + 0x24, Width::Word).unwrap(), 1);
+    calc.step().unwrap();
+    assert_eq!(calc.engine().cpu().registers()[0], 7);
+    calc.engine.bus_mut().write(pwr + 0x20, Width::Word, 1).unwrap();
+    assert_eq!(calc.read_memory(pwr + 0x24, Width::Word).unwrap(), 0);
+}
+
+#[test]
 fn usb_endpoint_nak_is_acknowledged_before_fifo_flush() {
     let mut calc = Calculator::boot(&firmware(&[0xbe00], &[])).unwrap();
     let base = 0x4004_0000u32;
