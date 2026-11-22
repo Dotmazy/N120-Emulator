@@ -1,0 +1,24 @@
+[package]
+name = "numworks"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+stm32-emulator = { path = "../emulator" }
+serde = { version = "1", features = ["derive"] }
+
+[target.'cfg(windows)'.dependencies]
+serde_json = "1"
+eframe = { version = "0.37", default-features = false, features = ["default_fonts", "glow"] }
+image = { version = "0.25", default-features = false, features = ["png"] }
+windows-sys = { version = "0.61", features = ["Win32_UI_Controls_Dialogs"] }
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+strip = "symbols"
+debug = false
+incremental = false
+overflow-checks = false

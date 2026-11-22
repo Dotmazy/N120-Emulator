@@ -1,0 +1,32 @@
+name = "Minimal Cortex-M0 board"
+cpu = "cortex_m0"
+clock_hz = 8000000
+firmware_base = 0x08000000
+vector_base = 0x08000000
+
+[[memory]]
+name = "FLASH"
+base = 0x08000000
+size = 0x8000
+kind = "flash"
+permissions = "rx"
+
+[[memory]]
+name = "SRAM"
+base = 0x20000000
+size = 0x1800
+kind = "ram"
+permissions = "rwx"
+
+[[peripherals]]
+name = "RCC"
+base = 0x40021000
+size = 0x400
+kind = "rcc_f0"
+
+[[peripherals]]
+name = "GPIOA"
+base = 0x48000000
+size = 0x400
+kind = "gpio"
+clock = { rcc = "RCC", bit = 17 }

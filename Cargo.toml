@@ -1,0 +1,4 @@
+[workspace]
+members = ["emulator", "numworks"]
+default-members = ["emulator"]
+resolver = "3"
